@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Articles by renc - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+        <meta name="author" content="renc" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="阿can's  blog"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="阿can's  blog"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+            <article>
+                <h2><a href="/Pointer is copied when passed as function parameter.html">Pointer is copied when passed as function parameter</a></h2>
+                <div class="summary"><h2>起源</h2>
+<p>看到这段代码(肯定是简化更改版啦)  </p>
+<div class="highlight"><pre><span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>   
+<span class="p">{</span>  
+    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
+    <span class="n">item</span><span class="o">-&gt;</span><span class="n">unref</span><span class="p">();</span>  
+<span class="p">}</span>   
+<span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">)</span>   
+<span class="p">{</span>  
+    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
+<span class="p">}</span>   
+</pre></div>
+
+
+<p>上面的unref()是用于reference count的, reference计数减一的意思. 为什么有这东东呢, 为什么下面用引入作为参数的就不需要呢? 
+我怀疑是指针在作为函数参数的传递过程中被复制了, 也就是指向实际的物体的指针又多了一个, 所以merge之后就unref减少一个. 以下的test case尝试证明指针是否被复制了:   </p>
+<div class="highlight"><pre><span class="c1">// try to check if a pointer will be copied during passing-by-pointer.         </span>
+<span class="c1">//              </span>
+<span class="p">#</span><span class="k">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>             
+
+<span class="k">void</span> <span class="n">func1</span><span class="p">(</span><span class="k">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Pointer is copied when passed as function parameter.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h2>
+                <div class="summary"><p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
+<p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
+一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release.  <br />
+图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标....     </p>
+<p>从face面的角度来看, 深蓝色的面为起点, 然后鼠标一旦离开这个深蓝色的面之后, 肯定会进入这个深蓝色面四周的8个浅蓝色面之一(假如把面的边界也看作面一部分). 于是在stroke的路线中, 鼠标所pick到的面是一个连着一个的, 连续. </p>
+<p>从edge边的角度来看, 鼠标从起点移动时候, 虽然鼠标在面内部而不是压在边上面, 但是面的几个边总有一个是距离当前鼠标位置近一点的, 我们选择这个边; 当鼠标移动要离开这个深蓝色的face的时候, 肯定会触碰到这个face是边(假如把角点corner也看作是edge是一部分). 于是在stroke的路线中, 鼠标所pick到的边是一个连着一个的, 也连续. </p>
+<p>而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   </p>
+<p>怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? <br />
+因为上面说到面是完备的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Fail to surround the mouse with the vertices.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Build myblog using pelican.html">Build myblog using pelican</a></h2>
+                <div class="summary"><p>都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞...   </p>
+<h2>环境:</h2>
+<ul>
+<li>python 2.7, withn pip, easy_install        </li>
+<li>pelican        <br />
+<img alt="Alt text" src="data/2014-08-31-pelican_output.PNG" title="output" /><br />
+注意上面的起始目录是E:\Temp\myblog&gt; 
+我试过别的起始目录是E:\Temp\myblog\context&gt; 就发生错误了. 
+进入output目录, 打开index.html就可以看到blog了。这里我没有用到make html命令哦.  </li>
+</ul>
+<h2>遇到的problems:</h2>
+<ul>
+<li>设置图片目录的路径.  <br />
+我的图片都是文档.md目录下的data目录, 例如folderA/xxx.md, folderA/data/yyy.PNG. 在pelican这里, 我想保持这样的结构, folderA 相当于 context目录, 目的是blog的内容(文档和图片)已经可以放到某个folderA里面, 然后要用pelican来build这个blog的时候, 直接把folderA目录里面的所有东西copy到context目录下就ok了.<br />
+但是pelican默认是把图片放到blogFolder/image目录 ...</li></ul>
+                    <a class="btn btn-default btn-xs" href="/Build myblog using pelican.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/build simple ui using pySide.html">build simple ui using pySide</a></h2>
+                <div class="summary"><p>记录一下做UI prototype时候遇到的新概念 </p>
+<blockquote>
+<p>life is short, use python. </p>
+</blockquote>
+<p>早有耳闻, 一试果然不凡. 
+安装Qt 4.8.X, 安装pySide (how? 具体看其主页), 然后新建file.py, 敲几行pySide代码, 然后command line里面python file.py立刻就出ui效果了. 省却了ide / c++代码 / 链接设置 / 反复修改反复编译的麻烦.  <br />
+事情的缘由是, 最近要参与用python快速做一个ui的prototype, 本来主程序M里面就有Qt+pySide, 所以连安装都不需要, 直接改py文件就得到ui结果, 真快. 于是就缺学几下python了. </p>
+<p>example 1. To define the style sheet 样式 of a button.  <br />
+<img alt="Alt text" src="data/2014-08-25_qtButtonStyleSheet.png" title="output" />   </p>
+<div class="highlight"><pre><span class="n">QPushButton</span> <span class="p">{</span>
+    <span class="nl">border:</span> <span class="mi">2 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/build simple ui using pySide.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/How to debug maya custom plugin.html">How to debug maya custom plugin</a></h2>
+                <div class="summary"><p>涉及maya plugin开发的时候，怎么debug呢? </p>
+<h2>Attach to maya process ... 寄生</h2>
+<p>step 1. maya plugin manager (Window -&gt; Settings/Preferences -&gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
+step 2. at your visual studio project of that custom plugin, Tools -&gt; Attach to ...</p>
+                    <a class="btn btn-default btn-xs" href="/How to debug maya custom plugin.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Tree view at Qt.html">Tree view at Qt</a></h2>
+                <div class="summary"><p>Qt中的TreeView很复杂, 记录一下自己的理解.  </p>
+<h2>引言</h2>
+<blockquote>
+<p>Model/View/item的关系就有点像Container/Algorithm/Iterator的关系。
+Tree view属于Model/View Programming的一部分。有些
+</p>
+</blockquote>
+<h2>Index 带上下层级结构的二维索引</h2>
+<p>QModelIndex()表示model中最上层的root item的index, QModelIndex().isValid() == 0. </p>
+<p>item之前有上下层级关系，index.parent()获取index的parent. 当index.parent().isValid() == false，表示这个item的parent就是root item. 这些items被称为top-level itmes. </p>
+<p>to retrieve data from a model:
+for (int row = 0; row &lt; model-&gt;rowCount(parentIndex); ++row)
+{
+    for (int ...</p>
+                    <a class="btn btn-default btn-xs" href="/Tree view at Qt.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Blendshape at maya.html">Blendshape at maya</a></h2>
+                <div class="summary"><p>最近接触了一点maya blendshape programming, 稍微记录一下。</p>
+<h2>BlendShape deformer basis (基础)</h2>
+<p>先说明一个特点，当drag一个cube or sphere物体的时候，会生成<transform node, shape node>两个nodes, 具体的细节请看maya scene graph，DAG。</p>
+<p>To create a simple blendshape example,<br />
+Polygon mode, create a cube, we have <pCube1, pCubeShape1>; <br />
+Select cube1, Shift+D, we have <pCube2, pCubeShape2>, move cube2 a little bit away from cube1.<br />
+Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
+                    <a class="btn btn-default btn-xs" href="/Blendshape at maya.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

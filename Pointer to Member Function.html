@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Pointer to Member Function - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/Pointer to Member Function.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="function pointer是知道的, 如 int max( int a, int b) { ... }; int (*pFtor)( int, int ) = &amp;max; int iResult = pFtor(1, 2); or typedef int(*FtorType)(int, int); FtorType pFtor; pFtor = &amp;max; int iResult = pFtor(1, 2); 但是当看到类似以下代码时候还是恐惧了一下: class Tool { int doA(ArgumentType &amp;); int doB(ArgumentType &amp;); }; typedef int(Tool::*MemberFunctionPtr)(ArgumentType &amp;); Tool toolObj ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Pointer to Member Function.html"
+                       rel="bookmark"
+                       title="Permalink to Pointer to Member Function">
+                        Pointer to Member Function
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-05-12T10:20:00"> 周一 12 五月 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>function pointer是知道的, 如</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+
+<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">pFtor</span><span class="p">)(</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span> <span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> 
+
+<span class="n">or</span>
+
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="o">*</span><span class="n">FtorType</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span> 
+<span class="n">FtorType</span> <span class="n">pFtor</span><span class="p">;</span> 
+<span class="n">pFtor</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</pre></div>
+
+
+<p>但是当看到类似以下代码时候还是恐惧了一下: </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">Tool</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">doA</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="nf">doB</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span> 
+<span class="p">};</span> 
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="n">Tool</span><span class="o">::*</span><span class="n">MemberFunctionPtr</span><span class="p">)(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+
+
+<span class="n">Tool</span> <span class="n">toolObj</span><span class="p">;</span>
+<span class="n">MemberFunctionPtr</span> <span class="n">pFtorA</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Tool</span><span class="o">::</span><span class="n">doA</span><span class="p">;</span> 
+<span class="n">MemberFunctionPtr</span> <span class="n">pFtorB</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Tool</span><span class="o">::</span><span class="n">doB</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="n">iResultA</span> <span class="o">=</span> <span class="p">(</span><span class="n">toolObj</span><span class="p">.</span><span class="o">*</span><span class="n">pFtorA</span><span class="p">)(</span><span class="n">argumentList</span><span class="p">);</span> 
+<span class="kt">int</span> <span class="n">iResultB</span> <span class="o">=</span> <span class="p">(</span><span class="n">toolObj</span><span class="p">.</span><span class="o">*</span><span class="n">pFtorB</span><span class="p">)(</span><span class="n">argumentList</span><span class="p">);</span> 
+
+<span class="n">or</span>
+<span class="n">Tool</span> <span class="o">*</span><span class="n">pToolObj</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResultA</span> <span class="o">=</span> <span class="p">(</span><span class="n">pToolObj</span><span class="o">-&gt;*</span><span class="n">pFtorA</span><span class="p">)(</span><span class="n">argumentList</span><span class="p">);</span> 
+</pre></div>
+
+
+<p>Google了一下，原来是pointer to member function. 一般pointer是指向一个obsolete address, 但是这个pointer to member function, 像是指向一个类class里面的偏移地址offset而已。给出一个对象(知道类的类型)，+这个offset, 推导出具体是某个函数? </p>
+<p>更复杂的情况，也是更常用的情况是引入Tool的子类derived class;</p>
+<div class="highlight"><pre><span class="kr">class</span> <span class="nx">ToolX</span> <span class="p">{</span>
+    <span class="c1">// override doA and doB functions;</span>
+<span class="p">};</span>
+<span class="kr">class</span> <span class="nx">ToolY</span> <span class="p">{</span>
+    <span class="c1">// override doA and doB functions;</span>
+<span class="p">};</span>
+
+<span class="nx">ToolX</span> <span class="nx">toolXObj</span><span class="p">;</span>
+<span class="nx">ToolY</span> <span class="nx">toolYObj</span><span class="p">;</span> 
+<span class="nx">MemberFunctionPtr</span> <span class="nx">pFtorA</span> <span class="o">=</span> <span class="o">&amp;</span><span class="nx">Tool</span><span class="o">::</span><span class="nx">doA</span><span class="p">;</span> 
+<span class="nx">MemberFunctionPtr</span> <span class="nx">pFtorB</span> <span class="o">=</span> <span class="o">&amp;</span><span class="nx">Tool</span><span class="o">::</span><span class="nx">doB</span><span class="p">;</span> 
+
+<span class="kr">int</span> <span class="nx">iResultXA</span> <span class="o">=</span> <span class="p">(</span><span class="nx">toolObjX</span><span class="p">.</span><span class="o">*</span><span class="nx">pFtorA</span><span class="p">)(</span><span class="nx">argumentList</span><span class="p">);</span>  <span class="c1">// ? 是调用了member func from base class or derived class呢? </span>
+<span class="kr">int</span> <span class="nx">iResultYA</span> <span class="o">=</span> <span class="p">(</span><span class="nx">toolObjY</span><span class="p">.</span><span class="o">*</span><span class="nx">pFtorA</span><span class="p">)(</span><span class="nx">argumentList</span><span class="p">);</span>  <span class="c1">// ?</span>
+</pre></div>
+
+
+<p>OK，简单知道了有这样的技术以后，那么, 这种技术有什么用呢? 
+Function pointer貌似很多情况下都是用于作为回调函数callback function, 目的是灵活. 这种pointer to member function也可以这么用。</p>
+<div class="highlight"><pre><span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="n">Tool</span><span class="o">::*</span><span class="n">MemberFunctionPtr</span><span class="p">)(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+
+<span class="n">class</span> <span class="n">Tool</span> <span class="p">{</span>
+
+    <span class="n">ToolCallback</span> <span class="o">*</span><span class="n">buildToolClassback</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">ToolCallback</span> <span class="o">*</span><span class="n">callback</span><span class="p">(</span><span class="o">*</span><span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Tool</span><span class="o">::</span><span class="n">doA</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">callback</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">doA</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="nf">doB</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span> 
+<span class="p">};</span> 
+
+<span class="n">class</span> <span class="n">ToolCallback</span> <span class="p">{</span>
+    <span class="n">ToolCallback</span><span class="p">(</span> <span class="n">Tool</span> <span class="o">&amp;</span><span class="n">_toolObj</span><span class="p">,</span> <span class="n">MemberFunctionPtr</span> <span class="n">_p</span><span class="p">)</span> 
+    <span class="o">:</span> <span class="n">toolObj</span><span class="p">(</span><span class="n">_toolObj</span><span class="p">),</span> <span class="n">pFtor</span><span class="p">(</span><span class="n">_p</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="kt">int</span> <span class="k">do</span><span class="p">(</span><span class="n">ArgumentType</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">toolObj</span><span class="p">.</span><span class="o">*</span><span class="n">pFtor</span><span class="p">)(</span> <span class="n">argument</span> <span class="p">);</span> <span class="p">}</span>
+
+    <span class="n">Tool</span> <span class="o">&amp;</span><span class="n">toolObj</span><span class="p">;</span>              <span class="c1">// 组成1: an object;</span>
+    <span class="n">MemberFunctionPtr</span> <span class="n">pFtor</span><span class="p">;</span>    <span class="c1">// 组成2: on offset; </span>
+<span class="p">};</span> 
+
+<span class="c1">// 后面我们就可以把ToolCallback *callback在代码里面传来传去, </span>
+<span class="c1">// 最后我们想执行这个东西了, 那就</span>
+<span class="n">callback</span><span class="o">-&gt;</span><span class="k">do</span><span class="p">(</span><span class="n">argument</span><span class="p">);</span> 
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title> - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <meta name="author" content="renc" />
+    <meta name="keywords" content="" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="阿can's  blog"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="阿can's  blog"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+            <article>
+                <h2><a href="/Blendshape at maya.html">Blendshape at maya</a></h2>
+                <div class="summary"><p>最近接触了一点maya blendshape programming, 稍微记录一下。</p>
+<h2>BlendShape deformer basis (基础)</h2>
+<p>先说明一个特点，当drag一个cube or sphere物体的时候，会生成<transform node, shape node>两个nodes, 具体的细节请看maya scene graph，DAG。</p>
+<p>To create a simple blendshape example,<br />
+Polygon mode, create a cube, we have <pCube1, pCubeShape1>; <br />
+Select cube1, Shift+D, we have <pCube2, pCubeShape2>, move cube2 a little bit away from cube1.<br />
+Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
+                    <a class="btn btn-default btn-xs" href="/Blendshape at maya.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Example of code conventions.html">build simple ui using pySide</a></h2>
+                <div class="summary"><p>刚看到如下代码:</p>
+<div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
+
+    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_center</span><span class="p">;</span> <span class="c1">///&lt; The computed center of the bounding box of the app</span>
+
+<span class="nl">private:</span>
+    <span class="n">NvModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
+    <span class="n">GLuint</span> <span class="n">model_vboID</span><span class="p">,</span> <span class="n">model_iboID</span><span class="p">;</span>
+    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_minExtent</span><span class="p">,</span> <span class="n">m_maxExtent</span><span class="p">,</span> <span class="n">m_radius</span><span class="p">;</span>
+</pre></div>
+
+
+<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
+<p>btw, 反例的英文原来是: counter example; negative example </p>
+                    <a class="btn btn-default btn-xs" href="/Example of code conventions.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/How to build a plugin system.html">build simple ui using pySide</a></h2>
+                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
+很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
+<p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
+- 自定义operation, support undo and redo;
+- 自定义某种brush (operation); 
+- 继承实现某个类，代替原有的那个. 例如map extraction? 
+当前接触到的maya api不多，知道plugin可以实现context and manipulator.</p>
+<p>问题就来了, 一个简单的plugin system是怎么设计和实现的呢? </p>
+<p>case 1: 
+Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
+http://3dgep ...</p>
+                    <a class="btn btn-default btn-xs" href="/How to build a plugin system.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Maya custom menu.html">Maya custom menu</a></h2>
+                <div class="summary"><p>How to add custom menu or menuitem into maya ui.</p>
+                    <a class="btn btn-default btn-xs" href="/Maya custom menu.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Picking with OpenGL.html">build simple ui using pySide</a></h2>
+                <div class="summary"><blockquote>
+<p>If you have choices, choose the best. If you have no choice, do the best. 如果有选择，那就选择最好的；如果没有选择，那就努力做到最好。</p>
+</blockquote>
+<h1>Picking with OpenGL</h1>
+<p>在3d软件提供交互的时候，例如先选择了某个vertex或者某个face，然后去操作这个被选中的东西。如在maya里面很多工具(maya里面把context==tool?)都是先pick the manipulator, drag the manipulator, to update the attributes of the node (the selection list). 第一步就是要选中mouse底下的东西，这是怎么做到的呢?</p>
+<p>其实一开始我想到的方法ray intersection的方法，
+approach 0 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Picking with OpenGL.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Position Transfromation from 2d world to window screen.html">Position Transfromation from 2d world to window screen</a></h2>
+                <div class="summary"><p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to find the position at 2d world corresponding to this mouse positon?     </p>
+<h2>Background背景</h2>
+<p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to ...</p>
+                    <a class="btn btn-default btn-xs" href="/Position Transfromation from 2d world to window screen.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/choose the overrided function.html">choose the overrided function</a></h2>
+                <div class="summary"><p>In class hierarchy, if functions are overrided by some subclass, which one will be invoked?</p>
+                    <a class="btn btn-default btn-xs" href="/choose the overrided function.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/what is this.html">Do and redo are similiar</a></h2>
+                <div class="summary"><p>Short version for index and feeds</p>
+                    <a class="btn btn-default btn-xs" href="/what is this.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        <ul class="pagination">
+                <li class="prev"><a href="/tag\.html">&laquo;</a>
+                </li>
+                    <li class=""><a
+                            href="/tag/.html">1</a></li>
+                    <li class="active"><a
+                            href="/tag/2.html">2</a></li>
+                <li class="next disabled"><a href="#">&raquo;</a></li>
+        </ul>
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

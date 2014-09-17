@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Tree view at Qt - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/Tree view at Qt.html">
+
+        <meta name="author" content="renc" />
+        <meta name="keywords" content="qt" />
+        <meta name="description" content="Qt中的TreeView很复杂, 记录一下自己的理解. 引言 Model/View/item的关系就有点像Container/Algorithm/Iterator的关系。 Tree view属于Model/View Programming的一部分。有些 Index 带上下层级结构的二维索引 QModelIndex()表示model中最上层的root item的index, QModelIndex().isValid() == 0. item之前有上下层级关系，index.parent()获取index的parent. 当index.parent().isValid() == false，表示这个item的parent就是root item. 这些items被称为top-level itmes. to retrieve data from a model: for (int row = 0; row &lt; model-&gt;rowCount(parentIndex); ++row) { for (int ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Tree view at Qt.html"
+                       rel="bookmark"
+                       title="Permalink to Tree view at Qt">
+                        Tree view at Qt
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2013-10-08T10:20:00"> 周二 08 十月 2013</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/qt.html">qt</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Qt中的TreeView很复杂, 记录一下自己的理解.  </p>
+<h2>引言</h2>
+<blockquote>
+<p>Model/View/item的关系就有点像Container/Algorithm/Iterator的关系。
+Tree view属于Model/View Programming的一部分。有些
+</p>
+</blockquote>
+<h2>Index 带上下层级结构的二维索引</h2>
+<p>QModelIndex()表示model中最上层的root item的index, QModelIndex().isValid() == 0. </p>
+<p>item之前有上下层级关系，index.parent()获取index的parent. 当index.parent().isValid() == false，表示这个item的parent就是root item. 这些items被称为top-level itmes. </p>
+<p>to retrieve data from a model:
+for (int row = 0; row &lt; model-&gt;rowCount(parentIndex); ++row)
+{
+    for (int col = 0; col &lt; model-&gt;columnCount(parentIndex); ++col)
+    {
+        QString text = model-&gt;data(index, Qt::DisplayRole).toString();
+        // Display the text in a widget.
+    }
+}
+对于tree view中的每一个row，它们的column数目都是一样的吗？
+每一个index的role的类型都一样? 请看是否有QVariant CustomModel::data(const QModelIndex &amp;, int role) const {} 貌似一个index里面有各种各样的role，你可以放什么东西都ok，只要你在这个函数中给对应的role返回合适的数据。这个函数在代码非常常用！例如后面CustomDelegate::paint()中就是根据data值来判断怎么画和画什么的。
+Question: QVariant QModelIndex::data(role); 这个函数跟model-&gt;data(index, role)结果一样的吗? 这里有个小细节, model是指针才能data()函数override. 
+跟data(...)函数的对应的另一函数是CustomModel::setData(...); 这个函数一般用的地方不多，就在给model插入新行insertRow()之后给每一个index插入不同的数据时候会用到。</p>
+<h2>Delegate 满足你特别的图案和交互需要</h2>
+<p>前提: install a custom delegate for a view. 
+任务: render and editting. </p>
+<p>To render:
+    Delegate::paint().</p>
+<p>To provide editing facilities:
+    QWidget <em>Delegate::createEditor(QWidget </em>, ..., const QModelIndex &amp;);
+    为某一个 or 每一个index提供editor? Can we create different editors depending on the model index supplied by the view ? 假如某些不行被edit而只是空白呢? </p>
+<div class="highlight"><pre>这些new QWidget obj应该是被view所manager的，本来可能就是view<span class="o">-&gt;</span>delegate<span class="o">-&gt;</span>createEditor <span class="kr">for</span> a given index.
+
+一旦在这里给某个item<span class="o">/</span>index建立了一个QWidget obj以后，那个view貌似就会自动把这个index跟它的QWidget obj关联起来，我们不需要担心，而是考虑有了这个关联之后怎么来 <span class="p">(</span>a<span class="p">)</span> copy the model data into the editor<span class="p">,</span> Delegate<span class="o">::</span>setEditorData<span class="p">(</span>QWidget <span class="o">*</span><span class="p">,</span> const QModelIndex <span class="o">&amp;</span><span class="p">)</span> const<span class="p">,</span> 参数的两者就是view给我们的<span class="p">,</span> index跟 widget已经一一对应好的. <span class="p">(</span>b<span class="p">)</span> when user has finished editting the value <span class="kr">in</span> the widget<span class="p">,</span> the view asks the delegate to store the edited value <span class="kr">in</span> the model by calling Delegate<span class="o">::</span>setModelData<span class="p">(</span>QWidget <span class="o">*</span><span class="p">,</span> model<span class="p">,</span> index<span class="p">)</span> const<span class="p">;</span> 这里的<span class="p">(</span>a and b<span class="p">)</span>就是两个方向editor <span class="o">&lt;-&gt;</span> model<span class="o">/</span>index.
+</pre></div>
+
+
+<p>Question: in the delegate class, how to get its view ? try to get the QObject *parent() first and cast it to the QTreeView or custom view type.</p>
+<h2>Render</h2>
+<p>Scenior: 一般是在自定义CustomModel, CustomView, CustomeDelegate的之后才考虑自己要怎么画Tree view中的东西. </p>
+<p>CustomView::paintEvent(QPaintEvent <em>)
+    drawTree(...);
+        drawRow(QPainter </em>, const option, const index); 干什么的呢?
+            貌似可以选择给特定的index (item)填一些背景, 然后QTreeView(...)做默认画。
+            drawBranches(QPainter *, const QRect &amp;rect, const index) const;
+            delegate-&gt;paint(...);</p>
+<p>可见首先是一行一行地画出来的. 先画branch分枝，然后在delegate-&gt;paint()画内容。
+D:\Qt\Qt5.1.0\5.1.0\Src\qtbase\src\widgets\itemviews\qtreeview.cpp for details.</p>
+<p>darwBranches(..., const QRect &amp;rect, ...)
+    在分枝中下一级会相对于上一级做一个往右边缩进，setIndentation(int)函数控制缩进的多少。而rect这个区域是做这一行的左边往右边加上每一次的缩进所得。最上一层top-level 是从root-item缩进一级所得。而且expand/collapse的event都是只在画branch这个区域上响应的。
+    问题来了，上面的缩进是所以level都一样的，可否不同level用不同大小的缩进呢? 未解。
+example:
+--level0
+----level1
+------level2
+the indentation for this is 2 (--). </p>
+<p>假如想把level0前面的缩进去掉，试试QTreeView::setRootIsDecorated(false);</p>
+<p>Read-Only access : (Qt::ItemIsEnabled | Qt::ItemIsSelectable)
+Editable items: Qt::ItemIsEditable | (Qt::ItemIsEnabled | Qt::ItemIsSelectable) 是在Read-Only access基础上加的. 
+这里有一点观察比较重要，假如flag里面不包含Qt::ItemIsEnabled, 那么这个item基本上不能干啥的了, 例如不能editable。 </p>
+<p>Drag &amp; Drop: 把一个item drag到另一个item上面，有些是接受，有些是不接受的，为什么呢？
+Model::flags(const QModelIndex &amp;) contain the Qt::ItemIsDragEnabled and Qt::ItemIsDropEnabled. 前提当然是已经包括上面提到的(Qt::ItemIsEnabled | Qt::ItemIsSelectable),我试过把Qt::ItemIsEnabled去掉，这个item就不能被选择了, 貌似就不响应mouse event了。
+在View里面还有一些设置setDragDropMode(QAbstractItemView::DragDrop); setDragEnabled(true); setAcceptDrops(true); setDropIndicatorShown(true);
+debug时候看到具体的函数流是: mouse move -&gt; mouseMoveEvent() -&gt; 按着LMB拖动-&gt; startDrag() -&gt; dragEnterEvent() -&gt; dragMoveEvent() -&gt; drop the item -&gt; dropEvent()</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

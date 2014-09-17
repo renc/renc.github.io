@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>build simple ui using pySide - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/build simple ui using pySide.html">
+
+        <meta name="author" content="renc" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="记录一下做UI prototype时候遇到的新概念 life is short, use python. 早有耳闻, 一试果然不凡. 安装Qt 4.8.X, 安装pySide (how? 具体看其主页), 然后新建file.py, 敲几行pySide代码, 然后command line里面python file.py立刻就出ui效果了. 省却了ide / c++代码 / 链接设置 / 反复修改反复编译的麻烦. 事情的缘由是, 最近要参与用python快速做一个ui的prototype, 本来主程序M里面就有Qt+pySide, 所以连安装都不需要, 直接改py文件就得到ui结果, 真快. 于是就缺学几下python了. example 1. To define the style sheet 样式 of a button. QPushButton { border: 2 ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/build simple ui using pySide.html"
+                       rel="bookmark"
+                       title="Permalink to build simple ui using pySide">
+                        build simple ui using pySide
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-08-25T10:20:00"> 周一 25 八月 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>记录一下做UI prototype时候遇到的新概念 </p>
+<blockquote>
+<p>life is short, use python. </p>
+</blockquote>
+<p>早有耳闻, 一试果然不凡. 
+安装Qt 4.8.X, 安装pySide (how? 具体看其主页), 然后新建file.py, 敲几行pySide代码, 然后command line里面python file.py立刻就出ui效果了. 省却了ide / c++代码 / 链接设置 / 反复修改反复编译的麻烦.  <br />
+事情的缘由是, 最近要参与用python快速做一个ui的prototype, 本来主程序M里面就有Qt+pySide, 所以连安装都不需要, 直接改py文件就得到ui结果, 真快. 于是就缺学几下python了. </p>
+<p>example 1. To define the style sheet 样式 of a button.  <br />
+<img alt="Alt text" src="data/2014-08-25_qtButtonStyleSheet.png" title="output" />   </p>
+<div class="highlight"><pre><span class="n">QPushButton</span> <span class="p">{</span>
+    <span class="nl">border:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="err">#</span><span class="mf">8f8f</span><span class="mi">91</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="o">:</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">176</span><span class="p">,</span> <span class="mi">189</span><span class="p">,</span> <span class="mi">194</span><span class="p">);</span>
+    <span class="nl">color:</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> 
+    <span class="n">font</span><span class="o">:</span> <span class="mi">10</span><span class="n">pt</span> <span class="s">&quot;MS Shell Dlg 2&quot;</span><span class="p">;</span>
+    <span class="n">min</span><span class="o">-</span><span class="n">width</span><span class="o">:</span> <span class="mi">80</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">min</span><span class="o">-</span><span class="n">height</span><span class="o">:</span> <span class="mi">80</span><span class="n">px</span><span class="p">;</span>  
+<span class="p">}</span> 
+<span class="nl">QPushButton:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="o">:</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">98</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">108</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>听说这有点像CSS的样子. 上面的定义可以在QtDesign里面不断尝试, 拖一个QPushButton到面板上, 在property panel里面找到Style Sheet属性, 里面就可以更改样式. 
+code: GitHub\coding_exercises\stylesheetButton.py </p>
+<p>另外在QToolButton widget里面有一个autoRaise的设置, 当鼠标移动到上面时候会有凸出的效果. 
+在QPushButtonse't这边要模拟的话, 可以在style sheet里面用QPushButton:hover { 自定义效果 } </p>
+<p>当前QPushButton按下去click之后会回弹, 假如想找个button被按下去之后保存按着的状态(例如表示选中了这个button), 可以用setDown(true/false)来达到. </p>
+<p>example 2. To enable the drag&amp;drop of buttons.     <br />
+<img alt="Alt text" src="data/2014-08-25_qtButtonDragDrop.png" title="output" />     <br />
+code: GitHub\coding_exercises\dragButton.py   </p>
+<p>example 3. Signal and Slots <br />
+three steps:          <br />
+1. define signal variable and slot function;    <br />
+2. connect the signal and slot;   <br />
+3. emit the signal, the slots will be invoked.    </p>
+<p>一般看到的简单例子: </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">PySide</span> <span class="kn">import</span> <span class="n">QtCore</span><span class="p">,</span> <span class="n">QtGui</span>
+
+<span class="c"># define a function that will be used as a slot</span>
+<span class="k">def</span> <span class="nf">sayHello</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&#39;Hello world!&#39;</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+
+<span class="n">button</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&#39;Say hello!&#39;</span><span class="p">)</span>
+
+<span class="c"># connect the clicked signal to the sayHello slot</span>
+<span class="n">button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sayHello</span><span class="p">)</span>
+<span class="n">button</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</pre></div>
+</td></tr></table>
+
+<p>这个QPushButton的例子里面, 其实.clicked这个QPushButton的signal已经由Qt来定义了, 而clicked这个signal的emit也由Qt完成, 所以我们只要提供Slot sayHello的定义, 已经connect就ok了. </p>
+<div class="highlight"><pre><span class="c1">// 这些可以帮助debug  </span>
+<span class="n">QObject</span> <span class="n">sendor</span><span class="p">();</span>  
+<span class="n">QString</span> <span class="n">sender</span><span class="p">().</span><span class="n">objectName</span><span class="p">();</span>  
+</pre></div>
+
+
+<p>假如一个signal连了好几个slots, 这些slots被调用的次序怎么决定的呢?          <br />
+好像是Qt 4.6之后就改成谁先连就先调用谁. 而印象中boost中的signal库是可以决定slot的调用次序的?          <br />
+http://qt-project.org/wiki/Signals_and_Slots_in_PySide</p>
+<p>example 4. layout and widget 
+question: layout and widget的关系 
+widget-&gt;setLayout
+widget-&gt;layout-&gt;addLayout/addWidget 
+如此循环. 而在QLayout的doc里面说了, widget跟widget之间可能有layout, widget1.layout.addWidget(widget2), widget2的parent还是widget1, 而不是layout. layout并不会跟widget成为parent-child的关系. </p>
+<p>question: 清空widget 
+怎么把widget里面的layout里面的children都清空(方便后面动态地生成新的widget内容)? 注意这里widget.layout本身没有变化, 例如没有从QHBoxLayout变成别的如QVBoxLayout. 而且要删除layout里面的内容(可能是子widget, 可能是子layout).   </p>
+<div class="highlight"><pre><span class="c1">// from QLayout doc,   </span>
+<span class="c1">// The following code fragment shows a safe way to remove all items from a layout:</span>
+<span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">child</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">((</span><span class="n">child</span> <span class="o">=</span> <span class="n">layout</span><span class="o">-&gt;</span><span class="n">takeAt</span><span class="p">(</span><span class="mh">0</span><span class="p">))</span> <span class="o">!=</span> <span class="mh">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="n">delete</span> <span class="n">child</span><span class="p">;</span>
+<span class="p">}</span>                
+<span class="c1">// 但是好像有说应该先if (QWidget *cW = child-&gt;widget()) delete cW; 再delete child. 其实可以自己试试, 看delete child时候会否自动跳到cW类型的deconstruction function里面.   </span>
+</pre></div>
+
+
+<p>[update 2014/8/26] ok, 有人说虽然开发容易, 但是部署难. 因为不像C++编译成binary file with dll, target machine上需要预先安装版本合适的qt &amp; python &amp; pySide 才能interpolate相应的.py file.   </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

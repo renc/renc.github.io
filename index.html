@@ -1,47 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+>
 <head>
-        <meta charset="utf-8" />
-        <title>阿can's  blog</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+    <title>阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+
+
+<link rel="canonical" href="">
+        <meta name="author" content="renc" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="阿can's  blog"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="阿can's  blog"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
 </head>
+<body>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">阿can's  blog </a></h1>
-                <nav><ul>
-                    <li><a href="/category/computer-graphics.html">computer graphics,</a></li>
-                    <li><a href="/category/programming.html">programming</a></li>
-                    <li><a href="/category/programming-computer-graphics.html">programming, computer graphics,</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/build simple ui using pySide.html">build simple ui using pySide</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2014-08-25T10:20:00">
-                Published: 周一 25 八月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-08-25T19:30:00">
-                Updated: 周一 25 八月 2014
-        </abbr>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/renc.html">renc</a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info --><hr />
-<p>layout: post 
-title: build simple ui using pySide 
-categories: programming </p>
-<hr />
+            <article>
+                <h2><a href="/Pointer is copied when passed as function parameter.html">Pointer is copied when passed as function parameter</a></h2>
+                <div class="summary"><h2>起源</h2>
+<p>看到这段代码(肯定是简化更改版啦)  </p>
+<div class="highlight"><pre><span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>   
+<span class="p">{</span>  
+    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
+    <span class="n">item</span><span class="o">-&gt;</span><span class="n">unref</span><span class="p">();</span>  
+<span class="p">}</span>   
+<span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">)</span>   
+<span class="p">{</span>  
+    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
+<span class="p">}</span>   
+</pre></div>
+
+
+<p>上面的unref()是用于reference count的, reference计数减一的意思. 为什么有这东东呢, 为什么下面用引入作为参数的就不需要呢? 
+我怀疑是指针在作为函数参数的传递过程中被复制了, 也就是指向实际的物体的指针又多了一个, 所以merge之后就unref减少一个. 以下的test case尝试证明指针是否被复制了:   </p>
+<div class="highlight"><pre><span class="c1">// try to check if a pointer will be copied during passing-by-pointer.         </span>
+<span class="c1">//              </span>
+<span class="p">#</span><span class="k">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>             
+
+<span class="k">void</span> <span class="n">func1</span><span class="p">(</span><span class="k">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Pointer is copied when passed as function parameter.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h2>
+                <div class="summary"><p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
+<p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
+一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release.  <br />
+图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标....     </p>
+<p>从face面的角度来看, 深蓝色的面为起点, 然后鼠标一旦离开这个深蓝色的面之后, 肯定会进入这个深蓝色面四周的8个浅蓝色面之一(假如把面的边界也看作面一部分). 于是在stroke的路线中, 鼠标所pick到的面是一个连着一个的, 连续. </p>
+<p>从edge边的角度来看, 鼠标从起点移动时候, 虽然鼠标在面内部而不是压在边上面, 但是面的几个边总有一个是距离当前鼠标位置近一点的, 我们选择这个边; 当鼠标移动要离开这个深蓝色的face的时候, 肯定会触碰到这个face是边(假如把角点corner也看作是edge是一部分). 于是在stroke的路线中, 鼠标所pick到的边是一个连着一个的, 也连续. </p>
+<p>而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   </p>
+<p>怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? <br />
+因为上面说到面是完备的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Fail to surround the mouse with the vertices.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Build myblog using pelican.html">Build myblog using pelican</a></h2>
+                <div class="summary"><p>都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞...   </p>
+<h2>环境:</h2>
+<ul>
+<li>python 2.7, withn pip, easy_install        </li>
+<li>pelican        <br />
+<img alt="Alt text" src="data/2014-08-31-pelican_output.PNG" title="output" /><br />
+注意上面的起始目录是E:\Temp\myblog&gt; 
+我试过别的起始目录是E:\Temp\myblog\context&gt; 就发生错误了. 
+进入output目录, 打开index.html就可以看到blog了。这里我没有用到make html命令哦.  </li>
+</ul>
+<h2>遇到的problems:</h2>
+<ul>
+<li>设置图片目录的路径.  <br />
+我的图片都是文档.md目录下的data目录, 例如folderA/xxx.md, folderA/data/yyy.PNG. 在pelican这里, 我想保持这样的结构, folderA 相当于 context目录, 目的是blog的内容(文档和图片)已经可以放到某个folderA里面, 然后要用pelican来build这个blog的时候, 直接把folderA目录里面的所有东西copy到context目录下就ok了.<br />
+但是pelican默认是把图片放到blogFolder/image目录 ...</li></ul>
+                    <a class="btn btn-default btn-xs" href="/Build myblog using pelican.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/build simple ui using pySide.html">build simple ui using pySide</a></h2>
+                <div class="summary"><p>记录一下做UI prototype时候遇到的新概念 </p>
 <blockquote>
 <p>life is short, use python. </p>
 </blockquote>
@@ -51,632 +146,336 @@ categories: programming </p>
 <p>example 1. To define the style sheet 样式 of a button.  <br />
 <img alt="Alt text" src="data/2014-08-25_qtButtonStyleSheet.png" title="output" />   </p>
 <div class="highlight"><pre><span class="n">QPushButton</span> <span class="p">{</span>
-    <span class="nl">border:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="err">#</span><span class="mf">8f8f</span><span class="mi">91</span><span class="p">;</span>
-    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
-    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="o">:</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">176</span><span class="p">,</span> <span class="mi">189</span><span class="p">,</span> <span class="mi">194</span><span class="p">);</span>
-    <span class="nl">color:</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> 
-    <span class="n">font</span><span class="o">:</span> <span class="mi">10</span><span class="n">pt</span> <span class="s">&quot;MS Shell Dlg 2&quot;</span><span class="p">;</span>
-    <span class="n">min</span><span class="o">-</span><span class="n">width</span><span class="o">:</span> <span class="mi">80</span><span class="n">px</span><span class="p">;</span>
-    <span class="n">min</span><span class="o">-</span><span class="n">height</span><span class="o">:</span> <span class="mi">80</span><span class="n">px</span><span class="p">;</span>  
-<span class="p">}</span> 
-<span class="nl">QPushButton:</span><span class="n">pressed</span> <span class="p">{</span>
-    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="o">:</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">98</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">108</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="nl">border:</span> <span class="mi">2 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/build simple ui using pySide.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/python basis.html">python basis</a></h2>
+                <div class="summary"><p>新接触python programming, 记录一些基础.<br />
+if string == "": <br />
+    pass        <br />
+if obj is None: <br />
+    pass  </p>
+<h2>References:</h2>
+<p>Python Practice Book, by Anand Chitipothu. http://anandology.com/python-practice-book/index.html<br />
+book, Head First Python, 只是book不错, 适合有编程背景的人去学python.<br />
+http://qt-project.org/wiki/PySide_Tutorials                    </p>
+                    <a class="btn btn-default btn-xs" href="/python basis.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/name on a book.html">Name on a book</a></h2>
+                <div class="summary"><p>记录一次参与翻译一本外文书的过程, 过程有点累, 结果有点甜.   </p>
+<blockquote>
+<p>you know, it is funny that people do not care your name, until you are in trouble. 
+-- 美剧&lt;疑犯追凶&gt;第一集里面的话, 类似而已哦. </p>
+</blockquote>
+<p>去参与翻译一本书, 可以出现在书店书架上的, 还提到你的名字, 是不是很cool?    </p>
+<p>昨天看到email, 被告知我有份参与的书终于上架了, "在各大网店都有售。但是样书会比较慢" 里面上google一下，果然在amazon.cn等都找到了: </p>
+<div class="highlight"><pre><span class="err">交互式程序设计（第</span><span class="mi">2</span><span class="err">版）</span>                                                               
+ <span class="o">~</span> <span class="n">Joshua</span> <span class="n">Noble</span> <span class="p">(</span><span class="err">作者</span><span class="p">),</span> <span class="err">毛顺兵</span> <span class="p">(</span><span class="err">译者</span><span class="p">),</span> <span class="err">张婷婷</span> <span class="p">(</span><span class="err">译者</span><span class="p">)</span>                
+<span class="err">出版社</span><span class="o">:</span> <span class="err">机械工业出版社</span><span class="p">;</span> <span class="p">(</span><span class="mi">2014</span><span class="err">年 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/name on a book.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/conflict by duplicated variables.html">conflict by duplicated variables</a></h2>
+                <div class="summary"><p>用多于一个变量来表示一个状态, 变量之间很容易不一致呢.      </p>
+<blockquote>
+<p>conflict  </p>
+</blockquote>
+<p>假如我们要描述以下这个状态:        <br />
+在一次mouse click的picking中, 我们给出了pick的范围, 一个rectangle, 然后要标记是否只要pick一个物体object就够了, 还是pick所有在rectangel下面的物体.  </p>
+<p>当假如我们只要pick到一个物体就够了, 那可能在for里面, 一旦找到某一个物体有效, 我们就可以返回, 退出pick过程了. 也就是我们只要pick到第一个有效物体就ok了, 而不考虑这个pick到的物体是否距离mouse click的点最近.   </p>
+<p>那么, 要记录这个状态, 我们看下面的实现:     </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">XViewContext</span>            
+<span class="p">{</span>               
+<span class="nl">public:</span>                           
+    <span class="n">PickingResult</span> <span class="n">pick</span><span class="p">(...);</span>                               
+    <span class="kt">void</span> <span class="nf">setPickSingle</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="n">m_bPickSingle</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>                      
+    <span class="kt">bool</span> <span class="n">pickSingle</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_bPickSingle</span><span class="p">;</span> <span class="p">};</span>                
+<span class="nl">private:</span>               
+    <span class="kt">bool</span> <span class="n">m_bPickSingle</span><span class="p">;</span>                   
+<span class="p">};</span>                           
+<span class="n">PickingResult</span> <span class="n">XViewContext</span><span class="o">::</span><span class="n">pick</span><span class="p">(...)</span>           
+<span class="p">{</span>                    
+    <span class="p">...</span>                                
+    <span class="k">if</span> <span class="p">(</span> <span class="n">pickSingle</span><span class="p">()</span> <span class="p">)</span> <span class="p">...;</span>                 
+    <span class="k">else</span> <span class="p">...;</span>         
+<span class="p">}</span>          
 </pre></div>
 
 
-<p>听说这有点像CSS的样子. 上面的定义可以在QtDesign里面不断尝试, 拖一个QPushButton到面板上, 在property panel里面找到Style Sheet属性, 里面就可以更改样式. 
-code: GitHub\coding_exercises\stylesheetButton.py </p>
-<p>另外在QToolButton widget里面有一个autoRaise的设置, 当鼠标移动到上面时候会有凸出的效果. 
-在QPushButtonse't这边要模拟的话, 可以在style sheet里面用QPushButton:hover { 自定义效果 } </p>
-<p>当前QPushButton按下去click之后会回弹, 假如想找个button被按下去之后保存按着的状态(例如表示选中了这个button), 可以用setDown(true/false)来达到. </p>
-<p>example 2. To enable the drag&amp;drop of buttons.     <br />
-<img alt="Alt text" src="data/2014-08-25_qtButtonDragDrop.png" title="output" />     <br />
-code: GitHub\coding_exercises\dragButton.py   </p>
-<p>example 3. Signal and Slots <br />
-three steps:          <br />
-1. define signal variable and slot function;    <br />
-2. connect the signal and slot;   <br />
-3. emit the signal, the slots will be invoked.    </p>
-<p>一般看到的简单例子: </p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<p>在这实现中, 是否要pick单一个物体的状态作为data member inside ...</p>
+                    <a class="btn btn-default btn-xs" href="/conflict by duplicated variables.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Undo and Redo.html">Undo and Redo</a></h2>
+                <div class="summary"><p>Undo and Redo 已经遇到很多次了, 记录一下想法.     </p>
+<blockquote>
+<p>So we beat on, boats against the current, borne back ceaselessly into the past. -- The Great Gatsby<br />
+所以我们不停地往前划，逆流而上，回到无穷无尽的过去。《了不起的盖茨比》  </p>
+</blockquote>
+<p>一个程序假如连undo/redo都没有, 那基本上不是给人用的, 可能只能算是demo.</p>
+<h2>Undo/Redo</h2>
+<p>用windows/paint画图工具做例子就很直观啦. </p>
+<p>case 1. 假如操作次序是: 画一笔A, 再画一笔B;
+undo 一次就是剩下A; undo 第二次就是空;
+redo 一次就是增加A; redo第二次就是恢复到A B; 
+这个case的特点是undo到底了，再redo到底. 没有undo的时候又夹着redo ...</p>
+                    <a class="btn btn-default btn-xs" href="/Undo and Redo.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/why game developers keep getting laid off.html">why game developers keep getting laid off</a></h2>
+                <div class="summary"><p>翻译了一下why game developers keep getting laid off这个文章. 里面有些观点是挺有意思的.   </p>
+<h2>引言</h2>
+<p>在Hacker News上看到此文, 
+Why Game Developers Keep Getting Laid Off
+by Jason Schreier 
+http://kotaku.com/why-game-developers-keep-getting-laid-off-1583192249 
+I enjoyed this article, thx. 稍微摘录和翻译一下. </p>
+<h2>Why does this happen so often?</h2>
+<p>...
+为什么裁掉一些开发，几个月之后又要重新请人？这个想法好像有点傻啊。但是这种事情却常常发生。根据Sony的某前员工，其中的解释很简单：在开发的前期(游戏的概念和设计是在这期间完成)，不需要那么多人，所以发行商就不养人。
+...</p>
+<h2>A deadline's ...</h2>
+                    <a class="btn btn-default btn-xs" href="/why game developers keep getting laid off.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/build error from line ending.html">build error from line ending</a></h2>
+                <div class="summary"><p>Build error, 具体是error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format怎么办呢？ </p>
+<p>故事的开端是checkin了一个.cpp，当然本地是build过的，但是server端那边反馈说build error, 具体是
+error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format</p>
+<p>怎么办呢？当然是查看一下到底是那个.cpp文件的line ending是什么东西，然后改成合适的就ok了. </p>
+<p>下面截图显示改之前是CR+LF, 改之后是LF的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/build error from line ending.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/algo - counting inversions.html">algo - counting inversions</a></h2>
+                <div class="summary"><p>算法练习: counting inversions       </p>
+<h2>Background</h2>
+<p>Given an array, say [1, 3, 5, 2, 4, 6], to count the inversions.
+What is an inversion ?
+if (i &lt; j) but arr[i] &gt; arr[j]. 例如上面的(3, 2), 3在2的前面, 但是3&gt;2, 构成一个inversion. 这个例子中一共三个inversions(3, 2) (5, 2) (5, 4). </p>
+<p>这个计算有什么用呢? 我是[Algorithms: Design and Analysis ...</p>
+                    <a class="btn btn-default btn-xs" href="/algo - counting inversions.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/partio.html">partio</a></h2>
+                <div class="summary"><p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.               </p>
+<h2>引言</h2>
+<p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.</p>
+<h2>安装libPNG and zlib</h2>
+<p>其实partio只需要zlib, 但是libPNG contain了zlib, 而且提供了zlib的vs project file, libPNG本身也是一个常用库, 于是就直接build libPNG and zlib好了. 
+download libPNG source, 
+download zlib source,
+update the zlib source information at file ...</p>
+                    <a class="btn btn-default btn-xs" href="/partio.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Vector based containers.html">Vector based containers</a></h2>
+                <div class="summary"><p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记.  </p>
+<h2>引言</h2>
+<h1>Using STL Vectors</h1>
+<p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 
+但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. </p>
+<h2>Prefer vector over list</h2>
+<p>比较 std::vector 和 std::list, 其中一个特定是, vector的内存是连续的(contiguous buffers), 还可以避免avoid内存动态分配memory allocations和四散的访问scattered access.  这些都是优势. </p>
+<p>这里发散一下，以前在用Qt 4.8的时候(以后Qt 5可能有变)，就有QVector, QList, QLinkedList，它们的区别也有意思。其中QVector跟std::vector类似 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Vector based containers.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Pointer to Member Function.html">Pointer to Member Function</a></h2>
+                <div class="summary"><p>function pointer是知道的, 如</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">PySide</span> <span class="kn">import</span> <span class="n">QtCore</span><span class="p">,</span> <span class="n">QtGui</span>
+<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">pFtor</span><span class="p">)(</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span> <span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> 
 
-<span class="c"># define a function that will be used as a slot</span>
-<span class="k">def</span> <span class="nf">sayHello</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&#39;Hello world!&#39;</span>
+<span class="n">or</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
-
-<span class="n">button</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&#39;Say hello!&#39;</span><span class="p">)</span>
-
-<span class="c"># connect the clicked signal to the sayHello slot</span>
-<span class="n">button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sayHello</span><span class="p">)</span>
-<span class="n">button</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="o">*</span><span class="n">FtorType</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span> 
+<span class="n">FtorType</span> <span class="n">pFtor</span><span class="p">;</span> 
+<span class="n">pFtor</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 </pre></div>
-</td></tr></table>
 
-<p>这个QPushButton的例子里面, 其实.clicked这个QPushButton的signal已经由Qt来定义了, 而clicked这个signal的emit也由Qt完成, 所以我们只要提供Slot sayHello的定义, 已经connect就ok了. </p>
-<div class="highlight"><pre><span class="c1">// 这些可以帮助debug  </span>
-<span class="n">QObject</span> <span class="n">sendor</span><span class="p">();</span>  
-<span class="n">QString</span> <span class="n">sender</span><span class="p">().</span><span class="n">objectName</span><span class="p">();</span>  
-</pre></div>
 
-
-<p>假如一个signal连了好几个slots, 这些slots被调用的次序怎么决定的呢?          <br />
-好像是Qt 4.6之后就改成谁先连就先调用谁. 而印象中boost中的signal库是可以决定slot的调用次序的?            </p>
-<p>example 4. layout and widget 
-question: layout and widget的关系 
-widget-&gt;setLayout
-widget-&gt;layout-&gt;addLayout/addWidget 
-如此循环. 而在QLayout的doc里面说了, widget跟widget之间可能有layout, widget1.layout.addWidget(widget2), widget2的parent还是widget1, 而不是layout. layout并不会跟widget成为parent-child的关系. </p>
-<p>question: 清空widget 
-怎么把widget里面的layout里面的children都清空(方便后面动态地生成新的widget内容)? 注意这里widget.layout本身没有变化, 例如没有从QHBoxLayout变成别的如QVBoxLayout. 而且要删除layout里面的内容(可能是子widget, 可能是子layout).   </p>
-<div class="highlight"><pre><span class="c1">// from QLayout doc,   </span>
-<span class="c1">// The following code fragment shows a safe way to remove all items from a layout:</span>
-<span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">child</span><span class="p">;</span>
-<span class="k">while</span> <span class="p">((</span><span class="n">child</span> <span class="o">=</span> <span class="n">layout</span><span class="o">-&gt;</span><span class="n">takeAt</span><span class="p">(</span><span class="mh">0</span><span class="p">))</span> <span class="o">!=</span> <span class="mh">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="p">...</span>
-    <span class="n">delete</span> <span class="n">child</span><span class="p">;</span>
-<span class="p">}</span>                
-<span class="c1">// 但是好像有说应该先if (QWidget *cW = child-&gt;widget()) delete cW; 再delete child. 其实可以自己试试, 看delete child时候会否自动跳到cW类型的deconstruction function里面.   </span>
-</pre></div>
-
-
-<p>[update 2014/8/26] ok, 有人说虽然开发容易, 但是部署难. 因为不像C++编译成binary file with dll, target machine上需要预先安装版本合适的qt &amp; python &amp; pySide 才能interpolate相应的.py file.   </p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/python basis.html" rel="bookmark"
-                           title="Permalink to python basis">python basis</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-08-21T10:20:00">
-                Published: 周四 21 八月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-08-21T19:30:00">
-                Updated: 周四 21 八月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>新接触python programming, 记录一些基础.</p>
-                <a class="readmore" href="/python basis.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/name on a book.html" rel="bookmark"
-                           title="Permalink to Name on a book">Name on a book</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-08-19T10:20:00">
-                Published: 周二 19 八月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-08-19T19:30:00">
-                Updated: 周二 19 八月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>记录一次参与翻译一本外文书的过程, 过程有点累, 结果有点甜.</p>
-                <a class="readmore" href="/name on a book.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/conflict by duplicated variables.html" rel="bookmark"
-                           title="Permalink to conflict by duplicated variables">conflict by duplicated variables</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-08-18T10:20:00">
-                Published: 周一 18 八月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-08-18T19:30:00">
-                Updated: 周一 18 八月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>用多于一个变量来表示一个状态, 变量之间很容易不一致呢.</p>
-                <a class="readmore" href="/conflict by duplicated variables.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Undo and Redo.html" rel="bookmark"
-                           title="Permalink to Undo and Redo">Undo and Redo</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-06-25T10:20:00">
-                Published: 周三 25 六月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-06-25T19:30:00">
-                Updated: 周三 25 六月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>Undo and Redo 已经遇到很多次了, 记录一下想法.</p>
-                <a class="readmore" href="/Undo and Redo.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/why game developers keep getting laid off.html" rel="bookmark"
-                           title="Permalink to why game developers keep getting laid off">why game developers keep getting laid off</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-06-08T10:20:00">
-                Published: 周日 08 六月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-06-08T19:30:00">
-                Updated: 周日 08 六月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>翻译why game developers keep getting laid off这个文章. 里面有些观点是挺有意思的.</p>
-                <a class="readmore" href="/why game developers keep getting laid off.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/build error from line ending.html" rel="bookmark"
-                           title="Permalink to build error from line ending">build error from line ending</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-05-29T10:20:00">
-                Published: 周四 29 五月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-05-29T19:30:00">
-                Updated: 周四 29 五月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>build error, 具体是error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format怎么办呢？</p>
-                <a class="readmore" href="/build error from line ending.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/algo - counting inversions.html" rel="bookmark"
-                           title="Permalink to algo - counting inversions">algo - counting inversions</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-05-22T10:20:00">
-                Published: 周四 22 五月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-05-22T19:30:00">
-                Updated: 周四 22 五月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>算法练习: counting inversions</p>
-                <a class="readmore" href="/algo - counting inversions.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/partio.html" rel="bookmark"
-                           title="Permalink to partio">partio</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-05-22T10:20:00">
-                Published: 周四 22 五月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-05-22T19:30:00">
-                Updated: 周四 22 五月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.</p>
-                <a class="readmore" href="/partio.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Vector based containers.html" rel="bookmark"
-                           title="Permalink to Vector based containers">Vector based containers</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-05-13T10:20:00">
-                Published: 周二 13 五月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-05-13T19:30:00">
-                Updated: 周二 13 五月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记.</p>
-                <a class="readmore" href="/Vector based containers.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Pointer to Member Function.html" rel="bookmark"
-                           title="Permalink to Pointer to Member Function">Pointer to Member Function</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-05-12T10:20:00">
-                Published: 周一 12 五月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-05-12T19:30:00">
-                Updated: 周一 12 五月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>In the middle of time and space</p>
-                <a class="readmore" href="/Pointer to Member Function.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/In the middle of time and space.html" rel="bookmark"
-                           title="Permalink to In the middle of time and space">In the middle of time and space</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-05-09T10:20:00">
-                Published: 周五 09 五月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-05-09T19:30:00">
-                Updated: 周五 09 五月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>In the middle of time and space</p>
-                <a class="readmore" href="/In the middle of time and space.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Do and redo are similiar.html" rel="bookmark"
-                           title="Permalink to Do and redo are similiar">Do and redo are similiar</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-04-14T10:20:00">
-                Published: 周一 14 四月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-04-14T19:30:00">
-                Updated: 周一 14 四月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>Do and redo are so similiar that they can share code.</p>
-                <a class="readmore" href="/Do and redo are similiar.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Note of Maya programming.html" rel="bookmark"
-                           title="Permalink to Note of Maya programming">Note of Maya programming</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-04-01T10:20:00">
-                Published: 周二 01 四月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-04-01T19:30:00">
-                Updated: 周二 01 四月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>学maya时候有些新概念要记录一下，否则忘得快.</p>
-                <a class="readmore" href="/Note of Maya programming.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/simple implement of 2d bezier curve.html" rel="bookmark"
-                           title="Permalink to simple implement of 2d bezier curve">simple implement of 2d bezier curve</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-03-03T10:20:00">
-                Published: 周一 03 三月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-03-03T19:30:00">
-                Updated: 周一 03 三月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>工作中又一次遇到nurb curve的问题，具体是knots个数和求法的问题。那东西太难，相对来来说，bezier curve易懂很多，一直想实现一下来看看，于是就有了此。</p>
-                <a class="readmore" href="/simple implement of 2d bezier curve.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Flood fill.html" rel="bookmark"
-                           title="Permalink to Flood fill">Flood fill</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-22T10:20:00">
-                Published: 周二 22 十月 2013
-        </abbr>
-		<br />
-        <abbr class="modified" title="2013-10-22T19:30:00">
-                Updated: 周二 22 十月 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>看见someone提到Flood fill algorithm, 惭愧，不熟悉这个名字，于是Google一下，竟然跟BFS很像，于是想着要简单实现一下。</p>
-                <a class="readmore" href="/Flood fill.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/How to debug maya custom plugin.html" rel="bookmark"
-                           title="Permalink to How to debug maya custom plugin">How to debug maya custom plugin</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-12T10:20:00">
-                Published: 周六 12 十月 2013
-        </abbr>
-		<br />
-        <abbr class="modified" title="2013-10-12T19:30:00">
-                Updated: 周六 12 十月 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/renc.html">renc</a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/maya.html">maya</a> <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>涉及maya plugin开发的时候，怎么debug呢?</p>
-                <a class="readmore" href="/How to debug maya custom plugin.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Tree view at Qt.html" rel="bookmark"
-                           title="Permalink to Tree view at Qt">Tree view at Qt</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-08T10:20:00">
-                Published: 周二 08 十月 2013
-        </abbr>
-		<br />
-        <abbr class="modified" title="2013-10-08T10:20:00">
-                Updated: 周二 08 十月 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/renc.html">renc</a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/qt.html">qt</a> </p>
-</footer><!-- /.post-info -->                <p>Qt中的TreeView很复杂, 记录一下自己的理解.</p>
-                <a class="readmore" href="/Tree view at Qt.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Blendshape at maya.html" rel="bookmark"
-                           title="Permalink to Blendshape at maya">Blendshape at maya</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-08-14T10:20:00">
-                Published: 周三 14 八月 2013
-        </abbr>
-		<br />
-        <abbr class="modified" title="2013-08-14T10:20:00">
-                Updated: 周三 14 八月 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/renc.html">renc</a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/maya.html">maya</a> <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>最近接触了一点maya blendshape programming, 稍微记录一下。</p>
-                <a class="readmore" href="/Blendshape at maya.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Example of code conventions.html" rel="bookmark"
-                           title="Permalink to build simple ui using pySide">build simple ui using pySide</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2010-12-03T10:20:00">
-                Published: 周五 03 十二月 2010
-        </abbr>
-		<br />
-        <abbr class="modified" title="2010-12-05T19:30:00">
-                Updated: 周日 05 十二月 2010
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->                <p>Example of code conventions</p>
-                <a class="readmore" href="/Example of code conventions.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 2
-        <a href="/index2.html">&raquo;</a>
-</p>
-                </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+<p>但是当看到类似以下代码时候还是恐惧了一下: </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">Tool</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">doA</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="nf">doB</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span> 
+<span class="p">};</span> 
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="n">Tool</span><span class="o">::*</span><span class="n">MemberFunctionPtr</span><span class="p">)(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+
+
+<span class="n">Tool</span> <span class="n">toolObj ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Pointer to Member Function.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/In the middle of time and space.html">In the middle of time and space</a></h2>
+                <div class="summary"><p>刚发生了一个有意思的事情, 5月9号16:40</p>
+<p>小伙C说了一段话;
+小伙B回答了一段话;</p>
+<p>小伙C是在北美西海岸, 跟我们差16小时; 
+小伙B是在英国.</p>
+<p>那么C大致是5月8号深夜, B可能是9号早上.</p>
+<p>过去和未来的对话，我们夹在时空中间，旁观.....</p>
+                    <a class="btn btn-default btn-xs" href="/In the middle of time and space.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h2>
+                <div class="summary"><p>Do and redo are so similiar that they can share code.</p>
+                    <a class="btn btn-default btn-xs" href="/Do and redo are similiar.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Note of Maya programming.html">Note of Maya programming</a></h2>
+                <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快.</p>
+                    <a class="btn btn-default btn-xs" href="/Note of Maya programming.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/simple implement of 2d bezier curve.html">simple implement of 2d bezier curve</a></h2>
+                <div class="summary"><p>工作中又一次遇到nurb curve的问题，具体是knots个数和求法的问题。那东西太难，相对来来说，bezier curve易懂很多，一直想实现一下来看看，于是就有了此。</p>
+                    <a class="btn btn-default btn-xs" href="/simple implement of 2d bezier curve.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Flood fill.html">Flood fill</a></h2>
+                <div class="summary"><p>看见someone提到Flood fill algorithm, 惭愧，不熟悉这个名字，于是Google一下，竟然跟BFS很像，于是想着要简单实现一下。</p>
+                    <a class="btn btn-default btn-xs" href="/Flood fill.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/How to debug maya custom plugin.html">How to debug maya custom plugin</a></h2>
+                <div class="summary"><p>涉及maya plugin开发的时候，怎么debug呢? </p>
+<h2>Attach to maya process ... 寄生</h2>
+<p>step 1. maya plugin manager (Window -&gt; Settings/Preferences -&gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
+step 2. at your visual studio project of that custom plugin, Tools -&gt; Attach to ...</p>
+                    <a class="btn btn-default btn-xs" href="/How to debug maya custom plugin.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        <ul class="pagination">
+                <li class="prev disabled"><a href="#">&laquo;</a></li>
+                    <li class="active"><a
+                            href="/index.html">1</a></li>
+                    <li class=""><a
+                            href="/index2.html">2</a></li>
+                <li class="next"><a
+                        href="/index2.html">&raquo;</a></li>
+        </ul>
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
 
 </body>
 </html>

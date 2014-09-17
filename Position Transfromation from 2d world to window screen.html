@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Position Transfromation from 2d world to window screen - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/Position Transfromation from 2d world to window screen.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to find the position at 2d world corresponding to this mouse positon? Background背景 工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Position Transfromation from 2d world to window screen.html"
+                       rel="bookmark"
+                       title="Permalink to Position Transfromation from 2d world to window screen">
+                        Position Transfromation from 2d world to window screen
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2010-12-03T10:20:00"> 周五 03 十二月 2010</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to find the position at 2d world corresponding to this mouse positon?     </p>
+<h2>Background背景</h2>
+<p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to find the position at 2d world corresponding to this mouse positon?</p>
+<h2>Transform变换和映射</h2>
+<p>解法Solution直接看我自己画的图片: 
+<img alt="Alt text" src="data/2014-06-20-ViewToPort.png" title="output" />
+Note 1:图中的变换矩阵其实是从2d world映射到window坐标的。假如再求invert, 就可以得到逆变换, 从window坐标到2d world坐标了。推导的过程有些烦, 数学不好, 但是结果很美好:-) 
+Note 2:图中例子是用横向量的, v*M=v_new; 要对应到竖向量的话请把M翻转一下.</p>
+<h2>Ortho Projection</h2>
+<p>上面只是单纯从几何来看，那原本的问题中还涉及渲染呢. 那问题就来了, 那个2d world是怎么被渲染成window窗口里面的呢? </p>
+<p>首先图片中的view=2d world, 是有大小和朝向的, (left, bottom) -&gt; (right, top). width = right - left. 
+好奇去看看opengl的函数，发现Ortho project也需要这几个参数, 会不会有什么联系呢?
+当把图中的矩阵M3的w拆开为right, left, 又刚刚好等于ortho projection matrix( 这个矩阵在书上网上代码上都很容易找到的)。</p>
+<p>那是不是可以把上面的Transfrom 1/2/3理解为跟OpengGL里面ortho projection类似呢? 我觉得像哦.</p>
+<p>也就是要渲染一个2d的世界, 在模型在世界坐标排好了之后, 给出我们想要渲染出来的l/b/r/t, 通过ortho projection, 就可以把那一块区域渲染到窗口上了? 这里好像没有涉及model and camera transform喔, 也就是modelViewMatrix = identity. </p>
+<h2>Pan and Zoom</h2>
+<p>怎么在上一节的基础上加入pan and zoom的效果? 一般对于perspective projection来说, 会引入camera, 通过改变camera的position and target point可以实现pan平移, 移动camera来靠近和远离target point, 也达到了zoom in/out的效果. 而对于上一节中我们说到的从view to port的例子中, 貌似直接更改(left, bottom, right, top)就ok了.
+例如pan: 
+右移: left = left + deltaX, right = right + deltaX;
+上移: bottom = bottom + deltaY, top = top + deltaY;</p>
+<p>缩放zoom in/out就复杂一些: 
+<img alt="Alt text" src="data/2014-06-20-ortho_zoom.png" title="output" /></p>
+<p>折腾一个小demo: 
+<img alt="Alt text" src="data/2014-06-20-transform_orthoProj.gif" title="output" />    <br />
+source code:  </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

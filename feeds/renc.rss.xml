@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>阿can's blog</title><link>/</link><description></description><atom:link href="/feeds%5Crenc.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 12 Sep 2014 12:00:00 +0200</lastBuildDate><item><title>Pointer is copied when passed as function parameter</title><link>/Pointer%20is%20copied%20when%20passed%20as%20function%20parameter.html</link><description>&lt;h2&gt;起源&lt;/h2&gt;
+&lt;p&gt;看到这段代码(肯定是简化更改版啦)  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;XList&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;merge&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Item&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="c1"&gt;// do the merge sth;   &lt;/span&gt;
+    &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;unref&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;  
+&lt;span class="p"&gt;}&lt;/span&gt;   
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;XList&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;merge&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Item&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   
+&lt;span class="p"&gt;{&lt;/span&gt;  
+    &lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="c1"&gt;// do the merge sth;   &lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;   
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面的unref()是用于reference count的, reference计数减一的意思. 为什么有这东东呢, 为什么下面用引入作为参数的就不需要呢? 
+我怀疑是指针在作为函数参数的传递过程中被复制了, 也就是指向实际的物体的指针又多了一个, 所以merge之后就unref减少一个. 以下的test case尝试证明指针是否被复制了:   &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// try to check if a pointer will be copied during passing-by-pointer.         &lt;/span&gt;
+&lt;span class="c1"&gt;//              &lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;iostream&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;             
+
+&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;func1&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;           
+&lt;span class="p"&gt;{&lt;/span&gt;               
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;in func1: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;                 
+    &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;                
+&lt;span class="p"&gt;}&lt;/span&gt;                      
+&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;func2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                    
+&lt;span class="p"&gt;{&lt;/span&gt;            
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;in func2: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;        
+    &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;            
+&lt;span class="p"&gt;}&lt;/span&gt;          
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="no"&gt;B&lt;/span&gt;             
+&lt;span class="p"&gt;{&lt;/span&gt;          
+&lt;span class="nl"&gt;public:&lt;/span&gt;               
+    &lt;span class="no"&gt;B&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;                  
+    &lt;span class="no"&gt;B&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="no"&gt;B&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;_inB&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;_inB&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;             
+    &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;operator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="no"&gt;B&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;_inB&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;_inB&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;           
+
+&lt;span class="nl"&gt;private:&lt;/span&gt;           
+    &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;                 
+&lt;span class="p"&gt;};&lt;/span&gt;                   
+
+&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;func3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;B&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;              
+&lt;span class="p"&gt;{&lt;/span&gt;                 
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;in func3: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;             
+&lt;span class="p"&gt;}&lt;/span&gt;                          
+&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;func4&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="no"&gt;B&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                
+&lt;span class="p"&gt;{&lt;/span&gt;                                
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;in func4: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;             
+&lt;span class="p"&gt;}&lt;/span&gt;              
+
+&lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;            
+&lt;span class="p"&gt;{&lt;/span&gt;                
+    &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;                  
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;init: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;        
+    &lt;span class="n"&gt;func1&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;       
+    &lt;span class="n"&gt;func2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;            
+
+    &lt;span class="no"&gt;B&lt;/span&gt; &lt;span class="n"&gt;Binstance&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;        
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;init: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;Binstance&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;           
+    &lt;span class="n"&gt;func3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;Binstance&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;           
+    &lt;span class="n"&gt;func4&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;Binstance&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;             
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;          
+&lt;span class="p"&gt;}&lt;/span&gt;            
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;代码中有意思的地方是对于指针来说, 怎么输出当前变量自己的地址和变量自己所指向的物体的地址. output:               &lt;br /&gt;
+init: 0, 00E5FAC8          &lt;br /&gt;
+in func1: 0, 00E5F9E8, 00E5FAC8, 00E5FAC8        &lt;br /&gt;
+in func2: 1, 00E5FAC8            &lt;br /&gt;
+init: 00E5FABC          &lt;br /&gt;
+in func3: 00E5F9E8, 00E5FABC, 00E5FABC   &lt;br /&gt;
+in func4: 00E5FABC     &lt;br /&gt;
+具体的source at github\coding_exercises\pointer_unref      &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Fri, 12 Sep 2014 12:00:00 +0200</pubDate><guid>tag:,2014-09-12:Pointer is copied when passed as function parameter.html</guid><category></category></item><item><title>Fail to surround the mouse with the vertices</title><link>/Fail%20to%20surround%20the%20mouse%20with%20the%20vertices.html</link><description>&lt;p&gt;一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" /&gt;   &lt;br /&gt;
+一个stroke的过程: mouse click/press -&amp;gt; drag/move -&amp;gt; release.  &lt;br /&gt;
+图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标....     &lt;/p&gt;
+&lt;p&gt;从face面的角度来看, 深蓝色的面为起点, 然后鼠标一旦离开这个深蓝色的面之后, 肯定会进入这个深蓝色面四周的8个浅蓝色面之一(假如把面的边界也看作面一部分). 于是在stroke的路线中, 鼠标所pick到的面是一个连着一个的, 连续. &lt;/p&gt;
+&lt;p&gt;从edge边的角度来看, 鼠标从起点移动时候, 虽然鼠标在面内部而不是压在边上面, 但是面的几个边总有一个是距离当前鼠标位置近一点的, 我们选择这个边; 当鼠标移动要离开这个深蓝色的face的时候, 肯定会触碰到这个face是边(假如把角点corner也看作是edge是一部分). 于是在stroke的路线中, 鼠标所pick到的边是一个连着一个的, 也连续. &lt;/p&gt;
+&lt;p&gt;而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   &lt;/p&gt;
+&lt;p&gt;怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? &lt;br /&gt;
+因为上面说到面是完备的+连续的, 那是否可以对pick到的面求跟鼠标距离近的顶点来组成那一串连续的顶点呢.     &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Tue, 02 Sep 2014 16:00:00 +0200</pubDate><guid>tag:,2014-09-02:Fail to surround the mouse with the vertices.html</guid><category></category></item><item><title>Build myblog using pelican</title><link>/Build%20myblog%20using%20pelican.html</link><description>&lt;p&gt;都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞...   &lt;/p&gt;
+&lt;h2&gt;环境:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;python 2.7, withn pip, easy_install        &lt;/li&gt;
+&lt;li&gt;pelican        &lt;br /&gt;
+&lt;img alt="Alt text" src="data/2014-08-31-pelican_output.PNG" title="output" /&gt;&lt;br /&gt;
+注意上面的起始目录是E:\Temp\myblog&amp;gt; 
+我试过别的起始目录是E:\Temp\myblog\context&amp;gt; 就发生错误了. 
+进入output目录, 打开index.html就可以看到blog了。这里我没有用到make html命令哦.  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;遇到的problems:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;设置图片目录的路径.  &lt;br /&gt;
+我的图片都是文档.md目录下的data目录, 例如folderA/xxx.md, folderA/data/yyy.PNG. 在pelican这里, 我想保持这样的结构, folderA 相当于 context目录, 目的是blog的内容(文档和图片)已经可以放到某个folderA里面, 然后要用pelican来build这个blog的时候, 直接把folderA目录里面的所有东西copy到context目录下就ok了.&lt;br /&gt;
+但是pelican默认是把图片放到blogFolder/image目录, 跟blogFolder/context目录同级的. 要改动以下的设置, 在blogFolder/pelicanconf.py:    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# static paths will be copied without parsing their contents                        &lt;/span&gt;
+&lt;span class="n"&gt;STATIC_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;                                 
+    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                   
+    &lt;span class="p"&gt;]&lt;/span&gt;              
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;意思是把context目录下我加的data目录(里面是图片)copy到输出目录那边.            &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文件的编码                  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nl"&gt;C:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Python27&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Scripts&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exe&lt;/span&gt; &lt;span class="n"&gt;path_to_context_folder&lt;/span&gt;               
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;可能会返回说某个位置的编码编译不过, 原因是pelican要求utf8 without BOM的格式. 中文嘛, 
+''
+s——- 之前好像是用GBXXX格式来做encoding的.                  &lt;br /&gt;
+修正方法是: Nodepad++ / Encoding / convert to UTF-8 w/o BOM      &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更改theme                 &lt;br /&gt;
+build出来的blog是有默认主题的, 要改的话可以在setting file pelicanconf.py里面设置 
+THEME = "notmyidea" #这就是默认主题 
+or: 
+THEME = "simple" &lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Sun, 31 Aug 2014 20:00:00 +0200</pubDate><guid>tag:,2014-08-31:Build myblog using pelican.html</guid><category></category></item><item><title>build simple ui using pySide</title><link>/build%20simple%20ui%20using%20pySide.html</link><description>&lt;p&gt;记录一下做UI prototype时候遇到的新概念 &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;life is short, use python. &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;早有耳闻, 一试果然不凡. 
+安装Qt 4.8.X, 安装pySide (how? 具体看其主页), 然后新建file.py, 敲几行pySide代码, 然后command line里面python file.py立刻就出ui效果了. 省却了ide / c++代码 / 链接设置 / 反复修改反复编译的麻烦.  &lt;br /&gt;
+事情的缘由是, 最近要参与用python快速做一个ui的prototype, 本来主程序M里面就有Qt+pySide, 所以连安装都不需要, 直接改py文件就得到ui结果, 真快. 于是就缺学几下python了. &lt;/p&gt;
+&lt;p&gt;example 1. To define the style sheet 样式 of a button.  &lt;br /&gt;
+&lt;img alt="Alt text" src="data/2014-08-25_qtButtonStyleSheet.png" title="output" /&gt;   &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;QPushButton&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nl"&gt;border:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="n"&gt;px&lt;/span&gt; &lt;span class="n"&gt;solid&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mf"&gt;8f8f&lt;/span&gt;&lt;span class="mi"&gt;91&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;border&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;radius&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="n"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;background&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;rgb&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;176&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;189&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;194&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nl"&gt;color:&lt;/span&gt; &lt;span class="n"&gt;rgb&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="n"&gt;font&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="n"&gt;pt&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;MS Shell Dlg 2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="n"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="n"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+&lt;span class="p"&gt;}&lt;/span&gt; 
+&lt;span class="nl"&gt;QPushButton:&lt;/span&gt;&lt;span class="n"&gt;pressed&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;background&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;rgb&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;98&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;105&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;108&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;听说这有点像CSS的样子. 上面的定义可以在QtDesign里面不断尝试, 拖一个QPushButton到面板上, 在property panel里面找到Style Sheet属性, 里面就可以更改样式. 
+code: GitHub\coding_exercises\stylesheetButton.py &lt;/p&gt;
+&lt;p&gt;另外在QToolButton widget里面有一个autoRaise的设置, 当鼠标移动到上面时候会有凸出的效果. 
+在QPushButtonse't这边要模拟的话, 可以在style sheet里面用QPushButton:hover { 自定义效果 } &lt;/p&gt;
+&lt;p&gt;当前QPushButton按下去click之后会回弹, 假如想找个button被按下去之后保存按着的状态(例如表示选中了这个button), 可以用setDown(true/false)来达到. &lt;/p&gt;
+&lt;p&gt;example 2. To enable the drag&amp;amp;drop of buttons.     &lt;br /&gt;
+&lt;img alt="Alt text" src="data/2014-08-25_qtButtonDragDrop.png" title="output" /&gt;     &lt;br /&gt;
+code: GitHub\coding_exercises\dragButton.py   &lt;/p&gt;
+&lt;p&gt;example 3. Signal and Slots &lt;br /&gt;
+three steps:          &lt;br /&gt;
+1. define signal variable and slot function;    &lt;br /&gt;
+2. connect the signal and slot;   &lt;br /&gt;
+3. emit the signal, the slots will be invoked.    &lt;/p&gt;
+&lt;p&gt;一般看到的简单例子: &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;PySide&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;QtCore&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;QtGui&lt;/span&gt;
+
+&lt;span class="c"&gt;# define a function that will be used as a slot&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sayHello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Hello world!&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;QtGui&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;QApplication&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;button&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;QtGui&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;QPushButton&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Say hello!&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# connect the clicked signal to the sayHello slot&lt;/span&gt;
+&lt;span class="n"&gt;button&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clicked&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sayHello&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;button&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exec_&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;这个QPushButton的例子里面, 其实.clicked这个QPushButton的signal已经由Qt来定义了, 而clicked这个signal的emit也由Qt完成, 所以我们只要提供Slot sayHello的定义, 已经connect就ok了. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// 这些可以帮助debug  &lt;/span&gt;
+&lt;span class="n"&gt;QObject&lt;/span&gt; &lt;span class="n"&gt;sendor&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;  
+&lt;span class="n"&gt;QString&lt;/span&gt; &lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;objectName&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;假如一个signal连了好几个slots, 这些slots被调用的次序怎么决定的呢?          &lt;br /&gt;
+好像是Qt 4.6之后就改成谁先连就先调用谁. 而印象中boost中的signal库是可以决定slot的调用次序的?          &lt;br /&gt;
+http://qt-project.org/wiki/Signals_and_Slots_in_PySide&lt;/p&gt;
+&lt;p&gt;example 4. layout and widget 
+question: layout and widget的关系 
+widget-&amp;gt;setLayout
+widget-&amp;gt;layout-&amp;gt;addLayout/addWidget 
+如此循环. 而在QLayout的doc里面说了, widget跟widget之间可能有layout, widget1.layout.addWidget(widget2), widget2的parent还是widget1, 而不是layout. layout并不会跟widget成为parent-child的关系. &lt;/p&gt;
+&lt;p&gt;question: 清空widget 
+怎么把widget里面的layout里面的children都清空(方便后面动态地生成新的widget内容)? 注意这里widget.layout本身没有变化, 例如没有从QHBoxLayout变成别的如QVBoxLayout. 而且要删除layout里面的内容(可能是子widget, 可能是子layout).   &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// from QLayout doc,   &lt;/span&gt;
+&lt;span class="c1"&gt;// The following code fragment shows a safe way to remove all items from a layout:&lt;/span&gt;
+&lt;span class="n"&gt;QLayoutItem&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;child&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;layout&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;takeAt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="p"&gt;...&lt;/span&gt;
+    &lt;span class="n"&gt;delete&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;                
+&lt;span class="c1"&gt;// 但是好像有说应该先if (QWidget *cW = child-&amp;gt;widget()) delete cW; 再delete child. 其实可以自己试试, 看delete child时候会否自动跳到cW类型的deconstruction function里面.   &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;[update 2014/8/26] ok, 有人说虽然开发容易, 但是部署难. 因为不像C++编译成binary file with dll, target machine上需要预先安装版本合适的qt &amp;amp; python &amp;amp; pySide 才能interpolate相应的.py file.   &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Mon, 25 Aug 2014 19:30:00 +0200</pubDate><guid>tag:,2014-08-25:build simple ui using pySide.html</guid><category></category></item><item><title>How to debug maya custom plugin</title><link>/How%20to%20debug%20maya%20custom%20plugin.html</link><description>&lt;p&gt;涉及maya plugin开发的时候，怎么debug呢? &lt;/p&gt;
+&lt;h2&gt;Attach to maya process ... 寄生&lt;/h2&gt;
+&lt;p&gt;step 1. maya plugin manager (Window -&amp;gt; Settings/Preferences -&amp;gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
+step 2. at your visual studio project of that custom plugin, Tools -&amp;gt; Attach to Process ..., choose maya.exe you will see visual studio processing some source files....这就完整寄生了. &lt;/p&gt;
+&lt;h2&gt;Debug&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;MGlobal::displayInfo(MString("..")); 输出到Script Editor. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MStatus status; 这东西是很多函数的返回值，记得判断是否MS::kSuccess. 用MString MStatus::errorString() const函数方便输出函数的返回状态. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Sat, 12 Oct 2013 19:30:00 +0200</pubDate><guid>tag:,2013-10-12:How to debug maya custom plugin.html</guid><category>maya</category><category></category></item><item><title>Tree view at Qt</title><link>/Tree%20view%20at%20Qt.html</link><description>&lt;p&gt;Qt中的TreeView很复杂, 记录一下自己的理解.  &lt;/p&gt;
+&lt;h2&gt;引言&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Model/View/item的关系就有点像Container/Algorithm/Iterator的关系。
+Tree view属于Model/View Programming的一部分。有些
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Index 带上下层级结构的二维索引&lt;/h2&gt;
+&lt;p&gt;QModelIndex()表示model中最上层的root item的index, QModelIndex().isValid() == 0. &lt;/p&gt;
+&lt;p&gt;item之前有上下层级关系，index.parent()获取index的parent. 当index.parent().isValid() == false，表示这个item的parent就是root item. 这些items被称为top-level itmes. &lt;/p&gt;
+&lt;p&gt;to retrieve data from a model:
+for (int row = 0; row &amp;lt; model-&amp;gt;rowCount(parentIndex); ++row)
+{
+    for (int col = 0; col &amp;lt; model-&amp;gt;columnCount(parentIndex); ++col)
+    {
+        QString text = model-&amp;gt;data(index, Qt::DisplayRole).toString();
+        // Display the text in a widget.
+    }
+}
+对于tree view中的每一个row，它们的column数目都是一样的吗？
+每一个index的role的类型都一样? 请看是否有QVariant CustomModel::data(const QModelIndex &amp;amp;, int role) const {} 貌似一个index里面有各种各样的role，你可以放什么东西都ok，只要你在这个函数中给对应的role返回合适的数据。这个函数在代码非常常用！例如后面CustomDelegate::paint()中就是根据data值来判断怎么画和画什么的。
+Question: QVariant QModelIndex::data(role); 这个函数跟model-&amp;gt;data(index, role)结果一样的吗? 这里有个小细节, model是指针才能data()函数override. 
+跟data(...)函数的对应的另一函数是CustomModel::setData(...); 这个函数一般用的地方不多，就在给model插入新行insertRow()之后给每一个index插入不同的数据时候会用到。&lt;/p&gt;
+&lt;h2&gt;Delegate 满足你特别的图案和交互需要&lt;/h2&gt;
+&lt;p&gt;前提: install a custom delegate for a view. 
+任务: render and editting. &lt;/p&gt;
+&lt;p&gt;To render:
+    Delegate::paint().&lt;/p&gt;
+&lt;p&gt;To provide editing facilities:
+    QWidget &lt;em&gt;Delegate::createEditor(QWidget &lt;/em&gt;, ..., const QModelIndex &amp;amp;);
+    为某一个 or 每一个index提供editor? Can we create different editors depending on the model index supplied by the view ? 假如某些不行被edit而只是空白呢? &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;这些new QWidget obj应该是被view所manager的，本来可能就是view&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;delegate&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;createEditor &lt;span class="kr"&gt;for&lt;/span&gt; a given index.
+
+一旦在这里给某个item&lt;span class="o"&gt;/&lt;/span&gt;index建立了一个QWidget obj以后，那个view貌似就会自动把这个index跟它的QWidget obj关联起来，我们不需要担心，而是考虑有了这个关联之后怎么来 &lt;span class="p"&gt;(&lt;/span&gt;a&lt;span class="p"&gt;)&lt;/span&gt; copy the model data into the editor&lt;span class="p"&gt;,&lt;/span&gt; Delegate&lt;span class="o"&gt;::&lt;/span&gt;setEditorData&lt;span class="p"&gt;(&lt;/span&gt;QWidget &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; const QModelIndex &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; const&lt;span class="p"&gt;,&lt;/span&gt; 参数的两者就是view给我们的&lt;span class="p"&gt;,&lt;/span&gt; index跟 widget已经一一对应好的. &lt;span class="p"&gt;(&lt;/span&gt;b&lt;span class="p"&gt;)&lt;/span&gt; when user has finished editting the value &lt;span class="kr"&gt;in&lt;/span&gt; the widget&lt;span class="p"&gt;,&lt;/span&gt; the view asks the delegate to store the edited value &lt;span class="kr"&gt;in&lt;/span&gt; the model by calling Delegate&lt;span class="o"&gt;::&lt;/span&gt;setModelData&lt;span class="p"&gt;(&lt;/span&gt;QWidget &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; model&lt;span class="p"&gt;,&lt;/span&gt; index&lt;span class="p"&gt;)&lt;/span&gt; const&lt;span class="p"&gt;;&lt;/span&gt; 这里的&lt;span class="p"&gt;(&lt;/span&gt;a and b&lt;span class="p"&gt;)&lt;/span&gt;就是两个方向editor &lt;span class="o"&gt;&amp;lt;-&amp;gt;&lt;/span&gt; model&lt;span class="o"&gt;/&lt;/span&gt;index.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Question: in the delegate class, how to get its view ? try to get the QObject *parent() first and cast it to the QTreeView or custom view type.&lt;/p&gt;
+&lt;h2&gt;Render&lt;/h2&gt;
+&lt;p&gt;Scenior: 一般是在自定义CustomModel, CustomView, CustomeDelegate的之后才考虑自己要怎么画Tree view中的东西. &lt;/p&gt;
+&lt;p&gt;CustomView::paintEvent(QPaintEvent &lt;em&gt;)
+    drawTree(...);
+        drawRow(QPainter &lt;/em&gt;, const option, const index); 干什么的呢?
+            貌似可以选择给特定的index (item)填一些背景, 然后QTreeView(...)做默认画。
+            drawBranches(QPainter *, const QRect &amp;amp;rect, const index) const;
+            delegate-&amp;gt;paint(...);&lt;/p&gt;
+&lt;p&gt;可见首先是一行一行地画出来的. 先画branch分枝，然后在delegate-&amp;gt;paint()画内容。
+D:\Qt\Qt5.1.0\5.1.0\Src\qtbase\src\widgets\itemviews\qtreeview.cpp for details.&lt;/p&gt;
+&lt;p&gt;darwBranches(..., const QRect &amp;amp;rect, ...)
+    在分枝中下一级会相对于上一级做一个往右边缩进，setIndentation(int)函数控制缩进的多少。而rect这个区域是做这一行的左边往右边加上每一次的缩进所得。最上一层top-level 是从root-item缩进一级所得。而且expand/collapse的event都是只在画branch这个区域上响应的。
+    问题来了，上面的缩进是所以level都一样的，可否不同level用不同大小的缩进呢? 未解。
+example:
+--level0
+----level1
+------level2
+the indentation for this is 2 (--). &lt;/p&gt;
+&lt;p&gt;假如想把level0前面的缩进去掉，试试QTreeView::setRootIsDecorated(false);&lt;/p&gt;
+&lt;p&gt;Read-Only access : (Qt::ItemIsEnabled | Qt::ItemIsSelectable)
+Editable items: Qt::ItemIsEditable | (Qt::ItemIsEnabled | Qt::ItemIsSelectable) 是在Read-Only access基础上加的. 
+这里有一点观察比较重要，假如flag里面不包含Qt::ItemIsEnabled, 那么这个item基本上不能干啥的了, 例如不能editable。 &lt;/p&gt;
+&lt;p&gt;Drag &amp;amp; Drop: 把一个item drag到另一个item上面，有些是接受，有些是不接受的，为什么呢？
+Model::flags(const QModelIndex &amp;amp;) contain the Qt::ItemIsDragEnabled and Qt::ItemIsDropEnabled. 前提当然是已经包括上面提到的(Qt::ItemIsEnabled | Qt::ItemIsSelectable),我试过把Qt::ItemIsEnabled去掉，这个item就不能被选择了, 貌似就不响应mouse event了。
+在View里面还有一些设置setDragDropMode(QAbstractItemView::DragDrop); setDragEnabled(true); setAcceptDrops(true); setDropIndicatorShown(true);
+debug时候看到具体的函数流是: mouse move -&amp;gt; mouseMoveEvent() -&amp;gt; 按着LMB拖动-&amp;gt; startDrag() -&amp;gt; dragEnterEvent() -&amp;gt; dragMoveEvent() -&amp;gt; drop the item -&amp;gt; dropEvent()&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Tue, 08 Oct 2013 10:20:00 +0200</pubDate><guid>tag:,2013-10-08:Tree view at Qt.html</guid><category>qt</category></item><item><title>Blendshape at maya</title><link>/Blendshape%20at%20maya.html</link><description>&lt;p&gt;最近接触了一点maya blendshape programming, 稍微记录一下。&lt;/p&gt;
+&lt;h2&gt;BlendShape deformer basis (基础)&lt;/h2&gt;
+&lt;p&gt;先说明一个特点，当drag一个cube or sphere物体的时候，会生成&lt;transform node, shape node&gt;两个nodes, 具体的细节请看maya scene graph，DAG。&lt;/p&gt;
+&lt;p&gt;To create a simple blendshape example,&lt;br /&gt;
+Polygon mode, create a cube, we have &lt;pCube1, pCubeShape1&gt;; &lt;br /&gt;
+Select cube1, Shift+D, we have &lt;pCube2, pCubeShape2&gt;, move cube2 a little bit away from cube1.&lt;br /&gt;
+Select cube1, Shift+D, we have &lt;pCube3, pCubeShape3&gt;, move cube3 a little bit away from cube1.&lt;br /&gt;
+Select cube3 first, then shift+select cube2, then shift+select cube1, 
+Animatioin mode, menu Create Deformer &amp;gt; BlendShape (Deformation order == Default), we have a blendshape deformer node, for example called blendShape1. &lt;br /&gt;
+cube1 is called source shape for this blenshape. &lt;br /&gt;
+cube2 and cube3 are as target shapes for this blendshape.&lt;/p&gt;
+&lt;p&gt;select cube1, menu Windows &amp;gt; Connections, we see the connections of these nodes.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt text" src="2013-08-14_maya_blendshape_fig_maya_scene.PNG" title="maya scene" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Maya/Fbx API Table.&lt;/strong&gt; &lt;br /&gt;
+| source | blendshape | channel | target |         &lt;br /&gt;
+| ---- |   &lt;br /&gt;
+| MObject | MFnBlendShapeDeformer | Target Weight slider | MObject |         &lt;br /&gt;
+| FbxGeometry | FbxBlendShape | FbxBlendShapeChannel | FbxShape|       &lt;/p&gt;
+&lt;p&gt;这个table展示了blendshape deformer里面的三要素: source shape, target shapes, target weight (类似于blending weight).&lt;/p&gt;
+&lt;p&gt;有关target weight slider的注意事项:   &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;一个blendshape可以有多个target weight slider, 每一个slider中可以是一个or多个target shapes, 取决于In-Between off/on.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每一个target weight slider 有一个数值叫target weight (value) 表示target shapes对source的effect.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每一个target weight slider 有一个名字target weight or target weight slider name or name of target weight. 这个name默认by default是用transform node的名字，例如上述例子的两个target weights的名字分别是pCube2 and pCube3. tricky的是这个名字可以被改掉, 改成whatever u like, 例如这里改成pCube2x. 于是在code里面就有个问题了，给出一个target weight name, how to find out the target shape (or the transform node of the target shape) associated with this target weight name?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每一个target weight slider 对应于fbx里面的FbxBlendShapeChannel, 而且maya/fbx exporter plugin (fbxmaya.mll)对channel的命名是blendShape1.nameOfTargetWeight.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一些调试的MEL commands: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="n"&gt;objExists&lt;/span&gt; &lt;span class="n"&gt;pCube2&lt;/span&gt;   
+    &lt;span class="n"&gt;objExists&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;pCube2&lt;/span&gt;   
+    &lt;span class="n"&gt;objExists&lt;/span&gt; &lt;span class="n"&gt;pCube2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;pCubeShape2&lt;/span&gt;    
+    &lt;span class="n"&gt;objExists&lt;/span&gt; &lt;span class="n"&gt;pCubeShape2&lt;/span&gt;   
+    &lt;span class="n"&gt;objExists&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;pCubeShape2&lt;/span&gt;      
+
+    &lt;span class="n"&gt;objExists&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pCube2x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="c1"&gt;// Results: 1 //   &lt;/span&gt;
+
+    &lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Result: pCubeShape1 //  the source shape&amp;#39;s name, not transform node&amp;#39;s name.&lt;/span&gt;
+    &lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;target&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="c1"&gt;// Result: pCube2 pCube3 // the target shape ‘s transform node’s name.&lt;/span&gt;
+    &lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Result: pCube2 pCube3 // the flag -target is the same as -t&lt;/span&gt;
+    &lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="n"&gt;weightCount&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="c1"&gt;// Result: 2 //            这里返回的数字应该就是刚好上面targets数目&lt;/span&gt;
+    &lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Result: 0.5 0 //  每一个target weight&amp;#39;s value. &lt;/span&gt;
+
+    &lt;span class="n"&gt;listAttr&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sn&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;    
+    &lt;span class="c1"&gt;// Result: pCube2x //  这命令可以访问到被Delete而baked的target. &lt;/span&gt;
+    &lt;span class="n"&gt;listAttr&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
+    &lt;span class="c1"&gt;// Result: pCube2x pCube3 // names of target weight, not the name of target shape or transform node.&lt;/span&gt;
+    &lt;span class="c1"&gt;// 这输出也会包含被Delete而baked的targets. &lt;/span&gt;
+
+    &lt;span class="n"&gt;getAttr&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Result: 0.4 0 0.2 //例如(s:pCube1, t:pCube2, pCube3, pCube4), 然后直接按键“Delete&amp;quot;掉pCube3 (pCube3变成baked的了. &lt;/span&gt;
+
+    &lt;span class="n"&gt;aliasAttr&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="c1"&gt;// Result: pCube2x weight[0] pCube3 weight[1] // 对应关系 &lt;/span&gt;
+    &lt;span class="n"&gt;aliasAttr&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pCube2x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   
+    &lt;span class="c1"&gt;// Result: pCube2x //    &lt;/span&gt;
+    &lt;span class="n"&gt;aliasAttr&lt;/span&gt; &lt;span class="n"&gt;smile&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="n"&gt;aliasAttr&lt;/span&gt; &lt;span class="n"&gt;smile&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// weight[0] == w[0] &lt;/span&gt;
+    &lt;span class="c1"&gt;// Result: 1 //  把weight[0]改名为smile, 而不是上面的pCube2x了. &lt;/span&gt;
+    &lt;span class="n"&gt;aliasAttr&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;smile&lt;/span&gt;
+    &lt;span class="c1"&gt;// 会改成weight[x]这个名字 我相信这个x就是target/weight/slider的index. &lt;/span&gt;
+
+    &lt;span class="n"&gt;setAttr&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pCube2x&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c1"&gt;//成功, 调target weight slider的value.   &lt;/span&gt;
+    &lt;span class="n"&gt;setAttr&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blendShape1.pCube2x&amp;quot;&lt;/span&gt; &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;//成功, 调target weight slider的value.   &lt;/span&gt;
+    &lt;span class="n"&gt;setAttr&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;smile&lt;/span&gt; &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Succeed, &lt;/span&gt;
+    &lt;span class="n"&gt;setAttr&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c1"&gt;// Succeed, w[0] == weight[0] has been renamed as smile. &lt;/span&gt;
+
+    &lt;span class="n"&gt;listConnections&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;it&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;//一样的&lt;/span&gt;
+    &lt;span class="n"&gt;listConnections&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;inputTarget&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Result: 列出所有target shapes (不包括baked)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在Script Editor中输入 help &lt;command name&gt;会返回help information.  而且在C++ source里面也可以用这些mel commands, 以objExists为例:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;MString&lt;/span&gt; &lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;objExists pCube1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// false;&lt;/span&gt;
+&lt;span class="n"&gt;MStatus&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MGlobal&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;executeCommand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;updated about getting the target shapes from the blendshape deformer node.
+&lt;img alt="Alt text" src="2013-08-14_maya_blendshape_fig_maya_scene_Weight_InBetween.PNG" title="What is Target Weight? Like slots" /&gt; &lt;/p&gt;
+&lt;p&gt;updated 2013/10/11. blendShape是线性操作，deformed result = source * (1 - target_weight) + target * target_weight;
+source and target可以说shape mesh, 也可以是别的blendshape deformation node的结果。&lt;/p&gt;
+&lt;p&gt;udated 2013/10/12. 遇到一个使用objExists mel command的bug. 假如Face + FaceShape是面部的transform + shape nodes, 它在DAG中的path是:
+|man|head_group|Face|FaceShape 
+那么在Script Editor里面执行:
+objExists |Face
+的结果是什么呢? false, 找不到|Face ? 场景中不是明明有Face这个node的吗? 试试执行:
+objExists Face
+结果是true。 原来不是找不到Face, 而是找不到|Face. 两者有什么区别? |Face表示这个face node是直接在root下面. 所以我觉得用objExists命令还是别加|为好. 在maya scene graph的资料中有提到|.&lt;/p&gt;
+&lt;p&gt;MFnBlendShapeDeformer::addTarget(base shape, channel/target weight index, target shape, weight value); 
+可否多次add相同的targets呢？还是每次add target之前先判断假如已经有得话就先removeTarget呢?&lt;/p&gt;
+&lt;h2&gt;Target weight上的connection (MPlug的应用)&lt;/h2&gt;
+&lt;p&gt;来一个简单的例子。建一个blendShape1(cube1 as source, cube2 and cube3 and cube4 as target shapes, rename the weight to be weight1 and weight2)。然后select cube3 and shift select cube1, remove target from blendshape (目的是显示plug 跟existing weight index list可能不相等，因为前者plug中那个被删掉的target之前占的位置还在) 
+blendshape1.weight1 是一个plug的名字，其实这个weight1也同时是对应target slider的名字。上面提到可以用listAttr and aliasAttr来找有什么plugs和改它们的名字. 下面来看怎么获得obtain这些sliders/weights:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="o"&gt;//&lt;/span&gt; mel commands
+    blendShape &lt;span class="o"&gt;-&lt;/span&gt;q &lt;span class="o"&gt;-&lt;/span&gt;wc blendShapeName&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="kr"&gt;return&lt;/span&gt; the weight count &lt;span class="p"&gt;(&lt;/span&gt;including the baked&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;deleted target&lt;span class="p"&gt;);&lt;/span&gt;
+    blendShape &lt;span class="o"&gt;-&lt;/span&gt;q &lt;span class="o"&gt;-&lt;/span&gt;t blendShapeName&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; retrun the target shpae &lt;span class="s"&gt;&amp;#39;s name (no baked&amp;amp;deleted target(&lt;/span&gt;
+&lt;span class="s"&gt;    listAttr -m blendShapeName.w; // return all the names of weights, including the removed or baked&amp;amp;deleted one.&lt;/span&gt;
+&lt;span class="s"&gt;    aliasAttr -q blendShapeName; // return all the weights&amp;#39;&lt;/span&gt; names and associated weight&lt;span class="p"&gt;[&lt;/span&gt;i&lt;span class="p"&gt;]&lt;/span&gt; 
+
+    &lt;span class="o"&gt;//&lt;/span&gt; c&lt;span class="o"&gt;++&lt;/span&gt; code
+    unsigned int iWeightCount &lt;span class="o"&gt;=&lt;/span&gt; MFnBlendShapeDeformer&lt;span class="o"&gt;::&lt;/span&gt;numWeights&lt;span class="p"&gt;();&lt;/span&gt; 
+    MFnBlendShapeDeformer&lt;span class="o"&gt;::&lt;/span&gt;weightIndexList&lt;span class="p"&gt;(&lt;/span&gt; MIntArray &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;indexList &lt;span class="p"&gt;);&lt;/span&gt;
+    assert&lt;span class="p"&gt;(&lt;/span&gt; iWeightCount &lt;span class="o"&gt;==&lt;/span&gt; indexList.length&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+    MPlug plugs &lt;span class="o"&gt;=&lt;/span&gt; blendShapeNode.findPlug&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;weight&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;status&lt;span class="p"&gt;);&lt;/span&gt; 
+    assert&lt;span class="p"&gt;(&lt;/span&gt; iWeightCount &lt;span class="o"&gt;==&lt;/span&gt; plugs.numElements&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; one weight &lt;span class="o"&gt;&amp;lt;-&amp;gt;&lt;/span&gt; one &lt;span class="s"&gt;&amp;quot;weight&amp;quot;&lt;/span&gt; plug
+    &lt;span class="o"&gt;//&lt;/span&gt; 这个不一定成立的 例如上面pCube3被remove target了 or 直接按键“Delete”了. 
+
+    &lt;span class="kr"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;unsigned int i &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; i &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; iWeightCount&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;i&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        MPlug weightPlug &lt;span class="o"&gt;=&lt;/span&gt; plugs&lt;span class="p"&gt;[&lt;/span&gt;i&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; we can get the slider&lt;span class="o"&gt;/&lt;/span&gt;weight name.
+
+        &lt;span class="o"&gt;//&lt;/span&gt; indexList&lt;span class="p"&gt;[]&lt;/span&gt; is only a small set of the indices of a very large weight array&lt;span class="p"&gt;[],&lt;/span&gt;
+        &lt;span class="o"&gt;//&lt;/span&gt; some items of the big weight array&lt;span class="p"&gt;[]&lt;/span&gt; are not used&lt;span class="p"&gt;,&lt;/span&gt; some items are
+        &lt;span class="o"&gt;//&lt;/span&gt; deleted and invalid &lt;span class="kr"&gt;if&lt;/span&gt; some targets are removed from weight.
+        const int iWeightIndexOfWeightArray &lt;span class="o"&gt;=&lt;/span&gt; indexList&lt;span class="p"&gt;[&lt;/span&gt;i&lt;span class="p"&gt;];&lt;/span&gt; 
+        &lt;span class="o"&gt;//&lt;/span&gt; this iWeightIndexOfWeightArray can be used to get the weight value and targets.
+        &lt;span class="kc"&gt;...&lt;/span&gt;
+
+        &lt;span class="o"&gt;//&lt;/span&gt; btw&lt;span class="p"&gt;,&lt;/span&gt; one weightPlug &lt;span class="o"&gt;/&lt;/span&gt; slider &lt;span class="o"&gt;/&lt;/span&gt; weight &lt;span class="o"&gt;&amp;lt;--&amp;gt;&lt;/span&gt; one FbxBlendShapeChannel
+        &lt;span class="o"&gt;//&lt;/span&gt; the target shapes of this channel become some objects of FbxShape.
+    &lt;span class="p"&gt;}&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;一般情况下我们是通过拖动这slider来调blendshape的效果。对应的mel and c++ code: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="n"&gt;setAttr&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blendshape1.weight1&amp;quot;&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;
+
+    &lt;span class="n"&gt;weightPlug&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setDouble&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// MPlug weightPlug; weightPlug.name() == &amp;quot;blendshape1.wieght1&amp;quot;; &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;也可以把别的值connect到这个target weight上来, 例如通过动画animation或者locator等控制target weight的值的变化。每一个connection是由source plug and destination plug组成的. 在上面的blendShape1例子上增加一点:
+建一个plane1, 打开Window &amp;gt; Node Editor 把plane1的translateX连到blendShape1.weight1, 把plane1的translateY连到blendShape1.weight2, UI上这两个sliders都变成黄色了, DG窗口中blendShape1这个node的形状也从长方形变成的菱形. 
+&lt;img alt="Alt text" src="2013-08-14_maya_blendshape_fig_BS_with_connnection_DG_NodeEditor.PNG" title="Connections at DG and NodeEditor" /&gt;
+上面的过程其实我们建立了两个connections. 其中一个connection是 (pPlane1.translateX, blendshape1.weight1)，其中pPlane1.translateX称为source plug, blendShape1.weight1称为destination plug. 
+下面的代码显示怎么获得一个blendShape的plug, 以及这些plug的连接connections: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="c1"&gt;// given MFnDependencyNode blendShapeNode, and MStatus status;&lt;/span&gt;
+    &lt;span class="n"&gt;MPlug&lt;/span&gt; &lt;span class="n"&gt;plugs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;blendShapeNode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findPlug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;weight&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;plugs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;numElements&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;MPlug&lt;/span&gt; &lt;span class="n"&gt;weightPlug&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plugs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// as destination plug for connection.&lt;/span&gt;
+        &lt;span class="n"&gt;MPlugArray&lt;/span&gt; &lt;span class="n"&gt;inPlug&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// as source plug for connection.&lt;/span&gt;
+        &lt;span class="n"&gt;weightPlug&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connectedTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inPlug&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;inPlug&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;MGlobal&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;displayInfo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inPlug&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; + &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;weightPlug&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt; &lt;span class="c1"&gt;// for debug.   &lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// mel command below: &lt;/span&gt;
+    &lt;span class="n"&gt;listAttr&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// for example returns weight1 weight2 ... &lt;/span&gt;
+    &lt;span class="n"&gt;connectionInfo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sourceFromDestination&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;weight1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// for example returns pPlane1.translateX, the source of the connection (string, empty if null).&lt;/span&gt;
+    &lt;span class="n"&gt;connectionInfo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;destinationFromSource&lt;/span&gt; &lt;span class="n"&gt;pPlane1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;translateX&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// for example returns blendShape1.weight1 &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;假如这个target weight对应的模型target shape被removeTarget了, 那些connection还在吗？不在了，可能是副作用side effect。 假如重新把模型addTarget回blendShape1，还想重新把那些断开的connection重新连上呢，否则之前key的动画等都失效了/&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="c1"&gt;// target shape is removed from this blendshape for some reason.&lt;/span&gt;
+    &lt;span class="c1"&gt;// target shape is re-added into the blendshape. we want to &lt;/span&gt;
+    &lt;span class="c1"&gt;// restore those connections before. how to do this?&lt;/span&gt;
+    &lt;span class="n"&gt;MString&lt;/span&gt; &lt;span class="n"&gt;commandString&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;connectAttr &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;inPlug&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;weightPlug&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;MGlobal&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;executeCommand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commandString&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// true: display the result. &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面的代码中我用了connectAttr这个mel command, 貌似MDGModifier::connect(,)也有相似的功能，但网上查阅时候这个东西一般是放到某个custom command class里面用的，而且还要自定义undo/redo的函数，我还没试过。相比而言，直接用mel就没有这些担心。本来UI上的操作给我的感觉就是用相应的参数来调用底下的mel commands (Script Editors往往显示这些命令历史), mel command再底下当然可能是用C++ 函数XX在实现的。
+UI operation -&amp;gt; mel command -&amp;gt; c++ XX function (not exposed to user); 
+而给出一些maya c++ api，可能也能实现某mel命令所做的事，毕竟假如api够用的话就能把XX函数都模拟一次，但是可能有些bugs. 所以是不是这样比较好呢: 
+mel command有的，就MGlobal::executeCommand(...); mel command实现起来不方便 or 实现不了的(有吗？例如自定义的某些操作?) 才用maya api来做. &lt;/p&gt;
+&lt;p&gt;一个target shape被用户直接按"Delete" button 删掉，这个target shape的形状会自动默认被bake到blendshape里面，也就是虽然scene中没有这个shape了，但是它的影响还是保存在这个blendshape里面，对应的weight还是存在的。问题来了，假如想删掉这个没有target shape的weight怎么办呢？
+例如 blendShape1(source: pCube1; targets: pCube2, pCube3, pCube4). 把pCube3 "Delete" button 删掉，要把"pCube3" weight去掉. google "deleteBlendshapeByIndex" http://www.creativecrash.com/forums/rigging-character-setup/topics/delete-one-blendshape-target &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Wed, 14 Aug 2013 10:20:00 +0200</pubDate><guid>tag:,2013-08-14:Blendshape at maya.html</guid><category>maya</category><category></category></item></channel></rss>

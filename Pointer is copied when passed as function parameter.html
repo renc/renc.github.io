@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Pointer is copied when passed as function parameter - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/Pointer is copied when passed as function parameter.html">
+
+        <meta name="author" content="renc" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="起源 看到这段代码(肯定是简化更改版啦) void XList::merge(Item *item) { ... // do the merge sth; item-&gt;unref(); } void XList::merge(Item &amp;item) { ... // do the merge sth; } 上面的unref()是用于reference count的, reference计数减一的意思. 为什么有这东东呢, 为什么下面用引入作为参数的就不需要呢? 我怀疑是指针在作为函数参数的传递过程中被复制了, 也就是指向实际的物体的指针又多了一个, 所以merge之后就unref减少一个. 以下的test case尝试证明指针是否被复制了: // try to check if a pointer will be copied during passing-by-pointer. // #include &lt;iostream&gt; void func1(int ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Pointer is copied when passed as function parameter.html"
+                       rel="bookmark"
+                       title="Permalink to Pointer is copied when passed as function parameter">
+                        Pointer is copied when passed as function parameter
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-09-12T12:00:00"> 周五 12 九月 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h2>起源</h2>
+<p>看到这段代码(肯定是简化更改版啦)  </p>
+<div class="highlight"><pre><span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>   
+<span class="p">{</span>  
+    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
+    <span class="n">item</span><span class="o">-&gt;</span><span class="n">unref</span><span class="p">();</span>  
+<span class="p">}</span>   
+<span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">)</span>   
+<span class="p">{</span>  
+    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
+<span class="p">}</span>   
+</pre></div>
+
+
+<p>上面的unref()是用于reference count的, reference计数减一的意思. 为什么有这东东呢, 为什么下面用引入作为参数的就不需要呢? 
+我怀疑是指针在作为函数参数的传递过程中被复制了, 也就是指向实际的物体的指针又多了一个, 所以merge之后就unref减少一个. 以下的test case尝试证明指针是否被复制了:   </p>
+<div class="highlight"><pre><span class="c1">// try to check if a pointer will be copied during passing-by-pointer.         </span>
+<span class="c1">//              </span>
+<span class="p">#</span><span class="k">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>             
+
+<span class="k">void</span> <span class="n">func1</span><span class="p">(</span><span class="k">int</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>           
+<span class="p">{</span>               
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;in func1: &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>                 
+    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>                
+<span class="p">}</span>                      
+<span class="k">void</span> <span class="n">func2</span><span class="p">(</span><span class="k">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span>                    
+<span class="p">{</span>            
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;in func2: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>        
+    <span class="n">p</span> <span class="o">=</span> <span class="mh">2</span><span class="p">;</span>            
+<span class="p">}</span>          
+
+<span class="k">class</span> <span class="no">B</span>             
+<span class="p">{</span>          
+<span class="nl">public:</span>               
+    <span class="no">B</span><span class="p">()</span> <span class="o">:</span> <span class="n">b</span><span class="p">(</span><span class="mh">0</span><span class="p">)</span> <span class="p">{};</span>                  
+    <span class="no">B</span><span class="p">(</span><span class="k">const</span> <span class="no">B</span> <span class="o">&amp;</span><span class="n">_inB</span><span class="p">)</span> <span class="p">{</span> <span class="n">b</span> <span class="o">=</span> <span class="n">_inB</span><span class="p">.</span><span class="n">b</span><span class="p">;</span> <span class="p">}</span>             
+    <span class="k">void</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="no">B</span> <span class="o">&amp;</span><span class="n">_inB</span><span class="p">)</span> <span class="p">{</span> <span class="n">b</span> <span class="o">=</span> <span class="n">_inB</span><span class="p">.</span><span class="n">b</span><span class="p">;</span> <span class="p">}</span>           
+
+<span class="nl">private:</span>           
+    <span class="k">int</span> <span class="n">b</span><span class="p">;</span>                 
+<span class="p">};</span>                   
+
+<span class="k">void</span> <span class="n">func3</span><span class="p">(</span><span class="no">B</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>              
+<span class="p">{</span>                 
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;in func3: &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>             
+<span class="p">}</span>                          
+<span class="k">void</span> <span class="n">func4</span><span class="p">(</span><span class="k">const</span> <span class="no">B</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span>                
+<span class="p">{</span>                                
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;in func4: &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>             
+<span class="p">}</span>              
+
+<span class="k">int</span> <span class="n">main</span><span class="p">()</span>            
+<span class="p">{</span>                
+    <span class="k">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>                  
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;init: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>        
+    <span class="n">func1</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">a</span> <span class="p">);</span>       
+    <span class="n">func2</span><span class="p">(</span> <span class="n">a</span> <span class="p">);</span>            
+
+    <span class="no">B</span> <span class="n">Binstance</span><span class="p">;</span>        
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;init: &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">Binstance</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>           
+    <span class="n">func3</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">Binstance</span> <span class="p">);</span>           
+    <span class="n">func4</span><span class="p">(</span> <span class="n">Binstance</span> <span class="p">);</span>             
+
+    <span class="k">return</span> <span class="mh">1</span><span class="p">;</span>          
+<span class="p">}</span>            
+</pre></div>
+
+
+<p>代码中有意思的地方是对于指针来说, 怎么输出当前变量自己的地址和变量自己所指向的物体的地址. output:               <br />
+init: 0, 00E5FAC8          <br />
+in func1: 0, 00E5F9E8, 00E5FAC8, 00E5FAC8        <br />
+in func2: 1, 00E5FAC8            <br />
+init: 00E5FABC          <br />
+in func3: 00E5F9E8, 00E5FABC, 00E5FABC   <br />
+in func4: 00E5FABC     <br />
+具体的source at github\coding_exercises\pointer_unref      </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

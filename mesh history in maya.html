@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>mesh history - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/mesh history in maya.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="maya" />
+        <meta name="description" content="做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. 引言 以前对mesh的修改都是例如 mesh.setVertexPosition( vertexID, newPos ); mesh.setVertexTC( tcID, newTC ); 这样直接改[1], 从读书时候到现在都是这么simple and naive:-) 而对于maya的case就没有这样简单了，例如去看maya&gt;devkit&gt;splitUV example [2], 套用上面直接修改的方法, 要split一个uv的话，那直接用MFnMesh加几个新uv, MFnMesh::setUV(new uv id, uv value) 就ok了, 可是故事没有这么简单.... Construction History and Tweak 直接摘抄两段来看看: All the operations that can be performed on a polygonal ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/mesh history in maya.html"
+                       rel="bookmark"
+                       title="Permalink to mesh history">
+                        mesh history
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2010-12-03T10:20:00"> 周五 03 十二月 2010</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/maya.html">maya</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
+<h2>引言</h2>
+<p>以前对mesh的修改都是例如
+mesh.setVertexPosition( vertexID, newPos ); 
+mesh.setVertexTC( tcID, newTC ); 
+这样直接改[1], 从读书时候到现在都是这么simple and naive:-) 而对于maya的case就没有这样简单了，例如去看maya&gt;devkit&gt;splitUV example [2],  套用上面直接修改的方法, 要split一个uv的话，那直接用MFnMesh加几个新uv, MFnMesh::setUV(new uv id, uv value) 就ok了, 可是故事没有这么简单.... </p>
+<h2>Construction History and Tweak</h2>
+<p>直接摘抄两段来看看:</p>
+<blockquote>
+<p>All the operations that can be performed on a polygonal mesh can be generalized into three basic types: create, edit and query. While both the creating and querying a mesh are straightforward, editing involves complications resulting from construction history and tweaks and how they work within the confines of the dependency graph. (from [3])
+There are many intricacies involving modifying a polygonal mesh, including construction history and tweaks. If the mesh does not have history, you could attempt to unshare the UVs directly on the mesh itself. If the mesh has history, any DG evaluation from a node upstream in the construction history overwrites the mesh on the mesh node and the modifications made directly to the mesh would be lost. Even if that were the case, the existence of tweaks would change the appropriate place to write the modifications on the mesh. (from [2])</p>
+</blockquote>
+<p>先看construction history这概念. </p>
+<p>幻想一下，对一个mesh做sculpting, 先假设sculpt的对象是vertices positions, 
+new pos  of vertex Vi = stroke1 + stroke 2 + ... stroke n (with some specified brush properties) effect on vertex Vi; <br />
+其中 stroke j effect on vertex Vi: 
+case 1. = 0, if this stroke does not touch the vertex Vi; 
+case 2. = a delta vector (a displacement); 
+也就是说当前的顶点vi的坐标是由一连串chain的stroke operation来决定的, 这一串operation就形成了一个history. 假如允许回到过去, 修改某个stroke i, 那么这个历史被改变了之后, 当前顶点vi的坐标又不同了. (这不是电影桥段吗?:-)</p>
+<p>Maya里面的construction history可能也是类似，只是不单单影响vertex position.</p>
+<p>那tweak node又是干啥的？</p>
+<p>暂时的理解不一定对和全啊：maya不是有DG和construction history吗，例如一个shape node处于dg的下游，上游的别的其它node会不断改变，mark为dirty，然后当需要的时候，例如渲染的时候，就从DG的上游到下游来从新计算被dirty影响的node，包括shape node。也就是说，shape node只是人家揉捏的结果，人家改了，shape node也得变。所以假如你想直接改shape的形状，那是没有意义的，因为你改了，上游人家一改，就会重新冲掉你的改动。怎么解决呢，引入tweak node。在shape node的直接上游，+一个tweak node作为过滤，不论你们上游怎么改，都要经过我这个tweak node的过滤，因为我下面直接就是shape node嘛，所以你们上面怎么搞最后还不是到我这里。一妇当关万夫莫过。</p>
+<h2>题外话</h2>
+<p>技术可能有三个层次：算法, 架构, 业务知识. 这是SQ.B在今年performance review时候教我的, 很有意思。回顾之前的Muxxxx, 
+API  + core (framework) + plugin  + exe 
+的结构，在做一个feature的时候,  尽量放到plugin里面去做, 不影响core, 可能要添加api. 这方面都比较直观。
+然后跟着就是node+attribute system, brush system, undo/redo operation stack等....
+然后就是在这个框架的布局下, 某个具体算法或者功能的实现。</p>
+<p>但是在maya这边架构就复杂很多了，例如就算是一个简单的功能，都要考虑到DG, construction history, tweak node等. 还有meta data等概念等着去学习呢. </p>
+<h2>References</h2>
+<p>[1] mudbox sdk;
+[2] maya &gt; devkit plugin &gt; splitUVCmd example; 
+[3] maya developer help &gt; Polygon API &gt; Construction History and Tweaks; 其实maya developer help &gt; Polygon API这一节都看吧.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>
