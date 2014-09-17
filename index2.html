@@ -72,6 +72,78 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/Maya custom menu.html">Maya custom menu</a></h2>
+                <div class="summary"><p>How to add custom menu or menuitem into maya ui.</p>
+                    <a class="btn btn-default btn-xs" href="/Maya custom menu.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h2>
+                <div class="summary"><blockquote>
+<p>Do and redo are so similiar that they can share code.</p>
+</blockquote>
+<p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
+- do sth -&gt; undo it, or 
+- do sth -&gt; undo it -&gt; redo it;
+在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。</p>
+<p>maya/devkit的例子所使用的方法是:</p>
+<div class="highlight"><pre><span class="c1">//code  </span>
+<span class="c1">// inside class CommandXY </span>
+<span class="k">virtual</span> <span class="n">bool</span> <span class="n">isUndoable</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">true</span> <span class="k">or</span> <span class="n">false ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Do and redo are similiar.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/How to build a plugin system.html">How to build a plugin system</a></h2>
+                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
+很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
+<p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
+- 自定义operation, support undo and redo;
+- 自定义某种brush (operation); 
+- 继承实现某个类，代替原有的那个. 例如map extraction? 
+当前接触到的maya api不多，知道plugin可以实现context and manipulator.</p>
+<p>问题就来了, 一个简单的plugin system是怎么设计和实现的呢? </p>
+<p>case 1: 
+Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
+http://3dgep ...</p>
+                    <a class="btn btn-default btn-xs" href="/How to build a plugin system.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Note of Maya programming.html">Note of Maya programming</a></h2>
+                <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快.</p>
+                    <a class="btn btn-default btn-xs" href="/Note of Maya programming.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/simple implement of 2d bezier curve.html">simple implement of 2d bezier curve</a></h2>
+                <div class="summary"><p>工作中又一次遇到nurb curve的问题，具体是knots个数和求法的问题。那东西太难，相对来来说，bezier curve易懂很多，一直想实现一下来看看，于是就有了此。</p>
+                    <a class="btn btn-default btn-xs" href="/simple implement of 2d bezier curve.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Flood fill.html">Flood fill</a></h2>
+                <div class="summary"><p>看见someone提到Flood fill algorithm, 惭愧，不熟悉这个名字，于是Google一下，竟然跟BFS很像，于是想着要简单实现一下。</p>
+                    <a class="btn btn-default btn-xs" href="/Flood fill.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/How to debug maya custom plugin.html">How to debug maya custom plugin</a></h2>
+                <div class="summary"><p>涉及maya plugin开发的时候，怎么debug呢? </p>
+<h2>Attach to maya process ... 寄生</h2>
+<p>step 1. maya plugin manager (Window -&gt; Settings/Preferences -&gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
+step 2. at your visual studio project of that custom plugin, Tools -&gt; Attach to ...</p>
+                    <a class="btn btn-default btn-xs" href="/How to debug maya custom plugin.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/Tree view at Qt.html">Tree view at Qt</a></h2>
                 <div class="summary"><p>Qt中的TreeView很复杂, 记录一下自己的理解.  </p>
 <h2>引言</h2>
@@ -101,95 +173,6 @@ Polygon mode, create a cube, we have <pCube1, pCubeShape1>; <br />
 Select cube1, Shift+D, we have <pCube2, pCubeShape2>, move cube2 a little bit away from cube1.<br />
 Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                     <a class="btn btn-default btn-xs" href="/Blendshape at maya.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Example of code conventions.html">build simple ui using pySide</a></h2>
-                <div class="summary"><p>刚看到如下代码:</p>
-<div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
-
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_center</span><span class="p">;</span> <span class="c1">///&lt; The computed center of the bounding box of the app</span>
-
-<span class="nl">private:</span>
-    <span class="n">NvModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
-    <span class="n">GLuint</span> <span class="n">model_vboID</span><span class="p">,</span> <span class="n">model_iboID</span><span class="p">;</span>
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_minExtent</span><span class="p">,</span> <span class="n">m_maxExtent</span><span class="p">,</span> <span class="n">m_radius</span><span class="p">;</span>
-</pre></div>
-
-
-<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
-<p>btw, 反例的英文原来是: counter example; negative example </p>
-                    <a class="btn btn-default btn-xs" href="/Example of code conventions.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/How to build a plugin system.html">build simple ui using pySide</a></h2>
-                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
-很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
-<p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
-- 自定义operation, support undo and redo;
-- 自定义某种brush (operation); 
-- 继承实现某个类，代替原有的那个. 例如map extraction? 
-当前接触到的maya api不多，知道plugin可以实现context and manipulator.</p>
-<p>问题就来了, 一个简单的plugin system是怎么设计和实现的呢? </p>
-<p>case 1: 
-Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
-http://3dgep ...</p>
-                    <a class="btn btn-default btn-xs" href="/How to build a plugin system.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Maya custom menu.html">Maya custom menu</a></h2>
-                <div class="summary"><p>How to add custom menu or menuitem into maya ui.</p>
-                    <a class="btn btn-default btn-xs" href="/Maya custom menu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Picking with OpenGL.html">build simple ui using pySide</a></h2>
-                <div class="summary"><blockquote>
-<p>If you have choices, choose the best. If you have no choice, do the best. 如果有选择，那就选择最好的；如果没有选择，那就努力做到最好。</p>
-</blockquote>
-<h1>Picking with OpenGL</h1>
-<p>在3d软件提供交互的时候，例如先选择了某个vertex或者某个face，然后去操作这个被选中的东西。如在maya里面很多工具(maya里面把context==tool?)都是先pick the manipulator, drag the manipulator, to update the attributes of the node (the selection list). 第一步就是要选中mouse底下的东西，这是怎么做到的呢?</p>
-<p>其实一开始我想到的方法ray intersection的方法，
-approach 0 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Picking with OpenGL.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Position Transfromation from 2d world to window screen.html">Position Transfromation from 2d world to window screen</a></h2>
-                <div class="summary"><p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to find the position at 2d world corresponding to this mouse positon?     </p>
-<h2>Background背景</h2>
-<p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to ...</p>
-                    <a class="btn btn-default btn-xs" href="/Position Transfromation from 2d world to window screen.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/choose the overrided function.html">choose the overrided function</a></h2>
-                <div class="summary"><p>In class hierarchy, if functions are overrided by some subclass, which one will be invoked?</p>
-                    <a class="btn btn-default btn-xs" href="/choose the overrided function.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/mesh history in maya.html">mesh history</a></h2>
-                <div class="summary"><p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
-<h2>引言</h2>
-<p>以前对mesh的修改都是例如
-mesh.setVertexPosition( vertexID, newPos ); 
-mesh.setVertexTC( tcID, newTC ); 
-这样直接改[1], 从读书时候到现在都是这么simple and naive:-) 而对于maya的case就没有这样简单了，例如去看maya&gt;devkit&gt;splitUV example [2],  套用上面直接修改的方法, 要split一个uv的话，那直接用MFnMesh加几个新uv, MFnMesh::setUV(new uv id, uv value) 就ok了, 可是故事没有这么简单.... </p>
-<h2>Construction History and Tweak</h2>
-<p>直接摘抄两段来看看:</p>
-<blockquote>
-<p>All the operations that can be performed on a polygonal ...</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="/mesh history in maya.html">more ...</a>
                 </div>
             </article>
             <hr/>

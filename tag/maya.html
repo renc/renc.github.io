@@ -73,6 +73,22 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/mesh history in maya.html">mesh history</a></h2>
+                <div class="summary"><p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
+<h2>引言</h2>
+<p>以前对mesh的修改都是例如
+mesh.setVertexPosition( vertexID, newPos ); 
+mesh.setVertexTC( tcID, newTC ); 
+这样直接改[1], 从读书时候到现在都是这么simple and naive:-) 而对于maya的case就没有这样简单了，例如去看maya&gt;devkit&gt;splitUV example [2],  套用上面直接修改的方法, 要split一个uv的话，那直接用MFnMesh加几个新uv, MFnMesh::setUV(new uv id, uv value) 就ok了, 可是故事没有这么简单.... </p>
+<h2>Construction History and Tweak</h2>
+<p>直接摘抄两段来看看:</p>
+<blockquote>
+<p>All the operations that can be performed on a polygonal ...</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="/mesh history in maya.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/How to debug maya custom plugin.html">How to debug maya custom plugin</a></h2>
                 <div class="summary"><p>涉及maya plugin开发的时候，怎么debug呢? </p>
 <h2>Attach to maya process ... 寄生</h2>
@@ -92,22 +108,6 @@ Polygon mode, create a cube, we have <pCube1, pCubeShape1>; <br />
 Select cube1, Shift+D, we have <pCube2, pCubeShape2>, move cube2 a little bit away from cube1.<br />
 Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                     <a class="btn btn-default btn-xs" href="/Blendshape at maya.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/mesh history in maya.html">mesh history</a></h2>
-                <div class="summary"><p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
-<h2>引言</h2>
-<p>以前对mesh的修改都是例如
-mesh.setVertexPosition( vertexID, newPos ); 
-mesh.setVertexTC( tcID, newTC ); 
-这样直接改[1], 从读书时候到现在都是这么simple and naive:-) 而对于maya的case就没有这样简单了，例如去看maya&gt;devkit&gt;splitUV example [2],  套用上面直接修改的方法, 要split一个uv的话，那直接用MFnMesh加几个新uv, MFnMesh::setUV(new uv id, uv value) 就ok了, 可是故事没有这么简单.... </p>
-<h2>Construction History and Tweak</h2>
-<p>直接摘抄两段来看看:</p>
-<blockquote>
-<p>All the operations that can be performed on a polygonal ...</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="/mesh history in maya.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -180,7 +180,7 @@ mesh.setVertexTC( tcID, newTC );
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2013 renc
+         <div class="col-xs-10">&copy; 2014 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

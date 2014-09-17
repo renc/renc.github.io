@@ -14,7 +14,7 @@
 
         <meta name="author" content="" />
         <meta name="keywords" content="" />
-        <meta name="description" content="Do and redo are so similiar that they can share code." />
+        <meta name="description" content="Do and redo are so similiar that they can share code. 在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: - do sth -&gt; undo it, or - do sth -&gt; undo it -&gt; redo it; 在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。 maya/devkit的例子所使用的方法是: //code // inside class CommandXY virtual bool isUndoable() const { return true or false ..." />
 
 
 
@@ -95,7 +95,10 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
+                <blockquote>
+<p>Do and redo are so similiar that they can share code.</p>
+</blockquote>
+<p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
 - do sth -&gt; undo it, or 
 - do sth -&gt; undo it -&gt; redo it;
 在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。</p>
