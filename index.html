@@ -50,13 +50,10 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
-                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li >
                             <a href="/category/programming.html">Programming</a>
-                        </li>
-                        <li >
-                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -71,6 +68,122 @@
     <div class="row">
         <div class="col-sm-9">
 
+            <article>
+                <h2><a href="/Algo - Check if a binary tree is mirror or symmetric.html">Algo - Check if a binary tree is mirror or symmetric</a></h2>
+                <div class="summary"><p>问题: 给出一个binary tree二叉树, 判断这个数是否关于根节点对称. </p>
+<p>尝试在纸上画画形状, 例如:  <br />
+<img alt="Alt text" src="data/2014-10-11-Asymmetric_BinaryTree.PNG" title="output" />            <br />
+这就引入一个问题, 问题中的对称是指结构上的对称就足够了, 还是还要加上node里面的值相等呢? 
+case 1: structure symmetric; 
+case 2: structure symmetric + value equal; 
+因为case 2是在case 1的基础上层进的, 所以并不矛盾, 先考虑case 1好了. 于是对着上面的图来写代码,  </p>
+<div class="highlight"><pre><span class="kt">bool</span> <span class="nf">isSymmetricBinaryTree</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>                    
+<span class="p">{</span>                                             
+    <span class="c1">// node without children                     </span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="n">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">)</span>        
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>                                                    
+    <span class="c1">//                       </span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">)</span>                  
+        <span class="k">return</span> <span class="nb">false ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Algo - Check if a binary tree is mirror or symmetric.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Algo - Detecting a Loop in a Singly Linked List.html">Algo - Detecting a Loop in a Singly Linked List</a></h2>
+                <div class="summary"><p>This is not the first time i see this algo problem, and i want to describe the details of how to solve it this time in case need to revisit it later.   </p>
+<p>首先想象一下一个list带loop/circle的形状.                            <br />
+<img alt="Alt text" src="data/2014-10-09-list_with_different_loop.PNG" title="output" />            <br />
+最左边的最general, 但是一个node只有一个next指针, 只能指向一个后续node, 所以只有最后的情况才可能. 或者是这个list没有loop, 或者是这个list本身就是一个loop/closed circle.                   </p>
+<p>假如一个node的定义是:         </p>
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">Node</span> <span class="p">{</span>   
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span> 
+<span class="p">};</span>     
+</pre></div>
+
+
+<p>要形成一个loop, 某一个node的next指向已经visit过的node ...</p>
+                    <a class="btn btn-default btn-xs" href="/Algo - Detecting a Loop in a Singly Linked List.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Difference between Parameter and Variabe and Argument.html">Difference between Parameter and Variabe and Argument</a></h2>
+                <div class="summary"><p>翻译过来的话, variable 是变量, parameter and argument 是参数的意思, 怎么区别使用呢?    </p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>     <span class="c1">// (int a, int b)叫argument list, a/b是parameter.  </span>
+<span class="p">{</span>                         
+    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>        <span class="c1">// c is variable.   </span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>           
+<span class="p">}</span>          
+
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                <span class="c1">// x对应自己的scope下的variables.       </span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>            <span class="c1">// x/y作为函数参数时候就是arguments.    </span>
+</pre></div>
+
+
+<p>引用一下网上的解释: </p>
+<blockquote>
+<p>A parameter is a variable in a method ...</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="/Difference between Parameter and Variabe and Argument.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Mode Switch in Class Hierarchy.html">Mode Switch in Class Hierarchy</a></h2>
+                <div class="summary"><p><img alt="Alt text" src="data/2014-09-22-Mode_Switching.PNG" title="output" /><br />
+想象我们正在搞一个砌砖的程序, 是的, 码农只是其中一种称呼, 时不时也被称为搬砖的.  <br />
+一开始, 我们只有不断在已有的基础上添加砖头的功能。      <br />
+后来, 我们需要有移动某些砖块的功能。例如在最外表面的砖块都可以被移动。 <br />
+再后来，我们需要敲掉某砖块的功能。                     <br />
+它们分别对应于add, move, delete这三种modes.     </p>
+<p>其中一种设计方法是 </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">Build</span> 
+<span class="p">{</span>
+    <span class="k">enum</span> <span class="n">BuildMode</span> <span class="p">{</span>            
+        <span class="n">Add</span><span class="p">,</span>      
+        <span class="n">Move</span><span class="p">,</span>       
+        <span class="n">Delete</span>       
+    <span class="p">};</span>          
+    <span class="n">BuildMode</span> <span class="n">m_currentMode</span><span class="p">;</span>            
+<span class="p">};</span>         
+</pre></div>
+
+
+<p>这方法是把所有mode的实现都放在同一个地方, 每次更新都要改这个地方Build的源代码实现. 但是假如在添加move, delete这新mode的时候, 我们不想or不能改已有的只有add mode的Build源码呢?    </p>
+<p>这是另一种设计方案  </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">Build</span>  
+<span class="p">{</span>   
+    <span class="c1">// care about the add mode only.    </span>
+<span class="p">};</span>   
+<span class="n">class</span> <span class="n">BuildMove</span> <span class="o">:</span> <span class="n">public</span> <span class="n">Build</span> 
+<span class="p">{</span> 
+    <span class="kt">bool</span> <span class="n">onMouseEvent</span><span class="p">()</span>   
+    <span class="p">{</span> 
+        <span class="n">check</span> <span class="k">if</span> <span class="n">we</span> <span class="n">will</span> <span class="n">go ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Mode Switch in Class Hierarchy.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Char Array vs Char Pointer.html">Char Array vs Char Pointer</a></h2>
+                <div class="summary"><p>刚才在阅读以下内容时候复习了一下这两个概念. 
+<a href="http://www.bfilipek.com/2014/07/quick-case-char-pointer-vs-char-array.html">Quick case: Char Pointer vs Char Array in C++, by Bartlomiej Filipek</a>  </p>
+<div class="highlight"><pre><span class="c1">// Test case of char array vs char pointer. </span>
+<span class="c1">// </span>
+
+<span class="p">#</span><span class="k">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>   
+
+<span class="k">int</span> <span class="n">main</span><span class="p">()</span>     
+<span class="p">{</span>       
+    <span class="n">char</span> <span class="n">strA</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;char array!&quot;</span><span class="p">;</span>          
+    <span class="n">char</span> <span class="o">*</span><span class="n">strP</span> <span class="o">=</span> <span class="s">&quot;char array?&quot;</span><span class="p">;</span>        
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;sizeof(strA): &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">strA</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, of: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">strA</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, addr: &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">strA</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>          
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;sizeof(strA): &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sizeof ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Char Array vs Char Pointer.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="/Pointer is copied when passed as function parameter.html">Pointer is copied when passed as function parameter</a></h2>
                 <div class="summary"><h2>起源</h2>
@@ -303,12 +416,9 @@ if (i &lt; j) but arr[i] &gt; arr[j]. 例如上面的(3, 2), 3在2的前面, 但
                 <h2><a href="/partio.html">partio</a></h2>
                 <div class="summary"><p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.               </p>
 <h2>引言</h2>
-<p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.</p>
-<h2>安装libPNG and zlib</h2>
-<p>其实partio只需要zlib, 但是libPNG contain了zlib, 而且提供了zlib的vs project file, libPNG本身也是一个常用库, 于是就直接build libPNG and zlib好了. 
-download libPNG source, 
-download zlib source,
-update the zlib source information at file ...</p>
+<p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project from
+Disney Animation, 读读它的代码应该能学到东西, 于是故事就开始了.<br />
+“The goal of Partio is to provide a unified interface akin to unified image libraries that makes it easier to load, save, and manipulate ...</p>
                     <a class="btn btn-default btn-xs" href="/partio.html">more ...</a>
                 </div>
             </article>
@@ -324,89 +434,6 @@ update the zlib source information at file ...</p>
 <p>比较 std::vector 和 std::list, 其中一个特定是, vector的内存是连续的(contiguous buffers), 还可以避免avoid内存动态分配memory allocations和四散的访问scattered access.  这些都是优势. </p>
 <p>这里发散一下，以前在用Qt 4.8的时候(以后Qt 5可能有变)，就有QVector, QList, QLinkedList，它们的区别也有意思。其中QVector跟std::vector类似 ...</p>
                     <a class="btn btn-default btn-xs" href="/Vector based containers.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Pointer to Member Function.html">Pointer to Member Function</a></h2>
-                <div class="summary"><p>function pointer是知道的, 如</p>
-<div class="highlight"><pre><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
-
-<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">pFtor</span><span class="p">)(</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span> <span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> 
-
-<span class="n">or</span>
-
-<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="o">*</span><span class="n">FtorType</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span> 
-<span class="n">FtorType</span> <span class="n">pFtor</span><span class="p">;</span> 
-<span class="n">pFtor</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-</pre></div>
-
-
-<p>但是当看到类似以下代码时候还是恐惧了一下: </p>
-<div class="highlight"><pre><span class="n">class</span> <span class="n">Tool</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">doA</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="nf">doB</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span> 
-<span class="p">};</span> 
-<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="n">Tool</span><span class="o">::*</span><span class="n">MemberFunctionPtr</span><span class="p">)(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
-
-
-<span class="n">Tool</span> <span class="n">toolObj ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Pointer to Member Function.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/In the middle of time and space.html">In the middle of time and space</a></h2>
-                <div class="summary"><p>刚发生了一个有意思的事情, 5月9号16:40</p>
-<p>小伙C说了一段话;
-小伙B回答了一段话;</p>
-<p>小伙C是在北美西海岸, 跟我们差16小时; 
-小伙B是在英国.</p>
-<p>那么C大致是5月8号深夜, B可能是9号早上.</p>
-<p>过去和未来的对话，我们夹在时空中间，旁观.....</p>
-                    <a class="btn btn-default btn-xs" href="/In the middle of time and space.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Example of code conventions.html">Example of code conventions</a></h2>
-                <div class="summary"><p>刚看到如下代码:</p>
-<div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
-
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_center</span><span class="p">;</span> <span class="c1">///&lt; The computed center of the bounding box of the app</span>
-
-<span class="nl">private:</span>
-    <span class="n">NvModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
-    <span class="n">GLuint</span> <span class="n">model_vboID</span><span class="p">,</span> <span class="n">model_iboID</span><span class="p">;</span>
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_minExtent</span><span class="p">,</span> <span class="n">m_maxExtent</span><span class="p">,</span> <span class="n">m_radius</span><span class="p">;</span>
-</pre></div>
-
-
-<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
-<p>btw, 反例的英文原来是: counter example; negative example </p>
-                    <a class="btn btn-default btn-xs" href="/Example of code conventions.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Picking with OpenGL.html">Picking with OpenGL</a></h2>
-                <div class="summary"><blockquote>
-<p>If you have choices, choose the best. If you have no choice, do the best. 如果有选择，那就选择最好的；如果没有选择，那就努力做到最好。</p>
-</blockquote>
-<h1>Picking with OpenGL</h1>
-<p>在3d软件提供交互的时候，例如先选择了某个vertex或者某个face，然后去操作这个被选中的东西。如在maya里面很多工具(maya里面把context==tool?)都是先pick the manipulator, drag the manipulator, to update the attributes of the node (the selection list). 第一步就是要选中mouse底下的东西，这是怎么做到的呢?</p>
-<p>其实一开始我想到的方法ray intersection的方法，
-approach 0 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Picking with OpenGL.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/choose the overrided function.html">choose the overrided function</a></h2>
-                <div class="summary"><p>In class hierarchy, if functions are overrided by some subclass, which one will be invoked?</p>
-                    <a class="btn btn-default btn-xs" href="/choose the overrided function.html">more ...</a>
                 </div>
             </article>
             <hr/>

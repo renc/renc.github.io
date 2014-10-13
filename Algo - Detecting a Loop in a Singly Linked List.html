@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Algo - Detecting a Loop in a Singly Linked List - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/Algo - Detecting a Loop in a Singly Linked List.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="This is not the first time i see this algo problem, and i want to describe the details of how to solve it this time in case need to revisit it later. 首先想象一下一个list带loop/circle的形状. 最左边的最general, 但是一个node只有一个next指针, 只能指向一个后续node, 所以只有最后的情况才可能. 或者是这个list没有loop, 或者是这个list本身就是一个loop/closed circle. 假如一个node的定义是: struct Node { struct Node *next; }; 要形成一个loop, 某一个node的next指向已经visit过的node ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Algo - Detecting a Loop in a Singly Linked List.html"
+                       rel="bookmark"
+                       title="Permalink to Algo - Detecting a Loop in a Singly Linked List">
+                        Algo - Detecting a Loop in a Singly Linked List
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-10-09T22:00:00"> 周四 09 十月 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>This is not the first time i see this algo problem, and i want to describe the details of how to solve it this time in case need to revisit it later.   </p>
+<p>首先想象一下一个list带loop/circle的形状.                            <br />
+<img alt="Alt text" src="data/2014-10-09-list_with_different_loop.PNG" title="output" />            <br />
+最左边的最general, 但是一个node只有一个next指针, 只能指向一个后续node, 所以只有最后的情况才可能. 或者是这个list没有loop, 或者是这个list本身就是一个loop/closed circle.                   </p>
+<p>假如一个node的定义是:         </p>
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">Node</span> <span class="p">{</span>   
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span> 
+<span class="p">};</span>     
+</pre></div>
+
+
+<p>要形成一个loop, 某一个node的next指向已经visit过的node. 那要记录被visit过的node, 可以把visit的node放入一个set里面, 然后检查每一个node的next指向的node是否已经在set里面了, 是的话就有loop.             </p>
+<div class="highlight"><pre><span class="kt">bool</span> <span class="nf">hasLoop</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> 
+<span class="p">{</span>   
+    <span class="n">set</span><span class="p">.</span><span class="n">clean</span><span class="p">();</span> <span class="c1">// empty. </span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">head</span><span class="p">)</span>          
+    <span class="p">{</span>                  
+        <span class="k">if</span> <span class="p">(</span><span class="n">set</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>         
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>              
+        <span class="n">set</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">head</span><span class="p">);</span>          
+        <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>        
+    <span class="p">}</span>                           
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>        
+<span class="p">}</span>                
+</pre></div>
+
+
+<p>直观, 遍历一遍list就ok了, O(n) time, 空间倒是需要O(n).     </p>
+<p>在网上找到的解法中, 最流行就是两个指针, slow and fast: </p>
+<div class="highlight"><pre><span class="kt">bool</span> <span class="nf">hasLoop</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>              
+  <span class="n">Node</span> <span class="o">*</span><span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="p">,</span> <span class="o">*</span><span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>              
+  <span class="k">while</span> <span class="p">(</span><span class="n">slow</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>             
+    <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>                       
+    <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>              
+    <span class="k">if</span> <span class="p">(</span><span class="n">slow</span> <span class="o">==</span> <span class="n">fast</span><span class="p">)</span>                
+      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>             
+  <span class="p">}</span>                    
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>          
+<span class="p">}</span>                    
+</pre></div>
+
+
+<p>原来这种策略有专门的名字"Tortoise and hare"龟兔赛跑... 用于更general的cycle detection问题.        <br />
+这个算法容易记, 容易实现, 但是怎么证明一旦有loop, slow and fast这两个指针一定会在loop中相遇呢? 我比较关心这个, 一开始想不通, 后来看到用归纳法可以证明: 假如s and f这两个指针都在loop里面了,               <br />
+case 1, f在s后1个位置, 也就是f-&gt;next == s, 这种情况下, 下一轮 s and f就相遇meet.     <br />
+case 2, f在s后2位, 下一轮之后, f变成在s后1位了, 也就是case 1的情况, 所以再下一轮, 就会meet. 一共2轮.     <br />
+case 3, f在s后3位, 下一轮之后, f变成在s后2位了, 也就是case 2的情况, 也能在2轮之后就meet. 一共3轮.  <br />
+对于一个有n个node的loop, f最多也只能在s后n-1位, 每走1轮, 就缩小1位, 走一共n-1轮, 两者meet. </p>
+<p>性质: f在s后x位, 走x轮, 相遇. </p>
+<p>假如上面的理解是对的, 那这个性质就很有意思了.    </p>
+<p>PS: 这文档描述了linked list下的一般操作, http://cslibrary.stanford.edu/105/LinkedListProblems.pdf                             </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

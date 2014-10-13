@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>In the middle of time and space - 阿can's  blog</title>
+    <title>Difference between Parameter and Variabe and Argument - 阿can's  blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,11 +10,11 @@
 
 
 
-<link rel="canonical" href="/In the middle of time and space.html">
+<link rel="canonical" href="/Difference between Parameter and Variabe and Argument.html">
 
         <meta name="author" content="" />
         <meta name="keywords" content="" />
-        <meta name="description" content="刚发生了一个有意思的事情, 5月9号16:40 小伙C说了一段话; 小伙B回答了一段话; 小伙C是在北美西海岸, 跟我们差16小时; 小伙B是在英国. 那么C大致是5月8号深夜, B可能是9号早上. 过去和未来的对话，我们夹在时空中间，旁观....." />
+        <meta name="description" content="翻译过来的话, variable 是变量, parameter and argument 是参数的意思, 怎么区别使用呢? int add(int a, int b) // (int a, int b)叫argument list, a/b是parameter. { int c = a + b; // c is variable. return c; } int x = 1; // x对应自己的scope下的variables. z = add(x, 2); // x/y作为函数参数时候就是arguments. 引用一下网上的解释: A parameter is a variable in a method ..." />
 
 
 
@@ -69,10 +69,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/In the middle of time and space.html"
+                    <a href="/Difference between Parameter and Variabe and Argument.html"
                        rel="bookmark"
-                       title="Permalink to In the middle of time and space">
-                        In the middle of time and space
+                       title="Permalink to Difference between Parameter and Variabe and Argument">
+                        Difference between Parameter and Variabe and Argument
                     </a>
                 </h1>
             </header>
@@ -82,7 +82,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-05-09T10:20:00"> 周五 09 五月 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-09-28T12:00:00"> 周日 28 九月 2014</time>
     </span>
 
 
@@ -92,13 +92,24 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>刚发生了一个有意思的事情, 5月9号16:40</p>
-<p>小伙C说了一段话;
-小伙B回答了一段话;</p>
-<p>小伙C是在北美西海岸, 跟我们差16小时; 
-小伙B是在英国.</p>
-<p>那么C大致是5月8号深夜, B可能是9号早上.</p>
-<p>过去和未来的对话，我们夹在时空中间，旁观.....</p>
+                <p>翻译过来的话, variable 是变量, parameter and argument 是参数的意思, 怎么区别使用呢?    </p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>     <span class="c1">// (int a, int b)叫argument list, a/b是parameter.  </span>
+<span class="p">{</span>                         
+    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>        <span class="c1">// c is variable.   </span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>           
+<span class="p">}</span>          
+
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                <span class="c1">// x对应自己的scope下的variables.       </span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>            <span class="c1">// x/y作为函数参数时候就是arguments.    </span>
+</pre></div>
+
+
+<p>引用一下网上的解释: </p>
+<blockquote>
+<p>A parameter is a variable in a method definition. When a method is called, the arguments are the data you pass into the method's parameters.  - Torbjörn Hansson<br />
+A parameter is the variable which is part of the method’s signature (method declaration). An argument is an expression used when calling the method.  - tranmq 
+A parameter is the variable which is part of the method’s signature (method declaration). An argument is an expression used when calling the method.  – vol7ron         </p>
+</blockquote>
             </div>
             <!-- /.entry-content -->
         </article>

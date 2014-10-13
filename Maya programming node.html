@@ -14,7 +14,7 @@
 
         <meta name="author" content="" />
         <meta name="keywords" content="" />
-        <meta name="description" content="学maya时候有些新概念要记录一下，否则忘得快. Selection 起码区分清楚了selection mode and mask之后, 才能继续. ls -sl # to list objects /components are selected. ls -hilite # to list the objects ready be select their components ls -psh # the current pre-select highlight coomponent. check the hilite command too. 这几个东西很相像的. -sl是已经选中的东西, 例如绿色的顶点和物体. -hilite是可能在上面选择component的物体. -psh好像就是预选, 例如切换到vtx模式, 在物体上面移动鼠标, 那些被高亮的红色顶点。 Command 定义命令cmd的语法, 例如你可能想给命令添加一些flags ..." />
+        <meta name="description" content="学maya时候有些新概念要记录一下，否则忘得快. Selection 起码区分清楚了selection mode and mask之后, 才能继续. // modified from Complete Maya Programming, chapter 3.3. string $ns[] = `ls -sl`; for ($n in $ns) { string $nt = `objectType $n`; print (&#34;Node: &#34; + $n + &#34;, &#34; + $nt + &#34;\n&#34;); }; ls -sl # to list objects /components are selected. ls -hilite # to list the objects ready be select ..." />
 
 
 
@@ -47,13 +47,10 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
-                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li class="active">
                             <a href="/category/programming.html">Programming</a>
-                        </li>
-                        <li >
-                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -99,11 +96,77 @@
 <h2>Selection</h2>
 <p><img alt="mode_and_mask" src="data/2014-04-01_maya_selection_mode_mask.png" title="output" /><br />
 起码区分清楚了selection mode and mask之后, 才能继续. </p>
+<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, chapter 3.3.    </span>
+<span class="k">string</span> <span class="err">$</span><span class="n">ns</span><span class="p">[]</span> <span class="o">=</span> <span class="no">`ls</span> <span class="o">-</span><span class="n">sl</span><span class="err">`</span><span class="p">;</span>    
+<span class="k">for</span> <span class="p">(</span><span class="err">$</span><span class="n">n</span> <span class="n">in</span> <span class="err">$</span><span class="n">ns</span><span class="p">)</span>     
+<span class="p">{</span>    
+    <span class="k">string</span> <span class="err">$</span><span class="n">nt</span> <span class="o">=</span> <span class="no">`objectType</span> <span class="err">$</span><span class="n">n</span><span class="err">`</span><span class="p">;</span>     
+    <span class="n">print</span> <span class="p">(</span><span class="s">&quot;Node: &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">n</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">nt</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>      
+<span class="p">};</span>      
+</pre></div>
+
+
 <p>ls -sl  # to list objects /components are selected.<br />
 ls -hilite  # to list the objects ready be select their components<br />
 ls -psh  # the current pre-select highlight coomponent.<br />
 check the hilite command too.<br />
 这几个东西很相像的. -sl是已经选中的东西, 例如绿色的顶点和物体. -hilite是可能在上面选择component的物体. -psh好像就是预选, 例如切换到vtx模式, 在物体上面移动鼠标, 那些被高亮的红色顶点。</p>
+<div class="highlight"><pre><span class="c1">//Store old selection mode and mask </span>
+<span class="n">fPreviousSelectionMode</span> <span class="o">=</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">selectionMode</span><span class="p">();</span> 
+<span class="k">if</span><span class="p">(</span> <span class="n">fPreviousSelectionMode</span> <span class="o">==</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">kSelectComponentMode</span> <span class="p">)</span> 
+    <span class="n">fPreviousSelectionMask</span> <span class="o">=</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">componentSelectionMask</span><span class="p">();</span> 
+<span class="k">else</span> 
+    <span class="n">fPreviousSelectionMask</span> <span class="o">=</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">objectSelectionMask</span><span class="p">();</span>
+
+<span class="n">MGlobal</span><span class="o">::</span><span class="n">setSelectionMode</span><span class="p">(</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">kSelectComponentMode</span> <span class="p">);</span> 
+<span class="n">MGlobal</span><span class="o">::</span><span class="n">setComponentSelectionMask</span><span class="p">(</span> <span class="n">MSelectionMask</span><span class="o">::</span><span class="n">kSelectMeshUVs</span> <span class="p">);</span>
+</pre></div>
+
+
+<p>例如我们选择一个平面模型, drag to create a plane, 得到的除了一个shape node以外, 还有一个transform node作为parent.<br />
+<img alt="Alt text" src="data/2014-09-28-plane-connection.PNG" title="" />  <br />
+左边应该是一连串表示shape的构造过程, 最右边是transform node.  </p>
+<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, ch 3.4 Hierarchies </span>
+
+<span class="c1">// to create a new transform node, and connect the sphere and plane as children </span>
+<span class="n">group</span> <span class="o">-</span><span class="n">name</span> <span class="n">topTransform</span> <span class="n">pSphere1</span><span class="p">;</span> 
+<span class="n">parent</span> <span class="n">pPlane1</span> <span class="n">topTransform</span><span class="p">;</span>
+
+<span class="n">listRelatives</span> <span class="n">topTransform</span><span class="p">;</span>
+<span class="c1">// Result: pSphere1 pPlane1 //   </span>
+<span class="n">listRelatives</span> <span class="o">-</span><span class="n">allDescendents</span> <span class="n">topTransform</span><span class="p">;</span>
+<span class="c1">// Result: pSphereShape1 pSphere1 pPlaneShape1 pPlane1 // </span>
+
+<span class="n">listRelatives</span> <span class="o">-</span><span class="n">parent</span> <span class="n">pPlaneShape1</span><span class="p">;</span>
+<span class="c1">// Result: pPlane1 // </span>
+<span class="n">listRelatives</span> <span class="o">-</span><span class="n">parent</span> <span class="n">pPlane1</span><span class="p">;</span>
+<span class="c1">// Result: topTransform // </span>
+</pre></div>
+
+
+<p><img alt="Alt text" src="data/2014-09-28-Hierarchy-topTransform.PNG" title="" />这图很清晰表示它们的上下结构. 在这个结构下, </p>
+<div class="highlight"><pre><span class="n">move</span> <span class="o">-</span><span class="n">relative</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">0</span> <span class="n">topTransform</span><span class="p">;</span> 
+</pre></div>
+
+
+<p>很有意思地, 两个模型同时往上移动了3. 理由当然是因为下面的transform 继承了上面parent的transform. 而这种继承是可以打破的,<br />
+<img alt="Alt text" src="data/2014-09-28-Hierarchy-inheritTransform.PNG" title="" />试试鼠标在ui上点击这选项, mel的输出是:    </p>
+<div class="highlight"><pre><span class="n">setAttr</span> <span class="s">&quot;pPlane1.inheritsTransform&quot;</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="n">setAttr</span> <span class="s">&quot;pPlane1.inheritsTransform&quot;</span> <span class="mi">1</span><span class="p">;</span>  
+</pre></div>
+
+
+<p>对应地mel命令, 执行下面的命令等于turn off this option: </p>
+<div class="highlight"><pre><span class="n">inheritTransform</span> <span class="o">-</span><span class="n">off</span> <span class="n">pPlane1</span> 
+</pre></div>
+
+
+<p>[book, Complete Maya Programming, ch3.4 Objects]解释hierarchy and transform后就接着介绍attributes了. </p>
+<h2>Polygon components</h2>
+<p>对mesh的结构肯定要了解嘛, v/e/f/uv是怎么存放的结构, 怎么访问到这些elements(v/e/f/uv, 我习惯了称为element, 而maya这边好像用component表示). 在maya doc里面描述还算清晰, 具体看:         <br />
+Developer Resources &gt; API Guide &gt; Polygon API &gt; How polygons are handled internally       <br />
+这一节内容的前半段是讲mesh的components(v/e/f/uv)的结构, 后半段是讲polygon mesh作为一个shape node(相对于别的node类型)是怎么融入maya的dependency graph的。   </p>
+<p>然后就是API那边有什么接口interface来获取这些信息了. MFnMesh.</p>
 <h2>Command</h2>
 <p>定义命令cmd的语法, 例如你可能想给命令添加一些flags. [ MPxCommand::newSyntax() ]
 有了语法, 在具体执行这个命令的时候, 首先当然就是分解命令, 看它是否包含了哪些参数. [doIt, parseArgs, argument list, argument data]</p>

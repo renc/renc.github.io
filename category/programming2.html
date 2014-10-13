@@ -51,13 +51,10 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
-                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li class="active">
                             <a href="/category/programming.html">Programming</a>
-                        </li>
-                        <li >
-                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -72,6 +69,83 @@
     <div class="row">
         <div class="col-sm-9">
 
+            <article>
+                <h2><a href="/Picking with OpenGL.html">Picking with OpenGL</a></h2>
+                <div class="summary"><blockquote>
+<p>If you have choices, choose the best. If you have no choice, do the best. 如果有选择，那就选择最好的；如果没有选择，那就努力做到最好。</p>
+</blockquote>
+<h1>Picking with OpenGL</h1>
+<p>在3d软件提供交互的时候，例如先选择了某个vertex或者某个face，然后去操作这个被选中的东西。如在maya里面很多工具(maya里面把context==tool?)都是先pick the manipulator, drag the manipulator, to update the attributes of the node (the selection list). 第一步就是要选中mouse底下的东西，这是怎么做到的呢?</p>
+<p>其实一开始我想到的方法ray intersection的方法，
+approach 0 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Picking with OpenGL.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/choose the overrided function.html">choose the overrided function</a></h2>
+                <div class="summary"><p>In class hierarchy, if functions are overrided by some subclass, which one will be invoked?</p>
+                    <a class="btn btn-default btn-xs" href="/choose the overrided function.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h2>
+                <div class="summary"><p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
+- do sth -&gt; undo it, or 
+- do sth -&gt; undo it -&gt; redo it;
+在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。</p>
+<p>maya/devkit的例子所使用的方法是:</p>
+<div class="highlight"><pre><span class="c1">//code  </span>
+<span class="c1">// inside class CommandXY </span>
+<span class="k">virtual</span> <span class="n">bool</span> <span class="n">isUndoable</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">true</span> <span class="k">or</span> <span class="n">false</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">virtual</span> <span class="n">MStatus</span> <span class="n">doIt</span><span class="p">(</span> <span class="k">const</span> <span class="n">MArglist</span> <span class="o">&amp;</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// parse the argument list;</span>
+    <span class="c1">// do some ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Do and redo are similiar.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/How to build a plugin system.html">How to build a plugin system</a></h2>
+                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
+很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
+<p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
+- 自定义operation, support undo and redo;
+- 自定义某种brush (operation); 
+- 继承实现某个类，代替原有的那个. 例如map extraction? 
+当前接触到的maya api不多，知道plugin可以实现context and manipulator.</p>
+<p>问题就来了, 一个简单的plugin system是怎么设计和实现的呢? </p>
+<p>case 1: 
+Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
+http://3dgep ...</p>
+                    <a class="btn btn-default btn-xs" href="/How to build a plugin system.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Maya programming node.html">Maya Programming Node</a></h2>
+                <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
+<h2>Selection</h2>
+<p><img alt="mode_and_mask" src="data/2014-04-01_maya_selection_mode_mask.png" title="output" /><br />
+起码区分清楚了selection mode and mask之后, 才能继续. </p>
+<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, chapter 3.3.    </span>
+<span class="k">string</span> <span class="err">$</span><span class="n">ns</span><span class="p">[]</span> <span class="o">=</span> <span class="no">`ls</span> <span class="o">-</span><span class="n">sl</span><span class="err">`</span><span class="p">;</span>    
+<span class="k">for</span> <span class="p">(</span><span class="err">$</span><span class="n">n</span> <span class="n">in</span> <span class="err">$</span><span class="n">ns</span><span class="p">)</span>     
+<span class="p">{</span>    
+    <span class="k">string</span> <span class="err">$</span><span class="n">nt</span> <span class="o">=</span> <span class="no">`objectType</span> <span class="err">$</span><span class="n">n</span><span class="err">`</span><span class="p">;</span>     
+    <span class="n">print</span> <span class="p">(</span><span class="s">&quot;Node: &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">n</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">nt</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>      
+<span class="p">};</span>      
+</pre></div>
+
+
+<p>ls -sl  # to list objects /components are selected.<br />
+ls -hilite  # to list the objects ready be select ...</p>
+                    <a class="btn btn-default btn-xs" href="/Maya programming node.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="/simple implement of 2d bezier curve.html">simple implement of 2d bezier curve</a></h2>
                 <div class="summary"><p>工作中又一次遇到nurb curve的问题，具体是knots个数和求法的问题。那东西太难，相对来来说，bezier curve易懂很多，一直想实现一下来看看，于是就有了此。</p>

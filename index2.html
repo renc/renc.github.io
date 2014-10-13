@@ -50,13 +50,10 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
-                            <a href="/category/computer-graphics.html">Computer graphics,</a>
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li >
                             <a href="/category/programming.html">Programming</a>
-                        </li>
-                        <li >
-                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -72,18 +69,102 @@
         <div class="col-sm-9">
 
             <article>
-                <h2><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h2>
+                <h2><a href="/Pointer to Member Function.html">Pointer to Member Function</a></h2>
+                <div class="summary"><p>function pointer是知道的, 如</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+
+<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">pFtor</span><span class="p">)(</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span> <span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> 
+
+<span class="n">or</span>
+
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="o">*</span><span class="n">FtorType</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span> 
+<span class="n">FtorType</span> <span class="n">pFtor</span><span class="p">;</span> 
+<span class="n">pFtor</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</pre></div>
+
+
+<p>但是当看到类似以下代码时候还是恐惧了一下: </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">Tool</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">doA</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="nf">doB</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span> 
+<span class="p">};</span> 
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="n">Tool</span><span class="o">::*</span><span class="n">MemberFunctionPtr</span><span class="p">)(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+
+
+<span class="n">Tool</span> <span class="n">toolObj ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Pointer to Member Function.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/In the middle of time and space.html">In the middle of time and space</a></h2>
+                <div class="summary"><p>刚发生了一个有意思的事情, 5月9号16:40</p>
+<p>小伙C说了一段话;
+小伙B回答了一段话;</p>
+<p>小伙C是在北美西海岸, 跟我们差16小时; 
+小伙B是在英国.</p>
+<p>那么C大致是5月8号深夜, B可能是9号早上.</p>
+<p>过去和未来的对话，我们夹在时空中间，旁观.....</p>
+                    <a class="btn btn-default btn-xs" href="/In the middle of time and space.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Example of code conventions.html">Example of code conventions</a></h2>
+                <div class="summary"><p>刚看到如下代码:</p>
+<div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
+
+    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_center</span><span class="p">;</span> <span class="c1">///&lt; The computed center of the bounding box of the app</span>
+
+<span class="nl">private:</span>
+    <span class="n">NvModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
+    <span class="n">GLuint</span> <span class="n">model_vboID</span><span class="p">,</span> <span class="n">model_iboID</span><span class="p">;</span>
+    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_minExtent</span><span class="p">,</span> <span class="n">m_maxExtent</span><span class="p">,</span> <span class="n">m_radius</span><span class="p">;</span>
+</pre></div>
+
+
+<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
+<p>btw, 反例的英文原来是: counter example; negative example </p>
+                    <a class="btn btn-default btn-xs" href="/Example of code conventions.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Picking with OpenGL.html">Picking with OpenGL</a></h2>
                 <div class="summary"><blockquote>
-<p>Do and redo are so similiar that they can share code.</p>
+<p>If you have choices, choose the best. If you have no choice, do the best. 如果有选择，那就选择最好的；如果没有选择，那就努力做到最好。</p>
 </blockquote>
-<p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
+<h1>Picking with OpenGL</h1>
+<p>在3d软件提供交互的时候，例如先选择了某个vertex或者某个face，然后去操作这个被选中的东西。如在maya里面很多工具(maya里面把context==tool?)都是先pick the manipulator, drag the manipulator, to update the attributes of the node (the selection list). 第一步就是要选中mouse底下的东西，这是怎么做到的呢?</p>
+<p>其实一开始我想到的方法ray intersection的方法，
+approach 0 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Picking with OpenGL.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/choose the overrided function.html">choose the overrided function</a></h2>
+                <div class="summary"><p>In class hierarchy, if functions are overrided by some subclass, which one will be invoked?</p>
+                    <a class="btn btn-default btn-xs" href="/choose the overrided function.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h2>
+                <div class="summary"><p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
 - do sth -&gt; undo it, or 
 - do sth -&gt; undo it -&gt; redo it;
 在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。</p>
 <p>maya/devkit的例子所使用的方法是:</p>
 <div class="highlight"><pre><span class="c1">//code  </span>
 <span class="c1">// inside class CommandXY </span>
-<span class="k">virtual</span> <span class="n">bool</span> <span class="n">isUndoable</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">true</span> <span class="k">or</span> <span class="n">false ...</span></pre></div>
+<span class="k">virtual</span> <span class="n">bool</span> <span class="n">isUndoable</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">true</span> <span class="k">or</span> <span class="n">false</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">virtual</span> <span class="n">MStatus</span> <span class="n">doIt</span><span class="p">(</span> <span class="k">const</span> <span class="n">MArglist</span> <span class="o">&amp;</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// parse the argument list;</span>
+    <span class="c1">// do some ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="/Do and redo are similiar.html">more ...</a>
                 </div>
             </article>
@@ -111,13 +192,18 @@ http://3dgep ...</p>
 <h2>Selection</h2>
 <p><img alt="mode_and_mask" src="data/2014-04-01_maya_selection_mode_mask.png" title="output" /><br />
 起码区分清楚了selection mode and mask之后, 才能继续. </p>
+<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, chapter 3.3.    </span>
+<span class="k">string</span> <span class="err">$</span><span class="n">ns</span><span class="p">[]</span> <span class="o">=</span> <span class="no">`ls</span> <span class="o">-</span><span class="n">sl</span><span class="err">`</span><span class="p">;</span>    
+<span class="k">for</span> <span class="p">(</span><span class="err">$</span><span class="n">n</span> <span class="n">in</span> <span class="err">$</span><span class="n">ns</span><span class="p">)</span>     
+<span class="p">{</span>    
+    <span class="k">string</span> <span class="err">$</span><span class="n">nt</span> <span class="o">=</span> <span class="no">`objectType</span> <span class="err">$</span><span class="n">n</span><span class="err">`</span><span class="p">;</span>     
+    <span class="n">print</span> <span class="p">(</span><span class="s">&quot;Node: &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">n</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">nt</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>      
+<span class="p">};</span>      
+</pre></div>
+
+
 <p>ls -sl  # to list objects /components are selected.<br />
-ls -hilite  # to list the objects ready be select their components<br />
-ls -psh  # the current pre-select highlight coomponent.<br />
-check the hilite command too.<br />
-这几个东西很相像的. -sl是已经选中的东西, 例如绿色的顶点和物体. -hilite是可能在上面选择component的物体. -psh好像就是预选, 例如切换到vtx模式, 在物体上面移动鼠标, 那些被高亮的红色顶点。</p>
-<h2>Command</h2>
-<p>定义命令cmd的语法, 例如你可能想给命令添加一些flags ...</p>
+ls -hilite  # to list the objects ready be select ...</p>
                     <a class="btn btn-default btn-xs" href="/Maya programming node.html">more ...</a>
                 </div>
             </article>
@@ -176,13 +262,6 @@ Polygon mode, create a cube, we have <pCube1, pCubeShape1>; <br />
 Select cube1, Shift+D, we have <pCube2, pCubeShape2>, move cube2 a little bit away from cube1.<br />
 Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                     <a class="btn btn-default btn-xs" href="/Blendshape at maya.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/what is this.html">Do and redo are similiar</a></h2>
-                <div class="summary"><p>Short version for index and feeds</p>
-                    <a class="btn btn-default btn-xs" href="/what is this.html">more ...</a>
                 </div>
             </article>
             <hr/>
