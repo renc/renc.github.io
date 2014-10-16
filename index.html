@@ -69,6 +69,44 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/Reading Note: GLSL Cookbook - Chapter 1.html">Reading Note: GLSL Cookbook - Chapter 1</a></h2>
+                <div class="summary"><p>OpenGL 4.0 Shading Language Cookbook - Chapter 1  </p>
+<h3>Profiles: Core vs. Compatibility</h3>
+<p>OpenGL 3.0版本引入了deprecation model模型. 被标记为deprecated的函数或者功能, 意味着在将来的版本中会被removed去掉. 例如immdediate mode rendering使用的glBegin/glEnd在3.0版本中标记为deprecated而在3.1版本中被去掉.     </p>
+<p>为了backwoods compatibility后兼容, OpenGL 3.2版本引入了compatibility profiles的概念.<br />
+Core profile: 目标是某一个特定的版本, older features removed.        <br />
+Compatibility profile: 为了后兼容, older features 还在的.  </p>
+<p>有些地方有full vs. forward compatible context这些概念, 听上去有点令人confusing. 跟上面的core/compatibility概念是有些不一样的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Reading Note: GLSL Cookbook - Chapter 1.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Mudbox - Sculpt Layer Group.html">Mudbox - Sculpt Layer Group</a></h2>
+                <div class="summary"><p>下面的截图来自autodesk/mudbox features中视频:  <br />
+<img alt="Alt text" src="data/2014-10-14-Mudbox2015_Layer_Group.PNG" title="output" />  <br />
+Group的引入可能会有这两个用处:          <br />
++ 管理、组织organize layers, 如脸部的和身体上的可以分两个group来组织layers;         <br />
++ one group &lt;&gt; one blendshape in maya; 当然blendshape复杂很多, 只是最简单支持.             </p>
+<p>看到参与的功能暴露出来面对用户了, 感觉好像创造的生命一样, 希望它能健康(别crash 别hang), 能有用:-)   </p>
+                    <a class="btn btn-default btn-xs" href="/Mudbox - Sculpt Layer Group.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Book - Everyday Probability and Statistics.html">Book - Everyday Probability and Statistics</a></h2>
+                <div class="summary"><p><img alt="Alt text" src="data/2014-10-13-book_naked_statistics.PNG" title="output" />         <br />
+<img alt="Alt text" src="data/2014-10-13-book_everyday_probability_and_statistics.PNG" title="output" />         <br />
+那本[Naked Statistics]是流行书, 所以年初的时候买来看, 主要是讲日常生活中, 例如媒体, 那些统计学方面的概念可能会被误解or有意无意的用来误导大众.              <br />
+也正是在看这书时候发现后几章的概念不懂, 想找本简单的书来学习一下, 于是就有了第二本[人人都来掷骰子], 跟前一本的区别是: 前面讲了一些概率的基础, 后面讲统计学的概念。而且一般是例子引入, 然后教怎么算, 没有复杂的公式没有公式证明推导等. 15章后开始的样品空间, 还不是很清晰.         </p>
+<p>不过能在上几周断断续续地看完这本书还是满足:-) 特别是还在追这部美剧:<br />
++ Person of Interest / 疑犯追凶;       <br />
+这有一个问题就是我们还有多少隐私呢? 倒不是说zf监控了我们的信息, 而是我们在日常的网上购物/网上言论/网上账单等都把我们清清楚楚的记录了, 甚至比我们自己还记得清楚, 慢慢地可能比我们自己还了解我们自己了. so who care the privacy? 说真的, 我都不知道哪些属于隐私范围, 而另外即使知道了别人的隐私, 是否又等于侵犯了别人的隐私呢?                                        </p>
+                    <a class="btn btn-default btn-xs" href="/Book - Everyday Probability and Statistics.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/Algo - Check if a binary tree is mirror or symmetric.html">Algo - Check if a binary tree is mirror or symmetric</a></h2>
                 <div class="summary"><p>问题: 给出一个binary tree二叉树, 判断这个数是否关于根节点对称. </p>
 <p>尝试在纸上画画形状, 例如:  <br />
@@ -400,43 +438,6 @@ mesh.setVertexTC( tcID, newTC );
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/algo - counting inversions.html">algo - counting inversions</a></h2>
-                <div class="summary"><p>算法练习: counting inversions       </p>
-<h2>Background</h2>
-<p>Given an array, say [1, 3, 5, 2, 4, 6], to count the inversions.
-What is an inversion ?
-if (i &lt; j) but arr[i] &gt; arr[j]. 例如上面的(3, 2), 3在2的前面, 但是3&gt;2, 构成一个inversion. 这个例子中一共三个inversions(3, 2) (5, 2) (5, 4). </p>
-<p>这个计算有什么用呢? 我是[Algorithms: Design and Analysis ...</p>
-                    <a class="btn btn-default btn-xs" href="/algo - counting inversions.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/partio.html">partio</a></h2>
-                <div class="summary"><p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.               </p>
-<h2>引言</h2>
-<p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project from
-Disney Animation, 读读它的代码应该能学到东西, 于是故事就开始了.<br />
-“The goal of Partio is to provide a unified interface akin to unified image libraries that makes it easier to load, save, and manipulate ...</p>
-                    <a class="btn btn-default btn-xs" href="/partio.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Vector based containers.html">Vector based containers</a></h2>
-                <div class="summary"><p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记.  </p>
-<h2>引言</h2>
-<h1>Using STL Vectors</h1>
-<p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 
-但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. </p>
-<h2>Prefer vector over list</h2>
-<p>比较 std::vector 和 std::list, 其中一个特定是, vector的内存是连续的(contiguous buffers), 还可以避免avoid内存动态分配memory allocations和四散的访问scattered access.  这些都是优势. </p>
-<p>这里发散一下，以前在用Qt 4.8的时候(以后Qt 5可能有变)，就有QVector, QList, QLinkedList，它们的区别也有意思。其中QVector跟std::vector类似 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Vector based containers.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -475,8 +476,18 @@ Disney Animation, 读读它的代码应该能学到东西, 于是故事就开始
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/opengl.html">
+                            OpenGL
                         </a>
                     </li>
                 </ul>

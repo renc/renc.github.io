@@ -134,7 +134,7 @@ pop op3, there is a merge flag, so continue pop op2, the op2 has merge flag too,
 <p>序列化的时候, 假如涉及指针的序列化呢? 假如指针指向的物体, 在undo 或者 redo时候已经被删掉了, 这个指针指向垃圾了, 怎么避免呢?              </p>
 <p>[2014/7/18 updated] 原来在unod stack实现的时候，这个stack可以是内存，也可以是硬件上的文件。下面分开来说:
 case 1. stack是文件。例如在某个神秘的目录下建一个undo_stack_file and redo_stack_file; 把执行过的command/operation都写里面，写=序列化; 
-case 2. stack是内存. 例如直接就是std::vector&lt;&gt; undoStack, redoStack; 然后把command/operation对象的指针都放里面就ok了. </p>
+case 2. stack是内存. 例如直接就是std::vector&lt;&gt; undoStack, redoStack; 然后把command/operation对象的指针都放里面就ok了. 可以测试一下在undo时候的指针是否还是跟之前do时候的指针一样指向同一个对象。 </p>
 <h2>Interactive command</h2>
 <p>[updated 2014/7/3] 最近跟undoable command (或者称undoable operation)对上了.<br />
 以前当然也做过undoable operation, 例如mudbox里面不是有mudbox::Operation吗? 虽然有一些操作是不能undo的, 例如load scene, subdivision, map extraction, 但是layer operation, sculpt operation都是undoable的.    <br />
@@ -181,8 +181,18 @@ case 2. stack是内存. 例如直接就是std::vector&lt;&gt; undoStack, redoSta
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/opengl.html">
+                            OpenGL
                         </a>
                     </li>
                 </ul>

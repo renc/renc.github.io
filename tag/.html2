@@ -70,6 +70,50 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/Vector based containers.html">Vector based containers</a></h2>
+                <div class="summary"><p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记.  </p>
+<h2>引言</h2>
+<h1>Using STL Vectors</h1>
+<p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 
+但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. </p>
+<h2>Prefer vector over list</h2>
+<p>比较 std::vector 和 std::list, 其中一个特定是, vector的内存是连续的(contiguous buffers), 还可以避免avoid内存动态分配memory allocations和四散的访问scattered access.  这些都是优势. </p>
+<p>这里发散一下，以前在用Qt 4.8的时候(以后Qt 5可能有变)，就有QVector, QList, QLinkedList，它们的区别也有意思。其中QVector跟std::vector类似 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Vector based containers.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Pointer to Member Function.html">Pointer to Member Function</a></h2>
+                <div class="summary"><p>function pointer是知道的, 如</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+
+<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">pFtor</span><span class="p">)(</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span> <span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> 
+
+<span class="n">or</span>
+
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="o">*</span><span class="n">FtorType</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span> 
+<span class="n">FtorType</span> <span class="n">pFtor</span><span class="p">;</span> 
+<span class="n">pFtor</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</pre></div>
+
+
+<p>但是当看到类似以下代码时候还是恐惧了一下: </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">Tool</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">doA</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="nf">doB</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span> 
+<span class="p">};</span> 
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="n">Tool</span><span class="o">::*</span><span class="n">MemberFunctionPtr</span><span class="p">)(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+
+
+<span class="n">Tool</span> <span class="n">toolObj ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Pointer to Member Function.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/In the middle of time and space.html">In the middle of time and space</a></h2>
                 <div class="summary"><p>刚发生了一个有意思的事情, 5月9号16:40</p>
 <p>小伙C说了一段话;
@@ -261,8 +305,18 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/opengl.html">
+                            OpenGL
                         </a>
                     </li>
                 </ul>
