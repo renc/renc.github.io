@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Bit field - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/Bit field.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢? 毕竟1个字节=8bits=2^8=256个状态. Part 1 Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验: #include &lt;cstdio&gt; // 交通繁忙时间 enum CallTariff { tOffPeak, tMediumRate, tPeakTime } ; // 账单 struct Bill { unsigned int iNameId; // 客户名 CallTariff eTariff; }; struct BillVIP { unsigned int iNameId; // 客户名 bool isVIP ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Bit field.html"
+                       rel="bookmark"
+                       title="Permalink to Bit field">
+                        Bit field
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-11-10T20:20:00"> 周一 10 十一月 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢?  毕竟1个字节=8bits=2^8=256个状态.           </p>
+<h2>Part 1</h2>
+<p>Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验:            </p>
+<div class="highlight"><pre><span class="vi">#include</span> <span class="o">&lt;</span><span class="nx">cstdio</span><span class="o">&gt;</span>          
+
+<span class="c1">// 交通繁忙时间            </span>
+<span class="nx">enum</span> <span class="nx">CallTariff</span> <span class="p">{</span> <span class="nx">tOffPeak</span><span class="p">,</span> <span class="nx">tMediumRate</span><span class="p">,</span> <span class="nx">tPeakTime</span> <span class="p">}</span> <span class="p">;</span>           
+
+<span class="c1">// 账单           </span>
+<span class="nx">struct</span> <span class="nx">Bill</span>           
+<span class="p">{</span>          
+    <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+    <span class="nx">CallTariff</span>      <span class="nx">eTariff</span><span class="p">;</span>           
+<span class="p">};</span>           
+
+<span class="nx">struct</span> <span class="nx">BillVIP</span>           
+<span class="p">{</span>          
+    <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+    <span class="nx">bool</span>            <span class="nx">isVIP</span><span class="p">;</span>           
+    <span class="nx">CallTariff</span>      <span class="nx">eTariff</span><span class="p">;</span>           
+<span class="p">};</span>           
+
+<span class="c1">// optimization 1.           </span>
+<span class="nx">namespace</span> <span class="nx">Op1</span> <span class="p">{</span>          
+
+    <span class="nx">struct</span> <span class="nx">Bill</span>           
+    <span class="p">{</span>          
+        <span class="nx">unsigned</span> <span class="nx">int</span> <span class="nx">iNameId</span><span class="p">;</span>          
+        <span class="nx">unsigned</span> <span class="nx">int</span> <span class="nx">iTraffic</span> <span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// range: [0, 3];           </span>
+    <span class="p">};</span>           
+
+    <span class="nx">struct</span> <span class="nx">Bill2</span>  
+    <span class="p">{</span>         
+        <span class="nx">unsigned</span> <span class="nx">int</span> <span class="nx">iNameId</span><span class="p">;</span>         
+        <span class="nx">unsigned</span> <span class="nx">int</span> <span class="nx">iTraffic</span> <span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// range: [0, 3];           </span>
+        <span class="nx">unsigned</span> <span class="nx">int</span> <span class="nx">iTraffic2</span> <span class="p">:</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// range: [0, 8];             </span>
+    <span class="p">};</span>         
+
+    <span class="nx">struct</span> <span class="nx">BillVIP</span>                
+    <span class="p">{</span>                    
+        <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名                     </span>
+        <span class="nx">bool</span>            <span class="nx">isVIP</span><span class="p">;</span>           
+        <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iTariff</span> <span class="p">:</span> <span class="mi">2</span><span class="p">;</span>           
+    <span class="p">};</span>          
+    <span class="nx">struct</span> <span class="nx">BillVIP2</span>           
+    <span class="p">{</span>                    
+        <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名                     </span>
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">isVIP</span>    <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>           
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">iTariff</span>  <span class="p">:</span> <span class="mi">2</span><span class="p">;</span>           
+    <span class="p">};</span>          
+    <span class="nx">struct</span> <span class="nx">BillVIP3</span>           
+    <span class="p">{</span>          
+        <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+        <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">isVIP</span>    <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>                     
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">iTariff</span>  <span class="p">:</span> <span class="mi">2</span><span class="p">;</span>           
+    <span class="p">};</span>          
+    <span class="nx">struct</span> <span class="nx">BillVIP4</span>           
+    <span class="p">{</span>          
+        <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span> <span class="p">:</span> <span class="mi">3</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+        <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">isVIP</span>   <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>           
+        <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iTariff</span> <span class="p">:</span> <span class="mi">2</span><span class="p">;</span>           
+    <span class="p">};</span>          
+    <span class="nx">struct</span> <span class="nx">BillVIP5</span>          
+    <span class="p">{</span>          
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">iNameId</span> <span class="p">:</span> <span class="mi">13</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">isVIP</span>   <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>           
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">iTariff</span> <span class="p">:</span> <span class="mi">2</span><span class="p">;</span>           
+    <span class="p">};</span>          
+    <span class="nx">struct</span> <span class="nx">BillVIP6</span>          
+    <span class="p">{</span>          
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">iNameId</span> <span class="p">:</span> <span class="mi">8</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">isVIP</span>   <span class="p">:</span> <span class="mi">7</span><span class="p">;</span>           
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">iTariff</span> <span class="p">:</span> <span class="mi">7</span><span class="p">;</span>           
+    <span class="p">};</span>          
+    <span class="nb">class</span> <span class="nx">BillVIP7</span>          
+    <span class="p">{</span>          
+    <span class="k">public</span><span class="p">:</span>          
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">iNameId</span> <span class="p">:</span> <span class="mi">8</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">isVIP</span>   <span class="p">:</span> <span class="mi">7</span><span class="p">;</span>           
+        <span class="nx">unsigned</span> <span class="nx">short</span>  <span class="nx">iTariff</span> <span class="p">:</span> <span class="mi">7</span><span class="p">;</span>           
+    <span class="p">};</span>          
+
+<span class="p">};</span>           
+
+<span class="nx">int</span> <span class="nx">main</span><span class="p">()</span>          
+<span class="p">{</span>          
+    <span class="c1">// to check the sizeof some basic types.           </span>
+    <span class="nx">CallTariff</span> <span class="nb">t</span><span class="p">;</span>             
+    <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof CallTariff: %d, %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">CallTariff</span><span class="p">),</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nb">t</span><span class="p">));</span>           
+
+    <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof bool: %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">bool</span><span class="p">));</span>           
+
+    <span class="p">{</span>          
+        <span class="nx">Bill</span> <span class="nx">b</span><span class="p">;</span>           
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof Bill: %d, %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Bill</span><span class="p">),</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">b</span><span class="p">));</span>            
+
+        <span class="nx">BillVIP</span> <span class="nx">bVIP</span><span class="p">;</span>           
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof BillVIP: %d, %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">BillVIP</span><span class="p">),</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">bVIP</span><span class="p">));</span>            
+    <span class="p">}</span>          
+
+    <span class="p">{</span>          
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">----op1----</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>            
+
+        <span class="nx">Op1</span><span class="p">::</span><span class="nl">Bill</span> <span class="nx">b</span><span class="p">;</span>           
+        <span class="n">b.iTraffic</span> <span class="o">=</span> <span class="nx">CallTariff</span><span class="p">::</span><span class="nl">tOffPeak</span><span class="p">;</span>           
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof Bill: %d, %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Op1</span><span class="p">::</span><span class="nl">Bill</span><span class="p">),</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">b</span><span class="p">));</span>            
+
+        <span class="nx">Op1</span><span class="p">::</span><span class="nl">Bill2</span> <span class="nx">b2</span><span class="p">;</span>           
+        <span class="n">b2.iTraffic</span> <span class="o">=</span> <span class="nx">CallTariff</span><span class="p">::</span><span class="nl">tOffPeak</span><span class="p">;</span>           
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof Bill: %d, %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Op1</span><span class="p">::</span><span class="nl">Bill2</span><span class="p">),</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">b2</span><span class="p">));</span>          
+
+
+        <span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP</span> <span class="nx">bVIP</span><span class="p">;</span>           
+        <span class="n">bVIP.isVIP</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>          
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof BillVIP: %d, %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP</span><span class="p">),</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">bVIP</span><span class="p">));</span>           
+
+        <span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP2</span> <span class="nx">bVIP2</span><span class="p">;</span>           
+        <span class="n">bVIP2.isVIP</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>          
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof BillVIP2: %d, %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP2</span><span class="p">),</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">bVIP2</span><span class="p">));</span>           
+
+        <span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP3</span> <span class="nx">bVIP3</span><span class="p">;</span>           
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof BillVIP3: %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP3</span><span class="p">));</span>          
+        <span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP4</span> <span class="nx">bVIP4</span><span class="p">;</span>           
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof BillVIP4: %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP4</span><span class="p">));</span>           
+        <span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP5</span> <span class="nx">bVIP5</span><span class="p">;</span>           
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof BillVIP5: %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP5</span><span class="p">));</span>           
+        <span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP6</span> <span class="nx">bVIP6</span><span class="p">;</span>           
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof BillVIP6: %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP6</span><span class="p">));</span>           
+        <span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP7</span> <span class="nx">bVIP7</span><span class="p">;</span>             
+        <span class="nx">printf</span><span class="p">(</span><span class="s2">&quot;sizeof BillVIP7: %d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nx">sizeof</span><span class="p">(</span><span class="nx">Op1</span><span class="p">::</span><span class="nl">BillVIP7</span><span class="p">));</span>          
+    <span class="p">}</span>            
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>            
+<span class="p">}</span>          
+</pre></div>
+
+
+<p>先看一遍代码，基本上就是尝试判断不同struct所占的字节大小. 我机器下的结果如下: </p>
+<div class="highlight"><pre><span class="k">sizeof</span> <span class="n">CallTariff</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span>
+<span class="k">sizeof</span> <span class="kt">bool</span><span class="o">:</span> <span class="mi">1</span>
+<span class="k">sizeof</span> <span class="n">Bill</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span>
+<span class="k">sizeof</span> <span class="n">BillVIP</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span>
+
+<span class="o">----</span><span class="n">op1</span><span class="o">----</span>            
+<span class="k">sizeof</span> <span class="n">Bill</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span>                
+<span class="k">sizeof</span> <span class="n">Bill2</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span>                 
+<span class="k">sizeof</span> <span class="n">BillVIP</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span>              
+<span class="k">sizeof</span> <span class="n">BillVIP2</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span>             
+<span class="k">sizeof</span> <span class="n">BillVIP3</span><span class="o">:</span> <span class="mi">12</span>        
+<span class="k">sizeof</span> <span class="n">BillVIP4</span><span class="o">:</span> <span class="mi">4</span>         
+<span class="k">sizeof</span> <span class="n">BillVIP5</span><span class="o">:</span> <span class="mi">2</span>          
+<span class="k">sizeof</span> <span class="n">BillVIP6</span><span class="o">:</span> <span class="mi">4</span>          
+<span class="k">sizeof</span> <span class="n">BillVIP7</span><span class="o">:</span> <span class="mi">4</span>          
+</pre></div>
+
+
+<p>上面的结果还是挺有意思的。非常类似的结果struct，里面通过不同的类型(short, int)的安排, 以及各个数位的安排, 可以改变这个struct的结果.             </p>
+<p>下面在仔细分析一下, 代码跟上面是一样的, 只是我加了注释:            </p>
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">Bill</span>              
+<span class="p">{</span>                  
+    <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名                   </span>
+    <span class="n">CallTariff</span>      <span class="n">eTariff</span><span class="p">;</span>                       
+<span class="p">};</span>                          
+<span class="err">这个</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">CallTariff</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">8</span> <span class="n">bytes</span><span class="p">.</span>                         
+
+<span class="k">struct</span> <span class="n">BillVIP</span>         
+<span class="p">{</span>                   
+    <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名                 </span>
+    <span class="kt">bool</span>            <span class="n">isVIP</span><span class="p">;</span>           
+    <span class="n">CallTariff</span>      <span class="n">eTariff</span><span class="p">;</span>               
+<span class="p">};</span>           
+<span class="err">这个</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">bytes</span><span class="p">,</span> <span class="kt">bool</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">CallTariff</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">9</span> <span class="n">bytes</span><span class="p">.</span>   <span class="err">但是结果是</span><span class="mi">12</span><span class="err">的，那是因为对齐。</span>              
+
+<span class="c1">// optimization 1.                 </span>
+<span class="n">namespace</span> <span class="n">Op1</span> <span class="p">{</span>                   
+
+    <span class="k">struct</span> <span class="n">Bill</span>                             
+    <span class="p">{</span>               
+        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">iNameId</span><span class="p">;</span>                        
+        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">iTraffic</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// range: [0, 3];                      </span>
+    <span class="p">};</span>                    
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">iNameId</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">bytes</span><span class="p">,</span> <span class="err">然后看到</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">iTraffic</span><span class="o">:</span><span class="mi">2</span><span class="p">;</span> <span class="err">不是说分配</span><span class="mi">2</span> <span class="n">bits</span><span class="p">,</span> <span class="err">而是先分配</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">but</span> <span class="err">只用了其中</span><span class="mi">2</span><span class="n">bits</span><span class="p">.</span> <span class="err">所以还是一共</span> <span class="mi">8</span> <span class="n">bytes</span><span class="p">.</span>                      
+
+    <span class="k">struct</span> <span class="n">Bill2</span>             
+    <span class="p">{</span>                 
+        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">iNameId</span><span class="p">;</span>        
+        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">iTraffic</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// range: [0, 3];                  </span>
+        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">iTraffic2</span> <span class="o">:</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// range: [0, 8];                  </span>
+    <span class="p">};</span>                    
+    <span class="err">第一个</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">bytes</span><span class="p">;</span> <span class="err">第二个</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="err">再分配第二个</span><span class="mi">4</span><span class="n">bytes</span><span class="p">,</span> <span class="err">其中用了</span><span class="mi">2</span> <span class="n">bits</span><span class="p">;</span> <span class="err">看到第三个</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="err">的时候</span><span class="p">,</span> <span class="err">因为只用</span><span class="mi">3</span><span class="n">bits</span><span class="p">,</span> <span class="err">前面第二个还没有用完</span><span class="p">,</span> <span class="err">而且再加上这</span><span class="mi">3</span><span class="n">bits</span><span class="err">够用有余</span><span class="p">.</span> <span class="err">所以第三个</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="err">就没有分配空间</span><span class="p">.</span>                                   
+
+    <span class="k">struct</span> <span class="n">BillVIP</span>               
+    <span class="p">{</span>                
+        <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名                                 </span>
+        <span class="kt">bool</span>            <span class="n">isVIP</span><span class="p">;</span>                
+        <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iTariff</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>                 
+    <span class="p">};</span> <span class="err">中间的</span><span class="kt">bool</span><span class="err">也是因为对齐</span> <span class="err">而占了</span> <span class="mi">4</span><span class="n">bytes</span><span class="o">?</span>                 
+
+    <span class="k">struct</span> <span class="n">BillVIP2</span>                      
+    <span class="p">{</span>                                                              
+        <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">isVIP</span>    <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>                  
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">iTariff</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>            
+    <span class="p">};</span>                                  
+    <span class="err">这里我以为是</span><span class="mi">4</span><span class="n">bytes</span> <span class="o">+</span> <span class="mi">2</span><span class="n">bytes</span> <span class="o">=</span> <span class="mi">6</span> <span class="n">bytes</span><span class="err">的。但不是</span><span class="p">.</span>             
+
+    <span class="k">struct</span> <span class="n">BillVIP3</span>                
+    <span class="p">{</span>                     
+        <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名             </span>
+        <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">isVIP</span>    <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>               
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">iTariff</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>          
+    <span class="p">};</span>            
+    <span class="err">这里也不像我才的</span><span class="mi">4</span> <span class="n">bytes</span> <span class="o">+</span> <span class="mi">4</span> <span class="n">bytes</span> <span class="o">+</span> <span class="mi">2</span> <span class="n">bytes</span> <span class="o">=</span> <span class="mi">10</span> <span class="n">bytes</span><span class="p">.</span> <span class="err">好像结果是要是</span><span class="k">struct</span><span class="err">里面最大的元素</span><span class="mi">4</span><span class="err">的倍数</span><span class="o">?</span>      
+
+    <span class="k">struct</span> <span class="n">BillVIP4</span>           
+    <span class="p">{</span>               
+        <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iNameId</span> <span class="o">:</span> <span class="mi">3</span><span class="p">;</span>    <span class="c1">// 客户名              </span>
+        <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">isVIP</span>   <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>          
+        <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iTariff</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>            
+    <span class="p">};</span>             
+    <span class="err">这个有意思，首先全部元素都是一样的</span><span class="p">,</span> <span class="err">分配了一个</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">bytes</span><span class="err">就够用了</span><span class="p">.</span>             
+
+    <span class="k">struct</span> <span class="n">BillVIP5</span>                
+    <span class="p">{</span>                  
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">iNameId</span> <span class="o">:</span> <span class="mi">13</span><span class="p">;</span>    <span class="c1">// 客户名                 </span>
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">isVIP</span>   <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>             
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">iTariff</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>       
+    <span class="p">};</span>                   
+    <span class="err">这里一个</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="o">=</span> <span class="mi">2</span> <span class="n">bytes</span><span class="err">就够用了</span><span class="p">.</span>             
+
+    <span class="k">struct</span> <span class="n">BillVIP6</span>                 
+    <span class="p">{</span>                  
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">iNameId</span> <span class="o">:</span> <span class="mi">8</span><span class="p">;</span>    <span class="c1">// 客户名             </span>
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">isVIP</span>   <span class="o">:</span> <span class="mi">7</span><span class="p">;</span>                 
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">iTariff</span> <span class="o">:</span> <span class="mi">7</span><span class="p">;</span>             
+    <span class="p">};</span>                        
+    <span class="err">这里为什么不是</span><span class="mi">2</span> <span class="n">bytes</span><span class="p">,</span> <span class="mi">3</span> <span class="n">bytes</span><span class="p">,</span> <span class="err">而是</span><span class="mi">4</span><span class="n">bytes</span><span class="err">呢</span><span class="o">?</span>                
+
+    <span class="n">class</span> <span class="n">BillVIP7</span>               
+    <span class="p">{</span>                     
+    <span class="n">public</span><span class="o">:</span>            
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">iNameId</span> <span class="o">:</span> <span class="mi">8</span><span class="p">;</span>    <span class="c1">// 客户名                           </span>
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">isVIP</span>   <span class="o">:</span> <span class="mi">7</span><span class="p">;</span>                  
+        <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">iTariff</span> <span class="o">:</span> <span class="mi">7</span><span class="p">;</span>                
+    <span class="p">};</span>                                
+    <span class="n">class</span><span class="err">与</span><span class="k">struct</span><span class="err">一样</span><span class="p">.</span>        
+
+<span class="p">};</span>              
+</pre></div>
+
+
+<p>上面的分析可见我有部分是不甚了解, 可能有更深的技术细节。但反应的一个问题就是不直观.           </p>
+<h2>References</h2>
+<p>http://publications.gbdirect.co.uk/c_book/chapter6/bitfields.html               <br />
+http://www.informit.com/guides/content.aspx?g=cplusplus&amp;seqNum=131        <br />
+http://en.wikipedia.org/wiki/Bit_field                                   </p>
+<h2>Part 2</h2>
+<p>假如我们要表达一个重要的信息: 有100个元素, 每个元素就两种状态, 例如true or false, sel ected or not selected, visited or not visited... 那么用上面的bit field语言细节可能:               </p>
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">SelectionField</span> <span class="p">{</span>                           
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">element1</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>                        
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">element2</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>                        
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="p">...</span>                        
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">element8</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>               
+<span class="p">};</span> <span class="c1">// 1 bytes;                          </span>
+
+<span class="n">SelectionField</span> <span class="n">arr</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>                             
+<span class="kt">bool</span> <span class="nf">test</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{...};</span>                   
+</pre></div>
+
+
+<p>然后使用的时候, 例如要判断第93号元素是否为true/false;                <br />
+a = index / 16;                                          <br />
+b = index % 8;                 <br />
+check arr[a].element(b)'s value; 也就是a = 5, b = 3, arr[5].element3.      </p>
+<p>原来在STL里面有一个std::bitset&lt;&gt;; 它的实现跟上面的理解也有点类似:    </p>
+<div class="highlight"><pre><span class="nb">bitset</span><span class="o">&lt;</span><span class="nx">_Bits</span><span class="o">&gt;&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="nx">size_t</span> <span class="nx">_Pos</span><span class="p">,</span>                   
+    <span class="nx">bool</span> <span class="n">_Val</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>                 
+    <span class="p">{</span>   <span class="c1">// set bit at _Pos to _Val              </span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">_Bits</span> <span class="o">&lt;=</span> <span class="nx">_Pos</span><span class="p">)</span>                    
+            <span class="nx">_Xran</span><span class="p">();</span>    <span class="c1">// _Pos off end              </span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">_Val</span><span class="p">)</span>                          
+            <span class="nx">_Array</span><span class="err">[</span><span class="nx">_Pos</span> <span class="o">/</span> <span class="nx">_Bitsperword</span><span class="cp">]</span> |= (_Ty)1 <span class="err">&lt;&lt;</span> _Pos % _Bitsperword;          
+        else                 
+            _Array<span class="cp">[</span><span class="nx">_Pos</span> <span class="o">/</span> <span class="nx">_Bitsperword</span><span class="cp">]</span> <span class="err">&amp;</span>= ~((_Ty)1 <span class="err">&lt;&lt;</span> _Pos % _Bitsperword);           
+        return (*this);               
+    }                        
+</pre></div>
+
+
+<p>首先&lt;&lt; 与 %的优先级问题: modulus % 先于 bitwise shift;  <br />
+(_Ty)1 &lt;&lt; _Pos % _Bitsperword == (_Ty)1 &lt;&lt; (_Pos % _Bitsperword) 也就是先取余数.  <br />
+然后就是bitwise shift的操作, 例如取余数得到3, 然后1&lt;&lt;3 = 1000(二进制binary format), 来跟 _Array[a]做操作....                                         </p>
+<p>这里的_Array[a] 跟我们上面的SelectionField arr[xx]很像, 但是上面的arr[xx]是一个很tricky的structure, 需要我们自己来定义里面是8个bits组成的 1 bits x 8, 而在_Array[a]这里, 却不需要这么麻烦, 只要我们保证_Array[a]是一个_Bitsperword的类型就ok了, 例如当是一个_Bitsperword的类型就ok了=8的时候里面可能就是一个unsigned char.        </p>
+<p>应用。学习了这个数据结构, 在日常中有什么用呢?  <br />
+例如我们要在mesh上记录一堆selected faces, 就有以下两种不同的存储方式:       <br />
+std::vector<unsigned int> aSelectedFaces ( selected faces's count);         <br />
+std::bitset<mesh.FaceCount()> faceFlags;    <br />
+具体哪种比较好? .... </p>
+<hr />
+<p>用perforce的时候, 怎么看一个workspace当前所处哪个changeset呢?  就是一个workspace放旧了，都忘了它之前sync到哪个changeset了.   </p>
+<div class="highlight"><pre><span class="nl">C:</span><span class="err">\</span><span class="n">Workspace</span><span class="err">\</span><span class="n">ProjectX</span><span class="err">\</span><span class="n">src</span><span class="o">&gt;</span><span class="n">p4</span> <span class="n">changes</span> <span class="o">-</span><span class="n">m1</span> <span class="err">@</span><span class="n">my_workspace_at_local</span>  
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/opengl.html">
+                            OpenGL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/shader.html">
+                            Shader
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/algo.html">
+                            Algo
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

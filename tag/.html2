@@ -70,6 +70,40 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/build error from line ending.html">build error from line ending</a></h2>
+                <div class="summary"><p>Build error, 具体是error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format怎么办呢？ </p>
+<p>故事的开端是checkin了一个.cpp，当然本地是build过的，但是server端那边反馈说build error, 具体是
+error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format</p>
+<p>怎么办呢？当然是查看一下到底是那个.cpp文件的line ending是什么东西，然后改成合适的就ok了. </p>
+<p>下面截图显示改之前是CR+LF, 改之后是LF的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/build error from line ending.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/algo - counting inversions.html">algo - counting inversions</a></h2>
+                <div class="summary"><p>算法练习: counting inversions       </p>
+<h2>Background</h2>
+<p>Given an array, say [1, 3, 5, 2, 4, 6], to count the inversions.
+What is an inversion ?
+if (i &lt; j) but arr[i] &gt; arr[j]. 例如上面的(3, 2), 3在2的前面, 但是3&gt;2, 构成一个inversion. 这个例子中一共三个inversions(3, 2) (5, 2) (5, 4). </p>
+<p>这个计算有什么用呢? 我是[Algorithms: Design and Analysis ...</p>
+                    <a class="btn btn-default btn-xs" href="/algo - counting inversions.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/partio.html">partio</a></h2>
+                <div class="summary"><p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.               </p>
+<h2>引言</h2>
+<p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project from
+Disney Animation, 读读它的代码应该能学到东西, 于是故事就开始了.<br />
+“The goal of Partio is to provide a unified interface akin to unified image libraries that makes it easier to load, save, and manipulate ...</p>
+                    <a class="btn btn-default btn-xs" href="/partio.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/Vector based containers.html">Vector based containers</a></h2>
                 <div class="summary"><p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记.  </p>
 <h2>引言</h2>
@@ -299,9 +333,24 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                             
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
+                    <li class="list-group-item tag-2">
                         <a href="/tag/maya.html">
                             maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -310,13 +359,23 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/shader.html">
+                            Shader
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/reading.html">
-                            reading
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/algo.html">
+                            Algo
                         </a>
                     </li>
                 </ul>

@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Example of code conventions - 阿can's  blog</title>
+    <title>Shader - 阿can's  blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,12 +10,16 @@
 
 
 
-<link rel="canonical" href="/Example of code conventions.html">
 
-        <meta name="author" content="" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="刚看到如下代码: // NvGLModel.h from nvidia samples nv::vec3f m_center; ///&lt; The computed center of the bounding box of the app private: NvModel *model; GLuint model_vboID, model_iboID; nv::vec3f m_minExtent, m_maxExtent, m_radius; 觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste? btw, 反例的英文原来是: counter example; negative example" />
+    <meta name="author" content="renc" />
+    <meta name="keywords" content="Shader" />
 
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="阿can's  blog"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="阿can's  blog"/>
 
 
     <!-- Bootstrap -->
@@ -43,13 +47,13 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                        <li >
+                        <li class="active">
                             <a href="/category/.html"></a>
                         </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="/category/programming.html">Programming</a>
                         </li>
             </ul>
@@ -65,51 +69,19 @@
     <div class="row">
         <div class="col-sm-9">
 
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/Example of code conventions.html"
-                       rel="bookmark"
-                       title="Permalink to Example of code conventions">
-                        Example of code conventions
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-05-03T10:20:00"> 周六 03 五月 2014</time>
-    </span>
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
-    
-</footer><!-- /.post-info -->                    </div>
+            <article>
+                <h2><a href="/阅读笔记 GLSL Cookbook - Chapter 1.html">阅读笔记 GLSL Cookbook - Chapter 1</a></h2>
+                <div class="summary"><p>[OpenGL 4.0 Shading Language Cookbook] - Chapter 1  </p>
+<h3>Profiles: Core vs. Compatibility</h3>
+<p>OpenGL 3.0版本引入了deprecation model模型. 被标记为deprecated的函数或者功能, 意味着在将来的版本中会被removed去掉. 例如immdediate mode rendering使用的glBegin/glEnd在3.0版本中标记为deprecated而在3.1版本中被去掉.     </p>
+<p>为了backwoods compatibility后兼容, OpenGL 3.2版本引入了compatibility profiles的概念.<br />
+Core profile: 目标是某一个特定的版本, older features removed.        <br />
+Compatibility profile: 为了后兼容, older features 还在的.  </p>
+<p>有些地方有full vs. forward compatible context这些概念, 听上去有点令人confusing. 跟上面的core/compatibility概念是有些不一样的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/阅读笔记 GLSL Cookbook - Chapter 1.html">more ...</a>
                 </div>
-                <p>刚看到如下代码:</p>
-<div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
-
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_center</span><span class="p">;</span> <span class="c1">///&lt; The computed center of the bounding box of the app</span>
-
-<span class="nl">private:</span>
-    <span class="n">NvModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
-    <span class="n">GLuint</span> <span class="n">model_vboID</span><span class="p">,</span> <span class="n">model_iboID</span><span class="p">;</span>
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_minExtent</span><span class="p">,</span> <span class="n">m_maxExtent</span><span class="p">,</span> <span class="n">m_radius</span><span class="p">;</span>
-</pre></div>
-
-
-<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
-<p>btw, 反例的英文原来是: counter example; negative example </p>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
+            </article>
+            <hr/>
 
         </div>
         <div class="col-sm-3" id="sidebar">

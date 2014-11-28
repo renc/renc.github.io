@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Example of code conventions - 阿can's  blog</title>
+    <title>Python - 阿can's  blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,12 +10,16 @@
 
 
 
-<link rel="canonical" href="/Example of code conventions.html">
 
-        <meta name="author" content="" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="刚看到如下代码: // NvGLModel.h from nvidia samples nv::vec3f m_center; ///&lt; The computed center of the bounding box of the app private: NvModel *model; GLuint model_vboID, model_iboID; nv::vec3f m_minExtent, m_maxExtent, m_radius; 觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste? btw, 反例的英文原来是: counter example; negative example" />
+    <meta name="author" content="renc" />
+    <meta name="keywords" content="Python" />
 
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="阿can's  blog"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="阿can's  blog"/>
 
 
     <!-- Bootstrap -->
@@ -43,13 +47,13 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                        <li >
+                        <li class="active">
                             <a href="/category/.html"></a>
                         </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="/category/programming.html">Programming</a>
                         </li>
             </ul>
@@ -65,51 +69,53 @@
     <div class="row">
         <div class="col-sm-9">
 
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/Example of code conventions.html"
-                       rel="bookmark"
-                       title="Permalink to Example of code conventions">
-                        Example of code conventions
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-05-03T10:20:00"> 周六 03 五月 2014</time>
-    </span>
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
-    
-</footer><!-- /.post-info -->                    </div>
+            <article>
+                <h2><a href="/Python Basis 基础笔记.html">Python Basis 基础笔记</a></h2>
+                <div class="summary"><p>新接触python programming, 记录一些基础.        </p>
+<p>Batteries Included. 立马就可以使用的. 
+Installizaton </p>
+<hr />
+<p>download 2.7 from python website and install at C:\Python27;              <br />
+download Anaconda 2.1.0 install at E:\Anaconda;                  <br />
+<img alt="Alt text" src="data/python_2014-11-03_version.PNG" title="output" />         <br />
+看来两者并不冲突.                    </p>
+<p>这是从Anaconda里面起来的Spyder IDE:<br />
+<img alt="Alt text" src="data/python_2014-11-03_Spyder_IDE.PNG" title="output" />        </p>
+<p>list: <br />
+    name = [x, y, z, 1, 2, 3];                         <br />
+    if ( isinstance(name, list) ): 
+        ...
+    else:<br />
+        ... </p>
+<p>if string == "": <br />
+    pass        <br />
+if obj is None ...</p>
+                    <a class="btn btn-default btn-xs" href="/Python Basis 基础笔记.html">more ...</a>
                 </div>
-                <p>刚看到如下代码:</p>
-<div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
-
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_center</span><span class="p">;</span> <span class="c1">///&lt; The computed center of the bounding box of the app</span>
-
-<span class="nl">private:</span>
-    <span class="n">NvModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
-    <span class="n">GLuint</span> <span class="n">model_vboID</span><span class="p">,</span> <span class="n">model_iboID</span><span class="p">;</span>
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_minExtent</span><span class="p">,</span> <span class="n">m_maxExtent</span><span class="p">,</span> <span class="n">m_radius</span><span class="p">;</span>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Maya programming node.html">Maya Programming Node</a></h2>
+                <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
+<h2>Selection</h2>
+<p><img alt="mode_and_mask" src="data/2014-04-01_maya_selection_mode_mask.png" title="output" /><br />
+起码区分清楚了selection mode and mask之后, 才能继续. </p>
+<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, chapter 3.3.    </span>
+<span class="k">string</span> <span class="err">$</span><span class="n">ns</span><span class="p">[]</span> <span class="o">=</span> <span class="no">`ls</span> <span class="o">-</span><span class="n">sl</span><span class="err">`</span><span class="p">;</span>    
+<span class="k">for</span> <span class="p">(</span><span class="err">$</span><span class="n">n</span> <span class="n">in</span> <span class="err">$</span><span class="n">ns</span><span class="p">)</span>     
+<span class="p">{</span>    
+    <span class="k">string</span> <span class="err">$</span><span class="n">nt</span> <span class="o">=</span> <span class="no">`objectType</span> <span class="err">$</span><span class="n">n</span><span class="err">`</span><span class="p">;</span>     
+    <span class="n">print</span> <span class="p">(</span><span class="s">&quot;Node: &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">n</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">nt</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>      
+<span class="p">};</span>      
 </pre></div>
 
 
-<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
-<p>btw, 反例的英文原来是: counter example; negative example </p>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
+<p>ls -sl  # to list objects /components are selected.<br />
+ls -hilite  # to list the objects ready be select ...</p>
+                    <a class="btn btn-default btn-xs" href="/Maya programming node.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
 
         </div>
         <div class="col-sm-3" id="sidebar">

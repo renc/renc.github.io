@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Example of code conventions - 阿can's  blog</title>
+    <title>Algo - 阿can's  blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,12 +10,16 @@
 
 
 
-<link rel="canonical" href="/Example of code conventions.html">
 
-        <meta name="author" content="" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="刚看到如下代码: // NvGLModel.h from nvidia samples nv::vec3f m_center; ///&lt; The computed center of the bounding box of the app private: NvModel *model; GLuint model_vboID, model_iboID; nv::vec3f m_minExtent, m_maxExtent, m_radius; 觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste? btw, 反例的英文原来是: counter example; negative example" />
+    <meta name="author" content="renc" />
+    <meta name="keywords" content="Algo" />
 
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="阿can's  blog"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="阿can's  blog"/>
 
 
     <!-- Bootstrap -->
@@ -43,13 +47,13 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                        <li >
+                        <li class="active">
                             <a href="/category/.html"></a>
                         </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="/category/programming.html">Programming</a>
                         </li>
             </ul>
@@ -65,51 +69,23 @@
     <div class="row">
         <div class="col-sm-9">
 
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/Example of code conventions.html"
-                       rel="bookmark"
-                       title="Permalink to Example of code conventions">
-                        Example of code conventions
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-05-03T10:20:00"> 周六 03 五月 2014</time>
-    </span>
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
-    
-</footer><!-- /.post-info -->                    </div>
+            <article>
+                <h2><a href="/Algo - Tower of Hanoi.html">Algo - Tower of Hanoi</a></h2>
+                <div class="summary"><p>在书的第二章又看到汉诺塔的问题:   <br />
+有三个柱子A B C; A柱上有好几个盘子, 小的放在大的上面;   <br />
+现在问怎么把A柱上的盘子移到C柱上, B是做辅助的, 条件是大的盘子不能压到小的盘子上. 所以结果C柱上的盘子也是小的放在大的上面。    </p>
+<p>A__B__C; 三个柱子     </p>
+<p>假如A上有1个盘子，直接放到C上就解答完了。    </p>
+<p>假如A上有2个盘子ab，a盘小的 在 b盘大的上面. 先把a放到B上, b放到C上, 然后把a从B移到C上. 结果就是C柱上有ab。[pattern 1]   <br />
+注意这种case中先把a放到C上, 那b放到B上, 然后a从C移到到B柱上, 那B柱上就有ab两个盘子了. 这结果很像上面的, 但是B柱跟C柱次序反了. 可见在移动盘子的时候, 柱子的次序, 是很重要的.   </p>
+<p>假如A上有3个盘子, 去尝试多画几次, 还是能解出来, 但是发现好像没有什么规律啊.   <br />
+假如A上有4个盘子, 那可能就要尝试好多次才能碰巧一次解答出来. 还没有看出来规律.   </p>
+<p>要换一种角度来看啊, 上面我们已经解答了A柱上有2个盘子的case了. 那重新看A柱上有3个盘子的case.          </p>
+<p>A柱上的2个盘子 能借助B移到到C上, 那换个次序, 也能实现: 把A柱上的2个盘子, 借助C移动到B上.[pattern ...</p>
+                    <a class="btn btn-default btn-xs" href="/Algo - Tower of Hanoi.html">more ...</a>
                 </div>
-                <p>刚看到如下代码:</p>
-<div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
-
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_center</span><span class="p">;</span> <span class="c1">///&lt; The computed center of the bounding box of the app</span>
-
-<span class="nl">private:</span>
-    <span class="n">NvModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
-    <span class="n">GLuint</span> <span class="n">model_vboID</span><span class="p">,</span> <span class="n">model_iboID</span><span class="p">;</span>
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_minExtent</span><span class="p">,</span> <span class="n">m_maxExtent</span><span class="p">,</span> <span class="n">m_radius</span><span class="p">;</span>
-</pre></div>
-
-
-<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
-<p>btw, 反例的英文原来是: counter example; negative example </p>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
+            </article>
+            <hr/>
 
         </div>
         <div class="col-sm-3" id="sidebar">

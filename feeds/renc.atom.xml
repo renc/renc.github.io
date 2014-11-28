@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>阿can's blog</title><link href="/" rel="alternate"></link><link href="/feeds%5Crenc.atom.xml" rel="self"></link><id>/</id><updated>2014-10-16T22:00:00+02:00</updated><entry><title>阅读笔记 GLSL Cookbook - Chapter 1</title><link href="/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%20GLSL%20Cookbook%20-%20Chapter%201.html" rel="alternate"></link><updated>2014-10-16T22:00:00+02:00</updated><author><name>renc</name></author><id>tag:,2014-10-16:阅读笔记 GLSL Cookbook - Chapter 1.html</id><summary type="html">&lt;p&gt;OpenGL 4.0 Shading Language Cookbook - Chapter 1  &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>阿can's blog</title><link href="/" rel="alternate"></link><link href="/feeds%5Crenc.atom.xml" rel="self"></link><id>/</id><updated>2014-10-16T22:00:00+02:00</updated><entry><title>阅读笔记 GLSL Cookbook - Chapter 1</title><link href="/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%20GLSL%20Cookbook%20-%20Chapter%201.html" rel="alternate"></link><updated>2014-10-16T22:00:00+02:00</updated><author><name>renc</name></author><id>tag:,2014-10-16:阅读笔记 GLSL Cookbook - Chapter 1.html</id><summary type="html">&lt;p&gt;[OpenGL 4.0 Shading Language Cookbook] - Chapter 1  &lt;/p&gt;
 &lt;h3&gt;Profiles: Core vs. Compatibility&lt;/h3&gt;
 &lt;p&gt;OpenGL 3.0版本引入了deprecation model模型. 被标记为deprecated的函数或者功能, 意味着在将来的版本中会被removed去掉. 例如immdediate mode rendering使用的glBegin/glEnd在3.0版本中标记为deprecated而在3.1版本中被去掉.     &lt;/p&gt;
 &lt;p&gt;为了backwoods compatibility后兼容, OpenGL 3.2版本引入了compatibility profiles的概念.&lt;br /&gt;
@@ -19,7 +19,7 @@ Full: 支持所选择版本的所有函数, 包括deprecated函数.
 
 
 &lt;h2&gt;Determining the GLSL and OpenGL version&lt;/h2&gt;
-&lt;p&gt;程序为了支持很多不同的系统, 需要知道当前driver驱动所支持的OpenGL和GLSL版本. 容易, glGetString and glGetIntegerv.   &lt;/p&gt;
+&lt;p&gt;程序为了支持很多不同的系统, 需要知道当前driver驱动所支持的OpenGL和GLSL版本. 容易, glGetString and glGetIntegerv.    &lt;/p&gt;
 &lt;h3&gt;How to do it...&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;dumpGLInfo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;dumpExtensions&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;                        
     &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;GLubyte&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;renderer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;glGetString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;GL_RENDERER&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;            
@@ -45,27 +45,297 @@ Full: 支持所选择版本的所有函数, 包括deprecated函数.
         &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;nExtensions&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;                    
             &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;glGetStringi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GL_EXTENSIONS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;              
         &lt;span class="p"&gt;}&lt;/span&gt;               
-    &lt;span class="p"&gt;}&lt;/span&gt;                
+    &lt;span class="p"&gt;}&lt;/span&gt;                 
 &lt;span class="p"&gt;}&lt;/span&gt;                                
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;h2&gt;Compiling a shader&lt;/h2&gt;
+&lt;p&gt;GLSL的编译器是在OpenGL库里面的, shders只能是在一个正在running的OpenGL程序的context里面才能被compiled编译. 当前还没有外在的工具能生产pre-compiling GLSL shader 和/或 shader program.  &lt;/p&gt;
+&lt;p&gt;cj: 上面说“GLSL编译器是在OpenGL库里面的”, 是不是指在OpenGL driver驱动里面呢? 我查到关于EVEmulate的网页上有"By default, the OpenGL Shading Language (GLSL) compiler in the NVIDIA OpenGL driver will generate code targeting the NVIDIA GPU installed in your system. " 所以在OpenGL里面应该就是指在OpenGL驱动里面的意思.             &lt;/p&gt;
+&lt;p&gt;OpenGL 4.1加入新的功能, 可以把编译过的shader programs保存到文件, 这样通过加载pre-compiled shader programs就可以避免因为shader compilation引入的overhead.   &lt;/p&gt;
+&lt;p&gt;下来来看作者在github中提供例子:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;SceneBasic&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;initScene&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;//////////////////////////////////////////////////////&lt;/span&gt;
+    &lt;span class="c1"&gt;/////////// Vertex shader //////////////////////////&lt;/span&gt;
+    &lt;span class="c1"&gt;//////////////////////////////////////////////////////&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Load contents of file&lt;/span&gt;
+    &lt;span class="n"&gt;ifstream&lt;/span&gt; &lt;span class="n"&gt;inFile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;shader/basic.vert&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;inFile&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Error opening file: shader/basic.vert&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;stringstream&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;inFile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rdbuf&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;inFile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="nf"&gt;codeStr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Create the shader object &lt;/span&gt;
+    &lt;span class="c1"&gt;// glCreateShader 返回的常常被称为handle &lt;/span&gt;
+    &lt;span class="n"&gt;GLuint&lt;/span&gt; &lt;span class="n"&gt;vertShader&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;glCreateShader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;GL_VERTEX_SHADER&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;vertShader&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Error creating vertex shader.&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EXIT_FAILURE&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Load the source code into the shader object&lt;/span&gt;
+    &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;GLchar&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;codeArray&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;codeStr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;c_str&lt;/span&gt;&lt;span class="p"&gt;()};&lt;/span&gt;
+    &lt;span class="n"&gt;glShaderSource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vertShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;codeArray&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Compile the shader&lt;/span&gt;
+    &lt;span class="n"&gt;glCompileShader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;vertShader&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Check/Verify the compilation status&lt;/span&gt;
+    &lt;span class="n"&gt;GLint&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;glGetShaderiv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;vertShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GL_COMPILE_STATUS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;GL_FALSE&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+       &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Vertex shader compilation failed!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+       &lt;span class="n"&gt;GLint&lt;/span&gt; &lt;span class="n"&gt;logLen&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+       &lt;span class="n"&gt;glGetShaderiv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;vertShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GL_INFO_LOG_LENGTH&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;logLen&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+       &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logLen&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+           &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;malloc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logLen&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+           &lt;span class="n"&gt;GLsizei&lt;/span&gt; &lt;span class="n"&gt;written&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+           &lt;span class="n"&gt;glGetShaderInfoLog&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vertShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;logLen&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;written&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+           &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Shader log: &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;%s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+           &lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+       &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;//////////////////////////////////////////////////////&lt;/span&gt;
+    &lt;span class="c1"&gt;/////////// Fragment shader //////////////////////////&lt;/span&gt;
+    &lt;span class="c1"&gt;//////////////////////////////////////////////////////&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Load contents of file into shaderCode here&lt;/span&gt;
+    &lt;span class="n"&gt;ifstream&lt;/span&gt; &lt;span class="n"&gt;fragFile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;shader/basic.frag&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;fragFile&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Error opening file: shader/basic.frag&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;stringstream&lt;/span&gt; &lt;span class="n"&gt;fragCode&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;fragCode&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;fragFile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rdbuf&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;fragFile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;codeStr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fragCode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Create the shader object&lt;/span&gt;
+    &lt;span class="n"&gt;GLuint&lt;/span&gt; &lt;span class="n"&gt;fragShader&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;glCreateShader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;GL_FRAGMENT_SHADER&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;fragShader&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Error creating fragment shader.&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Load the source code into the shader object&lt;/span&gt;
+    &lt;span class="n"&gt;codeArray&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;codeStr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;c_str&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;glShaderSource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;fragShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;codeArray&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Compile the shader&lt;/span&gt;
+    &lt;span class="n"&gt;glCompileShader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;fragShader&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Check compilation status&lt;/span&gt;
+    &lt;span class="n"&gt;glGetShaderiv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;fragShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GL_COMPILE_STATUS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GL_FALSE&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+       &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Fragment shader compilation failed!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+       &lt;span class="n"&gt;GLint&lt;/span&gt; &lt;span class="n"&gt;logLen&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+       &lt;span class="n"&gt;glGetShaderiv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;fragShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GL_INFO_LOG_LENGTH&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;logLen&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+       &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logLen&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+           &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;malloc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logLen&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+           &lt;span class="n"&gt;GLsizei&lt;/span&gt; &lt;span class="n"&gt;written&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+           &lt;span class="n"&gt;glGetShaderInfoLog&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fragShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;logLen&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;written&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+           &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Shader log: &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;%s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+           &lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+       &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;linkMe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vertShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fragShader&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;...&lt;/span&gt; 
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;glShaderSource: 一旦glShaderSource返回, source code就被copied到OpenGL internal memory, 于是codeArray就可以被释放freed.&lt;br /&gt;
+其中一个参数是GLchar &lt;strong&gt;类型. GLchar *表示一个字符串, GLchar &lt;/strong&gt;表示array of GLchar &lt;em&gt;, 是一个数组啊! 所以你看到 
+    const GLchar&lt;/em&gt; codeArray[] = {codeStr.c_str()}; &lt;/p&gt;
+&lt;p&gt;glDeleteShader: 释放shader所用的memory, invalidate its handle. 如果shader是attach到一个program object, 那么这个shader不会被立刻delete, 而是会被标记为等从program object中detached的时候再删除.     &lt;/p&gt;
+&lt;h2&gt;Linking a shader program&lt;/h2&gt;
+&lt;p&gt;直接看代码: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;SceneBasic&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;linkMe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GLint&lt;/span&gt; &lt;span class="n"&gt;vertShader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GLint&lt;/span&gt; &lt;span class="n"&gt;fragShader&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// Create the program object&lt;/span&gt;
+    &lt;span class="n"&gt;GLuint&lt;/span&gt; &lt;span class="n"&gt;programHandle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;glCreateProgram&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;programHandle&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Error creating program object.&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Bind index 0 to the shader input variable &amp;quot;VertexPosition&amp;quot;&lt;/span&gt;
+    &lt;span class="c1"&gt;//glBindAttribLocation(programHandle, 0, &amp;quot;VertexPosition&amp;quot;);&lt;/span&gt;
+    &lt;span class="c1"&gt;// Bind index 1 to the shader input variable &amp;quot;VertexColor&amp;quot;&lt;/span&gt;
+    &lt;span class="c1"&gt;//glBindAttribLocation(programHandle, 1, &amp;quot;VertexColor&amp;quot;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Attach the shaders to the program object&lt;/span&gt;
+    &lt;span class="n"&gt;glAttachShader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;programHandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vertShader&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;glAttachShader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;programHandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fragShader&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Link the program&lt;/span&gt;
+    &lt;span class="n"&gt;glLinkProgram&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;programHandle&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Check for successful linking&lt;/span&gt;
+    &lt;span class="n"&gt;GLint&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;glGetProgramiv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;programHandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GL_LINK_STATUS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GL_FALSE&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+        &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Failed to link shader program!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+        &lt;span class="n"&gt;GLint&lt;/span&gt; &lt;span class="n"&gt;logLen&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;glGetProgramiv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;programHandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GL_INFO_LOG_LENGTH&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;logLen&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logLen&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;malloc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logLen&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+            &lt;span class="n"&gt;GLsizei&lt;/span&gt; &lt;span class="n"&gt;written&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="n"&gt;glGetProgramInfoLog&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;programHandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;logLen&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;written&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+            &lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Program log: &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;%s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+            &lt;span class="n"&gt;free&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; 
+        &lt;span class="c1"&gt;// install the program into the GL pipeline &lt;/span&gt;
+        &lt;span class="n"&gt;glUseProgram&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;programHandle&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Sending data to a shader using per-vertex attributes and vertex buffer objects&lt;/h2&gt;
+&lt;p&gt;旧版本OpenGL中(先于3.0版本): 每一样的顶点信息都有各自的通道channel到pipeline, 
+glVertex/glTexCoord/glNormal or &lt;br /&gt;
+glVertexPointer/glTexCoordPointer/glNormalPointer.         &lt;br /&gt;
+在shader中是通过一些内置变量build-in variables, 如gl_Vertex and gl_Normal, 来访问这些值. 这种方式在3.0版本中被mark为deprecated, 而在后版本中就没有了. 现在提供vertex信息就必须使用generic vertex attributes, 通常跟(vertex) buffer object一起用.&lt;br /&gt;
+OpenGL program -&amp;gt; vbo with vertex attributes -&amp;gt; shaders    &lt;/p&gt;
+&lt;p&gt;下面的代码recipe画一个三角形, 每个顶点一个颜色, 颜色在vs输出后被blend后进入fs.   &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// the vertex shader (basic.vert)          &lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="mh"&gt;430&lt;/span&gt;                   
+&lt;span class="n"&gt;layout&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;vec3&lt;/span&gt; &lt;span class="n"&gt;VertexPosition&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;           
+&lt;span class="n"&gt;layout&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;vec3&lt;/span&gt; &lt;span class="n"&gt;VertexColor&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;              
+&lt;span class="n"&gt;out&lt;/span&gt; &lt;span class="n"&gt;vec3&lt;/span&gt; &lt;span class="n"&gt;Color&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;                                     
+&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;              
+&lt;span class="p"&gt;{&lt;/span&gt;                
+    &lt;span class="n"&gt;Color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VertexColor&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;     
+    &lt;span class="n"&gt;gl_Position&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vec4&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;VertexPosition&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;         
+&lt;span class="p"&gt;}&lt;/span&gt;      
+
+&lt;span class="c1"&gt;// the fragment shader (basic.frag)        &lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="mh"&gt;430&lt;/span&gt;                                 
+&lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;vec3&lt;/span&gt; &lt;span class="n"&gt;Color&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;                                 
+&lt;span class="n"&gt;layout&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt; &lt;span class="n"&gt;vec4&lt;/span&gt; &lt;span class="n"&gt;FragColor&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;                   
+&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;                                     
+    &lt;span class="n"&gt;FragColor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vec4&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Color&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;                    
+&lt;span class="p"&gt;}&lt;/span&gt;                                          
+
+&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;SceneBasic&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;initScene&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// vertex shader and fragment shader, and shader program object .        &lt;/span&gt;
+    &lt;span class="p"&gt;...&lt;/span&gt;               
+    &lt;span class="c1"&gt;/////////////////// Create the VBO ////////////////////             &lt;/span&gt;
+    &lt;span class="n"&gt;float&lt;/span&gt; &lt;span class="n"&gt;positionData&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;                 
+        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.8f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.8f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                 
+         &lt;span class="mf"&gt;0.8f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.8f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                     
+         &lt;span class="mf"&gt;0.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.8f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.0f&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;              
+    &lt;span class="n"&gt;float&lt;/span&gt; &lt;span class="n"&gt;colorData&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;                     
+        &lt;span class="mf"&gt;1.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                  
+        &lt;span class="mf"&gt;0.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;             
+        &lt;span class="mf"&gt;0.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.0f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1.0f&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;            
+
+
+    &lt;span class="c1"&gt;// Create and populate the buffer objects          &lt;/span&gt;
+    &lt;span class="n"&gt;GLuint&lt;/span&gt; &lt;span class="n"&gt;vboHandles&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;                
+    &lt;span class="n"&gt;glGenBuffers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vboHandles&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;                
+    &lt;span class="n"&gt;GLuint&lt;/span&gt; &lt;span class="n"&gt;positionBufferHandle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vboHandles&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;            
+    &lt;span class="n"&gt;GLuint&lt;/span&gt; &lt;span class="n"&gt;colorBufferHandle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vboHandles&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;            
+
+    &lt;span class="n"&gt;glBindBuffer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;GL_ARRAY_BUFFER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;positionBufferHandle&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;           
+    &lt;span class="n"&gt;glBufferData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;GL_ARRAY_BUFFER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;9&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;sizeof&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;float&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;positionData&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;GL_STATIC_DRAW&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;                  
+
+    &lt;span class="n"&gt;glBindBuffer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;GL_ARRAY_BUFFER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;colorBufferHandle&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;              
+    &lt;span class="n"&gt;glBufferData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;GL_ARRAY_BUFFER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;9&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;sizeof&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;float&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;colorData&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;GL_STATIC_DRAW&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;      
+
+    &lt;span class="c1"&gt;// Create and set-up the vertex array object                &lt;/span&gt;
+    &lt;span class="n"&gt;glGenVertexArrays&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;vaoHandle&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;                    
+    &lt;span class="n"&gt;glBindVertexArray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vaoHandle&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;             
+    &lt;span class="c1"&gt;// 这两句说indexes 0和1会被用到, 但是还不知道0号对应哪个buffer object.    &lt;/span&gt;
+    &lt;span class="n"&gt;glEnableVertexAttribArray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;  &lt;span class="c1"&gt;// Vertex position               &lt;/span&gt;
+    &lt;span class="n"&gt;glEnableVertexAttribArray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;  &lt;span class="c1"&gt;// Vertex color                &lt;/span&gt;
+    &lt;span class="c1"&gt;// 下面才是把0号对应给pos buffer obj.                      &lt;/span&gt;
+    &lt;span class="n"&gt;glBindBuffer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;GL_ARRAY_BUFFER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;positionBufferHandle&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;              
+    &lt;span class="n"&gt;glVertexAttribPointer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;GL_FLOAT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;GL_FALSE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GLubyte&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="no"&gt;NULL&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;      
+
+    &lt;span class="n"&gt;glBindBuffer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;GL_ARRAY_BUFFER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;colorBufferHandle&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;              
+    &lt;span class="n"&gt;glVertexAttribPointer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;GL_FLOAT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;GL_FALSE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GLubyte&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="no"&gt;NULL&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;            
+&lt;span class="p"&gt;}&lt;/span&gt;                                                                          
+&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;SceneBasic&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;                     
+&lt;span class="p"&gt;{&lt;/span&gt;                                
+    &lt;span class="n"&gt;glClear&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;GL_COLOR_BUFFER_BIT&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;              
+
+    &lt;span class="n"&gt;glBindVertexArray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vaoHandle&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;            
+    &lt;span class="n"&gt;glDrawArrays&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;GL_TRIANGLES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;3&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;            
+&lt;span class="p"&gt;}&lt;/span&gt;            
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面的例子是通过在shader里面使用layout qualifiers修饰词限定词 &lt;br /&gt;
+layout (location = i) in type name; 
+来建立 shader input variable &amp;lt;--&amp;gt; vertex attributes 的映射关系的. &lt;/p&gt;
+&lt;p&gt;另一些地方会看到另一种方式来建立这种映射: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="c1"&gt;// prior to linking the shader program                         &lt;/span&gt;
+    &lt;span class="n"&gt;glBindAttribLocation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;programHandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;VertexPosition&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;            
+    &lt;span class="n"&gt;glBindAttribLocation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;programHandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;VertexColor&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;               
+
+    &lt;span class="n"&gt;glBindFragDataLocation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;programHandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;FragColor&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;                
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;Using element arrays&lt;/h4&gt;
+&lt;p&gt;上面例子使用glDrawArrays函数, 而在别的地方, 会用到glDrawElements函数. 例如一个cube 8个positions, 这些pos会在画不同的平面时候会被重用, 这时候就需要用到index buffer.    &lt;/p&gt;
+&lt;h4&gt;Interleaved arrays&lt;/h4&gt;
+&lt;p&gt;上面的例子用了两个buffers, pos and color各一个. 事实上, 我们可以只用一个buffer来包含所有的pos and color数据, 这要求在使用glVertexAttribPointer的时候小心设置第五个fifth参数: stride. &lt;br /&gt;
+&lt;img alt="Alt text" src="data/2014-10-19-VBO_InterleavedArray.PNG" title="output" /&gt;&lt;br /&gt;
+Interleaved array可能因为数据在memory里面靠得更近(所谓的locality of reference)而得到更好的caching performance.          &lt;/p&gt;
+&lt;p&gt;Vertex array object (VAO)是干什么用的呢?           &lt;br /&gt;
+&lt;img alt="Alt text" src="data/2014-10-19-VBO_VAO_index.PNG" title="output" /&gt;              &lt;/p&gt;
+&lt;h2&gt;Sending data to a shader using uniform variables&lt;/h2&gt;
+&lt;p&gt;Vertex attributes: 上面提供的给vertex shader提供per-vertex attributes, 如position, color等信息. &lt;br /&gt;
+Uniform variables: 在shader里面是read-only.        &lt;/p&gt;
 &lt;p&gt;To readlist:  &lt;br /&gt;
 [OpenGL 4.0 Shading Language Cookbook, by David Wolff, 2011, Packt pub] with code at https://github.com/daw42/glslcookbook    &lt;br /&gt;
 &lt;a href="http://www.arcsynthesis.org/gltut/"&gt;Learning Modern 3D Graphics Programming, Jason L. McKesson&lt;/a&gt;  &lt;br /&gt;
 &lt;a href="http://www.opengl-tutorial.org/"&gt;Tutorial for modern OpenGL (3.3+)&lt;/a&gt;   &lt;br /&gt;
-&lt;a href="http://ogldev.atspace.co.uk/index.html"&gt;Modern OpenGL Tutorials | ogldev&lt;/a&gt;        &lt;br /&gt;
-&lt;a href="http://www.tomdalling.com/blog/category/modern-opengl/"&gt;Modern OpenGL | Tom Dalling&lt;/a&gt;   &lt;/p&gt;</summary><category term="OpenGL"></category></entry><entry><title>Mudbox - Sculpt Layer Group</title><link href="/Mudbox%20-%20Sculpt%20Layer%20Group.html" rel="alternate"></link><updated>2014-10-14T22:20:00+02:00</updated><author><name>renc</name></author><id>tag:,2014-10-14:Mudbox - Sculpt Layer Group.html</id><summary type="html">&lt;p&gt;下面的截图来自autodesk/mudbox features中视频:  &lt;br /&gt;
+&lt;a href="http://ogldev.atspace.co.uk/index.html"&gt;Modern OpenGL Tutorials | ogldev&lt;/a&gt; 已经40多个tutorials.         &lt;br /&gt;
+&lt;a href="http://www.tomdalling.com/blog/category/modern-opengl/"&gt;Modern OpenGL | Tom Dalling&lt;/a&gt;   &lt;/p&gt;
+&lt;p&gt;hello Liang, i have tried that way to remove the TselectCmd::select(selectionLIst, kAddToList); and change this line to fCutCmd-&amp;gt;doThisCommand(selectionList,false); but the cut/sew does not work as expected,so finally use the current way to clean the selection list at end of stroke. &lt;/p&gt;</summary><category term="OpenGL"></category><category term="GLSL"></category><category term="Shader"></category><category term=""></category></entry><entry><title>Mudbox - Sculpt Layer Group</title><link href="/Mudbox%20-%20Sculpt%20Layer%20Group.html" rel="alternate"></link><updated>2014-10-14T22:20:00+02:00</updated><author><name>renc</name></author><id>tag:,2014-10-14:Mudbox - Sculpt Layer Group.html</id><summary type="html">&lt;p&gt;下面的截图来自autodesk/mudbox features中视频:  &lt;br /&gt;
 &lt;img alt="Alt text" src="data/2014-10-14-Mudbox2015_Layer_Group.PNG" title="output" /&gt;  &lt;br /&gt;
 Group的引入可能会有这两个用处:          &lt;br /&gt;
 + 管理、组织organize layers, 如脸部的和身体上的可以分两个group来组织layers;         &lt;br /&gt;
 + one group &amp;lt;&amp;gt; one blendshape in maya; 当然blendshape复杂很多, 只是最简单支持.             &lt;/p&gt;
-&lt;p&gt;看到参与的功能暴露出来面对用户了, 感觉好像创造的生命一样, 希望它能健康(别crash 别hang), 能有用:-)   &lt;/p&gt;</summary><category term=""></category></entry><entry><title>Book - Everyday Probability and Statistics</title><link href="/Book%20-%20Everyday%20Probability%20and%20Statistics.html" rel="alternate"></link><updated>2014-10-13T22:30:00+02:00</updated><author><name>renc</name></author><id>tag:,2014-10-13:Book - Everyday Probability and Statistics.html</id><summary type="html">&lt;p&gt;&lt;img alt="Alt text" src="data/2014-10-13-book_naked_statistics.PNG" title="output" /&gt;         &lt;br /&gt;
-&lt;img alt="Alt text" src="data/2014-10-13-book_everyday_probability_and_statistics.PNG" title="output" /&gt;         &lt;br /&gt;
+&lt;p&gt;看到参与的功能暴露出来面对用户了, 感觉好像创造的生命一样, 希望它能健康(别crash 别hang), 能有用:-)   &lt;/p&gt;</summary><category term=""></category></entry><entry><title>Book - Everyday Probability and Statistics</title><link href="/Book%20-%20Everyday%20Probability%20and%20Statistics.html" rel="alternate"></link><updated>2014-10-13T22:30:00+02:00</updated><author><name>renc</name></author><id>tag:,2014-10-13:Book - Everyday Probability and Statistics.html</id><summary type="html">&lt;p&gt;&lt;img alt="Alt text" src="data/2014-10-13-book_naked_statistics.PNG" title="output" /&gt; &lt;img alt="Alt text" src="data/2014-10-13-book_everyday_probability_and_statistics.PNG" title="output" /&gt;         &lt;br /&gt;
 那本[Naked Statistics]是流行书, 所以年初的时候买来看, 主要是讲日常生活中, 例如媒体, 那些统计学方面的概念可能会被误解or有意无意的用来误导大众.              &lt;br /&gt;
 也正是在看这书时候发现后几章的概念不懂, 想找本简单的书来学习一下, 于是就有了第二本[人人都来掷骰子], 跟前一本的区别是: 前几章讲了一些概率的基础, 后几章讲统计学的概念。每一章介绍一个概念, 不长, 可以一下看完. 而且一般的步骤是例子|概念|怎么算, 没有复杂的公式没有公式证明推导等. 15章后开始的样品空间, 还不是很清晰.         &lt;/p&gt;
-&lt;p&gt;不过能在上几周断断续续地看完这本书还是满足:-) 特别是还在追这部美剧: 
-+ Person of Interest / 疑犯追凶;        &lt;br /&gt;
+&lt;p&gt;不过能在上几周断断续续地看完这本书还是满足:-) 特别是还在追这部美剧:  &lt;br /&gt;
+&lt;img alt="Alt text" src="data/2014-10-13-PersionOfInterest.PNG" title="output" /&gt;                  &lt;br /&gt;
+Person of Interest / 疑犯追凶;           &lt;br /&gt;
 这有一个问题就是我们还有多少隐私呢? 倒不是说zf监控了我们的信息, 而是我们在日常的网上购物/网上言论/网上账单等都把我们清清楚楚的记录了, 甚至比我们自己还记得清楚, 慢慢地可能比我们自己还了解我们自己了. so who care the privacy? 说真的, 我都不知道哪些属于隐私范围, 而另外即使知道了别人的隐私, 是否又等于侵犯了别人的隐私呢?                                        &lt;/p&gt;</summary><category term="reading"></category><category term=""></category></entry><entry><title>Pointer is copied when passed as function parameter</title><link href="/Pointer%20is%20copied%20when%20passed%20as%20function%20parameter.html" rel="alternate"></link><updated>2014-09-12T12:00:00+02:00</updated><author><name>renc</name></author><id>tag:,2014-09-12:Pointer is copied when passed as function parameter.html</id><summary type="html">&lt;h2&gt;起源&lt;/h2&gt;
 &lt;p&gt;看到这段代码(肯定是简化更改版啦)  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;XList&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;merge&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Item&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   

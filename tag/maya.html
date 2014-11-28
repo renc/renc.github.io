@@ -86,6 +86,28 @@ mesh.setVertexTC( tcID, newTC );
             </article>
             <hr/>
             <article>
+                <h2><a href="/Maya programming node.html">Maya Programming Node</a></h2>
+                <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
+<h2>Selection</h2>
+<p><img alt="mode_and_mask" src="data/2014-04-01_maya_selection_mode_mask.png" title="output" /><br />
+起码区分清楚了selection mode and mask之后, 才能继续. </p>
+<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, chapter 3.3.    </span>
+<span class="k">string</span> <span class="err">$</span><span class="n">ns</span><span class="p">[]</span> <span class="o">=</span> <span class="no">`ls</span> <span class="o">-</span><span class="n">sl</span><span class="err">`</span><span class="p">;</span>    
+<span class="k">for</span> <span class="p">(</span><span class="err">$</span><span class="n">n</span> <span class="n">in</span> <span class="err">$</span><span class="n">ns</span><span class="p">)</span>     
+<span class="p">{</span>    
+    <span class="k">string</span> <span class="err">$</span><span class="n">nt</span> <span class="o">=</span> <span class="no">`objectType</span> <span class="err">$</span><span class="n">n</span><span class="err">`</span><span class="p">;</span>     
+    <span class="n">print</span> <span class="p">(</span><span class="s">&quot;Node: &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">n</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">nt</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>      
+<span class="p">};</span>      
+</pre></div>
+
+
+<p>ls -sl  # to list objects /components are selected.<br />
+ls -hilite  # to list the objects ready be select ...</p>
+                    <a class="btn btn-default btn-xs" href="/Maya programming node.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/How to debug maya custom plugin.html">How to debug maya custom plugin</a></h2>
                 <div class="summary"><p>涉及maya plugin开发的时候，怎么debug呢? </p>
 <h2>Attach to maya process ... 寄生</h2>
@@ -131,9 +153,24 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                             
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
+                    <li class="list-group-item tag-2">
                         <a href="/tag/maya.html">
                             maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -142,13 +179,23 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/shader.html">
+                            Shader
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/reading.html">
-                            reading
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/algo.html">
+                            Algo
                         </a>
                     </li>
                 </ul>

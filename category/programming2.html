@@ -70,6 +70,49 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/Pointer to Member Function.html">Pointer to Member Function</a></h2>
+                <div class="summary"><p>function pointer是知道的, 如</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+
+<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">pFtor</span><span class="p">)(</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span> <span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> 
+
+<span class="n">or</span>
+
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="o">*</span><span class="n">FtorType</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span> 
+<span class="n">FtorType</span> <span class="n">pFtor</span><span class="p">;</span> 
+<span class="n">pFtor</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</pre></div>
+
+
+<p>但是当看到类似以下代码时候还是恐惧了一下: </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">Tool</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">doA</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="nf">doB</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span> 
+<span class="p">};</span> 
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="n">Tool</span><span class="o">::*</span><span class="n">MemberFunctionPtr</span><span class="p">)(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+
+
+<span class="n">Tool</span> <span class="n">toolObj ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Pointer to Member Function.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/In the middle of time and space.html">In the middle of time and space</a></h2>
+                <div class="summary"><p>刚发生了一个有意思的事情, 5月9号16:40</p>
+<p>小伙C说了一段话;
+小伙B回答了一段话;</p>
+<p>小伙C是在北美西海岸, 跟我们差16小时; 
+小伙B是在英国.</p>
+<p>那么C大致是5月8号深夜, B可能是9号早上.</p>
+<p>过去和未来的对话，我们夹在时空中间，旁观.....</p>
+                    <a class="btn btn-default btn-xs" href="/In the middle of time and space.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/Example of code conventions.html">Example of code conventions</a></h2>
                 <div class="summary"><p>刚看到如下代码:</p>
 <div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
@@ -262,9 +305,24 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                             
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
+                    <li class="list-group-item tag-2">
                         <a href="/tag/maya.html">
                             maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -273,13 +331,23 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/shader.html">
+                            Shader
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/reading.html">
-                            reading
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/algo.html">
+                            Algo
                         </a>
                     </li>
                 </ul>

@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Example of code conventions - 阿can's  blog</title>
+    <title>Python Basis 基础笔记 - 阿can's  blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,11 +10,11 @@
 
 
 
-<link rel="canonical" href="/Example of code conventions.html">
+<link rel="canonical" href="/Python Basis 基础笔记.html">
 
         <meta name="author" content="" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="刚看到如下代码: // NvGLModel.h from nvidia samples nv::vec3f m_center; ///&lt; The computed center of the bounding box of the app private: NvModel *model; GLuint model_vboID, model_iboID; nv::vec3f m_minExtent, m_maxExtent, m_radius; 觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste? btw, 反例的英文原来是: counter example; negative example" />
+        <meta name="keywords" content="Python," />
+        <meta name="description" content="新接触python programming, 记录一些基础. Batteries Included. 立马就可以使用的. Installizaton download 2.7 from python website and install at C:\Python27; download Anaconda 2.1.0 install at E:\Anaconda; 看来两者并不冲突. 这是从Anaconda里面起来的Spyder IDE: list: name = [x, y, z, 1, 2, 3]; if ( isinstance(name, list) ): ... else: ... if string == &#34;&#34;: pass if obj is None ..." />
 
 
 
@@ -69,10 +69,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Example of code conventions.html"
+                    <a href="/Python Basis 基础笔记.html"
                        rel="bookmark"
-                       title="Permalink to Example of code conventions">
-                        Example of code conventions
+                       title="Permalink to Python Basis 基础笔记">
+                        Python Basis 基础笔记
                     </a>
                 </h1>
             </header>
@@ -82,30 +82,50 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-05-03T10:20:00"> 周六 03 五月 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-08-21T10:20:00"> 周四 21 八月 2014</time>
     </span>
 
 
 
 <span class="label label-default">Tags</span>
+	<a href="/tag/python.html">Python</a>
+        /
 	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>刚看到如下代码:</p>
-<div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
-
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_center</span><span class="p">;</span> <span class="c1">///&lt; The computed center of the bounding box of the app</span>
-
-<span class="nl">private:</span>
-    <span class="n">NvModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
-    <span class="n">GLuint</span> <span class="n">model_vboID</span><span class="p">,</span> <span class="n">model_iboID</span><span class="p">;</span>
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_minExtent</span><span class="p">,</span> <span class="n">m_maxExtent</span><span class="p">,</span> <span class="n">m_radius</span><span class="p">;</span>
-</pre></div>
-
-
-<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
-<p>btw, 反例的英文原来是: counter example; negative example </p>
+                <p>新接触python programming, 记录一些基础.        </p>
+<p>Batteries Included. 立马就可以使用的. 
+Installizaton </p>
+<hr />
+<p>download 2.7 from python website and install at C:\Python27;              <br />
+download Anaconda 2.1.0 install at E:\Anaconda;                  <br />
+<img alt="Alt text" src="data/python_2014-11-03_version.PNG" title="output" />         <br />
+看来两者并不冲突.                    </p>
+<p>这是从Anaconda里面起来的Spyder IDE:<br />
+<img alt="Alt text" src="data/python_2014-11-03_Spyder_IDE.PNG" title="output" />        </p>
+<p>list: <br />
+    name = [x, y, z, 1, 2, 3];                         <br />
+    if ( isinstance(name, list) ): 
+        ...
+    else:<br />
+        ... </p>
+<p>if string == "": <br />
+    pass        <br />
+if obj is None: <br />
+    pass  </p>
+<p>the_file = open('sketch.tex')                        </p>
+<h1>do sth with the data in "the_file".</h1>
+<p>the_file.close()                        </p>
+<h2>IDLE:</h2>
+<p>help(range)           <br />
+help(isinstance)              </p>
+<h2>References:</h2>
+<p><a href="http://anandology.com/python-practice-book/index.html">Python Practice Book, by Anand Chitipothu.</a>    </p>
+<p>book, Head First Python, 只是book不错, 适合有编程背景的人去学python.              </p>
+<p>book, Python Cookbook, 第三版是用python3. 适合有python基础的去看.               </p>
+<p>http://qt-project.org/wiki/PySide_Tutorials                    </p>
+<p><a href="http://nbviewer.ipython.org/gist/rpmuller/5920182">A Crash Course in Python for Scientists</a> </p>
             </div>
             <!-- /.entry-content -->
         </article>

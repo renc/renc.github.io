@@ -13,7 +13,7 @@
 <link rel="canonical" href="/Maya programming node.html">
 
         <meta name="author" content="" />
-        <meta name="keywords" content="" />
+        <meta name="keywords" content="Maya,Mel,Python," />
         <meta name="description" content="学maya时候有些新概念要记录一下，否则忘得快. Selection 起码区分清楚了selection mode and mask之后, 才能继续. // modified from Complete Maya Programming, chapter 3.3. string $ns[] = `ls -sl`; for ($n in $ns) { string $nt = `objectType $n`; print (&#34;Node: &#34; + $n + &#34;, &#34; + $nt + &#34;\n&#34;); }; ls -sl # to list objects /components are selected. ls -hilite # to list the objects ready be select ..." />
 
 
@@ -88,6 +88,12 @@
 
 
 <span class="label label-default">Tags</span>
+	<a href="/tag/maya.html">Maya</a>
+        /
+	<a href="/tag/mel.html">Mel</a>
+        /
+	<a href="/tag/python.html">Python</a>
+        /
 	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
@@ -165,8 +171,10 @@ check the hilite command too.<br />
 <h2>Polygon components</h2>
 <p>对mesh的结构肯定要了解嘛, v/e/f/uv是怎么存放的结构, 怎么访问到这些elements(v/e/f/uv, 我习惯了称为element, 而maya这边好像用component表示). 在maya doc里面描述还算清晰, 具体看:         <br />
 Developer Resources &gt; API Guide &gt; Polygon API &gt; How polygons are handled internally       <br />
-这一节内容的前半段是讲mesh的components(v/e/f/uv)的结构, 后半段是讲polygon mesh作为一个shape node(相对于别的node类型)是怎么融入maya的dependency graph的。   </p>
-<p>然后就是API那边有什么接口interface来获取这些信息了. MFnMesh.</p>
+这一节内容的前半段是讲mesh的components(v/e/f/uv)的结构, 后半段是讲polygon mesh作为一个shape node(相对于别的node类型)是怎么融入maya的dependency graph的。 <br />
+其中那些component的关系应该是: 下面这图是从maya doc那边截图然后按我理解来组合的,   <br />
+<img alt="Alt text" src="data/2014-10-20_maya_polygon_componet.PNG" title="" /> </p>
+<p>然后就是API那边有什么接口interface来获取这些信息了. API Guide &gt; Polygon API &gt; The five basic polygonal API classes: MItMeshPolygon, MItMeshEdge, MItMeshVertex, MItMeshFaceVertex, MFnMesh.   </p>
 <h2>Command</h2>
 <p>定义命令cmd的语法, 例如你可能想给命令添加一些flags. [ MPxCommand::newSyntax() ]
 有了语法, 在具体执行这个命令的时候, 首先当然就是分解命令, 看它是否包含了哪些参数. [doIt, parseArgs, argument list, argument data]</p>
@@ -196,6 +204,8 @@ UI例子 window/tabLayout/shelfLayout/shelfButton; 用setParent .. 可以回到�
 <p>方法2.        </p>
 <p>References: 
 + mel command document: window, tabLayout, shelfLayout, shelfButton. </p>
+<p>To read list:  <br />
+book: Maya Python for Games and File, Adam Mechtley, Ryan Trowbridge; </p>
             </div>
             <!-- /.entry-content -->
         </article>
@@ -223,9 +233,24 @@ UI例子 window/tabLayout/shelfLayout/shelfButton; 用setParent .. 可以回到�
                             
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
+                    <li class="list-group-item tag-2">
                         <a href="/tag/maya.html">
                             maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -234,13 +259,23 @@ UI例子 window/tabLayout/shelfLayout/shelfButton; 用setParent .. 可以回到�
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/shader.html">
+                            Shader
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/reading.html">
-                            reading
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/algo.html">
+                            Algo
                         </a>
                     </li>
                 </ul>
