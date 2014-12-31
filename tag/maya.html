@@ -51,6 +51,9 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
+                            <a href="/category/book.html">Book</a>
+                        </li>
+                        <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li >
@@ -70,6 +73,18 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/Corrective Blendshape at Maya.html">Corrective Blendshape at Maya</a></h2>
+                <div class="summary"><p>记录一下最近学到的corrective blendshape知识.    </p>
+<h2>问题描述</h2>
+<p>First, a basic scene is built, pCylinder1 is rigged and skinned,     <br />
+<img alt="basic scene for test" src="data/2014-12-20-skinedShape.png" title="basic scene for test" />     </p>
+<p>Now, suppose we are not satisfied with the elbow shape, want it change it a little bit. 例如一个手臂的骨骼动画已经搞好了, 后面发现在形状上还想改进一下, 那怎么办呢? </p>
+<p>If we select vertices and move them (adding vector delta to these vertics) on the skinned ...</p>
+                    <a class="btn btn-default btn-xs" href="/Corrective Blendshape at Maya.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/mesh history in maya.html">mesh history</a></h2>
                 <div class="summary"><p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
 <h2>引言</h2>
@@ -88,32 +103,18 @@ mesh.setVertexTC( tcID, newTC );
             <article>
                 <h2><a href="/Maya programming node.html">Maya Programming Node</a></h2>
                 <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
-<h2>Selection</h2>
-<p><img alt="mode_and_mask" src="data/2014-04-01_maya_selection_mode_mask.png" title="output" /><br />
-起码区分清楚了selection mode and mask之后, 才能继续. </p>
-<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, chapter 3.3.    </span>
-<span class="k">string</span> <span class="err">$</span><span class="n">ns</span><span class="p">[]</span> <span class="o">=</span> <span class="no">`ls</span> <span class="o">-</span><span class="n">sl</span><span class="err">`</span><span class="p">;</span>    
-<span class="k">for</span> <span class="p">(</span><span class="err">$</span><span class="n">n</span> <span class="n">in</span> <span class="err">$</span><span class="n">ns</span><span class="p">)</span>     
-<span class="p">{</span>    
-    <span class="k">string</span> <span class="err">$</span><span class="n">nt</span> <span class="o">=</span> <span class="no">`objectType</span> <span class="err">$</span><span class="n">n</span><span class="err">`</span><span class="p">;</span>     
-    <span class="n">print</span> <span class="p">(</span><span class="s">&quot;Node: &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">n</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">nt</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>      
-<span class="p">};</span>      
-</pre></div>
+<p>先在一个新场景里面拖一个多边形球polygon sphere出来,    <br />
+<img alt="transfrom and shape node" src="data/2014-04-01-transfer_shape_node.png" title="output" />
+打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是:    <br />
++ polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等;  <br />
++ pSphereShape1: 这个就是实际的shape node, 形状.                  <br />
++ initialShadingGroup: 用于画这个球的.               <br />
++ pSphere1: transform node, 决定了球在空间位置.                 </p>
+<div class="highlight"><pre><span class="n">import</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">;</span> 
 
-
-<p>ls -sl  # to list objects /components are selected.<br />
-ls -hilite  # to list the objects ready be select ...</p>
+<span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">polySphere</span><span class="p">()</span>                  <span class="err">#</span> <span class="err">用</span><span class="n">script</span><span class="err">建一个球</span> 
+<span class="cp"># Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="/Maya programming node.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/How to debug maya custom plugin.html">How to debug maya custom plugin</a></h2>
-                <div class="summary"><p>涉及maya plugin开发的时候，怎么debug呢? </p>
-<h2>Attach to maya process ... 寄生</h2>
-<p>step 1. maya plugin manager (Window -&gt; Settings/Preferences -&gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
-step 2. at your visual studio project of that custom plugin, Tools -&gt; Attach to ...</p>
-                    <a class="btn btn-default btn-xs" href="/How to debug maya custom plugin.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -159,6 +160,11 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
+                        <a href="/tag/algo.html">
+                            Algo
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
                         <a href="/tag/python.html">
                             Python
                         </a>
@@ -174,6 +180,11 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/opengl.html">
                             OpenGL
                         </a>
@@ -186,16 +197,6 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                     <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/algo.html">
-                            Algo
                         </a>
                     </li>
                 </ul>

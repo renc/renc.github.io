@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>GPP - Double Buffer - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/GPP - Double Buffer.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="首先多谢作者的慷慨generous! http://gameprogrammingpatterns.com/double-buffer.html Double buffer 出发点intent是使得一系列连续的操作像是同时立刻完成的。 为什么这么说呢? 作者的例子是读写屏幕的, 我画图说明: 问题是那个内存块还没有写完, 屏幕过来读的太快了, 我甚至猜想: 屏幕过来好几个笔头分任务读, 每个读一小块区域, 那速度就更快了, 快的结果是读到还没有来得及写的区域, 那可能那块区域里面就是一些不是这一帧原本想要呈现的信息(可能是之前的帧的遗留信息). 描述这样的现象专门有一个名词&#34;tearing&#34;, or &#34;image tearing&#34;. 解决方案，就是引入两个buffer, 你笔头2只能从我写完的那个bufferA里面读, 而另一个bufferB我笔头1在写, 没有写完之前不给笔头2来读. 等我笔头1写完了这个bufferB, 就做一个swap告诉笔头2可以来读这个bufferB了. 笔头2来读bufferB的时候, 我笔头1又过去写bufferA了, 依然没写完之前不给笔头2来读..... [update 2014-12-18]在看以下新闻时候遇到了&#34;image tearing&#34;这个词. &#34;A 4K monitor is great in theory, but ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/book.html">Book</a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/GPP - Double Buffer.html"
+                       rel="bookmark"
+                       title="Permalink to GPP - Double Buffer">
+                        GPP - Double Buffer
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-12-10T20:20:00"> 周三 10 十二月 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>首先多谢作者的慷慨generous!                                         <br />
+http://gameprogrammingpatterns.com/double-buffer.html                </p>
+<p>Double buffer 出发点intent是使得一系列连续的操作像是同时立刻完成的。 
+为什么这么说呢?                                                 <br />
+作者的例子是读写屏幕的, 我画图说明:        <br />
+<img alt="Alt text" src="data/2014-12-10-before_double_buffer.png" title="output" />   <br />
+问题是那个内存块还没有写完, 屏幕过来读的太快了, 我甚至猜想: 屏幕过来好几个笔头分任务读, 每个读一小块区域, 那速度就更快了, 快的结果是读到还没有来得及写的区域, 那可能那块区域里面就是一些不是这一帧原本想要呈现的信息(可能是之前的帧的遗留信息). 描述这样的现象专门有一个名词"tearing", or "image tearing".      </p>
+<p>解决方案，就是引入两个buffer, 你笔头2只能从我写完的那个bufferA里面读, 而另一个bufferB我笔头1在写, 没有写完之前不给笔头2来读. 等我笔头1写完了这个bufferB, 就做一个swap告诉笔头2可以来读这个bufferB了.  笔头2来读bufferB的时候, 我笔头1又过去写bufferA了, 依然没写完之前不给笔头2来读.....          </p>
+<p>[update 2014-12-18]在看以下新闻时候遇到了"image tearing"这个词. "A 4K monitor is great in theory, but extra pixels won’t really improve gaming if the screen can’t keep up with the computer’s graphics card. LCD monitors often have fixed refresh rates of either 60 or 120 Hz, but games rarely deliver frames at a constant speed, causing image tearing. The 28-inch Acer XB280HK is the first 4K monitor to include a Nvidia G-Sync board, which allows it to match rates on the fly with the computer’s graphics card. This way, dramatic battle scenes will always look the way developers intended. $799 Acer" 这里提到一个现象是GPU写的速度跟显示屏来读的速度不一致导致image tearing. 我不理解的是它指假如两者速度一致的话就不需要double buffer来解决image tearing问题里面? 还是暗示就算用了double buffer技术还是需要这种速度同步来解决image tearing问题? 当然里面的实现可以很多tricky的东西, 例如就算两者速度一样 读写的次数一样每秒 用一个buffer呢, 还是用两个buffer呢, 你来读的时刻跟我刚写完的时刻是否一致呢, 是在buffer上直接读呢 还是读之前先整块拷贝回去再慢慢读呢...          </p>
+<p>别的应用场景(等待在日常coding中发掘啦). 这是一个例子,                 <br />
+<img alt="Alt text" src="data/2014-12-10-double_buffer_enumerateFaces.png" title="output" />   <br />
+在枚举邻接面的时候, 不断交换两个buffer, 每一个buffer里面表示当前这一个round所能枚举到的面, 每一个round/buffer里面的面到初始那个红色面seed的距离(步长)可以看作相同(假如从一个面到邻面的距离看作相同的话)? 挺有意思.    </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/algo.html">
+                            Algo
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/opengl.html">
+                            OpenGL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/shader.html">
+                            Shader
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

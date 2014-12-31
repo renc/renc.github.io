@@ -47,6 +47,9 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
+                            <a href="/category/book.html">Book</a>
+                        </li>
+                        <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li class="active">
@@ -106,7 +109,7 @@ Animatioin mode, menu Create Deformer &gt; BlendShape (Deformation order == Defa
 cube1 is called source shape for this blenshape. <br />
 cube2 and cube3 are as target shapes for this blendshape.</p>
 <p>select cube1, menu Windows &gt; Connections, we see the connections of these nodes.</p>
-<p><img alt="Alt text" src="2013-08-14_maya_blendshape_fig_maya_scene.PNG" title="maya scene" /></p>
+<p><img alt="Alt text" src="data/2013-08-14_maya_blendshape_fig_maya_scene.PNG" title="maya scene" /></p>
 <p><strong>Maya/Fbx API Table.</strong> <br />
 | source | blendshape | channel | target |         <br />
 | ---- |   <br />
@@ -187,7 +190,7 @@ cube2 and cube3 are as target shapes for this blendshape.</p>
 
 
 <p>updated about getting the target shapes from the blendshape deformer node.
-<img alt="Alt text" src="2013-08-14_maya_blendshape_fig_maya_scene_Weight_InBetween.PNG" title="What is Target Weight? Like slots" /> </p>
+<img alt="Alt text" src="data/2013-08-14_maya_blendshape_fig_maya_scene_Weight_InBetween.PNG" title="What is Target Weight? Like slots" /> </p>
 <p>updated 2013/10/11. blendShape是线性操作，deformed result = source * (1 - target_weight) + target * target_weight;
 source and target可以说shape mesh, 也可以是别的blendshape deformation node的结果。</p>
 <p>udated 2013/10/12. 遇到一个使用objExists mel command的bug. 假如Face + FaceShape是面部的transform + shape nodes, 它在DAG中的path是:
@@ -243,7 +246,7 @@ blendshape1.weight1 是一个plug的名字，其实这个weight1也同时是对�
 
 <p>也可以把别的值connect到这个target weight上来, 例如通过动画animation或者locator等控制target weight的值的变化。每一个connection是由source plug and destination plug组成的. 在上面的blendShape1例子上增加一点:
 建一个plane1, 打开Window &gt; Node Editor 把plane1的translateX连到blendShape1.weight1, 把plane1的translateY连到blendShape1.weight2, UI上这两个sliders都变成黄色了, DG窗口中blendShape1这个node的形状也从长方形变成的菱形. 
-<img alt="Alt text" src="2013-08-14_maya_blendshape_fig_BS_with_connnection_DG_NodeEditor.PNG" title="Connections at DG and NodeEditor" />
+<img alt="Alt text" src="data/2013-08-14_maya_blendshape_fig_BS_with_connnection_DG_NodeEditor.PNG" title="Connections at DG and NodeEditor" />
 上面的过程其实我们建立了两个connections. 其中一个connection是 (pPlane1.translateX, blendshape1.weight1)，其中pPlane1.translateX称为source plug, blendShape1.weight1称为destination plug. 
 下面的代码显示怎么获得一个blendShape的plug, 以及这些plug的连接connections: </p>
 <div class="highlight"><pre>    <span class="c1">// given MFnDependencyNode blendShapeNode, and MStatus status;</span>
@@ -315,6 +318,11 @@ mel command有的，就MGlobal::executeCommand(...); mel command实现起来不�
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
+                        <a href="/tag/algo.html">
+                            Algo
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
                         <a href="/tag/python.html">
                             Python
                         </a>
@@ -330,6 +338,11 @@ mel command有的，就MGlobal::executeCommand(...); mel command实现起来不�
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/opengl.html">
                             OpenGL
                         </a>
@@ -342,16 +355,6 @@ mel command有的，就MGlobal::executeCommand(...); mel command实现起来不�
                     <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/algo.html">
-                            Algo
                         </a>
                     </li>
                 </ul>

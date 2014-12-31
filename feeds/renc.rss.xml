@@ -1,5 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>阿can's blog</title><link>/</link><description></description><atom:link href="/feeds%5Crenc.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 16 Oct 2014 22:00:00 +0200</lastBuildDate><item><title>阅读笔记 GLSL Cookbook - Chapter 1</title><link>/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%20GLSL%20Cookbook%20-%20Chapter%201.html</link><description>&lt;p&gt;[OpenGL 4.0 Shading Language Cookbook] - Chapter 1  &lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>阿can's blog</title><link>/</link><description></description><atom:link href="/feeds%5Crenc.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 20 Dec 2014 20:20:00 +0100</lastBuildDate><item><title>Corrective Blendshape at Maya</title><link>/Corrective%20Blendshape%20at%20Maya.html</link><description>&lt;p&gt;记录一下最近学到的corrective blendshape知识.    &lt;/p&gt;
+&lt;h2&gt;问题描述&lt;/h2&gt;
+&lt;p&gt;First, a basic scene is built, pCylinder1 is rigged and skinned,     &lt;br /&gt;
+&lt;img alt="basic scene for test" src="data/2014-12-20-skinedShape.png" title="basic scene for test" /&gt;     &lt;/p&gt;
+&lt;p&gt;Now, suppose we are not satisfied with the elbow shape, want it change it a little bit. 例如一个手臂的骨骼动画已经搞好了, 后面发现在形状上还想改进一下, 那怎么办呢? &lt;/p&gt;
+&lt;p&gt;If we select vertices and move them (adding vector delta to these vertics) on the skinned mesh directly, the result is not expected, since the vector delta will be deformed by the skin deformer too.  &lt;br /&gt;
+&lt;img alt="alt text" src="data/2014-12-20-Issue-directSculptOnSkinnedMesh.png" title="issue" /&gt;                               &lt;/p&gt;
+&lt;p&gt;There are some methods can be used to fix this issues, corrective blendshape就是我看到的其中一种方法.     &lt;/p&gt;
+&lt;h2&gt;Corrective Blendshape&lt;/h2&gt;
+&lt;p&gt;从skinned shape复制(Copy and Paste, not Duplicate)一个shape出来, 把骨骼选中并delete掉, 这样得到的模型就是骨骼变形之前的shape, 原始的初始的形状, 这个shape作为下面我们所建的blendshape node的target shape. 为什么用初始的没有变形过的形状, 而不是用变形过的形状作为target shape呢? 我感觉是跟用front of chain的方式有关, 细节在下面.                  &lt;br /&gt;
+Create a new blendshape node, and add it at front of the skin deform node,    &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// to create a blendshape node at front of skinCluster node  &lt;/span&gt;
+&lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;frontOfChain&lt;/span&gt; &lt;span class="n"&gt;pCylinder2&lt;/span&gt; &lt;span class="n"&gt;pCylinder1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;                         
+&lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;edit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt; &lt;span class="mh"&gt;0&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;     
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里pCylinder1是变形过的, pCylinder2就是我们复制出来的原始的没有变形过的.   &lt;br /&gt;
+&lt;img alt="alt text" src="data/2014-12-20-frontOfChain.png" title="front of chain" /&gt;  &lt;br /&gt;
+然后有意思的事情出来了, 假如编辑target shape的顶点, 后面的deformed shape也相应更新.  &lt;br /&gt;
+&lt;img alt="alt text" src="data/2014-12-20-correctiveShape4.gif" title="corrective shape" /&gt;&lt;br /&gt;
++ target shape上我是水平拉顶点的, 结果skinned shape上的顶点却不是水平一定的. 因为skin变换在blendshape的后面, blending的结果会经过skin变换.   &lt;br /&gt;
++ 这个target shape我感觉就是网上被称为corrective shape的东西, 而相应地这个blendshape node应该就是传说中的corrective blendshape.          &lt;br /&gt;
++ target shape被移动顶点之后, skinned shape立马更新, 这估计是Dependency Graph厉害的地方之一.   &lt;br /&gt;
++ 有时候看到skin变形 会被做成key animation, 在不同的变形程度做key. 一下子变得好像很复杂, 其实把每一帧挺下来, 就是上面这些技术. 例如要修改某帧的pose(这个pose的意思我觉得是指某个帧时候那个deformed shape的当前形状), 那pose就是我们这里的skinned shape, 而为这个pose做一个corrective blendshape, 然后这个blendshape在这个帧下weight调成1, 别的帧调为0or[0,1]之内的值, 达到过度平滑.   &lt;/p&gt;
+&lt;p&gt;[update 2014-12-23]在写下上面的流程之后, 隔日回想, 主要是三个steps:   &lt;br /&gt;
++ step1. 从skinned mesh中复制(Copy and Paste, not Duplicate)一个没有skinned过的mesh出来;   &lt;br /&gt;
++ step2. 把那个没有skinned过的mesh 作为target shape, skinned mesh作为source/base mesh, 建一个blendshape node, 而且这个blendshape node以frontOfChain的方式放到skinCluster前面.      &lt;br /&gt;
++ step3. 雕刻那个没有skinned过的mesh, 看那个skinned mesh是相应怎么更新了.  这一步要慢慢调, 因为雕刻那个没有skinned过的mesh, 得到的顶点上的vector delta还需要经过skin变换才会体现到skinned mesh上, 所以在没有skinned过的mesh上的雕刻 并不直观等于我们真正想要的在skinned mesh上的雕刻细节.                                                            &lt;br /&gt;
+&lt;img alt="alt text" src="data/2014-12-20-frontOfChain_correctiveblendshape_review.png" title="review" /&gt;     &lt;/p&gt;
+&lt;p&gt;上面的流程, 特别是step3真的很不直观, 于是就出来了可以改进的地方, 例如我想直接在skinned mesh上做雕刻来作出我想要的效果, 而不是需要在没有skinned过的mesh做雕刻.                       &lt;/p&gt;
+&lt;h2&gt;ExtractDeltas&lt;/h2&gt;
+&lt;p&gt;在网上遇到这个&lt;a href="http://www.braverabbit.de/playground/?p=443"&gt;Extract delta plugin&lt;/a&gt;.  下面是使用视频,        &lt;br /&gt;
+&lt;img alt="alt text" src="data/2014-12-20-mayaDefaultBlendShape_with_ExtractDeltaPlugin.gif" title="extract delta plugin" /&gt;  &lt;br /&gt;
+具体就是避免上面我们说的不直观的做法, 这个plugin的流程是:   &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;extractDeltasDuplicateMesh&lt;/span&gt; 
+&lt;span class="n"&gt;performExtractDeltas&lt;/span&gt;
+&lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;frontOfChain&lt;/span&gt; &lt;span class="n"&gt;pCylinder2_corrective&lt;/span&gt; &lt;span class="n"&gt;pCylinder1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;edit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mf"&gt;0.3&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
+&lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;edit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mf"&gt;0.6&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
+&lt;span class="n"&gt;blendShape&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;edit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;weight&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mf"&gt;0.9&lt;/span&gt; &lt;span class="n"&gt;blendShape1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;通过命令extractDeltasDuplicatedMesh, 从skinned mesh复制一个temp mesh出来, 不带骨骼的, 是变换过的形状;    &lt;/li&gt;
+&lt;li&gt;在复制出来的temp mesh上做雕刻, 做成我们想要的形状.  &lt;/li&gt;
+&lt;li&gt;选择skinned mesh, and temp mesh, 通过命令performExtractDeltas来创建一个corrective shape, 估计是 (temp mesh - skinned mesh) with some magic transformation;   &lt;/li&gt;
+&lt;li&gt;corrective shape作为target shape, skinned mesh做base shape, 建blendshape node, 以front of chain的方式放到骨骼变形skinCluster node前面;  &lt;/li&gt;
+&lt;li&gt;ok, 可以通过调widget看到效果是好的.    &lt;br /&gt;
+说真的, 很感谢这个plugin的作者, 提供了&lt;a href="data/extractDeltas.zip"&gt;源代码&lt;/a&gt;方便学习, 而且我也是第一次肯定了自己没有理解错那个"corrective shape"的意思, 因为看到这个名词, 在网上有很多说各自的用法, 但是在这之前没有看到那个文档详细明确的说"corrective shape"就是那个保存了delta的用着blendshape上的target shape, 就是一个特别用处的target shape.[update 2014-12-23] BTW, 作者主页上还有不少script/plugin.         &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;上面有一步是有点magic的, 就是那个命令performExtractDeltas是怎样实现的?    &lt;/p&gt;
+&lt;h2&gt;cvShapeInverter&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.chadvernon.com/blog/resources/cvshapeinverter/"&gt;cvShapeInverter, Chad Vernon, start from 2011&lt;/a&gt;,&lt;a href="https://github.com/chadmv/cvshapeinverter"&gt;code&lt;/a&gt; &lt;br /&gt;
+跟上面的ExtractDeltas功能很像的, 也是从两个mesh作为输入算出一个corrective shape, 也是用于a front of chain shape.      &lt;/p&gt;
+&lt;p&gt;其它references:&lt;br /&gt;
+&lt;a href="http://www.b-ling.com/"&gt;Christian Breitling’s correctiveShape plug-in, 2005-2008&lt;/a&gt;    &lt;br /&gt;
+&lt;a href="https://circecharacterworks.wordpress.com/2011/03/26/presentation/"&gt;Corrective shape extraction from the inverse transformation of a skincluster, 2011&lt;/a&gt;       &lt;br /&gt;
+&lt;a href="https://www.mail-archive.com/python_inside_maya@googlegroups.com/"&gt;python inside maya @googlegroups&lt;/a&gt;    &lt;/p&gt;
+&lt;p&gt;**    &lt;br /&gt;
+文中的gif动画文件是在&lt;a href="http://gifmaker.me/"&gt;GIFMaker.me&lt;/a&gt;上做出来的, intuitive, thank you.     &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Sat, 20 Dec 2014 20:20:00 +0100</pubDate><guid>tag:,2014-12-20:Corrective Blendshape at Maya.html</guid><category>maya</category><category></category></item><item><title>Volume Data Visualization</title><link>/Volume%20Data%20Visualization.html</link><description>&lt;p&gt;上周五Sq.B突然说起L.F到一个创业公司做Director of Engineer了,               &lt;br /&gt;
+http://www.datifex.com           &lt;br /&gt;
+为L.F高兴的同时, 这家公司很是吸引. 它的team介绍中很多都很牛的背景呢.    &lt;/p&gt;
+&lt;p&gt;big data visualize ...            &lt;/p&gt;
+&lt;p&gt;这年头连zf都在说大数据, 我不熟悉, 但好像他们的出发点都是怎么从大数据中获利, 例如怎么分析得到情报, 而visualization貌似可以帮到他们啊, 这就是需求? 有意思.  &lt;/p&gt;
+&lt;p&gt;To read list:  &lt;br /&gt;
+  http://cyrille.rossant.net/ 他写了两本书和很cool的project: &lt;br /&gt;
+  book Learning IPython for Interactive Computing and Data Visualization; 已下载pdf.   &lt;br /&gt;
+  book IPython Interactive Computing and Visualization Cookbook;                &lt;br /&gt;
+  vispy.org OpenGL-based interactive visualization in Python &lt;/p&gt;
+&lt;p&gt;Data Visualization with JavaScript https://news.ycombinator.com/item?id=8478933 &lt;/p&gt;
+&lt;p&gt;book Python for Data Analysis, Wes McKinney. 已买影印版. &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Mon, 20 Oct 2014 19:30:00 +0200</pubDate><guid>tag:,2014-10-20:Volume Data Visualization.html</guid><category></category></item><item><title>阅读笔记 GLSL Cookbook - Chapter 1</title><link>/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%20GLSL%20Cookbook%20-%20Chapter%201.html</link><description>&lt;p&gt;[OpenGL 4.0 Shading Language Cookbook] - Chapter 1  &lt;/p&gt;
 &lt;h3&gt;Profiles: Core vs. Compatibility&lt;/h3&gt;
 &lt;p&gt;OpenGL 3.0版本引入了deprecation model模型. 被标记为deprecated的函数或者功能, 意味着在将来的版本中会被removed去掉. 例如immdediate mode rendering使用的glBegin/glEnd在3.0版本中标记为deprecated而在3.1版本中被去掉.     &lt;/p&gt;
 &lt;p&gt;为了backwoods compatibility后兼容, OpenGL 3.2版本引入了compatibility profiles的概念.&lt;br /&gt;
@@ -324,8 +396,9 @@ Uniform variables: 在shader里面是read-only.        &lt;/p&gt;
 &lt;a href="http://www.arcsynthesis.org/gltut/"&gt;Learning Modern 3D Graphics Programming, Jason L. McKesson&lt;/a&gt;  &lt;br /&gt;
 &lt;a href="http://www.opengl-tutorial.org/"&gt;Tutorial for modern OpenGL (3.3+)&lt;/a&gt;   &lt;br /&gt;
 &lt;a href="http://ogldev.atspace.co.uk/index.html"&gt;Modern OpenGL Tutorials | ogldev&lt;/a&gt; 已经40多个tutorials.         &lt;br /&gt;
-&lt;a href="http://www.tomdalling.com/blog/category/modern-opengl/"&gt;Modern OpenGL | Tom Dalling&lt;/a&gt;   &lt;/p&gt;
-&lt;p&gt;hello Liang, i have tried that way to remove the TselectCmd::select(selectionLIst, kAddToList); and change this line to fCutCmd-&amp;gt;doThisCommand(selectionList,false); but the cut/sew does not work as expected,so finally use the current way to clean the selection list at end of stroke. &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Thu, 16 Oct 2014 22:00:00 +0200</pubDate><guid>tag:,2014-10-16:阅读笔记 GLSL Cookbook - Chapter 1.html</guid><category>OpenGL</category><category>GLSL</category><category>Shader</category><category></category></item><item><title>Mudbox - Sculpt Layer Group</title><link>/Mudbox%20-%20Sculpt%20Layer%20Group.html</link><description>&lt;p&gt;下面的截图来自autodesk/mudbox features中视频:  &lt;br /&gt;
+&lt;a href="http://www.tomdalling.com/blog/category/modern-opengl/"&gt;Modern OpenGL | Tom Dalling&lt;/a&gt; &lt;br /&gt;
+http://www.bfilipek.com/search/label/OpenGL 
+http://www.lighthouse3d.com/ &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Thu, 16 Oct 2014 22:00:00 +0200</pubDate><guid>tag:,2014-10-16:阅读笔记 GLSL Cookbook - Chapter 1.html</guid><category>OpenGL</category><category>GLSL</category><category>Shader</category><category></category></item><item><title>Mudbox - Sculpt Layer Group</title><link>/Mudbox%20-%20Sculpt%20Layer%20Group.html</link><description>&lt;p&gt;下面的截图来自autodesk/mudbox features中视频:  &lt;br /&gt;
 &lt;img alt="Alt text" src="data/2014-10-14-Mudbox2015_Layer_Group.PNG" title="output" /&gt;  &lt;br /&gt;
 Group的引入可能会有这两个用处:          &lt;br /&gt;
 + 管理、组织organize layers, 如脸部的和身体上的可以分两个group来组织layers;         &lt;br /&gt;
@@ -446,13 +519,15 @@ in func4: 00E5FABC     &lt;br /&gt;
 &lt;ul&gt;
 &lt;li&gt;文件的编码                  &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nl"&gt;C:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Python27&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Scripts&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exe&lt;/span&gt; &lt;span class="n"&gt;path_to_context_folder&lt;/span&gt;               
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Python27&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Scripts&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exe&lt;/span&gt; &lt;span class="n"&gt;path_to_context_folder&lt;/span&gt;               
+
+&lt;span class="nl"&gt;WARNING:&lt;/span&gt; &lt;span class="n"&gt;Could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="mi"&gt;2014&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;GPP_DoubleBuffer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;utf8&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;codec&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;decode&lt;/span&gt; &lt;span class="n"&gt;byte&lt;/span&gt; &lt;span class="mh"&gt;0xca&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;position&lt;/span&gt; &lt;span class="mi"&gt;158&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;invalid&lt;/span&gt; &lt;span class="n"&gt;continuation&lt;/span&gt; &lt;span class="n"&gt;byte&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;可能会返回说某个位置的编码编译不过, 原因是pelican要求utf8 without BOM的格式. 中文嘛, 
-''
-s——- 之前好像是用GBXXX格式来做encoding的.                  &lt;br /&gt;
+&lt;p&gt;可能会返回说某个位置的编码编译不过, 原因是pelican要求utf8 without BOM的格式. 
+中文嘛, 之前好像是用GBXXX格式来做encoding的. 在Notepad++ 右下角有文件的编码, 例如可能是UTF-8 w/o BOM, 也可能是GB2313(Simplified).                  &lt;br /&gt;
 修正方法是: Nodepad++ / Encoding / convert to UTF-8 w/o BOM      &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;更改theme                 &lt;br /&gt;
@@ -564,20 +639,7 @@ widget-&amp;gt;layout-&amp;gt;addLayout/addWidget
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;[update 2014/8/26] ok, 有人说虽然开发容易, 但是部署难. 因为不像C++编译成binary file with dll, target machine上需要预先安装版本合适的qt &amp;amp; python &amp;amp; pySide 才能interpolate相应的.py file.   &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Mon, 25 Aug 2014 19:30:00 +0200</pubDate><guid>tag:,2014-08-25:build simple ui using pySide.html</guid><category></category></item><item><title>How to debug maya custom plugin</title><link>/How%20to%20debug%20maya%20custom%20plugin.html</link><description>&lt;p&gt;涉及maya plugin开发的时候，怎么debug呢? &lt;/p&gt;
-&lt;h2&gt;Attach to maya process ... 寄生&lt;/h2&gt;
-&lt;p&gt;step 1. maya plugin manager (Window -&amp;gt; Settings/Preferences -&amp;gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
-step 2. at your visual studio project of that custom plugin, Tools -&amp;gt; Attach to Process ..., choose maya.exe you will see visual studio processing some source files....这就完整寄生了. &lt;/p&gt;
-&lt;h2&gt;Debug&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;MGlobal::displayInfo(MString("..")); 输出到Script Editor. &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;MStatus status; 这东西是很多函数的返回值，记得判断是否MS::kSuccess. 用MString MStatus::errorString() const函数方便输出函数的返回状态. &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Sat, 12 Oct 2013 19:30:00 +0200</pubDate><guid>tag:,2013-10-12:How to debug maya custom plugin.html</guid><category>maya</category><category></category></item><item><title>Tree view at Qt</title><link>/Tree%20view%20at%20Qt.html</link><description>&lt;p&gt;Qt中的TreeView很复杂, 记录一下自己的理解.  &lt;/p&gt;
+&lt;p&gt;[update 2014/8/26] ok, 有人说虽然开发容易, 但是部署难. 因为不像C++编译成binary file with dll, target machine上需要预先安装版本合适的qt &amp;amp; python &amp;amp; pySide 才能interpolate相应的.py file.   &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">renc</dc:creator><pubDate>Mon, 25 Aug 2014 19:30:00 +0200</pubDate><guid>tag:,2014-08-25:build simple ui using pySide.html</guid><category></category></item><item><title>Tree view at Qt</title><link>/Tree%20view%20at%20Qt.html</link><description>&lt;p&gt;Qt中的TreeView很复杂, 记录一下自己的理解.  &lt;/p&gt;
 &lt;h2&gt;引言&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Model/View/item的关系就有点像Container/Algorithm/Iterator的关系。
@@ -652,7 +714,7 @@ Animatioin mode, menu Create Deformer &amp;gt; BlendShape (Deformation order == 
 cube1 is called source shape for this blenshape. &lt;br /&gt;
 cube2 and cube3 are as target shapes for this blendshape.&lt;/p&gt;
 &lt;p&gt;select cube1, menu Windows &amp;gt; Connections, we see the connections of these nodes.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Alt text" src="2013-08-14_maya_blendshape_fig_maya_scene.PNG" title="maya scene" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt text" src="data/2013-08-14_maya_blendshape_fig_maya_scene.PNG" title="maya scene" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Maya/Fbx API Table.&lt;/strong&gt; &lt;br /&gt;
 | source | blendshape | channel | target |         &lt;br /&gt;
 | ---- |   &lt;br /&gt;
@@ -733,7 +795,7 @@ cube2 and cube3 are as target shapes for this blendshape.&lt;/p&gt;
 
 
 &lt;p&gt;updated about getting the target shapes from the blendshape deformer node.
-&lt;img alt="Alt text" src="2013-08-14_maya_blendshape_fig_maya_scene_Weight_InBetween.PNG" title="What is Target Weight? Like slots" /&gt; &lt;/p&gt;
+&lt;img alt="Alt text" src="data/2013-08-14_maya_blendshape_fig_maya_scene_Weight_InBetween.PNG" title="What is Target Weight? Like slots" /&gt; &lt;/p&gt;
 &lt;p&gt;updated 2013/10/11. blendShape是线性操作，deformed result = source * (1 - target_weight) + target * target_weight;
 source and target可以说shape mesh, 也可以是别的blendshape deformation node的结果。&lt;/p&gt;
 &lt;p&gt;udated 2013/10/12. 遇到一个使用objExists mel command的bug. 假如Face + FaceShape是面部的transform + shape nodes, 它在DAG中的path是:
@@ -789,7 +851,7 @@ blendshape1.weight1 是一个plug的名字，其实这个weight1也同时是对�
 
 &lt;p&gt;也可以把别的值connect到这个target weight上来, 例如通过动画animation或者locator等控制target weight的值的变化。每一个connection是由source plug and destination plug组成的. 在上面的blendShape1例子上增加一点:
 建一个plane1, 打开Window &amp;gt; Node Editor 把plane1的translateX连到blendShape1.weight1, 把plane1的translateY连到blendShape1.weight2, UI上这两个sliders都变成黄色了, DG窗口中blendShape1这个node的形状也从长方形变成的菱形. 
-&lt;img alt="Alt text" src="2013-08-14_maya_blendshape_fig_BS_with_connnection_DG_NodeEditor.PNG" title="Connections at DG and NodeEditor" /&gt;
+&lt;img alt="Alt text" src="data/2013-08-14_maya_blendshape_fig_BS_with_connnection_DG_NodeEditor.PNG" title="Connections at DG and NodeEditor" /&gt;
 上面的过程其实我们建立了两个connections. 其中一个connection是 (pPlane1.translateX, blendshape1.weight1)，其中pPlane1.translateX称为source plug, blendShape1.weight1称为destination plug. 
 下面的代码显示怎么获得一个blendShape的plug, 以及这些plug的连接connections: &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="c1"&gt;// given MFnDependencyNode blendShapeNode, and MStatus status;&lt;/span&gt;

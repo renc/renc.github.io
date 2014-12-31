@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>优化-访问数组值 - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/优化-访问数组值.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="记录一下学到的一个技术. 假如value[]是一个很长的数组, 记录着某些对象的值, 值的范围是[0, 1]. 它的操作包括: 给value[]初始化为每个元素都是0; 设置某一个元素的值, 如value[vIndex] = x; 访问某一个元素的值, 如x = value[vIndex]; 虽然数组很长, 很多时候一次使用到的就是其中的某一小部分的值, 例如10k大小, 某次使用到的可能就是10-1k这么小的局部. for (int i = 0; i &lt; 10000; ++i) { // change the value of 100 elements to [0, 1]; } for (int i = 0; i &lt; 10000; ++i) { if (value[i] &gt; 0) do ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/book.html">Book</a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/优化-访问数组值.html"
+                       rel="bookmark"
+                       title="Permalink to 优化-访问数组值">
+                        优化-访问数组值
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-12-31T20:20:00"> 周三 31 十二月 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>记录一下学到的一个技术.    <br />
+<img alt="alt text" src="data/2014-12-31-optimize_array_value.png" title="output" />     <br />
+假如value[]是一个很长的数组, 记录着某些对象的值, 值的范围是[0, 1]. 它的操作包括:<br />
+给value[]初始化为每个元素都是0; <br />
+设置某一个元素的值, 如value[vIndex] = x;<br />
+访问某一个元素的值, 如x = value[vIndex];  </p>
+<p>虽然数组很长, 很多时候一次使用到的就是其中的某一小部分的值, 例如10k大小, 某次使用到的可能就是10-1k这么小的局部.    </p>
+<div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// change the value of 100 elements to [0, 1];    </span>
+<span class="p">}</span>    
+
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>     
+        <span class="k">do</span> <span class="n">sth</span><span class="p">,</span> <span class="n">since</span> <span class="n">this</span> <span class="n">value</span> <span class="n">is</span> <span class="n">changed</span><span class="p">.</span> 
+<span class="p">}</span>    
+</pre></div>
+
+
+<p>可见其实大部分的element都是没有被改动, 而这些大部分的elements都是没有必要被访问到的, 否则浪费了.   </p>
+<p>学到的一个技术思路如上面我画的图. 除了本来的value[]以外, 引入额外的一个新数组block[], 大小是: <br />
+block.size() * sizePerBlock = value.size();  <br />
+block[]中每一个元素的值true/false, 表示所对应的value[]中的一个分块block里面是否有值被更新过.  <br />
+关键问题是bIndex &lt;&gt; vIndex之间的映射:   </p>
+<div class="highlight"><pre><span class="c1">// [bIndex * sizePerBlock, (bIndex+1) * sizePerBlock ) == vIndex;    </span>
+<span class="c1">// int(vIndex / sizePerBlock) == bIndex;          </span>
+
+<span class="c1">// to setting values. </span>
+<span class="k">for</span> <span class="p">(</span><span class="k">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mh">10000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// change the value of 100 elements to [0, 1];    </span>
+    <span class="k">int</span> <span class="n">bIndex</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">sizePerBlock</span><span class="p">;</span> 
+    <span class="n">block</span><span class="p">[</span><span class="n">bIndex</span><span class="p">]</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>    
+    <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">newValue</span><span class="p">;</span>         
+<span class="p">}</span>    
+
+<span class="c1">// to query values. </span>
+<span class="k">for</span> <span class="p">(</span><span class="k">int</span> <span class="n">bIndex</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span> <span class="n">bIndex</span> <span class="o">&lt;</span> <span class="n">block</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">bIndex</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">block</span><span class="p">[</span><span class="n">bIndex</span><span class="p">])</span> 
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">int</span> <span class="n">vIndex</span> <span class="o">=</span> <span class="n">bIndex</span> <span class="o">*</span> <span class="n">sizePerBlock</span><span class="p">;</span> <span class="n">vIndex</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">bIndex</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span><span class="o">*</span><span class="n">sizePerBlock</span><span class="p">;</span> <span class="o">++</span><span class="n">vIndex</span><span class="p">)</span>   
+            <span class="c1">//(value[i]) </span>
+    <span class="p">}</span>     
+<span class="p">}</span>  
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/algo.html">
+                            Algo
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/opengl.html">
+                            OpenGL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/shader.html">
+                            Shader
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

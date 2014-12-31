@@ -14,7 +14,7 @@
 
         <meta name="author" content="" />
         <meta name="keywords" content="Algo," />
-        <meta name="description" content="在书的第二章又看到汉诺塔的问题: 有三个柱子A B C; A柱上有好几个盘子, 小的放在大的上面; 现在问怎么把A柱上的盘子移到C柱上, B是做辅助的, 条件是大的盘子不能压到小的盘子上. 所以结果C柱上的盘子也是小的放在大的上面。 A__B__C; 三个柱子 假如A上有1个盘子，直接放到C上就解答完了。 假如A上有2个盘子ab，a盘小的 在 b盘大的上面. 先把a放到B上, b放到C上, 然后把a从B移到C上. 结果就是C柱上有ab。[pattern 1] 注意这种case中先把a放到C上, 那b放到B上, 然后a从C移到到B柱上, 那B柱上就有ab两个盘子了. 这结果很像上面的, 但是B柱跟C柱次序反了. 可见在移动盘子的时候, 柱子的次序, 是很重要的. 假如A上有3个盘子, 去尝试多画几次, 还是能解出来, 但是发现好像没有什么规律啊. 假如A上有4个盘子, 那可能就要尝试好多次才能碰巧一次解答出来. 还没有看出来规律. 要换一种角度来看啊, 上面我们已经解答了A柱上有2个盘子的case了. 那重新看A柱上有3个盘子的case. A柱上的2个盘子 能借助B移到到C上, 那换个次序, 也能实现: 把A柱上的2个盘子, 借助C移动到B上.[pattern ..." />
+        <meta name="description" content="在书[Anany Levitin, 算法设计与分析基础]的第二章又看到汉诺塔的问题: 有三个柱子A B C; A柱上有好几个盘子, 小的放在大的上面; 现在问怎么把A柱上的盘子移到C柱上, B是做辅助的, 条件是大的盘子不能压到小的盘子上. 所以结果C柱上的盘子也是小的放在大的上面。 A,B,C; 三个柱子 假如A上有1个盘子，直接放到C上就解答完了。 假如A上有2个盘子ab，a盘小的 在 b盘大的上面. 先把a放到B上, b放到C上, 然后把a从B移到C上. 结果就是C柱上有ab。[pattern 1] 注意这种case中先把a放到C上, 那b放到B上, 然后a从C移到到B柱上, 那B柱上就有ab两个盘子了. 这结果很像上面的, 但是B柱跟C柱次序反了. 可见在移动盘子的时候, 柱子的次序, 是很重要的. 假如A上有3个盘子, 去尝试多画几次, 还是能解出来, 但是发现好像没有什么规律啊. 假如A上有4个盘子, 那可能就要尝试好多次才能碰巧一次解答出来. 还没有看出来规律. 要换一种角度来看啊, 上面我们已经解答了A柱上有2个盘子的case了. 那重新看A柱上有3个盘子的case. A柱上的2个盘子 ..." />
 
 
 
@@ -45,6 +45,9 @@
             <ul class="nav navbar-nav">
                         <li >
                             <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/book.html">Book</a>
                         </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
@@ -94,10 +97,10 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>在书的第二章又看到汉诺塔的问题:   <br />
+                <p>在书[Anany Levitin, 算法设计与分析基础]的第二章又看到汉诺塔的问题:   <br />
 有三个柱子A B C; A柱上有好几个盘子, 小的放在大的上面;   <br />
 现在问怎么把A柱上的盘子移到C柱上, B是做辅助的, 条件是大的盘子不能压到小的盘子上. 所以结果C柱上的盘子也是小的放在大的上面。    </p>
-<p>A__B__C; 三个柱子     </p>
+<p>A,B,C; 三个柱子     </p>
 <p>假如A上有1个盘子，直接放到C上就解答完了。    </p>
 <p>假如A上有2个盘子ab，a盘小的 在 b盘大的上面. 先把a放到B上, b放到C上, 然后把a从B移到C上. 结果就是C柱上有ab。[pattern 1]   <br />
 注意这种case中先把a放到C上, 那b放到B上, 然后a从C移到到B柱上, 那B柱上就有ab两个盘子了. 这结果很像上面的, 但是B柱跟C柱次序反了. 可见在移动盘子的时候, 柱子的次序, 是很重要的.   </p>
@@ -162,6 +165,11 @@ recursive relation: 递归关系式, T(n) = T(n-1) + 1 + T(n-1) = 2*T(n-1) + 1; 
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
+                        <a href="/tag/algo.html">
+                            Algo
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
                         <a href="/tag/python.html">
                             Python
                         </a>
@@ -177,6 +185,11 @@ recursive relation: 递归关系式, T(n) = T(n-1) + 1 + T(n-1) = 2*T(n-1) + 1; 
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/opengl.html">
                             OpenGL
                         </a>
@@ -189,16 +202,6 @@ recursive relation: 递归关系式, T(n) = T(n-1) + 1 + T(n-1) = 2*T(n-1) + 1; 
                     <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/algo.html">
-                            Algo
                         </a>
                     </li>
                 </ul>

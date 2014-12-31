@@ -51,6 +51,9 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
+                            <a href="/category/book.html">Book</a>
+                        </li>
+                        <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li class="active">
@@ -69,6 +72,123 @@
     <div class="row">
         <div class="col-sm-9">
 
+            <article>
+                <h2><a href="/conflict by duplicated variables.html">conflict by duplicated variables</a></h2>
+                <div class="summary"><p>用多于一个变量来表示一个状态, 变量之间很容易不一致呢.      </p>
+<blockquote>
+<p>conflict  </p>
+</blockquote>
+<p>假如我们要描述以下这个状态:        <br />
+在一次mouse click的picking中, 我们给出了pick的范围, 一个rectangle, 然后要标记是否只要pick一个物体object就够了, 还是pick所有在rectangel下面的物体.  </p>
+<p>当假如我们只要pick到一个物体就够了, 那可能在for里面, 一旦找到某一个物体有效, 我们就可以返回, 退出pick过程了. 也就是我们只要pick到第一个有效物体就ok了, 而不考虑这个pick到的物体是否距离mouse click的点最近.   </p>
+<p>那么, 要记录这个状态, 我们看下面的实现:     </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">XViewContext</span>            
+<span class="p">{</span>               
+<span class="nl">public:</span>                           
+    <span class="n">PickingResult</span> <span class="n">pick</span><span class="p">(...);</span>                               
+    <span class="kt">void</span> <span class="nf">setPickSingle</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="n">m_bPickSingle</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>                      
+    <span class="kt">bool</span> <span class="n">pickSingle</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_bPickSingle</span><span class="p">;</span> <span class="p">};</span>                
+<span class="nl">private:</span>               
+    <span class="kt">bool</span> <span class="n">m_bPickSingle</span><span class="p">;</span>                   
+<span class="p">};</span>                           
+<span class="n">PickingResult</span> <span class="n">XViewContext</span><span class="o">::</span><span class="n">pick</span><span class="p">(...)</span>           
+<span class="p">{</span>                    
+    <span class="p">...</span>                                
+    <span class="k">if</span> <span class="p">(</span> <span class="n">pickSingle</span><span class="p">()</span> <span class="p">)</span> <span class="p">...;</span>                 
+    <span class="k">else</span> <span class="p">...;</span>         
+<span class="p">}</span>          
+</pre></div>
+
+
+<p>在这实现中, 是否要pick单一个物体的状态作为data member inside ...</p>
+                    <a class="btn btn-default btn-xs" href="/conflict by duplicated variables.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Undo and Redo.html">Undo and Redo</a></h2>
+                <div class="summary"><p>Undo and Redo 已经遇到很多次了, 记录一下想法.     </p>
+<blockquote>
+<p>So we beat on, boats against the current, borne back ceaselessly into the past. -- The Great Gatsby<br />
+所以我们不停地往前划，逆流而上，回到无穷无尽的过去。《了不起的盖茨比》  </p>
+</blockquote>
+<p>一个程序假如连undo/redo都没有, 那基本上不是给人用的, 可能只能算是demo.</p>
+<h2>Undo/Redo</h2>
+<p>用windows/paint画图工具做例子就很直观啦. </p>
+<p>case 1. 假如操作次序是: 画一笔A, 再画一笔B;
+undo 一次就是剩下A; undo 第二次就是空;
+redo 一次就是增加A; redo第二次就是恢复到A B; 
+这个case的特点是undo到底了，再redo到底. 没有undo的时候又夹着redo ...</p>
+                    <a class="btn btn-default btn-xs" href="/Undo and Redo.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/why game developers keep getting laid off.html">why game developers keep getting laid off</a></h2>
+                <div class="summary"><p>翻译了一下why game developers keep getting laid off这个文章. 里面有些观点是挺有意思的.   </p>
+<h2>引言</h2>
+<p>在Hacker News上看到此文, 
+Why Game Developers Keep Getting Laid Off
+by Jason Schreier 
+http://kotaku.com/why-game-developers-keep-getting-laid-off-1583192249 
+I enjoyed this article, thx. 稍微摘录和翻译一下. </p>
+<h2>Why does this happen so often?</h2>
+<p>...
+为什么裁掉一些开发，几个月之后又要重新请人？这个想法好像有点傻啊。但是这种事情却常常发生。根据Sony的某前员工，其中的解释很简单：在开发的前期(游戏的概念和设计是在这期间完成)，不需要那么多人，所以发行商就不养人。
+...</p>
+<h2>A deadline's ...</h2>
+                    <a class="btn btn-default btn-xs" href="/why game developers keep getting laid off.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/build error from line ending.html">build error from line ending</a></h2>
+                <div class="summary"><p>Build error, 具体是error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format怎么办呢？ </p>
+<p>故事的开端是checkin了一个.cpp，当然本地是build过的，但是server端那边反馈说build error, 具体是
+error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format</p>
+<p>怎么办呢？当然是查看一下到底是那个.cpp文件的line ending是什么东西，然后改成合适的就ok了. </p>
+<p>下面截图显示改之前是CR+LF, 改之后是LF的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/build error from line ending.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/algo - counting inversions.html">algo - counting inversions</a></h2>
+                <div class="summary"><p>算法练习: counting inversions       </p>
+<h2>Background</h2>
+<p>Given an array, say [1, 3, 5, 2, 4, 6], to count the inversions.
+What is an inversion ?
+if (i &lt; j) but arr[i] &gt; arr[j]. 例如上面的(3, 2), 3在2的前面, 但是3&gt;2, 构成一个inversion. 这个例子中一共三个inversions(3, 2) (5, 2) (5, 4). </p>
+<p>这个计算有什么用呢? 我是[Algorithms: Design and Analysis ...</p>
+                    <a class="btn btn-default btn-xs" href="/algo - counting inversions.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/partio.html">partio</a></h2>
+                <div class="summary"><p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.               </p>
+<h2>引言</h2>
+<p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project from
+Disney Animation, 读读它的代码应该能学到东西, 于是故事就开始了.<br />
+“The goal of Partio is to provide a unified interface akin to unified image libraries that makes it easier to load, save, and manipulate ...</p>
+                    <a class="btn btn-default btn-xs" href="/partio.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Vector based containers.html">Vector based containers</a></h2>
+                <div class="summary"><p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记.  </p>
+<h2>引言</h2>
+<h1>Using STL Vectors</h1>
+<p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 
+但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. </p>
+<h2>Prefer vector over list</h2>
+<p>比较 std::vector 和 std::list, 其中一个特定是, vector的内存是连续的(contiguous buffers), 还可以避免avoid内存动态分配memory allocations和四散的访问scattered access.  这些都是优势. </p>
+<p>这里发散一下，以前在用Qt 4.8的时候(以后Qt 5可能有变)，就有QVector, QList, QLinkedList，它们的区别也有意思。其中QVector跟std::vector类似 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Vector based containers.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="/Pointer to Member Function.html">Pointer to Member Function</a></h2>
                 <div class="summary"><p>function pointer是知道的, 如</p>
@@ -190,21 +310,17 @@ http://3dgep ...</p>
             <article>
                 <h2><a href="/Maya programming node.html">Maya Programming Node</a></h2>
                 <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
-<h2>Selection</h2>
-<p><img alt="mode_and_mask" src="data/2014-04-01_maya_selection_mode_mask.png" title="output" /><br />
-起码区分清楚了selection mode and mask之后, 才能继续. </p>
-<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, chapter 3.3.    </span>
-<span class="k">string</span> <span class="err">$</span><span class="n">ns</span><span class="p">[]</span> <span class="o">=</span> <span class="no">`ls</span> <span class="o">-</span><span class="n">sl</span><span class="err">`</span><span class="p">;</span>    
-<span class="k">for</span> <span class="p">(</span><span class="err">$</span><span class="n">n</span> <span class="n">in</span> <span class="err">$</span><span class="n">ns</span><span class="p">)</span>     
-<span class="p">{</span>    
-    <span class="k">string</span> <span class="err">$</span><span class="n">nt</span> <span class="o">=</span> <span class="no">`objectType</span> <span class="err">$</span><span class="n">n</span><span class="err">`</span><span class="p">;</span>     
-    <span class="n">print</span> <span class="p">(</span><span class="s">&quot;Node: &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">n</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">nt</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>      
-<span class="p">};</span>      
-</pre></div>
+<p>先在一个新场景里面拖一个多边形球polygon sphere出来,    <br />
+<img alt="transfrom and shape node" src="data/2014-04-01-transfer_shape_node.png" title="output" />
+打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是:    <br />
++ polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等;  <br />
++ pSphereShape1: 这个就是实际的shape node, 形状.                  <br />
++ initialShadingGroup: 用于画这个球的.               <br />
++ pSphere1: transform node, 决定了球在空间位置.                 </p>
+<div class="highlight"><pre><span class="n">import</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">;</span> 
 
-
-<p>ls -sl  # to list objects /components are selected.<br />
-ls -hilite  # to list the objects ready be select ...</p>
+<span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">polySphere</span><span class="p">()</span>                  <span class="err">#</span> <span class="err">用</span><span class="n">script</span><span class="err">建一个球</span> 
+<span class="cp"># Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="/Maya programming node.html">more ...</a>
                 </div>
             </article>
@@ -220,16 +336,6 @@ ls -hilite  # to list the objects ready be select ...</p>
                 <h2><a href="/Flood fill.html">Flood fill</a></h2>
                 <div class="summary"><p>看见someone提到Flood fill algorithm, 惭愧，不熟悉这个名字，于是Google一下，竟然跟BFS很像，于是想着要简单实现一下。</p>
                     <a class="btn btn-default btn-xs" href="/Flood fill.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/How to debug maya custom plugin.html">How to debug maya custom plugin</a></h2>
-                <div class="summary"><p>涉及maya plugin开发的时候，怎么debug呢? </p>
-<h2>Attach to maya process ... 寄生</h2>
-<p>step 1. maya plugin manager (Window -&gt; Settings/Preferences -&gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
-step 2. at your visual studio project of that custom plugin, Tools -&gt; Attach to ...</p>
-                    <a class="btn btn-default btn-xs" href="/How to debug maya custom plugin.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -311,6 +417,11 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
+                        <a href="/tag/algo.html">
+                            Algo
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
                         <a href="/tag/python.html">
                             Python
                         </a>
@@ -326,6 +437,11 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="/tag/opengl.html">
                             OpenGL
                         </a>
@@ -338,16 +454,6 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                     <li class="list-group-item tag-4">
                         <a href="/tag/qt.html">
                             qt
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/algo.html">
-                            Algo
                         </a>
                     </li>
                 </ul>

@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Do and redo are similiar - 阿can's  blog</title>
+    <title>LeetCodeOJ - Min Stack - 阿can's  blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,11 +10,11 @@
 
 
 
-<link rel="canonical" href="/what is this.html">
+<link rel="canonical" href="/LeetCodeOJ - Min Stack.html">
 
         <meta name="author" content="" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="Short version for index and feeds" />
+        <meta name="keywords" content="Algo," />
+        <meta name="description" content="Leetcode 上的题目, 实现一个Min Stack. + 带stack的一般功能, push, pop, top; + int getMin()能在constant time 返回最小值. 很明显, 带stack一般功能的容易实现, 用std::vector也行，or直接用std::stack&lt;&gt;这个container adapter更直接( 所谓adapter, 就是这个类型里面的实现会用到某些简单的container, 如vector, list). 但是那个getMin()呢? 假如只是取一个最小值, 那就简单了, 每次push时候都比较记录当前最小值就ok了. 但是假如不断地pop, 不断地getMin, 那stack内容改动了就需要不停地更新最小值. 一开始我想到保存一个最小值, 并可能需要O(n)的时间来更新这个最小值. 下面的方法是保存所有当前的最小值. 你只要取走了最小的, 然后下一个最小的立马出现了. 两个container, 其中一个是std::stack 用于实现一般的stack功能; 另一个可以是std::vector/list/stack ..." />
 
 
 
@@ -47,13 +47,13 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
-                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                            <a href="/category/book.html">Book</a>
                         </li>
                         <li >
-                            <a href="/category/programming.html">Programming</a>
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li class="active">
-                            <a href="/category/programming-computer-graphics.html">Programming, computer graphics,</a>
+                            <a href="/category/programming.html">Programming</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -72,10 +72,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/what is this.html"
+                    <a href="/LeetCodeOJ - Min Stack.html"
                        rel="bookmark"
-                       title="Permalink to Do and redo are similiar">
-                        Do and redo are similiar
+                       title="Permalink to LeetCodeOJ - Min Stack">
+                        LeetCodeOJ - Min Stack
                     </a>
                 </h1>
             </header>
@@ -85,17 +85,32 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2010-12-03T10:20:00"> 周五 03 十二月 2010</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-12-08T20:20:00"> 周一 08 十二月 2014</time>
     </span>
 
 
 
 <span class="label label-default">Tags</span>
+	<a href="/tag/algo.html">Algo</a>
+        /
 	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                
+                <p>Leetcode 上的题目, 实现一个Min Stack. <br />
++ 带stack的一般功能, push, pop, top;        <br />
++ int getMin()能在constant time 返回最小值.                 </p>
+<p>很明显, 带stack一般功能的容易实现, 用std::vector也行，or直接用std::stack&lt;&gt;这个container adapter更直接( 所谓adapter, 就是这个类型里面的实现会用到某些简单的container, 如vector, list).              <br />
+但是那个getMin()呢?                           <br />
+假如只是取一个最小值, 那就简单了, 每次push时候都比较记录当前最小值就ok了. 但是假如不断地pop, 不断地getMin, 那stack内容改动了就需要不停地更新最小值.      </p>
+<p>一开始我想到保存一个最小值, 并可能需要O(n)的时间来更新这个最小值.  下面的方法是保存<em>所有</em>当前的最小值. 你只要取走了最小的, 然后下一个最小的立马出现了.  <br />
+<img alt="Alt text" src="data/2014-12-09-MinStack.png" title="output" />   <br />
+两个container, 其中一个是std::stack 用于实现一般的stack功能;  另一个可以是std::vector/list/stack ... 称为minStack, 用于记录收集到的最小值.          <br />
+有些很形象的特点:                        <br />
++ minStack 总是会收集到了第一个元素;                       <br />
++ minStack 里面的元素是递减的;                           <br />
++ minStack 好像是一个filter, 过滤一些值大的元素;                              <br />
++ minStack 里面的每一个元素好像都是有一定的统治范围, 在这个范围内就是它最小.     </p>
             </div>
             <!-- /.entry-content -->
         </article>
@@ -123,9 +138,44 @@
                             
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
+                    <li class="list-group-item tag-2">
                         <a href="/tag/maya.html">
                             maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/algo.html">
+                            Algo
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/reading.html">
+                            reading
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/opengl.html">
+                            OpenGL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/shader.html">
+                            Shader
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
