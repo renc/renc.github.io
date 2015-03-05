@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Slide vertex on surface - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/Slide vertex on surface.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="过年上班没多几天啊, hackathon就开始了, 我报名的project是尝试实现以下paper: Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, EUROGRAPHICS 2010. 本文做一些记录, 特别是有些问题以后可能也会遇到. 想做这个slide brush的原因是: 1. 上面那个paper本身适合放到brush framework里面来做, 做成一个brush; 2. 看上去不是太难, 是有难点(后面会提到), 但是=不是那种求解方程组的优化问题(我还不太懂这个), 估计可以在2天内搞定的, yes, hackathon就2天. 大体做成的效果应该是: brush stroke的时候会带动一些vertices在mesh/surface上滑动, mesh的形状shape被保持。区别于现在mudbox已有的grab brush, 后者顶点跟着鼠标在走,会跑到mesh外面. 区域 算法的输入包括(不限于)下面这些: + handle, which is the mouse/brush ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Slide vertex on surface.html"
+                       rel="bookmark"
+                       title="Permalink to Slide vertex on surface">
+                        Slide vertex on surface
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-03-04T20:20:00"> 周三 04 三月 2015</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>过年上班没多几天啊, hackathon就开始了, 我报名的project是尝试实现以下paper: <br />
+Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, EUROGRAPHICS 2010. <br />
+本文做一些记录, 特别是有些问题以后可能也会遇到. </p>
+<p>想做这个slide brush的原因是: 1. 上面那个paper本身适合放到brush framework里面来做, 做成一个brush; 2. 看上去不是太难, 是有难点(后面会提到), 但是=不是那种求解方程组的优化问题(我还不太懂这个), 估计可以在2天内搞定的, yes, hackathon就2天.      </p>
+<p>大体做成的效果应该是: brush stroke的时候会带动一些vertices在mesh/surface上滑动, mesh的形状shape被保持。区别于现在mudbox已有的grab brush, 后者顶点跟着鼠标在走,会跑到mesh外面. 区域   </p>
+<p>算法的输入包括(不限于)下面这些:  <br />
++ handle, which is the mouse/brush picked surface point on mesh, P0;   <br />
++ brush ring, this brush parameter is used to enumerate the active vertices, which are reachable/inside the brush ring;<br />
++ drag direction when stroking, dP0;   </p>
+<p>Step 1. 当brush stroke开始, handle就有了(这个handle应该可以是face上的surface point, 不单只是如paper中说的mesh vertex), 然后就可以枚举出这个handle附近会受到影响的所谓active vertices, 为每一个active vertex P建立一个Tangent space{Np, b1, b2}, 并且在这个Tangetn space of P上构建local parameterization of P.                                                                    </p>
+<p>Tangent space of vertex P的:  <br />
+P点是有法相量normal的吧, 这个之间用作为Np; vertex P本身one-ring中有一些相连接的adjacent edges/vertices,  取最远的那个顶点Vx, 对向量VP = Vx - P 分解成垂直于Np的分向量b1 = VP - dotProject(VP, Np_normalized) * Np_normalized, 然后b2 = cross product( Np, b1 ); 注意normalize. 这方法算是Gram-Schmidt正交化在三维里面简化版?   <br />
+<img alt="Alt text" src="data/2015-03-04-tangentSpace.png" title="output" />  </p>
+<p>Local parameterization of vertex P的求法: <br />
+Paper中对应于3.1节. 对于每一个active vertex P, 把它四周一定范围(search distance)内的顶点Q都project到P的tangent space上得到Q', 这就是local param的意思.           <br />
+首先从P点开始枚举得到四周的很多个Q. 对于具体的一个每一个Q:                 <br />
+Vector PQ = Q - P; 跟P点上的法向量Np, 定义了一个平面plane;         <br />
+1. 这个平面跟P点上的tangent space相交, 就是tangent space上从P到Q'的方向;             <br />
+2. 这个平面跟mesh的相交, 会得到从P到Q沿着mesh的一个路径, 这个路径是一系列直线段组成的, 路径的长度作为在tangent space上从P到Q'的距离. 这个路径就是paper上的normal curve;     <br />
+这样P四周的Q都有了参数化了, 但是这些参数化点Q'只有三维坐标而没有连接关系的话, 后面就很难使用, 所以我的做法是这些P和Qs作为从原来mesh中取出来的一个patch, 然后修改这个patch上顶点坐标为参数化后的坐标, 就ok了, 即保持了原来的adjacent信息, 也方便debug visualization这个patch来看参数化是否正确.   <br />
+<img alt="Alt text" src="data/2015-03-04-localParam_at_tangentSpace.png" title="output" /> </p>
+<p>Step 2. 在brush stroking过程中, mouse/brush拖拽会有一个向量dP0, 是作用于handle P0上的displacement. 现在问题就来了, 这个dP0是拖拽handle的向量, 那作用于那些active vertex P上的向量dP是什么呢?                    <br />
+这一步真的是难点, 应就是paper中3.2节的内容, 特别是那个公式(4), 不太清楚啊.   <br />
+实现的时候可以从简单的开始, 把dP = dP0;    </p>
+<p>假设上面我们求出了每一个P点的dP; 考虑上falloff, dP = dP * falloff(distance from P0 to P); 可以算出P点的新坐标  <br />
+P' = P + dP;    <br />
+这个P'要在P点的local param中找出是在哪个quad face F'里面的, 算出P'对于F'的coordinate (u, v);         <br />
+然后用这个F'找到在原来没有被stroke改动之前的mesh上的那个face index, 用上那个(u, v)就得到在mesh上的坐标! 也就是preserve shape的特别所在．　　　　　</p>
+<p><a href="data/2015-03-04_2253_hackathon_demo_slide_brush.swf">Demo</a>　　　　　　　　　　
+<a href="">Source Code</a>   　　　</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="/tag/maya.html">
+                            maya
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/algo.html">
+                            Algo
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="/tag/reading.html">
+                            reading
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/qt.html">
+                            qt
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/shader.html">
+                            Shader
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/opengl.html">
+                            OpenGL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+</body>
+</html>

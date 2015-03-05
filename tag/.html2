@@ -51,9 +51,6 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
-                            <a href="/category/book.html">Book</a>
-                        </li>
-                        <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li >
@@ -72,6 +69,21 @@
     <div class="row">
         <div class="col-sm-9">
 
+            <article>
+                <h2><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h2>
+                <div class="summary"><p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
+<p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
+一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release.  <br />
+图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标....     </p>
+<p>从face面的角度来看, 深蓝色的面为起点, 然后鼠标一旦离开这个深蓝色的面之后, 肯定会进入这个深蓝色面四周的8个浅蓝色面之一(假如把面的边界也看作面一部分). 于是在stroke的路线中, 鼠标所pick到的面是一个连着一个的, 连续. </p>
+<p>从edge边的角度来看, 鼠标从起点移动时候, 虽然鼠标在面内部而不是压在边上面, 但是面的几个边总有一个是距离当前鼠标位置近一点的, 我们选择这个边; 当鼠标移动要离开这个深蓝色的face的时候, 肯定会触碰到这个face是边(假如把角点corner也看作是edge是一部分). 于是在stroke的路线中, 鼠标所pick到的边是一个连着一个的, 也连续. </p>
+<p>而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   </p>
+<p>怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? <br />
+因为上面说到面是完备的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Fail to surround the mouse with the vertices.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="/Build myblog using pelican.html">Build myblog using pelican</a></h2>
                 <div class="summary"><p>都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞...   </p>
@@ -390,24 +402,6 @@ http://3dgep ...</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/Maya programming node.html">Maya Programming Node</a></h2>
-                <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
-<p>先在一个新场景里面拖一个多边形球polygon sphere出来,    <br />
-<img alt="transfrom and shape node" src="data/2014-04-01-transfer_shape_node.png" title="output" />
-打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是:    <br />
-+ polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等;  <br />
-+ pSphereShape1: 这个就是实际的shape node, 形状.                  <br />
-+ initialShadingGroup: 用于画这个球的.               <br />
-+ pSphere1: transform node, 决定了球在空间位置.                 </p>
-<div class="highlight"><pre><span class="n">import</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">;</span> 
-
-<span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">polySphere</span><span class="p">()</span>                  <span class="err">#</span> <span class="err">用</span><span class="n">script</span><span class="err">建一个球</span> 
-<span class="cp"># Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Maya programming node.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/tag\.html">&laquo;</a>
@@ -449,33 +443,23 @@ http://3dgep ...</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
                         <a href="/tag/algo.html">
                             Algo
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/glsl.html">
-                            GLSL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
                         <a href="/tag/reading.html">
                             reading
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/opengl.html">
-                            OpenGL
+                        <a href="/tag/qt.html">
+                            qt
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -484,8 +468,18 @@ http://3dgep ...</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/qt.html">
-                            qt
+                        <a href="/tag/opengl.html">
+                            OpenGL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
                         </a>
                     </li>
                 </ul>
@@ -514,7 +508,7 @@ http://3dgep ...</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2014 renc
+         <div class="col-xs-10">&copy; 2015 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

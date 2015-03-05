@@ -50,9 +50,6 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
-                            <a href="/category/book.html">Book</a>
-                        </li>
-                        <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li >
@@ -71,6 +68,23 @@
     <div class="row">
         <div class="col-sm-9">
 
+            <article>
+                <h2><a href="/How to build a plugin system.html">How to build a plugin system</a></h2>
+                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
+很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
+<p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
+- 自定义operation, support undo and redo;
+- 自定义某种brush (operation); 
+- 继承实现某个类，代替原有的那个. 例如map extraction? 
+当前接触到的maya api不多，知道plugin可以实现context and manipulator.</p>
+<p>问题就来了, 一个简单的plugin system是怎么设计和实现的呢? </p>
+<p>case 1: 
+Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
+http://3dgep ...</p>
+                    <a class="btn btn-default btn-xs" href="/How to build a plugin system.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="/Maya programming node.html">Maya Programming Node</a></h2>
                 <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
@@ -183,33 +197,23 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
                         <a href="/tag/algo.html">
                             Algo
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/glsl.html">
-                            GLSL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
                         <a href="/tag/reading.html">
                             reading
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/opengl.html">
-                            OpenGL
+                        <a href="/tag/qt.html">
+                            qt
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -218,8 +222,18 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/qt.html">
-                            qt
+                        <a href="/tag/opengl.html">
+                            OpenGL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
                         </a>
                     </li>
                 </ul>
@@ -248,7 +262,7 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2014 renc
+         <div class="col-xs-10">&copy; 2015 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

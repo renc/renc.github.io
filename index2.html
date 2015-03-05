@@ -50,9 +50,6 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
-                            <a href="/category/book.html">Book</a>
-                        </li>
-                        <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li >
@@ -71,6 +68,21 @@
     <div class="row">
         <div class="col-sm-9">
 
+            <article>
+                <h2><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h2>
+                <div class="summary"><p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
+<p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
+一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release.  <br />
+图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标....     </p>
+<p>从face面的角度来看, 深蓝色的面为起点, 然后鼠标一旦离开这个深蓝色的面之后, 肯定会进入这个深蓝色面四周的8个浅蓝色面之一(假如把面的边界也看作面一部分). 于是在stroke的路线中, 鼠标所pick到的面是一个连着一个的, 连续. </p>
+<p>从edge边的角度来看, 鼠标从起点移动时候, 虽然鼠标在面内部而不是压在边上面, 但是面的几个边总有一个是距离当前鼠标位置近一点的, 我们选择这个边; 当鼠标移动要离开这个深蓝色的face的时候, 肯定会触碰到这个face是边(假如把角点corner也看作是edge是一部分). 于是在stroke的路线中, 鼠标所pick到的边是一个连着一个的, 也连续. </p>
+<p>而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   </p>
+<p>怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? <br />
+因为上面说到面是完备的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Fail to surround the mouse with the vertices.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="/Build myblog using pelican.html">Build myblog using pelican</a></h2>
                 <div class="summary"><p>都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞...   </p>
@@ -388,23 +400,6 @@ approach 0 ...</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/How to build a plugin system.html">How to build a plugin system</a></h2>
-                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
-很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
-<p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
-- 自定义operation, support undo and redo;
-- 自定义某种brush (operation); 
-- 继承实现某个类，代替原有的那个. 例如map extraction? 
-当前接触到的maya api不多，知道plugin可以实现context and manipulator.</p>
-<p>问题就来了, 一个简单的plugin system是怎么设计和实现的呢? </p>
-<p>case 1: 
-Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
-http://3dgep ...</p>
-                    <a class="btn btn-default btn-xs" href="/How to build a plugin system.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/index.html">&laquo;</a>
@@ -446,33 +441,23 @@ http://3dgep ...</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
                         <a href="/tag/algo.html">
                             Algo
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/glsl.html">
-                            GLSL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
                         <a href="/tag/reading.html">
                             reading
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/opengl.html">
-                            OpenGL
+                        <a href="/tag/qt.html">
+                            qt
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -481,8 +466,18 @@ http://3dgep ...</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/qt.html">
-                            qt
+                        <a href="/tag/opengl.html">
+                            OpenGL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
                         </a>
                     </li>
                 </ul>
@@ -511,7 +506,7 @@ http://3dgep ...</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2014 renc
+         <div class="col-xs-10">&copy; 2015 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

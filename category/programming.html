@@ -51,9 +51,6 @@
                             <a href="/category/.html"></a>
                         </li>
                         <li >
-                            <a href="/category/book.html">Book</a>
-                        </li>
-                        <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li class="active">
@@ -72,6 +69,19 @@
     <div class="row">
         <div class="col-sm-9">
 
+            <article>
+                <h2><a href="/Slide vertex on surface.html">Slide vertex on surface</a></h2>
+                <div class="summary"><p>过年上班没多几天啊, hackathon就开始了, 我报名的project是尝试实现以下paper: <br />
+Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, EUROGRAPHICS 2010. <br />
+本文做一些记录, 特别是有些问题以后可能也会遇到. </p>
+<p>想做这个slide brush的原因是: 1. 上面那个paper本身适合放到brush framework里面来做, 做成一个brush; 2. 看上去不是太难, 是有难点(后面会提到), 但是=不是那种求解方程组的优化问题(我还不太懂这个), 估计可以在2天内搞定的, yes, hackathon就2天.      </p>
+<p>大体做成的效果应该是: brush stroke的时候会带动一些vertices在mesh/surface上滑动, mesh的形状shape被保持。区别于现在mudbox已有的grab brush, 后者顶点跟着鼠标在走,会跑到mesh外面. 区域   </p>
+<p>算法的输入包括(不限于)下面这些:  <br />
++ handle, which is the mouse/brush ...</p>
+                    <a class="btn btn-default btn-xs" href="/Slide vertex on surface.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="/优化-访问数组值.html">优化-访问数组值</a></h2>
                 <div class="summary"><p>记录一下学到的一个技术.    <br />
@@ -435,22 +445,6 @@ print ...</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/name on a book.html">Name on a book</a></h2>
-                <div class="summary"><p>记录一次参与翻译一本外文书的过程, 过程有点累, 结果有点甜.   </p>
-<blockquote>
-<p>you know, it is funny that people do not care your name, until you are in trouble. 
--- 美剧&lt;疑犯追凶&gt;第一集里面的话, 类似而已哦. </p>
-</blockquote>
-<p>去参与翻译一本书, 可以出现在书店书架上的, 还提到你的名字, 是不是很cool?    </p>
-<p>昨天看到email, 被告知我有份参与的书终于上架了, "在各大网店都有售。但是样书会比较慢" 里面上google一下，果然在amazon.cn等都找到了: </p>
-<div class="highlight"><pre><span class="err">交互式程序设计（第</span><span class="mi">2</span><span class="err">版）</span>                                                               
- <span class="o">~</span> <span class="n">Joshua</span> <span class="n">Noble</span> <span class="p">(</span><span class="err">作者</span><span class="p">),</span> <span class="err">毛顺兵</span> <span class="p">(</span><span class="err">译者</span><span class="p">),</span> <span class="err">张婷婷</span> <span class="p">(</span><span class="err">译者</span><span class="p">)</span>                
-<span class="err">出版社</span><span class="o">:</span> <span class="err">机械工业出版社</span><span class="p">;</span> <span class="p">(</span><span class="mi">2014</span><span class="err">年 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/name on a book.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -458,6 +452,8 @@ print ...</p>
                             href="/category/programming.html">1</a></li>
                     <li class=""><a
                             href="/category/programming2.html">2</a></li>
+                    <li class=""><a
+                            href="/category/programming3.html">3</a></li>
                 <li class="next"><a
                         href="/category\programming2.html">&raquo;</a></li>
         </ul>
@@ -489,33 +485,23 @@ print ...</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
+                        <a href="/tag/python.html">
+                            Python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
                         <a href="/tag/algo.html">
                             Algo
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/glsl.html">
-                            GLSL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
                         <a href="/tag/reading.html">
                             reading
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/opengl.html">
-                            OpenGL
+                        <a href="/tag/qt.html">
+                            qt
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -524,8 +510,18 @@ print ...</p>
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
-                        <a href="/tag/qt.html">
-                            qt
+                        <a href="/tag/opengl.html">
+                            OpenGL
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/mel.html">
+                            Mel
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="/tag/glsl.html">
+                            GLSL
                         </a>
                     </li>
                 </ul>
@@ -554,7 +550,7 @@ print ...</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2014 renc
+         <div class="col-xs-10">&copy; 2015 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
