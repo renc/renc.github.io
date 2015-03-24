@@ -13,7 +13,7 @@
 <link rel="canonical" href="/Maya programming node.html">
 
         <meta name="author" content="" />
-        <meta name="keywords" content="Maya,Mel,Python," />
+        <meta name="keywords" content="" />
         <meta name="description" content="学maya时候有些新概念要记录一下，否则忘得快. 先在一个新场景里面拖一个多边形球polygon sphere出来, 打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是: + polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等; + pSphereShape1: 这个就是实际的shape node, 形状. + initialShadingGroup: 用于画这个球的. + pSphere1: transform node, 决定了球在空间位置. import maya.cmds; maya.cmds.polySphere() # 用script建一个球 # Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node ..." />
 
 
@@ -88,12 +88,6 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/maya.html">Maya</a>
-        /
-	<a href="/tag/mel.html">Mel</a>
-        /
-	<a href="/tag/python.html">Python</a>
-        /
 	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
@@ -306,51 +300,6 @@ vs2012, install update 4, there is no v4.5.1
                     <li class="list-group-item tag-1">
                         <a href="/tag/.html">
                             
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="/tag/maya.html">
-                            maya
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/algo.html">
-                            Algo
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/reading.html">
-                            reading
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/qt.html">
-                            qt
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/shader.html">
-                            Shader
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/opengl.html">
-                            OpenGL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/glsl.html">
-                            GLSL
                         </a>
                     </li>
                 </ul>

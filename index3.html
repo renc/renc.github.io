@@ -69,6 +69,24 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h2>
+                <div class="summary"><p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
+- do sth -&gt; undo it, or 
+- do sth -&gt; undo it -&gt; redo it;
+在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。</p>
+<p>maya/devkit的例子所使用的方法是:</p>
+<div class="highlight"><pre><span class="c1">//code  </span>
+<span class="c1">// inside class CommandXY </span>
+<span class="k">virtual</span> <span class="n">bool</span> <span class="n">isUndoable</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">true</span> <span class="k">or</span> <span class="n">false</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">virtual</span> <span class="n">MStatus</span> <span class="n">doIt</span><span class="p">(</span> <span class="k">const</span> <span class="n">MArglist</span> <span class="o">&amp;</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// parse the argument list;</span>
+    <span class="c1">// do some ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Do and redo are similiar.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/How to build a plugin system.html">How to build a plugin system</a></h2>
                 <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
 很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
@@ -151,9 +169,9 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
             </article>
             <hr/>
             <article>
-                <h2><a href="/This is the title.html">This is the Title</a></h2>
+                <h2><a href="/This is the title(file name of the html file).html">This is the Title(Title of artile)</a></h2>
                 <div class="summary"><p>Most of time, do not want summary, since some theme will only display summary at the head page if there is summary here.</p>
-                    <a class="btn btn-default btn-xs" href="/This is the title.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="/This is the title(file name of the html file).html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -189,51 +207,6 @@ Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
                     <li class="list-group-item tag-1">
                         <a href="/tag/.html">
                             
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="/tag/maya.html">
-                            maya
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/algo.html">
-                            Algo
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/reading.html">
-                            reading
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/qt.html">
-                            qt
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/shader.html">
-                            Shader
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/opengl.html">
-                            OpenGL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/glsl.html">
-                            GLSL
                         </a>
                     </li>
                 </ul>

@@ -70,6 +70,31 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/Exclude Edges Outside The Ring(排除圈外边).html">Exclude Edges Outside The Ring(排除圈外边)</a></h2>
+                <div class="summary"><p><img alt="Alt text" src="data/2015-03-17-edges_outside_ring.png" title="output" /><br />
+有时候为了找出这个圈ring接触到touch了哪些edge, 会用一个方形来代替这个圈. 问题是这个方形touch到的edges明显比圈理应touch到的要多, 怎么排除呢? 也就是在方形touch到的边作为一个集合set, 我们要在这里面找出正在被圈所接触到的(包括包含在圈内的).    </p>
+<p>图中我用橙色mark了那些应该被排除在外的边. 问题是怎么用代码表示出来.     </p>
+<div class="highlight"><pre><span class="nl">d:</span> <span class="err">圆圈中心点在边所在直线上的投影点</span><span class="p">,</span> <span class="err">和圈中心点的距离</span><span class="p">(</span><span class="err">点到直线距离</span><span class="p">);</span>   
+<span class="nl">R:</span> <span class="err">圆圈半径</span><span class="n">radius</span><span class="p">.</span>  
+<span class="nl">t:</span> <span class="err">圆圈中心点在边直线段上投影点对应直线段的参数</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="err">表示在直线段内部</span><span class="p">.</span>   
+
+<span class="err">圈外</span><span class="p">,</span> <span class="err">没有被圈覆盖到的边</span><span class="o">:</span>  
+<span class="n">d</span> <span class="o">&gt;</span> <span class="n">R</span> <span class="o">||</span> <span class="p">(</span> <span class="err">边两点在圈外</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">R</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="n">outside</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>     <span class="c1">// 公式1. </span>
+</pre></div>
+
+
+<p>有意思的是, 这是从反面找没有被touch的边, 也可以从正面直接找被touch到的边啊. 从图中可以找到这样的规律:  </p>
+<div class="highlight"><pre><span class="err">被圈覆盖到的边</span><span class="o">:</span>  
+<span class="err">边至少一点在圈内</span> <span class="o">||</span> <span class="p">(</span> <span class="err">边两点在圈外</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">R</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="n">inside</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>     <span class="c1">// 公式2.  </span>
+</pre></div>
+
+
+<p>理应两种情况包含了所有边的情况的, 也就是互补才对. 所以我画了下面的图 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Exclude Edges Outside The Ring(排除圈外边).html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/Slide vertex on surface.html">Slide vertex on surface</a></h2>
                 <div class="summary"><p>过年上班没多几天啊, hackathon就开始了, 我报名的project是尝试实现以下paper: <br />
 Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, EUROGRAPHICS 2010. <br />
@@ -397,33 +422,6 @@ case 2: structure symmetric + value equal;
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/Pointer is copied when passed as function parameter.html">Pointer is copied when passed as function parameter</a></h2>
-                <div class="summary"><h2>起源</h2>
-<p>看到这段代码(肯定是简化更改版啦)  </p>
-<div class="highlight"><pre><span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>   
-<span class="p">{</span>  
-    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
-    <span class="n">item</span><span class="o">-&gt;</span><span class="n">unref</span><span class="p">();</span>  
-<span class="p">}</span>   
-<span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">)</span>   
-<span class="p">{</span>  
-    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
-<span class="p">}</span>   
-</pre></div>
-
-
-<p>上面的unref()是用于reference count的, reference计数减一的意思. 为什么有这东东呢, 为什么下面用引入作为参数的就不需要呢? 
-我怀疑是指针在作为函数参数的传递过程中被复制了, 也就是指向实际的物体的指针又多了一个, 所以merge之后就unref减少一个. 以下的test case尝试证明指针是否被复制了:   </p>
-<div class="highlight"><pre><span class="c1">// try to check if a pointer will be copied during passing-by-pointer.         </span>
-<span class="c1">//              </span>
-<span class="p">#</span><span class="k">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>             
-
-<span class="k">void</span> <span class="n">func1</span><span class="p">(</span><span class="k">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Pointer is copied when passed as function parameter.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -456,51 +454,6 @@ case 2: structure symmetric + value equal;
                     <li class="list-group-item tag-1">
                         <a href="/tag/.html">
                             
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="/tag/maya.html">
-                            maya
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/algo.html">
-                            Algo
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/reading.html">
-                            reading
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/qt.html">
-                            qt
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/shader.html">
-                            Shader
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/opengl.html">
-                            OpenGL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/glsl.html">
-                            GLSL
                         </a>
                     </li>
                 </ul>

@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>This is the Title - 阿can's  blog</title>
+    <title>Exclude Edges Outside The Ring(排除圈外边) - 阿can's  blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,11 +10,11 @@
 
 
 
-<link rel="canonical" href="/This is the title.html">
+<link rel="canonical" href="/Exclude Edges Outside The Ring(排除圈外边).html">
 
         <meta name="author" content="" />
         <meta name="keywords" content="" />
-        <meta name="description" content="Most of time, do not want summary, since some theme will only display summary at the head page if there is summary here." />
+        <meta name="description" content="有时候为了找出这个圈ring接触到touch了哪些edge, 会用一个方形来代替这个圈. 问题是这个方形touch到的edges明显比圈理应touch到的要多, 怎么排除呢? 也就是在方形touch到的边作为一个集合set, 我们要在这里面找出正在被圈所接触到的(包括包含在圈内的). 图中我用橙色mark了那些应该被排除在外的边. 问题是怎么用代码表示出来. d: 圆圈中心点在边所在直线上的投影点, 和圈中心点的距离(点到直线距离); R: 圆圈半径radius. t: 圆圈中心点在边直线段上投影点对应直线段的参数, [0,1]表示在直线段内部. 圈外, 没有被圈覆盖到的边: d &gt; R || ( 边两点在圈外 &amp;&amp; d &lt;= R &amp;&amp; t outside [0,1] ) // 公式1. 有意思的是, 这是从反面找没有被touch的边, 也可以从正面直接找被touch到的边啊. 从图中可以找到这样的规律: 被圈覆盖到的边: 边至少一点在圈内 || ( 边两点在圈外 &amp;&amp; d &lt;= R &amp;&amp; t inside [0,1] ) // 公式2. 理应两种情况包含了所有边的情况的, 也就是互补才对. 所以我画了下面的图 ..." />
 
 
 
@@ -43,13 +43,13 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                        <li >
+                        <li class="active">
                             <a href="/category/.html"></a>
                         </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="/category/programming.html">Programming</a>
                         </li>
             </ul>
@@ -69,10 +69,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/This is the title.html"
+                    <a href="/Exclude Edges Outside The Ring(排除圈外边).html"
                        rel="bookmark"
-                       title="Permalink to This is the Title">
-                        This is the Title
+                       title="Permalink to Exclude Edges Outside The Ring(排除圈外边)">
+                        Exclude Edges Outside The Ring(排除圈外边)
                     </a>
                 </h1>
             </header>
@@ -82,7 +82,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2000-01-01T10:20:00"> 周六 01 一月 2000</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-03-17T20:20:00"> 周二 17 三月 2015</time>
     </span>
 
 
@@ -92,100 +92,27 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>This is the content of my super blog post.
-上面的Category貌似只能写一个名词, 而且假如加了, ,本身也成为了名词的一部分. </p>
-<h1>first class heading</h1>
-<h2>second class heading</h2>
-<h3>third class heading</h3>
-<h4>fourth class heading</h4>
-<h5>fifth class heading</h5>
-<h2>head?</h2>
-<ul>
-<li>无序层次1 unordered list </li>
-<li>
-<p>无序层次2</p>
-</li>
-<li>
-<p>有序层次1 ordered list </p>
-</li>
-<li>
-<p>有序层次2</p>
-</li>
-<li>
-<p>point 1 </p>
-</li>
-<li>point 2 </li>
-</ul>
-<p><strong>加粗bold</strong> </p>
-<blockquote>
-<p>引用文本blockquotes</p>
-</blockquote>
-<p><a href="http://renc.github.io">link to my blog</a>  <br />
-<a href="链接地址">链接上的文本</a>   <br />
-<img alt="Alt text 图片说明, 空也可以" src="data/LineEndings_CRLF.PNG" title="output" />         </p>
-<div class="highlight"><pre><span class="c1">// btw, 上面那个``` 是输入法英语模式下左上角的`  </span>
-<span class="c1">// code section 代码片段; </span>
-<span class="c1">// </span>
-<span class="k">int</span> <span class="n">main</span><span class="p">()</span> 
-<span class="p">{</span> 
-    <span class="k">return</span> <span class="mh">1</span><span class="p">;</span>  
-<span class="p">}</span>  
+                <p><img alt="Alt text" src="data/2015-03-17-edges_outside_ring.png" title="output" /><br />
+有时候为了找出这个圈ring接触到touch了哪些edge, 会用一个方形来代替这个圈. 问题是这个方形touch到的edges明显比圈理应touch到的要多, 怎么排除呢? 也就是在方形touch到的边作为一个集合set, 我们要在这里面找出正在被圈所接触到的(包括包含在圈内的).    </p>
+<p>图中我用橙色mark了那些应该被排除在外的边. 问题是怎么用代码表示出来.     </p>
+<div class="highlight"><pre><span class="nl">d:</span> <span class="err">圆圈中心点在边所在直线上的投影点</span><span class="p">,</span> <span class="err">和圈中心点的距离</span><span class="p">(</span><span class="err">点到直线距离</span><span class="p">);</span>   
+<span class="nl">R:</span> <span class="err">圆圈半径</span><span class="n">radius</span><span class="p">.</span>  
+<span class="nl">t:</span> <span class="err">圆圈中心点在边直线段上投影点对应直线段的参数</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="err">表示在直线段内部</span><span class="p">.</span>   
+
+<span class="err">圈外</span><span class="p">,</span> <span class="err">没有被圈覆盖到的边</span><span class="o">:</span>  
+<span class="n">d</span> <span class="o">&gt;</span> <span class="n">R</span> <span class="o">||</span> <span class="p">(</span> <span class="err">边两点在圈外</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">R</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="n">outside</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>     <span class="c1">// 公式1. </span>
 </pre></div>
 
 
-<table>
-<thead>
-<tr>
-<th>dog</th>
-<th>bird</th>
-<th>cat</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>foo</td>
-<td>foo</td>
-<td>foo</td>
-</tr>
-<tr>
-<td>bar</td>
-<td>bar</td>
-<td>bar</td>
-</tr>
-<tr>
-<td>baz</td>
-<td>baz</td>
-<td>baz</td>
-</tr>
-</tbody>
-</table>
-<p>Finally, by including colons : within the header row, you can define text to be left-aligned, right-aligned, or center-aligned:</p>
-<table>
-<thead>
-<tr>
-<th>Left-Aligned</th>
-<th align="center">Center Aligned</th>
-<th align="right">Right Aligned</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>col 3 is</td>
-<td align="center">some wordy text</td>
-<td align="right">$1600</td>
-</tr>
-<tr>
-<td>col 2 is</td>
-<td align="center">centered</td>
-<td align="right">$12</td>
-</tr>
-<tr>
-<td>zebra stripes</td>
-<td align="center">are neat</td>
-<td align="right">$1</td>
-</tr>
-</tbody>
-</table>
+<p>有意思的是, 这是从反面找没有被touch的边, 也可以从正面直接找被touch到的边啊. 从图中可以找到这样的规律:  </p>
+<div class="highlight"><pre><span class="err">被圈覆盖到的边</span><span class="o">:</span>  
+<span class="err">边至少一点在圈内</span> <span class="o">||</span> <span class="p">(</span> <span class="err">边两点在圈外</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">R</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="n">inside</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>     <span class="c1">// 公式2.  </span>
+</pre></div>
+
+
+<p>理应两种情况包含了所有边的情况的, 也就是互补才对. 所以我画了下面的图:<br />
+<img alt="Alt text" src="data/2015-03-17-two_cases.png" title="output" />    </p>
+<p>最后是否可以对其中一个公式取负(or 取补)得到另一个呢? 具体怎么做的了呢, 我都忘了.          </p>
             </div>
             <!-- /.entry-content -->
         </article>
@@ -211,51 +138,6 @@
                     <li class="list-group-item tag-1">
                         <a href="/tag/.html">
                             
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="/tag/maya.html">
-                            maya
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/algo.html">
-                            Algo
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/reading.html">
-                            reading
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/qt.html">
-                            qt
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/shader.html">
-                            Shader
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/opengl.html">
-                            OpenGL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/glsl.html">
-                            GLSL
                         </a>
                     </li>
                 </ul>

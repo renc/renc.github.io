@@ -70,6 +70,33 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="/Pointer is copied when passed as function parameter.html">Pointer is copied when passed as function parameter</a></h2>
+                <div class="summary"><h2>起源</h2>
+<p>看到这段代码(肯定是简化更改版啦)  </p>
+<div class="highlight"><pre><span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>   
+<span class="p">{</span>  
+    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
+    <span class="n">item</span><span class="o">-&gt;</span><span class="n">unref</span><span class="p">();</span>  
+<span class="p">}</span>   
+<span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">)</span>   
+<span class="p">{</span>  
+    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
+<span class="p">}</span>   
+</pre></div>
+
+
+<p>上面的unref()是用于reference count的, reference计数减一的意思. 为什么有这东东呢, 为什么下面用引入作为参数的就不需要呢? 
+我怀疑是指针在作为函数参数的传递过程中被复制了, 也就是指向实际的物体的指针又多了一个, 所以merge之后就unref减少一个. 以下的test case尝试证明指针是否被复制了:   </p>
+<div class="highlight"><pre><span class="c1">// try to check if a pointer will be copied during passing-by-pointer.         </span>
+<span class="c1">//              </span>
+<span class="p">#</span><span class="k">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>             
+
+<span class="k">void</span> <span class="n">func1</span><span class="p">(</span><span class="k">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Pointer is copied when passed as function parameter.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h2>
                 <div class="summary"><p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
 <p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
@@ -248,6 +275,22 @@ error C4335: Mac file format detected: please convert the source file to either 
             </article>
             <hr/>
             <article>
+                <h2><a href="/mesh history in maya.html">mesh history</a></h2>
+                <div class="summary"><p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
+<h2>引言</h2>
+<p>以前对mesh的修改都是例如
+mesh.setVertexPosition( vertexID, newPos ); 
+mesh.setVertexTC( tcID, newTC ); 
+这样直接改[1], 从读书时候到现在都是这么simple and naive:-) 而对于maya的case就没有这样简单了，例如去看maya&gt;devkit&gt;splitUV example [2],  套用上面直接修改的方法, 要split一个uv的话，那直接用MFnMesh加几个新uv, MFnMesh::setUV(new uv id, uv value) 就ok了, 可是故事没有这么简单.... </p>
+<h2>Construction History and Tweak</h2>
+<p>直接摘抄两段来看看:</p>
+<blockquote>
+<p>All the operations that can be performed on a polygonal ...</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="/mesh history in maya.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/algo - counting inversions.html">algo - counting inversions</a></h2>
                 <div class="summary"><p>算法练习: counting inversions       </p>
 <h2>Background</h2>
@@ -367,41 +410,6 @@ approach 0 ...</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h2>
-                <div class="summary"><p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
-- do sth -&gt; undo it, or 
-- do sth -&gt; undo it -&gt; redo it;
-在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。</p>
-<p>maya/devkit的例子所使用的方法是:</p>
-<div class="highlight"><pre><span class="c1">//code  </span>
-<span class="c1">// inside class CommandXY </span>
-<span class="k">virtual</span> <span class="n">bool</span> <span class="n">isUndoable</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">true</span> <span class="k">or</span> <span class="n">false</span><span class="p">;</span> <span class="p">}</span>
-<span class="k">virtual</span> <span class="n">MStatus</span> <span class="n">doIt</span><span class="p">(</span> <span class="k">const</span> <span class="n">MArglist</span> <span class="o">&amp;</span> <span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// parse the argument list;</span>
-    <span class="c1">// do some ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Do and redo are similiar.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/How to build a plugin system.html">How to build a plugin system</a></h2>
-                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
-很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
-<p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
-- 自定义operation, support undo and redo;
-- 自定义某种brush (operation); 
-- 继承实现某个类，代替原有的那个. 例如map extraction? 
-当前接触到的maya api不多，知道plugin可以实现context and manipulator.</p>
-<p>问题就来了, 一个简单的plugin system是怎么设计和实现的呢? </p>
-<p>case 1: 
-Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
-http://3dgep ...</p>
-                    <a class="btn btn-default btn-xs" href="/How to build a plugin system.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/tag\.html">&laquo;</a>
@@ -435,51 +443,6 @@ http://3dgep ...</p>
                     <li class="list-group-item tag-1">
                         <a href="/tag/.html">
                             
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="/tag/maya.html">
-                            maya
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/python.html">
-                            Python
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/algo.html">
-                            Algo
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="/tag/reading.html">
-                            reading
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/qt.html">
-                            qt
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/shader.html">
-                            Shader
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/opengl.html">
-                            OpenGL
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/mel.html">
-                            Mel
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="/tag/glsl.html">
-                            GLSL
                         </a>
                     </li>
                 </ul>
