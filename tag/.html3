@@ -1,77 +1,76 @@
 <!DOCTYPE html>
-<html lang="en"
->
+<html lang="en">
 <head>
-    <title> - 阿can's  blog</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <title>阿can's  blog - </title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
 
-
-
-
-    <meta name="author" content="renc" />
-    <meta name="keywords" content="" />
-
-    <!-- Open Graph tags -->
-        <meta property="og:site_name" content="阿can's  blog" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="阿can's  blog"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="阿can's  blog"/>
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 </head>
-<body>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-阿can's  blog            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="/category/.html"></a>
-                        </li>
-                        <li >
-                            <a href="/category/computer-graphics.html">Computer graphics</a>
-                        </li>
-                        <li >
-                            <a href="/category/programming.html">Programming</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-</div> <!-- /.navbar -->
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">阿can's  blog </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about_page.html">About</a></li>
+                    <li class="active"><a href="/category/.html"></a></li>
+                    <li><a href="/category/computer-graphics.html">Computer Graphics</a></li>
+                    <li><a href="/category/programming.html">programming</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
+                <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="19">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/choose the overrided function.html" rel="bookmark"
+                           title="Permalink to choose the overrided function">choose the overrided function</a></h1>
+                </header>
 
-            <article>
-                <h2><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h2>
-                <div class="summary"><p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-04-17T10:20:00">
+                Published: 周四 17 四月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-04-17T19:30:00">
+                Updated: 周四 17 四月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>In class hierarchy, if functions are overrided by some subclass, which one will be invoked?</p>
+                <a class="readmore" href="/choose the overrided function.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Do and redo are similiar.html" rel="bookmark"
+                           title="Permalink to Do and redo are similiar">Do and redo are similiar</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-04-14T10:20:00">
+                Published: 周一 14 四月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-04-14T19:30:00">
+                Updated: 周一 14 四月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
 - do sth -&gt; undo it, or 
 - do sth -&gt; undo it -&gt; redo it;
 在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。</p>
@@ -83,13 +82,32 @@
 <span class="p">{</span>
     <span class="c1">// parse the argument list;</span>
     <span class="c1">// do some ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Do and redo are similiar.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/How to build a plugin system.html">How to build a plugin system</a></h2>
-                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
+                <a class="readmore" href="/Do and redo are similiar.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/How to build a plugin system.html" rel="bookmark"
+                           title="Permalink to How to build a plugin system">How to build a plugin system</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-04-03T10:20:00">
+                Published: 周四 03 四月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-04-05T19:30:00">
+                Updated: 周六 05 四月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>Applications normally support custom plugins, how to do that?<br />
 很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
 <p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
 - 自定义operation, support undo and redo;
@@ -100,45 +118,117 @@
 <p>case 1: 
 Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
 http://3dgep ...</p>
-                    <a class="btn btn-default btn-xs" href="/How to build a plugin system.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Maya programming node.html">Maya Programming Node</a></h2>
-                <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
-<p>先在一个新场景里面拖一个多边形球polygon sphere出来,    <br />
-<img alt="transfrom and shape node" src="data/2014-04-01-transfer_shape_node.png" title="output" />
-打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是:    <br />
-+ polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等;  <br />
-+ pSphereShape1: 这个就是实际的shape node, 形状.                  <br />
-+ initialShadingGroup: 用于画这个球的.               <br />
-+ pSphere1: transform node, 决定了球在空间位置.                 </p>
-<div class="highlight"><pre><span class="n">import</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">;</span> 
+                <a class="readmore" href="/How to build a plugin system.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
-<span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">polySphere</span><span class="p">()</span>                  <span class="err">#</span> <span class="err">用</span><span class="n">script</span><span class="err">建一个球</span> 
-<span class="cp"># Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Maya programming node.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/simple implement of 2d bezier curve.html">simple implement of 2d bezier curve</a></h2>
-                <div class="summary"><p>工作中又一次遇到nurb curve的问题，具体是knots个数和求法的问题。那东西太难，相对来来说，bezier curve易懂很多，一直想实现一下来看看，于是就有了此。</p>
-                    <a class="btn btn-default btn-xs" href="/simple implement of 2d bezier curve.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Flood fill.html">Flood fill</a></h2>
-                <div class="summary"><p>看见someone提到Flood fill algorithm, 惭愧，不熟悉这个名字，于是Google一下，竟然跟BFS很像，于是想着要简单实现一下。</p>
-                    <a class="btn btn-default btn-xs" href="/Flood fill.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Tree view at Qt.html">Tree view at Qt</a></h2>
-                <div class="summary"><p>Qt中的TreeView很复杂, 记录一下自己的理解.  </p>
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Maya programming note.html" rel="bookmark"
+                           title="Permalink to Maya Programming Note">Maya Programming Note</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-04-01T10:20:00">
+                Published: 周二 01 四月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-09-18T23:30:00">
+                Updated: 周四 18 九月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>学maya时候有些新概念要记录一下，否则忘得快. </p>
+<h1>Background colors 改变3d view的背景颜色:</h1>
+<ol>
+<li>use the Alt-b hotkey to toggle切换 between different background colors;    </li>
+<li>Or to customize it by Window &gt; Setting/Preferences &gt; Color Settings &gt; General tab &gt; 3d view section. </li>
+</ol>
+<h1>Display the polygon count in the scene view  显示多边形个数</h1>
+<p>Display &gt; Heads Up Display &gt; Poly Count 有几列: 全部for visible polygon ...</p>
+                <a class="readmore" href="/Maya programming note.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/simple implement of 2d bezier curve.html" rel="bookmark"
+                           title="Permalink to simple implement of 2d bezier curve">simple implement of 2d bezier curve</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-03T10:20:00">
+                Published: 周一 03 三月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-03-03T19:30:00">
+                Updated: 周一 03 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>工作中又一次遇到nurb curve的问题，具体是knots个数和求法的问题。那东西太难，相对来来说，bezier curve易懂很多，一直想实现一下来看看，于是就有了此。</p>
+                <a class="readmore" href="/simple implement of 2d bezier curve.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Flood fill.html" rel="bookmark"
+                           title="Permalink to Flood fill">Flood fill</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-10-22T10:20:00">
+                Published: 周二 22 十月 2013
+        </abbr>
+		<br />
+        <abbr class="modified" title="2013-10-22T19:30:00">
+                Updated: 周二 22 十月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>看见someone提到Flood fill algorithm, 惭愧，不熟悉这个名字，于是Google一下，竟然跟BFS很像，于是想着要简单实现一下。</p>
+                <a class="readmore" href="/Flood fill.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Tree view at Qt.html" rel="bookmark"
+                           title="Permalink to Tree view at Qt">Tree view at Qt</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-10-08T10:20:00">
+                Published: 周二 08 十月 2013
+        </abbr>
+		<br />
+        <abbr class="modified" title="2013-10-08T10:20:00">
+                Updated: 周二 08 十月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/renc.html">renc</a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>Qt中的TreeView很复杂, 记录一下自己的理解.  </p>
 <h2>引言</h2>
 <blockquote>
 <p>Model/View/item的关系就有点像Container/Algorithm/Iterator的关系。
@@ -152,118 +242,130 @@ Tree view属于Model/View Programming的一部分。有些
 for (int row = 0; row &lt; model-&gt;rowCount(parentIndex); ++row)
 {
     for (int ...</p>
-                    <a class="btn btn-default btn-xs" href="/Tree view at Qt.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Blendshape at maya.html">Blendshape at maya</a></h2>
-                <div class="summary"><p>最近接触了一点maya blendshape programming, 稍微记录一下。</p>
+                <a class="readmore" href="/Tree view at Qt.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Blendshape at maya.html" rel="bookmark"
+                           title="Permalink to Blendshape at maya">Blendshape at maya</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-08-14T10:20:00">
+                Published: 周三 14 八月 2013
+        </abbr>
+		<br />
+        <abbr class="modified" title="2013-08-14T10:20:00">
+                Updated: 周三 14 八月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/renc.html">renc</a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>最近接触了一点maya blendshape programming, 稍微记录一下。</p>
 <h2>BlendShape deformer basis (基础)</h2>
 <p>先说明一个特点，当drag一个cube or sphere物体的时候，会生成<transform node, shape node>两个nodes, 具体的细节请看maya scene graph，DAG。</p>
 <p>To create a simple blendshape example,<br />
 Polygon mode, create a cube, we have <pCube1, pCubeShape1>; <br />
 Select cube1, Shift+D, we have <pCube2, pCubeShape2>, move cube2 a little bit away from cube1.<br />
 Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
-                    <a class="btn btn-default btn-xs" href="/Blendshape at maya.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Blendshape at maya.html">Blendshape at maya</a></h2>
-                <div class="summary"><p>最近接触了一点maya blendshape programming, 稍微记录一下。</p>
+                <a class="readmore" href="/Blendshape at maya.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Blendshape at maya.html" rel="bookmark"
+                           title="Permalink to Blendshape at maya">Blendshape at maya</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-08-14T10:20:00">
+                Published: 周三 14 八月 2013
+        </abbr>
+		<br />
+        <abbr class="modified" title="2013-08-14T10:20:00">
+                Updated: 周三 14 八月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/renc.html">renc</a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>最近接触了一点maya blendshape programming, 稍微记录一下。</p>
 <h2>BlendShape deformer basis (基础)</h2>
 <p>先说明一个特点，当drag一个cube or sphere物体的时候，会生成<transform node, shape node>两个nodes, 具体的细节请看maya scene graph，DAG。</p>
 <p>To create a simple blendshape example,<br />
 Polygon mode, create a cube, we have <pCube1, pCubeShape1>; <br />
 Select cube1, Shift+D, we have <pCube2, pCubeShape2>, move cube2 a little bit away from cube1.<br />
 Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
-                    <a class="btn btn-default btn-xs" href="/Blendshape at maya.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/This is the title(file name of the html file).html">This is the Title(Title of artile)</a></h2>
-                <div class="summary"><p>Most of time, do not want summary, since some theme will only display summary at the head page if there is summary here.</p>
-                    <a class="btn btn-default btn-xs" href="/This is the title(file name of the html file).html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+                <a class="readmore" href="/Blendshape at maya.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
-        <ul class="pagination">
-                <li class="prev"><a href="/tag\.html2">&laquo;</a>
-                </li>
-                    <li class=""><a
-                            href="/tag/.html">1</a></li>
-                    <li class=""><a
-                            href="/tag/2.html">2</a></li>
-                    <li class="active"><a
-                            href="/tag/3.html">3</a></li>
-                <li class="next disabled"><a href="#">&raquo;</a></li>
-        </ul>
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/This is the title(file name of the html file).html" rel="bookmark"
+                           title="Permalink to This is the Title(Title of artile)">This is the Title(Title of artile)</a></h1>
+                </header>
 
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
-              </ul>
-            </li>
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2000-01-01T10:20:00">
+                Published: 周六 01 一月 2000
+        </abbr>
+		<br />
+        <abbr class="modified" title="2000-01-01T19:30:00">
+                Updated: 周六 01 一月 2000
+        </abbr>
 
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>Most of time, do not want summary, since some theme will only display summary at the head page if there is summary here.</p>
+                <a class="readmore" href="/This is the title(file name of the html file).html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="/tag\.html2">&laquo;</a>
+    Page 3 / 3
+</p>
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
 
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="https://github.com/renc">Github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
 
-            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
-</section>
-            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="/theme/js/jquery.min.js"></script>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
 
 </body>
 </html>

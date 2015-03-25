@@ -1,98 +1,49 @@
 <!DOCTYPE html>
-<html lang="en"
->
+<html lang="en">
 <head>
-    <title>Fail to surround the mouse with the vertices - 阿can's  blog</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <title>Fail to surround the mouse with the vertices</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
 
-
-
-<link rel="canonical" href="/Fail to surround the mouse with the vertices.html">
-
-        <meta name="author" content="renc" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ? 一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release. 图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标.... 从face面的角度来看, 深蓝色的面为起点, 然后鼠标一旦离开这个深蓝色的面之后, 肯定会进入这个深蓝色面四周的8个浅蓝色面之一(假如把面的边界也看作面一部分). 于是在stroke的路线中, 鼠标所pick到的面是一个连着一个的, 连续. 从edge边的角度来看, 鼠标从起点移动时候, 虽然鼠标在面内部而不是压在边上面, 但是面的几个边总有一个是距离当前鼠标位置近一点的, 我们选择这个边; 当鼠标移动要离开这个深蓝色的face的时候, 肯定会触碰到这个face是边(假如把角点corner也看作是edge是一部分). 于是在stroke的路线中, 鼠标所pick到的边是一个连着一个的, 也连续. 而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续? 怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? 因为上面说到面是完备的 ..." />
-
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 </head>
-<body>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-阿can's  blog            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="/category/.html"></a>
-                        </li>
-                        <li >
-                            <a href="/category/computer-graphics.html">Computer graphics</a>
-                        </li>
-                        <li >
-                            <a href="/category/programming.html">Programming</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-</div> <!-- /.navbar -->
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">阿can's  blog </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about_page.html">About</a></li>
+                    <li class="active"><a href="/category/.html"></a></li>
+                    <li><a href="/category/computer-graphics.html">Computer Graphics</a></li>
+                    <li><a href="/category/programming.html">programming</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/Fail to surround the mouse with the vertices.html" rel="bookmark"
+           title="Permalink to Fail to surround the mouse with the vertices">Fail to surround the mouse with the vertices</a></h1>
+    </header>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
-
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/Fail to surround the mouse with the vertices.html"
-                       rel="bookmark"
-                       title="Permalink to Fail to surround the mouse with the vertices">
-                        Fail to surround the mouse with the vertices
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
+    <div class="entry-content">
 <footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-09-02T16:00:00"> 周二 02 九月 2014</time>
-    </span>
+        <abbr class="published" title="2014-09-02T16:00:00">
+                Published: 周二 02 九月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-09-02T16:00:00">
+                Updated: 周二 02 九月 2014
+        </abbr>
 
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
-    
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/renc.html">renc</a>
+        </address>
+<p>In <a href="/category/.html"></a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->      <p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
 <p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
 一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release.  <br />
 图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标....     </p>
@@ -101,74 +52,35 @@
 <p>而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   </p>
 <p>怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? <br />
 因为上面说到面是完备的+连续的, 那是否可以对pick到的面求跟鼠标距离近的顶点来组成那一串连续的顶点呢.     </p>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
+    </div><!-- /.entry-content -->
 
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
-              </ul>
-            </li>
-
-
-
-            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
+  </article>
 </section>
-            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="/theme/js/jquery.min.js"></script>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="https://github.com/renc">Github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
 
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
 
 </body>
 </html>

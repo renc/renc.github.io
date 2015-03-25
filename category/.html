@@ -1,77 +1,82 @@
 <!DOCTYPE html>
-<html lang="en"
->
+<html lang="en">
 <head>
-    <title> - 阿can's  blog</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <title>阿can's  blog - </title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
 
-
-
-
-    <meta name="author" content="renc" />
-    <meta name="keywords" content="" />
-
-    <!-- Open Graph tags -->
-        <meta property="og:site_name" content="阿can's  blog" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="阿can's  blog"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="阿can's  blog"/>
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 </head>
-<body>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-阿can's  blog            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="/category/.html"></a>
-                        </li>
-                        <li >
-                            <a href="/category/computer-graphics.html">Computer graphics</a>
-                        </li>
-                        <li >
-                            <a href="/category/programming.html">Programming</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-</div> <!-- /.navbar -->
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">阿can's  blog </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about_page.html">About</a></li>
+                    <li class="active"><a href="/category/.html"></a></li>
+                    <li><a href="/category/computer-graphics.html">Computer Graphics</a></li>
+                    <li><a href="/category/programming.html">programming</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/Maya_Script_-_simple_node.html">Maya_Script_-_simple_node</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-03-25T20:20:00">
+                Published: 周三 25 三月 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-03-25T20:30:00">
+                Updated: 周三 25 三月 2015
+        </abbr>
 
-            <article>
-                <h2><a href="/Exclude Edges Outside The Ring(排除圈外边).html">Exclude Edges Outside The Ring(排除圈外边)</a></h2>
-                <div class="summary"><p><img alt="Alt text" src="data/2015-03-17-edges_outside_ring.png" title="output" /><br />
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/.html"></a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info --><p>要学习maya node, 例如的attribute, plug, 怎么连接, 怎么计算等. 所以找了些资料来看, 这里记录一下.  </p>
+<h2>例子 建一个算sin函数的node</h2>
+<p>这例子是http://me.autodesk.jp/wam/maya/docs/Maya2009/API/sine_node_8py-example.html这里找到的, 算是能找到的最简单明了的了.  我把单位从原来的radian改为了degree, 加了comments. <br />
+<a href="https://github.com/renc/coding_exercises/blob/master/maya_py_sineNodeDegree/sineNodeDegree.py">sineNodeDegree.py</a>               <br />
+下载这个py文件放到目录 里面, Windows &gt; Plugin-in Manager to load that script.      <br />
+然后就打开Node Editor or Hypergraph: Connection window就可以看到这个node了,          <br />
+<img alt="Alt text" src="data/2015-03-25-node_editor.png" title="" /> <br />
+在Node Editor里面click to select this node, 就看到Attribute Editor是这样子:        <br />
+<img alt="Alt text" src="data/2015-03-25-node_attribute_editor.png" title="" />      <br />
+尝试在input那边输入例如0 30 60 90等, output会立刻输出sin结果, 在script editor中也有输出.     </p>
+<p>Best Practices for MPxNode::compute() func, from book [Maya Python for Games and Film, 2011], only use MDataBlock object associated with the node. Trying to retrieve data from outside the data block may trigger unnecessary DG computation, or result in an infinite loop.   </p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Exclude Edges Outside The Ring(排除圈外边).html" rel="bookmark"
+                           title="Permalink to Exclude Edges Outside The Ring(排除圈外边)">Exclude Edges Outside The Ring(排除圈外边)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-17T20:20:00">
+                Published: 周二 17 三月 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-03-17T20:30:00">
+                Updated: 周二 17 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/.html"></a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p><img alt="Alt text" src="data/2015-03-17-edges_outside_ring.png" title="output" /><br />
 有时候为了找出这个圈ring接触到touch了哪些edge, 会用一个方形来代替这个圈. 问题是这个方形touch到的edges明显比圈理应touch到的要多, 怎么排除呢? 也就是在方形touch到的边作为一个集合set, 我们要在这里面找出正在被圈所接触到的(包括包含在圈内的).    </p>
 <p>图中我用橙色mark了那些应该被排除在外的边. 问题是怎么用代码表示出来.     </p>
 <div class="highlight"><pre><span class="nl">d:</span> <span class="err">圆圈中心点在边所在直线上的投影点</span><span class="p">,</span> <span class="err">和圈中心点的距离</span><span class="p">(</span><span class="err">点到直线距离</span><span class="p">);</span>   
@@ -90,38 +95,95 @@
 
 
 <p>理应两种情况包含了所有边的情况的, 也就是互补才对. 所以我画了下面的图 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Exclude Edges Outside The Ring(排除圈外边).html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/祈祷落幕时.html">祈祷落幕时</a></h2>
-                <div class="summary"><p>书名：祈祷落幕时 <br />
+                <a class="readmore" href="/Exclude Edges Outside The Ring(排除圈外边).html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/祈祷落幕时.html" rel="bookmark"
+                           title="Permalink to 祈祷落幕时">祈祷落幕时</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-12-27T10:20:00">
+                Published: 周六 27 十二月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-12-27T19:30:00">
+                Updated: 周六 27 十二月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/.html"></a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>书名：祈祷落幕时 <br />
 作者：东野圭吾 <br />
 2015-1    </p>
 <p>amazon.cn 12月份的推荐书, 尝试买回来看一下, 谁知一看就停不下来, 周五下午到周六就看完了. 极少看侦探推理小说啊，都忘了上一部是什么时候看的了. 主要是叙述看得很舒服, 没有太凶残的描写, 关键是找人物的联系.<br />
 介绍说是父女的爱, 但看过一半没有预知结局时候还是觉得很莫名, 跟父女的亲情有什么关系呢?  而题目为什么又是"祈祷落幕时"呢?<br />
 当看完之后回味, 才觉得这书名不错。推荐.   </p>
-                    <a class="btn btn-default btn-xs" href="/祈祷落幕时.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Book - Everyday Probability and Statistics.html">Book - Everyday Probability and Statistics</a></h2>
-                <div class="summary"><p><img alt="Alt text" src="data/2014-10-13-book_naked_statistics.PNG" title="output" /> <img alt="Alt text" src="data/2014-10-13-book_everyday_probability_and_statistics.PNG" title="output" />         <br />
+                <a class="readmore" href="/祈祷落幕时.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Book - Everyday Probability and Statistics.html" rel="bookmark"
+                           title="Permalink to Book - Everyday Probability and Statistics">Book - Everyday Probability and Statistics</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-10-13T22:20:00">
+                Published: 周一 13 十月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-10-13T22:30:00">
+                Updated: 周一 13 十月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/renc.html">renc</a>
+        </address>
+<p>In <a href="/category/.html"></a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p><img alt="Alt text" src="data/2014-10-13-book_naked_statistics.PNG" title="output" /> <img alt="Alt text" src="data/2014-10-13-book_everyday_probability_and_statistics.PNG" title="output" />         <br />
 那本[Naked Statistics]是流行书, 所以年初的时候买来看, 主要是讲日常生活中, 例如媒体, 那些统计学方面的概念可能会被误解or有意无意的用来误导大众.              <br />
 也正是在看这书时候发现后几章的概念不懂, 想找本简单的书来学习一下, 于是就有了第二本[人人都来掷骰子], 跟前一本的区别是: 前几章讲了一些概率的基础, 后几章讲统计学的概念。每一章介绍一个概念, 不长, 可以一下看完. 而且一般的步骤是例子|概念|怎么算, 没有复杂的公式没有公式证明推导等. 15章后开始的样品空间, 还不是很清晰.         </p>
 <p>不过能在上几周断断续续地看完这本书还是满足:-) 特别是还在追这部美剧:  <br />
 <img alt="Alt text" src="data/2014-10-13-PersionOfInterest.PNG" title="output" />                  <br />
 Person of Interest / 疑犯追凶;           <br />
 这有一个问题就是我们还有多少隐私呢? 倒不是说zf监控了我们的信息, 而是我们在日常的网上购物/网上言论/网上账单等都把我们清清楚楚的记录了, 甚至比我们自己还记得清楚, 慢慢地可能比我们自己还了解我们自己了. so who care the privacy? 说真的, 我都不知道哪些属于隐私范围, 而另外即使知道了别人的隐私, 是否又等于侵犯了别人的隐私呢?                                        </p>
-                    <a class="btn btn-default btn-xs" href="/Book - Everyday Probability and Statistics.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h2>
-                <div class="summary"><p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
+                <a class="readmore" href="/Book - Everyday Probability and Statistics.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Fail to surround the mouse with the vertices.html" rel="bookmark"
+                           title="Permalink to Fail to surround the mouse with the vertices">Fail to surround the mouse with the vertices</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-09-02T16:00:00">
+                Published: 周二 02 九月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-09-02T16:00:00">
+                Updated: 周二 02 九月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/renc.html">renc</a>
+        </address>
+<p>In <a href="/category/.html"></a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
 <p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
 一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release.  <br />
 图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标....     </p>
@@ -130,13 +192,32 @@ Person of Interest / 疑犯追凶;           <br />
 <p>而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   </p>
 <p>怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? <br />
 因为上面说到面是完备的 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Fail to surround the mouse with the vertices.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/mesh history in maya.html">mesh history</a></h2>
-                <div class="summary"><p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
+                <a class="readmore" href="/Fail to surround the mouse with the vertices.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/mesh history in maya.html" rel="bookmark"
+                           title="Permalink to mesh history">mesh history</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-28T10:20:00">
+                Published: 周三 28 五月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-05-28T19:30:00">
+                Updated: 周三 28 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/.html"></a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->                <p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
 <h2>引言</h2>
 <p>以前对mesh的修改都是例如
 mesh.setVertexPosition( vertexID, newPos ); 
@@ -146,74 +227,39 @@ mesh.setVertexTC( tcID, newTC );
 <p>直接摘抄两段来看看:</p>
 <blockquote>
 <p>All the operations that can be performed on a polygonal ...</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="/mesh history in maya.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+                <a class="readmore" href="/mesh history in maya.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+    Page 1 / 1
+</p>
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
 
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="https://github.com/renc">Github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
 
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
-              </ul>
-            </li>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
 
-
-
-            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
-</section>
-            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
 
 </body>
 </html>

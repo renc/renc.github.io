@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Maya Programming Note</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">阿can's  blog </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about_page.html">About</a></li>
+                    <li><a href="/category/.html"></a></li>
+                    <li><a href="/category/computer-graphics.html">Computer Graphics</a></li>
+                    <li class="active"><a href="/category/programming.html">programming</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/Maya programming note.html" rel="bookmark"
+           title="Permalink to Maya Programming Note">Maya Programming Note</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-04-01T10:20:00">
+                Published: 周二 01 四月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-09-18T23:30:00">
+                Updated: 周四 18 九月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/.html"></a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->      <p>学maya时候有些新概念要记录一下，否则忘得快. </p>
+<h1>Background colors 改变3d view的背景颜色:</h1>
+<ol>
+<li>use the Alt-b hotkey to toggle切换 between different background colors;    </li>
+<li>Or to customize it by Window &gt; Setting/Preferences &gt; Color Settings &gt; General tab &gt; 3d view section. </li>
+</ol>
+<h1>Display the polygon count in the scene view  显示多边形个数</h1>
+<p>Display &gt; Heads Up Display &gt; Poly Count 有几列: 全部for visible polygon; count for selected polygons;  counts for selected components on objects that are partly visible in the view; </p>
+<h2>Transfrom and Shape node</h2>
+<p>先在一个新场景里面拖一个多边形球polygon sphere出来,    <br />
+<img alt="transfrom and shape node" src="data/2014-04-01-transfer_shape_node.png" title="output" />
+打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是:    <br />
++ polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等;  <br />
++ pSphereShape1: 这个就是实际的shape node, 形状.                  <br />
++ initialShadingGroup: 用于画这个球的.               <br />
++ pSphere1: transform node, 决定了球在空间位置.                 </p>
+<div class="highlight"><pre><span class="n">import</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">;</span> 
+
+<span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">polySphere</span><span class="p">()</span>                  <span class="err">#</span> <span class="err">用</span><span class="n">script</span><span class="err">建一个球</span> 
+<span class="cp"># Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node. interesting part is the result is an array [].                                        </span>
+
+<span class="n">print</span><span class="p">(</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">help</span><span class="p">(</span><span class="err">&#39;</span><span class="n">polySphere</span><span class="err">&#39;</span><span class="p">)</span> <span class="p">)</span>   <span class="err">#</span> <span class="err">查阅命令细节</span>        
+<span class="cp"># related commands: polyCube, polyPlane, polyCone, polyCylinder, polyTorus.     </span>
+</pre></div>
+
+
+<h2>Selection</h2>
+<p><img alt="mode_and_mask" src="data/2014-04-01_maya_selection_mode_mask.png" title="output" /><br />
+起码区分清楚了selection mode and mask之后, 才能继续. </p>
+<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, chapter 3.3.    </span>
+<span class="k">string</span> <span class="err">$</span><span class="n">ns</span><span class="p">[]</span> <span class="o">=</span> <span class="no">`ls</span> <span class="o">-</span><span class="n">sl</span><span class="err">`</span><span class="p">;</span>    
+<span class="k">for</span> <span class="p">(</span><span class="err">$</span><span class="n">n</span> <span class="n">in</span> <span class="err">$</span><span class="n">ns</span><span class="p">)</span>     
+<span class="p">{</span>    
+    <span class="k">string</span> <span class="err">$</span><span class="n">nt</span> <span class="o">=</span> <span class="no">`objectType</span> <span class="err">$</span><span class="n">n</span><span class="err">`</span><span class="p">;</span>     
+    <span class="n">print</span> <span class="p">(</span><span class="s">&quot;Node: &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">n</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="err">$</span><span class="n">nt</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>      
+<span class="p">};</span>      
+</pre></div>
+
+
+<p>ls -sl  # to list objects /components are selected.<br />
+ls -hilite  # to list the objects ready be select their components<br />
+ls -psh  # the current pre-select highlight coomponent.<br />
+check the hilite command too.<br />
+这几个东西很相像的. -sl是已经选中的东西, 例如绿色的顶点和物体. -hilite是可能在上面选择component的物体. -psh好像就是预选, 例如切换到vtx模式, 在物体上面移动鼠标, 那些被高亮的红色顶点。</p>
+<div class="highlight"><pre><span class="c1">//Store old selection mode and mask </span>
+<span class="n">fPreviousSelectionMode</span> <span class="o">=</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">selectionMode</span><span class="p">();</span> 
+<span class="k">if</span><span class="p">(</span> <span class="n">fPreviousSelectionMode</span> <span class="o">==</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">kSelectComponentMode</span> <span class="p">)</span> 
+    <span class="n">fPreviousSelectionMask</span> <span class="o">=</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">componentSelectionMask</span><span class="p">();</span> 
+<span class="k">else</span> 
+    <span class="n">fPreviousSelectionMask</span> <span class="o">=</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">objectSelectionMask</span><span class="p">();</span>
+
+<span class="n">MGlobal</span><span class="o">::</span><span class="n">setSelectionMode</span><span class="p">(</span> <span class="n">MGlobal</span><span class="o">::</span><span class="n">kSelectComponentMode</span> <span class="p">);</span> 
+<span class="n">MGlobal</span><span class="o">::</span><span class="n">setComponentSelectionMask</span><span class="p">(</span> <span class="n">MSelectionMask</span><span class="o">::</span><span class="n">kSelectMeshUVs</span> <span class="p">);</span>
+</pre></div>
+
+
+<p>例如我们选择一个平面模型, drag to create a plane, 得到的除了一个shape node以外, 还有一个transform node作为parent.<br />
+<img alt="Alt text" src="data/2014-09-28-plane-connection.PNG" title="" />  <br />
+左边应该是一连串表示shape的构造过程, 最右边是transform node.  </p>
+<div class="highlight"><pre><span class="c1">// modified from Complete Maya Programming, ch 3.4 Hierarchies </span>
+
+<span class="c1">// to create a new transform node, and connect the sphere and plane as children </span>
+<span class="n">group</span> <span class="o">-</span><span class="n">name</span> <span class="n">topTransform</span> <span class="n">pSphere1</span><span class="p">;</span> 
+<span class="n">parent</span> <span class="n">pPlane1</span> <span class="n">topTransform</span><span class="p">;</span>
+
+<span class="n">listRelatives</span> <span class="n">topTransform</span><span class="p">;</span>
+<span class="c1">// Result: pSphere1 pPlane1 //   </span>
+<span class="n">listRelatives</span> <span class="o">-</span><span class="n">allDescendents</span> <span class="n">topTransform</span><span class="p">;</span>
+<span class="c1">// Result: pSphereShape1 pSphere1 pPlaneShape1 pPlane1 // </span>
+
+<span class="n">listRelatives</span> <span class="o">-</span><span class="n">parent</span> <span class="n">pPlaneShape1</span><span class="p">;</span>
+<span class="c1">// Result: pPlane1 // </span>
+<span class="n">listRelatives</span> <span class="o">-</span><span class="n">parent</span> <span class="n">pPlane1</span><span class="p">;</span>
+<span class="c1">// Result: topTransform // </span>
+</pre></div>
+
+
+<p><img alt="Alt text" src="data/2014-09-28-Hierarchy-topTransform.PNG" title="" />这图很清晰表示它们的上下结构. 在这个结构下, </p>
+<div class="highlight"><pre><span class="n">move</span> <span class="o">-</span><span class="n">relative</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">0</span> <span class="n">topTransform</span><span class="p">;</span> 
+</pre></div>
+
+
+<p>很有意思地, 两个模型同时往上移动了3. 理由当然是因为下面的transform 继承了上面parent的transform. 而这种继承是可以打破的,<br />
+<img alt="Alt text" src="data/2014-09-28-Hierarchy-inheritTransform.PNG" title="" />试试鼠标在ui上点击这选项, mel的输出是:    </p>
+<div class="highlight"><pre><span class="n">setAttr</span> <span class="s">&quot;pPlane1.inheritsTransform&quot;</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="n">setAttr</span> <span class="s">&quot;pPlane1.inheritsTransform&quot;</span> <span class="mi">1</span><span class="p">;</span>  
+</pre></div>
+
+
+<p>对应地mel命令, 执行下面的命令等于turn off this option: </p>
+<div class="highlight"><pre><span class="n">inheritTransform</span> <span class="o">-</span><span class="n">off</span> <span class="n">pPlane1</span> 
+</pre></div>
+
+
+<p>[book, Complete Maya Programming, ch3.4 Objects]解释hierarchy and transform后就接着介绍attributes了. </p>
+<h2>Polygon components</h2>
+<p>对mesh的结构肯定要了解嘛, v/e/f/uv是怎么存放的结构, 怎么访问到这些elements(v/e/f/uv, 我习惯了称为element, 而maya这边好像用component表示). 在maya doc里面描述还算清晰, 具体看:         <br />
+Developer Resources &gt; API Guide &gt; Polygon API &gt; How polygons are handled internally       <br />
+这一节内容的前半段是讲mesh的components(v/e/f/uv)的结构, 后半段是讲polygon mesh作为一个shape node(相对于别的node类型)是怎么融入maya的dependency graph的。 <br />
+其中那些component的关系应该是: 下面这图是从maya doc那边截图然后按我理解来组合的,   <br />
+<img alt="Alt text" src="data/2014-10-20_maya_polygon_componet.PNG" title="" /> </p>
+<p>然后就是API那边有什么接口interface来获取这些信息了. API Guide &gt; Polygon API &gt; The five basic polygonal API classes: MItMeshPolygon, MItMeshEdge, MItMeshVertex, MItMeshFaceVertex, MFnMesh.   </p>
+<h2>Command</h2>
+<p>定义命令cmd的语法, 例如你可能想给命令添加一些flags. [ MPxCommand::newSyntax() ]
+有了语法, 在具体执行这个命令的时候, 首先当然就是分解命令, 看它是否包含了哪些参数. [doIt, parseArgs, argument list, argument data]</p>
+<p>分regular command and interactive command (tool command)两种, 分别对应MPxCommand and MPxToolCommand. </p>
+<p>在maya doc中看到说maya 是区分tools和actions的:<br />
+1. Tools work continuously, 例如brush那样会click and drag;   <br />
+2. Actions are immediate, "one shot" operations.  <br />
+这个区分挺有意思, 也解答了一些命名问题. </p>
+<h2>Context</h2>
+<p>例如左边select tool, paint select tool, move tool...还有polygon/drag a cube等，其实每一样都是一个context，于是context好像跟tool工具是一个意思。     <br />
+mel 下 "currentCtx"询问当前context类型的object.       <br />
+grabUVContext // 调用这个context command to create an object of this context;   <br />
+// Result, grabUVContext1; // object的名字是grabUVContext1;     <br />
+setToolTo grabUVContext1; // switch from current ctx to this new context object;     </p>
+<p>context涉及的范围很广:        <br />
++ context command, 也就是在plugin里面注册register一个context时候，其实是一个ctx command.  上面那个grabUVContext其实是一个cmd，而且是一个特殊的cmd类型, ctx cmd; -q 也就是query下也是作为一个cmd来用. 
++ context and interactive command, 例如moveTool;        <br />
++ context and manipulator; 例子很多.                </p>
+<h2>Node and Attributes</h2>
+<p>Three types of attributes exists in Maya:<br />
++ static: built in内置的, 不能被modified or removed; <br />
++ dynamic: allow u to add or delete attributes on a particular node (a specific instance of a node type).<br />
++ extension: allow u to add or delete attributes, at run time, on all nodes of a given type.                  </p>
+<p>给attribute设置值and取值             <br />
+maya.cmds.getAttr();   <br />
+maya.cmds.setAttr();<br />
+nodeName+'.scaleX' 这是简单的attribute;   <br />
+nodeName+'.translate' 这是所谓的compound attribute;                         </p>
+<p>连接attribute 前提是同样的type.      </p>
+<h2>UI</h2>
+<p>2014/7 因为要在maya界面的某个shelf上加button, 于是需要了解一下mel里面怎么建ui.      <br />
+大致是一个window, 下面是layout, 可以是各种各样的layout,  layout之间可能有父子关系，然后是button.        <br />
+当前知道的button有: 
+shelfButton 就是你在界面上Polygon下面可以点击了就建模型的那种; 
+toolButton 就是界面左边的select move rotate scale等.<br />
+<img alt="Alt text" src="data/2014-06-25-UndoRedoStack.png" title="output" /> <br />
+UI例子 window/tabLayout/shelfLayout/shelfButton; 用setParent .. 可以回到上一级layout.   </p>
+<p>那么怎么add custom shelf or shelf button 呢?     </p>
+<p>方法1. 找到maya安装路径\scripts\startup\目录, 看见下面很多shelf_xxx.mel, 例如shelf_Polygons.mel, shelf_Surfaces.mel, ...这些就是maya启动时候加载的, 也就是我们在界面上看到的.    </p>
+<p>那么我们就可以尝试在这路径下添加我们自己写的shelf_yyy.mel了。     <br />
+或者是试试“MAYA_SHELF_PATH” environment variable?         </p>
+<p>方法2.      <br />
+References: 
++ mel command document: window, tabLayout, shelfLayout, shelfButton. </p>
+<h2>安装Plugin</h2>
+<p>一般会提到plugin and script, 这两个名字有什么区别? (回顾maya区分tool and action)  </p>
+<p>首先是要让maya找到这些plugin or script, 那这些plugin or script放哪里才能被找到呢?      <br />
++ 可以放到maya自己指定的地方, 如maya安装目录下的相应文件夹;    <br />
++ 可以放到你自己指定的地方, 但是需要通过某种方式告诉maya让maya来这个地方找;    </p>
+<p>在当前运行的maya, script editor, MEL tab :             </p>
+<div class="highlight"><pre><span class="n">getenv</span> <span class="n">MAYA_PLUG_IN_PATH</span><span class="p">;</span> <span class="c1">// 注释 for c++ and python plug-ins                     </span>
+<span class="n">getenv</span> <span class="n">MAYA_SCRIPT_PATH</span><span class="p">;</span>  <span class="c1">// 注释 for MEL and Python scripts    </span>
+<span class="n">getenv</span> <span class="n">XBMLANGPATH</span>        <span class="c1">// 注释 for icons           </span>
+<span class="n">getenv</span> <span class="n">MAYA_PRESET_PATH</span>   <span class="c1">// 注释 for maya presets          </span>
+</pre></div>
+
+
+<p>会看到当前哪些路径被考虑到了。 </p>
+<p>假如要修改这些路径, 例如加入新的路径名字,  文档里面说有两种方法:   <br />
++ 在系统环境变量中修改MAYA_PLUG_IN_PATH; 
++ 推荐在 
+E:\Documents\maya\201X\Maya.env 这个文件中做文章, 具体请看 Maya 2014 API Guide / Installing Maya plug-ins. </p>
+<p>还有一种plugin是做成modules的方式. 其实一个目录, 里面包含了plugin的内容, 然后有一个pluginName.txt的文件, 内容是这个plugin的目录版本等信息, 把这个txt放到maya的文件夹/Ducument/maya/version/modules里面, maya的plugin manager就可以通过这个txt找到plugin, 但是还没load的.   </p>
+<p>MEL command: loadPlugin, unloadPlugin, pluginInfo,    </p>
+<h2>创造Plugin</h2>
+<p>参考 <br />
+Maya 2013, Maya 2014's API Guide / Maya Python Plug-in Learning Path 教程很好. <br />
+Maya 2015 的doc形式好像改了, 之前是User Guide 和 API Guide(或者叫API Documentation)分别不同地址, 现在2015变成一个地址下的不同子栏目了: 
++ Maya User Guide<br />
++ Maya Developer Help; 这个对应之前的API Guide。 </p>
+<p>涉及maya plugin开发的时候，怎么debug呢? </p>
+<h2>Attach to maya process ... 寄生</h2>
+<p>step 1. maya plugin manager (Window -&gt; Settings/Preferences -&gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
+step 2. at your visual studio project of that custom plugin, Tools -&gt; Attach to Process ..., choose maya.exe you will see visual studio processing some source files....这就完整寄生了. </p>
+<h2>Debug</h2>
+<ul>
+<li>MGlobal::displayInfo(MString("..")); 输出到Script Editor. </li>
+<li>MStatus status; 这东西是很多函数的返回值，记得判断是否MS::kSuccess. 用MString MStatus::errorString() const函数方便输出函数的返回状态. </li>
+</ul>
+<div class="highlight"><pre><span class="n">sys</span><span class="p">.</span><span class="n">platform</span><span class="p">;</span>              
+<span class="cp"># Result: win32 #  </span>
+<span class="n">sys</span><span class="p">.</span><span class="n">version</span>       
+<span class="cp"># Result: 2.7.6 (default, May  8 2014, 07:51:14) [MSC v.1700 64 bit (AMD64)] #   </span>
+<span class="n">print</span><span class="p">(</span> <span class="n">sys</span><span class="p">.</span><span class="n">version</span> <span class="p">)</span>      
+<span class="mf">2.7.6</span> <span class="p">(</span><span class="k">default</span><span class="p">,</span> <span class="n">May</span>  <span class="mi">8</span> <span class="mi">2014</span><span class="p">,</span> <span class="mo">07</span><span class="o">:</span><span class="mi">51</span><span class="o">:</span><span class="mi">14</span><span class="p">)</span> <span class="p">[</span><span class="n">MSC</span> <span class="n">v</span><span class="mf">.1700</span> <span class="mi">64</span> <span class="n">bit</span> <span class="p">(</span><span class="n">AMD64</span><span class="p">)]</span>       
+
+<span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">about</span><span class="p">(</span><span class="n">apiVersion</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>            
+<span class="cp"># Result: 201600 #                               </span>
+<span class="n">print</span> <span class="p">(</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">about</span><span class="p">(</span><span class="n">apiVersion</span><span class="o">=</span><span class="n">True</span><span class="p">)</span> <span class="p">)</span>                      
+<span class="mi">201600</span>  <span class="err">#</span> <span class="err">这是输出</span> <span class="n">to</span> <span class="n">print</span> <span class="n">out</span> <span class="n">the</span> <span class="n">current</span> <span class="n">version</span> <span class="n">of</span> <span class="n">maya</span>           
+
+<span class="n">maya</span><span class="p">.</span><span class="n">mel</span><span class="p">.</span><span class="n">eval</span><span class="p">(</span><span class="err">&#39;</span><span class="n">getApplicationVersionAsFloat</span><span class="err">&#39;</span><span class="p">)</span>           
+<span class="cp"># Result: 2016.0 #          </span>
+</pre></div>
+
+
+<p>To read list:  <br />
+book: Maya Python for Games and File, Adam Mechtley, Ryan Trowbridge, 2012; http://www.maya-python.com/introduction/ </p>
+<p>vs2012 with .Net Framework v4.5, check C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework.NETFramework<br />
+vs2012, install update 4, there is no v4.5.1 
+参考 .NET Framework Versions and Dependencies http://msdn.microsoft.com/zh-cn/library/bb822049(v=vs.110).aspx   </p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="https://github.com/renc">Github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

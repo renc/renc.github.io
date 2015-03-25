@@ -1,98 +1,49 @@
 <!DOCTYPE html>
-<html lang="en"
->
+<html lang="en">
 <head>
-    <title>Build myblog using pelican - 阿can's  blog</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <title>Build myblog using pelican</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
 
-
-
-<link rel="canonical" href="/Build myblog using pelican.html">
-
-        <meta name="author" content="renc" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞... 环境: python 2.7, withn pip, easy_install pelican 注意上面的起始目录是E:\Temp\myblog&gt; 我试过别的起始目录是E:\Temp\myblog\context&gt; 就发生错误了. 进入output目录, 打开index.html就可以看到blog了。这里我没有用到make html命令哦. 遇到的problems: 设置图片目录的路径. 我的图片都是文档.md目录下的data目录, 例如folderA/xxx.md, folderA/data/yyy.PNG. 在pelican这里, 我想保持这样的结构, folderA 相当于 context目录, 目的是blog的内容(文档和图片)已经可以放到某个folderA里面, 然后要用pelican来build这个blog的时候, 直接把folderA目录里面的所有东西copy到context目录下就ok了. 但是pelican默认是把图片放到blogFolder/image目录 ..." />
-
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 </head>
-<body>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-阿can's  blog            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li >
-                            <a href="/category/.html"></a>
-                        </li>
-                        <li >
-                            <a href="/category/computer-graphics.html">Computer graphics</a>
-                        </li>
-                        <li class="active">
-                            <a href="/category/programming.html">Programming</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-</div> <!-- /.navbar -->
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">阿can's  blog </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about_page.html">About</a></li>
+                    <li><a href="/category/.html"></a></li>
+                    <li><a href="/category/computer-graphics.html">Computer Graphics</a></li>
+                    <li class="active"><a href="/category/programming.html">programming</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/Build myblog using pelican.html" rel="bookmark"
+           title="Permalink to Build myblog using pelican">Build myblog using pelican</a></h1>
+    </header>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
-
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/Build myblog using pelican.html"
-                       rel="bookmark"
-                       title="Permalink to Build myblog using pelican">
-                        Build myblog using pelican
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
+    <div class="entry-content">
 <footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-08-31T20:00:00"> 周日 31 八月 2014</time>
-    </span>
+        <abbr class="published" title="2014-08-31T20:00:00">
+                Published: 周日 31 八月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-08-31T20:00:00">
+                Updated: 周日 31 八月 2014
+        </abbr>
 
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
-    
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <p>都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞...   </p>
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/renc.html">renc</a>
+        </address>
+<p>In <a href="/category/programming.html">programming</a>. </p>
+<p>tags: <a href="/tag/.html"></a> </p>
+</footer><!-- /.post-info -->      <p>都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞...   </p>
 <h2>环境:</h2>
 <ul>
 <li>python 2.7, withn pip, easy_install        </li>
@@ -130,80 +81,90 @@
 中文嘛, 之前好像是用GBXXX格式来做encoding的. 在Notepad++ 右下角有文件的编码, 例如可能是UTF-8 w/o BOM, 也可能是GB2313(Simplified).                  <br />
 修正方法是: Nodepad++ / Encoding / convert to UTF-8 w/o BOM      </p>
 <ul>
-<li>更改theme                 <br />
+<li>
+<p>更改theme                 <br />
 build出来的blog是有默认主题的, 要改的话可以在setting file pelicanconf.py里面设置 
 THEME = "notmyidea" #这就是默认主题 
 or: 
-THEME = "simple" </li>
+THEME = "simple" </p>
+</li>
+<li>
+<p>Build Error <br />
+有好几天出现以下的错误:   </p>
+</li>
 </ul>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
+<div class="highlight"><pre><span class="nl">E:</span><span class="err">\</span><span class="o">&gt;</span><span class="n">cd</span> <span class="n">Temp</span><span class="err">\</span><span class="n">myblog</span>
 
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
+<span class="nl">E:</span><span class="err">\</span><span class="n">Temp</span><span class="err">\</span><span class="n">myblog</span><span class="o">&gt;</span><span class="n">c</span><span class="o">:</span><span class="err">\</span><span class="n">Python27</span><span class="err">\</span><span class="n">Scripts</span><span class="err">\</span><span class="n">pelican</span><span class="p">.</span><span class="n">exe</span> <span class="p">.</span><span class="err">\</span><span class="n">content</span>
+<span class="nl">WARNING:</span> <span class="n">Feeds</span> <span class="n">generated</span> <span class="n">without</span> <span class="n">SITEURL</span> <span class="n">set</span> <span class="n">properly</span> <span class="n">may</span> <span class="n">not</span> <span class="n">be</span> <span class="n">valid</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="p">.</span><span class="err">\</span><span class="n">README</span><span class="p">.</span><span class="n">md</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">title</span><span class="err">&#39;</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">Algo</span> <span class="o">-</span> <span class="n">Check</span> <span class="k">if</span> <span class="n">a</span> <span class="n">binary</span> <span class="n">tree</span> <span class="n">is</span> <span class="n">mirror</span> <span class="n">or</span> <span class="n">symmetric</span><span class="p">.</span><span class="n">html</span>
+<span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">algo</span> <span class="o">-</span> <span class="n">counting</span> <span class="n">inversions</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">informati</span>
+<span class="n">on</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">Algo</span> <span class="o">-</span> <span class="n">Detecting</span> <span class="n">a</span> <span class="n">Loop</span> <span class="n">in</span> <span class="n">a</span> <span class="n">Singly</span> <span class="n">Linked</span> <span class="n">List</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">cou</span>
+<span class="n">ld</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">Algo</span> <span class="o">-</span> <span class="n">Tower</span> <span class="n">of</span> <span class="n">Hanoi</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">ab</span>
+<span class="n">out</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
+<span class="p">...</span> <span class="err">省略了相似的内容一大段</span> 
+<span class="nl">WARNING:</span> <span class="n">Could</span> <span class="n">not</span> <span class="n">process</span> <span class="n">output</span><span class="err">\</span><span class="n">category</span><span class="err">\</span><span class="p">.</span><span class="n">html</span>
+<span class="n">Pelican</span> <span class="n">does</span> <span class="n">not</span> <span class="n">know</span> <span class="n">how</span> <span class="n">to</span> <span class="n">parse</span> <span class="n">E</span><span class="o">:</span><span class="err">\</span><span class="n">Temp</span><span class="err">\</span><span class="n">myblog</span><span class="err">\</span><span class="n">content</span><span class="err">\</span><span class="n">output</span><span class="err">\</span><span class="n">category</span><span class="err">\</span><span class="p">.</span><span class="n">html</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">category</span><span class="err">\</span><span class="n">computer</span><span class="o">-</span><span class="n">graphics</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">informati</span>
+<span class="n">on</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">category</span><span class="err">\</span><span class="n">programming</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">abo</span>
+<span class="n">ut</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
+<span class="nl">WARNING:</span> <span class="n">Could</span> <span class="n">not</span> <span class="n">process</span> <span class="n">output</span><span class="err">\</span><span class="n">tag</span><span class="err">\</span><span class="p">.</span><span class="n">html</span>
+<span class="n">Pelican</span> <span class="n">does</span> <span class="n">not</span> <span class="n">know</span> <span class="n">how</span> <span class="n">to</span> <span class="n">parse</span> <span class="n">E</span><span class="o">:</span><span class="err">\</span><span class="n">Temp</span><span class="err">\</span><span class="n">myblog</span><span class="err">\</span><span class="n">content</span><span class="err">\</span><span class="n">output</span><span class="err">\</span><span class="n">tag</span><span class="err">\</span><span class="p">.</span><span class="n">html</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">tag</span><span class="err">\</span><span class="n">algo</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">tag</span><span class="err">\</span><span class="n">glsl</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">tag</span><span class="err">\</span><span class="n">reading</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
 
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
-              </ul>
-            </li>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">output</span><span class="err">\</span><span class="n">tag</span><span class="err">\</span><span class="n">shader</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">date</span><span class="err">&#39;</span>
+<span class="nl">Done:</span> <span class="n">Processed</span> <span class="mi">49</span> <span class="n">article</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="mi">0</span> <span class="n">draft</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">and</span> <span class="mi">0</span> <span class="n">page</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">in</span> <span class="mf">19.10</span> <span class="n">seconds</span><span class="p">.</span>
+
+<span class="nl">E:</span><span class="err">\</span><span class="n">Temp</span><span class="err">\</span><span class="n">myblog</span><span class="o">&gt;</span><span class="n">c</span><span class="o">:</span><span class="err">\</span><span class="n">Python27</span><span class="err">\</span><span class="n">Scripts</span><span class="err">\</span><span class="n">pelican</span><span class="p">.</span><span class="n">exe</span> <span class="p">.</span><span class="err">\</span><span class="n">content</span>
+<span class="nl">WARNING:</span> <span class="n">Feeds</span> <span class="n">generated</span> <span class="n">without</span> <span class="n">SITEURL</span> <span class="n">set</span> <span class="n">properly</span> <span class="n">may</span> <span class="n">not</span> <span class="n">be</span> <span class="n">valid</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="p">.</span><span class="err">\</span><span class="n">README</span><span class="p">.</span><span class="n">md</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">title</span><span class="err">&#39;</span>
+<span class="nl">ERROR:</span> <span class="n">Skipping</span> <span class="n">example</span><span class="err">\</span><span class="n">index</span><span class="p">.</span><span class="n">html</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="err">&#39;</span><span class="n">title</span><span class="err">&#39;</span>
+<span class="nl">Done:</span> <span class="n">Processed</span> <span class="mi">49</span> <span class="n">article</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="mi">0</span> <span class="n">draft</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">and</span> <span class="mi">0</span> <span class="n">page</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">in</span> <span class="mf">3.49</span> <span class="n">seconds</span><span class="p">.</span>
+
+<span class="nl">E:</span><span class="err">\</span><span class="n">Temp</span><span class="err">\</span><span class="n">myblog</span><span class="o">&gt;</span>
+</pre></div>
 
 
+<p>可以看到最后那一次是好的, 原因是在E:\Temp\myblog\content这个内容看到了一个output目录, 我把它delete掉了, build就没有错误了.    <br />
+想想原因可能是我之前在E:\Temp\myblog\content这一级目录用pelican来build了, 例如   <br />
+E:\Temp\myblog\content&gt;c:\Python27\Scripts\pelican.exe .                       <br />
+结果就是在content目录下出来一个output目录, 这是错的, output目录应该跟content目录平级.   </p>
+    </div><!-- /.entry-content -->
 
-            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
+  </article>
 </section>
-            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="/theme/js/jquery.min.js"></script>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="https://github.com/renc">Github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
 
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
 
 </body>
 </html>
