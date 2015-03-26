@@ -1,49 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+>
 <head>
-        <meta charset="utf-8" />
-        <title>Bit field</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+    <title>Bit field - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+
+
+<link rel="canonical" href="/Bit field.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢? 毕竟1个字节=8bits=2^8=256个状态. Part 1 Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验: #include &lt;cstdio&gt; // 交通繁忙时间 enum CallTariff { tOffPeak, tMediumRate, tPeakTime } ; // 账单 struct Bill { unsigned int iNameId; // 客户名 CallTariff eTariff; }; struct BillVIP { unsigned int iNameId; // 客户名 bool isVIP ..." />
+
+        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Bit field"/>
+        <meta property="og:url" content="/Bit field.html"/>
+        <meta property="og:description" content="一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢? 毕竟1个字节=8bits=2^8=256个状态. Part 1 Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验: #include &lt;cstdio&gt; // 交通繁忙时间 enum CallTariff { tOffPeak, tMediumRate, tPeakTime } ; // 账单 struct Bill { unsigned int iNameId; // 客户名 CallTariff eTariff; }; struct BillVIP { unsigned int iNameId; // 客户名 bool isVIP ..."/>
+        <meta property="article:published_time" content="2014-11-10" />
+            <meta property="article:section" content="programming" />
+            <meta property="article:tag" content="" />
+            <meta property="article:author" content="" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
 </head>
+<body>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">阿can's  blog </a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about_page.html">About</a></li>
-                    <li><a href="/category/.html"></a></li>
-                    <li><a href="/category/computer-graphics.html">Computer Graphics</a></li>
-                    <li class="active"><a href="/category/programming.html">programming</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="/Bit field.html" rel="bookmark"
-           title="Permalink to Bit field">Bit field</a></h1>
-    </header>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about_page.html">
+                             About
+                          </a></li>
+                        <li >
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
 
-    <div class="entry-content">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Bit field.html"
+                       rel="bookmark"
+                       title="Permalink to Bit field">
+                        Bit field
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
 <footer class="post-info">
-        <abbr class="published" title="2014-11-10T20:20:00">
-                Published: 周一 10 十一月 2014
-        </abbr>
-		<br />
-        <abbr class="modified" title="2014-11-10T22:30:00">
-                Updated: 周一 10 十一月 2014
-        </abbr>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-11-10T20:20:00"> 周一 10 十一月 2014</time>
+    </span>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/.html"></a>
-        </address>
-<p>In <a href="/category/programming.html">programming</a>. </p>
-<p>tags: <a href="/tag/.html"></a> </p>
-</footer><!-- /.post-info -->      <p>一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢?  毕竟1个字节=8bits=2^8=256个状态.           </p>
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢?  毕竟1个字节=8bits=2^8=256个状态.           </p>
 <h2>Part 1</h2>
 <p>Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验:            </p>
 <div class="highlight"><pre><span class="vi">#include</span> <span class="o">&lt;</span><span class="nx">cstdio</span><span class="o">&gt;</span>          
@@ -345,35 +407,75 @@ std::bitset<mesh.FaceCount()> faceFlags;    <br />
 <p>用perforce的时候, 怎么看一个workspace当前所处哪个changeset呢?  就是一个workspace放旧了，都忘了它之前sync到哪个changeset了.   </p>
 <div class="highlight"><pre><span class="nl">C:</span><span class="err">\</span><span class="n">Workspace</span><span class="err">\</span><span class="n">ProjectX</span><span class="err">\</span><span class="n">src</span><span class="o">&gt;</span><span class="n">p4</span> <span class="n">changes</span> <span class="o">-</span><span class="n">m1</span> <span class="err">@</span><span class="n">my_workspace_at_local</span>  
 </pre></div>
-    </div><!-- /.entry-content -->
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
 
-  </article>
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
 </section>
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="https://github.com/renc">Github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
 
 </body>
 </html>

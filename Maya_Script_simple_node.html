@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Maya Script - simple node - 阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/Maya_Script_simple_node.html">
+
+        <meta name="author" content="" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="要学习maya node, 例如的attribute, plug, 怎么连接, 怎么计算等. 所以找了些资料来看, 这里记录一下. 例子 建一个算sin函数的node 这例子是http://me.autodesk.jp/wam/maya/docs/Maya2009/API/sine_node_8py-example.html这里找到的, 算是能找到的最简单明了的了. 我把单位从原来的radian改为了degree, 加了comments. sineNodeDegree.py 下载这个py文件放到目录 里面, Windows &gt; Plugin-in Manager to load that script. 然后就打开Node Editor or Hypergraph: Connection window就可以看到这个node了, 在Node Editor里面click to select this node, 就看到Attribute Editor是这样子: 尝试在input那边输入例如0 ..." />
+
+        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Maya Script - simple node"/>
+        <meta property="og:url" content="/Maya_Script_simple_node.html"/>
+        <meta property="og:description" content="要学习maya node, 例如的attribute, plug, 怎么连接, 怎么计算等. 所以找了些资料来看, 这里记录一下. 例子 建一个算sin函数的node 这例子是http://me.autodesk.jp/wam/maya/docs/Maya2009/API/sine_node_8py-example.html这里找到的, 算是能找到的最简单明了的了. 我把单位从原来的radian改为了degree, 加了comments. sineNodeDegree.py 下载这个py文件放到目录 里面, Windows &gt; Plugin-in Manager to load that script. 然后就打开Node Editor or Hypergraph: Connection window就可以看到这个node了, 在Node Editor里面click to select this node, 就看到Attribute Editor是这样子: 尝试在input那边输入例如0 ..."/>
+        <meta property="article:published_time" content="2015-03-25" />
+            <meta property="article:section" content="" />
+            <meta property="article:tag" content="" />
+            <meta property="article:author" content="" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about_page.html">
+                             About
+                          </a></li>
+                        <li class="active">
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Maya_Script_simple_node.html"
+                       rel="bookmark"
+                       title="Permalink to Maya Script - simple node">
+                        Maya Script - simple node
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-03-25T20:20:00"> 周三 25 三月 2015</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/.html"></a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>要学习maya node, 例如的attribute, plug, 怎么连接, 怎么计算等. 所以找了些资料来看, 这里记录一下.  </p>
+<h2>例子 建一个算sin函数的node</h2>
+<p>这例子是http://me.autodesk.jp/wam/maya/docs/Maya2009/API/sine_node_8py-example.html这里找到的, 算是能找到的最简单明了的了.  我把单位从原来的radian改为了degree, 加了comments. <br />
+<a href="https://github.com/renc/coding_exercises/blob/master/maya_py_sineNodeDegree/sineNodeDegree.py">sineNodeDegree.py</a>               <br />
+下载这个py文件放到目录 里面, Windows &gt; Plugin-in Manager to load that script.      <br />
+然后就打开Node Editor or Hypergraph: Connection window就可以看到这个node了,          <br />
+<img alt="Alt text" src="data/2015-03-25-node_editor.png" title="" /> <br />
+在Node Editor里面click to select this node, 就看到Attribute Editor是这样子:        <br />
+<img alt="Alt text" src="data/2015-03-25-node_attribute_editor.png" title="" />      <br />
+尝试在input那边输入例如0 30 60 90等, output会立刻输出sin结果, 在script editor中也有输出.     </p>
+<p>Best Practices for MPxNode::compute() func, from book [Maya Python for Games and Film, 2011], only use MDataBlock object associated with the node. Trying to retrieve data from outside the data block may trigger unnecessary DG computation, or result in an infinite loop.   </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
