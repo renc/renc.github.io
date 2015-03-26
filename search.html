@@ -2,7 +2,8 @@
 <html lang="en"
 >
 <head>
-    <title>Authors - 阿can's  blog</title>
+    <title>Search - 阿can's  blog
+</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -72,8 +73,7 @@
     <div class="row">
         <div class="col-sm-9">
 
-    <h1>Authors on 阿can's  blog</h1>
-        <li><a href="/author/renc.html">renc</a> (11)</li>
+<div id="tipue_search_content"></div>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
@@ -139,5 +139,18 @@
 <script src="/theme/js/respond.min.js"></script>
 
 
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <script type="text/javascript" src="/theme/tipuesearch/tipuesearch_set.js"></script>
+    <script type="text/javascript" src="/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch({
+        'mode' : 'json',
+        'show': 10,
+        'newWindow': false,
+        'contentLocation': 'tipuesearch_content.json'
+      });
+    });
+    </script>
 </body>
 </html>
