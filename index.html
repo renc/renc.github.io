@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>阿can's  blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="">
+        <meta name="author" content="renc" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="阿can's  blog"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="阿can's  blog"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's  blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about_page.html">
+                             About
+                          </a></li>
+                        <li class="active">
+                            <a href="/category/.html"></a>
+                        </li>
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+            <article>
+                <h2><a href="/Maya_Script_simple_node.html">Maya Script - simple node</a></h2>
+                <div class="summary"><p>要学习maya node, 例如的attribute, plug, 怎么连接, 怎么计算等. 所以找了些资料来看, 这里记录一下.  </p>
+<h2>例子 建一个算sin函数的node</h2>
+<p>这例子是http://me.autodesk.jp/wam/maya/docs/Maya2009/API/sine_node_8py-example.html这里找到的, 算是能找到的最简单明了的了.  我把单位从原来的radian改为了degree, 加了comments. <br />
+<a href="https://github.com/renc/coding_exercises/blob/master/maya_py_sineNodeDegree/sineNodeDegree.py">sineNodeDegree.py</a>               <br />
+下载这个py文件放到目录 里面, Windows &gt; Plugin-in Manager to load that script.      <br />
+然后就打开Node Editor or Hypergraph: Connection window就可以看到这个node了,          <br />
+<img alt="Alt text" src="data/2015-03-25-node_editor.png" title="" /> <br />
+在Node Editor里面click to select this node, 就看到Attribute Editor是这样子:        <br />
+<img alt="Alt text" src="data/2015-03-25-node_attribute_editor.png" title="" />      <br />
+尝试在input那边输入例如0 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Maya_Script_simple_node.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Exclude Edges Outside The Ring(排除圈外边).html">Exclude Edges Outside The Ring(排除圈外边)</a></h2>
+                <div class="summary"><p><img alt="Alt text" src="data/2015-03-17-edges_outside_ring.png" title="output" /><br />
+有时候为了找出这个圈ring接触到touch了哪些edge, 会用一个方形来代替这个圈. 问题是这个方形touch到的edges明显比圈理应touch到的要多, 怎么排除呢? 也就是在方形touch到的边作为一个集合set, 我们要在这里面找出正在被圈所接触到的(包括包含在圈内的).    </p>
+<p>图中我用橙色mark了那些应该被排除在外的边. 问题是怎么用代码表示出来.     </p>
+<div class="highlight"><pre><span class="nl">d:</span> <span class="err">圆圈中心点在边所在直线上的投影点</span><span class="p">,</span> <span class="err">和圈中心点的距离</span><span class="p">(</span><span class="err">点到直线距离</span><span class="p">);</span>   
+<span class="nl">R:</span> <span class="err">圆圈半径</span><span class="n">radius</span><span class="p">.</span>  
+<span class="nl">t:</span> <span class="err">圆圈中心点在边直线段上投影点对应直线段的参数</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="err">表示在直线段内部</span><span class="p">.</span>   
+
+<span class="err">圈外</span><span class="p">,</span> <span class="err">没有被圈覆盖到的边</span><span class="o">:</span>  
+<span class="n">d</span> <span class="o">&gt;</span> <span class="n">R</span> <span class="o">||</span> <span class="p">(</span> <span class="err">边两点在圈外</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">R</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="n">outside</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>     <span class="c1">// 公式1. </span>
+</pre></div>
+
+
+<p>有意思的是, 这是从反面找没有被touch的边, 也可以从正面直接找被touch到的边啊. 从图中可以找到这样的规律:  </p>
+<div class="highlight"><pre><span class="err">被圈覆盖到的边</span><span class="o">:</span>  
+<span class="err">边至少一点在圈内</span> <span class="o">||</span> <span class="p">(</span> <span class="err">边两点在圈外</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">R</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="n">inside</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>     <span class="c1">// 公式2.  </span>
+</pre></div>
+
+
+<p>理应两种情况包含了所有边的情况的, 也就是互补才对. 所以我画了下面的图 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Exclude Edges Outside The Ring(排除圈外边).html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Slide vertex on surface.html">Slide vertex on surface</a></h2>
+                <div class="summary"><p>过年上班没多几天啊, hackathon就开始了, 我报名的project是尝试实现以下paper: <br />
+Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, EUROGRAPHICS 2010. <br />
+本文做一些记录, 特别是有些问题以后可能也会遇到. </p>
+<p>想做这个slide brush的原因是: 1. 上面那个paper本身适合放到brush framework里面来做, 做成一个brush; 2. 看上去不是太难, 是有难点(后面会提到), 但是=不是那种求解方程组的优化问题(我还不太懂这个), 估计可以在2天内搞定的, yes, hackathon就2天.      </p>
+<p>大体做成的效果应该是: brush stroke的时候会带动一些vertices在mesh/surface上滑动, mesh的形状shape被保持。区别于现在mudbox已有的grab brush, 后者顶点跟着鼠标在走,会跑到mesh外面. 区域   </p>
+<p>算法的输入包括(不限于)下面这些:  <br />
++ handle, which is the mouse/brush ...</p>
+                    <a class="btn btn-default btn-xs" href="/Slide vertex on surface.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/优化-访问数组值.html">优化-访问数组值</a></h2>
+                <div class="summary"><p>记录一下学到的一个技术.    <br />
+<img alt="alt text" src="data/2014-12-31-optimize_array_value.png" title="output" />     <br />
+假如value[]是一个很长的数组, 记录着某些对象的值, 值的范围是[0, 1]. 它的操作包括:<br />
+给value[]初始化为每个元素都是0; <br />
+设置某一个元素的值, 如value[vIndex] = x;<br />
+访问某一个元素的值, 如x = value[vIndex];  </p>
+<p>虽然数组很长, 很多时候一次使用到的就是其中的某一小部分的值, 例如10k大小, 某次使用到的可能就是10-1k这么小的局部.    </p>
+<div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// change the value of 100 elements to [0, 1];    </span>
+<span class="p">}</span>    
+
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>     
+        <span class="k">do ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/优化-访问数组值.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/祈祷落幕时.html">祈祷落幕时</a></h2>
+                <div class="summary"><p>书名：祈祷落幕时 <br />
+作者：东野圭吾 <br />
+2015-1    </p>
+<p>amazon.cn 12月份的推荐书, 尝试买回来看一下, 谁知一看就停不下来, 周五下午到周六就看完了. 极少看侦探推理小说啊，都忘了上一部是什么时候看的了. 主要是叙述看得很舒服, 没有太凶残的描写, 关键是找人物的联系.<br />
+介绍说是父女的爱, 但看过一半没有预知结局时候还是觉得很莫名, 跟父女的亲情有什么关系呢?  而题目为什么又是"祈祷落幕时"呢?<br />
+当看完之后回味, 才觉得这书名不错。推荐.   </p>
+                    <a class="btn btn-default btn-xs" href="/祈祷落幕时.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Corrective Blendshape at Maya.html">Corrective Blendshape at Maya</a></h2>
+                <div class="summary"><p>记录一下最近学到的corrective blendshape知识.    </p>
+<h2>问题描述</h2>
+<p>First, a basic scene is built, pCylinder1 is rigged and skinned,     <br />
+<img alt="basic scene for test" src="data/2014-12-20-skinedShape.png" title="basic scene for test" />     </p>
+<p>Now, suppose we are not satisfied with the elbow shape, want it change it a little bit. 例如一个手臂的骨骼动画已经搞好了, 后面发现在形状上还想改进一下, 那怎么办呢? </p>
+<p>If we select vertices and move them (adding vector delta to these vertics) on the skinned ...</p>
+                    <a class="btn btn-default btn-xs" href="/Corrective Blendshape at Maya.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/GPP - Double Buffer.html">GPP - Double Buffer</a></h2>
+                <div class="summary"><p>首先多谢作者的慷慨generous!                                         <br />
+http://gameprogrammingpatterns.com/double-buffer.html                </p>
+<p>Double buffer 出发点intent是使得一系列连续的操作像是同时立刻完成的。 
+为什么这么说呢?                                                 <br />
+作者的例子是读写屏幕的, 我画图说明:        <br />
+<img alt="Alt text" src="data/2014-12-10-before_double_buffer.png" title="output" />   <br />
+问题是那个内存块还没有写完, 屏幕过来读的太快了, 我甚至猜想: 屏幕过来好几个笔头分任务读, 每个读一小块区域, 那速度就更快了, 快的结果是读到还没有来得及写的区域, 那可能那块区域里面就是一些不是这一帧原本想要呈现的信息(可能是之前的帧的遗留信息). 描述这样的现象专门有一个名词"tearing", or "image tearing".      </p>
+<p>解决方案，就是引入两个buffer, 你笔头2只能从我写完的那个bufferA里面读, 而另一个bufferB我笔头1在写, 没有写完之前不给笔头2来读. 等我笔头1写完了这个bufferB, 就做一个swap告诉笔头2可以来读这个bufferB了.  笔头2来读bufferB的时候, 我笔头1又过去写bufferA了, 依然没写完之前不给笔头2来读.....          </p>
+<p>[update 2014-12-18]在看以下新闻时候遇到了"image tearing"这个词. "A 4K monitor is great in theory, but ...</p>
+                    <a class="btn btn-default btn-xs" href="/GPP - Double Buffer.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/LeetCodeOJ - Find Minimum in Rotated Sorted Array.html">LeetCodeOJ - Find Minimum in Rotated Sorted Array</a></h2>
+                <div class="summary"><p>题目:      </p>
+<blockquote>
+<p>Suppose a sorted array is rotated at some pivot unknown to you beforehand.          <br />
+(i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).             <br />
+Find the minimum element.                             <br />
+You may assume no duplicate exists in the array                 </p>
+</blockquote>
+<p>基本上看到sorted, find, ... 这关键字就想到binary search二分查找.        <br />
+根据输入 ...</p>
+                    <a class="btn btn-default btn-xs" href="/LeetCodeOJ - Find Minimum in Rotated Sorted Array.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Reading List.html">Reading List</a></h2>
+                <div class="summary"><p>C++ Concurrency in Action: Practical Multithreading Paperback – February 28, 2012  <br />
+by Anthony Williams (Author)               </p>
+<p>Multithreading for Visual Effects Hardcover – July 29, 2014        </p>
+<p>Effective Modern C++: 42 Specific Ways to Improve Your Use of C++11 and C++14 Paperback – December 5, 2014               <br />
+by Scott Meyers  (Author)                 </p>
+<p>Game Engine Architecture, Second ...</p>
+                    <a class="btn btn-default btn-xs" href="/Reading List.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/LeetCodeOJ - Min Stack.html">LeetCodeOJ - Min Stack</a></h2>
+                <div class="summary"><p>Leetcode 上的题目, 实现一个Min Stack. <br />
++ 带stack的一般功能, push, pop, top;        <br />
++ int getMin()能在constant time 返回最小值.                 </p>
+<p>很明显, 带stack一般功能的容易实现, 用std::vector也行，or直接用std::stack&lt;&gt;这个container adapter更直接( 所谓adapter, 就是这个类型里面的实现会用到某些简单的container, 如vector, list).              <br />
+但是那个getMin()呢?                           <br />
+假如只是取一个最小值, 那就简单了, 每次push时候都比较记录当前最小值就ok了. 但是假如不断地pop, 不断地getMin, 那stack内容改动了就需要不停地更新最小值.      </p>
+<p>一开始我想到保存一个最小值, 并可能需要O(n)的时间来更新这个最小值.  下面的方法是保存<em>所有</em>当前的最小值. 你只要取走了最小的, 然后下一个最小的立马出现了.  <br />
+<img alt="Alt text" src="data/2014-12-09-MinStack.png" title="output" />   <br />
+两个container, 其中一个是std::stack 用于实现一般的stack功能;  另一个可以是std::vector/list/stack ...</p>
+                    <a class="btn btn-default btn-xs" href="/LeetCodeOJ - Min Stack.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Algo - Tower of Hanoi.html">Algo - Tower of Hanoi</a></h2>
+                <div class="summary"><p>在书[Anany Levitin, 算法设计与分析基础]的第二章又看到汉诺塔的问题:   <br />
+有三个柱子A B C; A柱上有好几个盘子, 小的放在大的上面;   <br />
+现在问怎么把A柱上的盘子移到C柱上, B是做辅助的, 条件是大的盘子不能压到小的盘子上. 所以结果C柱上的盘子也是小的放在大的上面。    </p>
+<p>A,B,C; 三个柱子     </p>
+<p>假如A上有1个盘子，直接放到C上就解答完了。    </p>
+<p>假如A上有2个盘子ab，a盘小的 在 b盘大的上面. 先把a放到B上, b放到C上, 然后把a从B移到C上. 结果就是C柱上有ab。[pattern 1]   <br />
+注意这种case中先把a放到C上, 那b放到B上, 然后a从C移到到B柱上, 那B柱上就有ab两个盘子了. 这结果很像上面的, 但是B柱跟C柱次序反了. 可见在移动盘子的时候, 柱子的次序, 是很重要的.   </p>
+<p>假如A上有3个盘子, 去尝试多画几次, 还是能解出来, 但是发现好像没有什么规律啊.   <br />
+假如A上有4个盘子, 那可能就要尝试好多次才能碰巧一次解答出来. 还没有看出来规律.   </p>
+<p>要换一种角度来看啊, 上面我们已经解答了A柱上有2个盘子的case了. 那重新看A柱上有3个盘子的case.          </p>
+<p>A柱上的2个盘子 ...</p>
+                    <a class="btn btn-default btn-xs" href="/Algo - Tower of Hanoi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Bit field.html">Bit field</a></h2>
+                <div class="summary"><p>一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢?  毕竟1个字节=8bits=2^8=256个状态.           </p>
+<h2>Part 1</h2>
+<p>Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验:            </p>
+<div class="highlight"><pre><span class="vi">#include</span> <span class="o">&lt;</span><span class="nx">cstdio</span><span class="o">&gt;</span>          
+
+<span class="c1">// 交通繁忙时间            </span>
+<span class="nx">enum</span> <span class="nx">CallTariff</span> <span class="p">{</span> <span class="nx">tOffPeak</span><span class="p">,</span> <span class="nx">tMediumRate</span><span class="p">,</span> <span class="nx">tPeakTime</span> <span class="p">}</span> <span class="p">;</span>           
+
+<span class="c1">// 账单           </span>
+<span class="nx">struct</span> <span class="nx">Bill</span>           
+<span class="p">{</span>          
+    <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+    <span class="nx">CallTariff</span>      <span class="nx">eTariff</span><span class="p">;</span>           
+<span class="p">};</span>           
+
+<span class="nx">struct</span> <span class="nx">BillVIP</span>           
+<span class="p">{</span>          
+    <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+    <span class="nx">bool</span>            <span class="nx">isVIP ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Bit field.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Volume Data Visualization.html">Volume Data Visualization</a></h2>
+                <div class="summary"><p>上周五Sq.B突然说起L.F到一个创业公司做Director of Engineer了,               <br />
+http://www.datifex.com           <br />
+为L.F高兴的同时, 这家公司很是吸引. 它的team介绍中很多都很牛的背景呢.    </p>
+<p>big data visualize ...            </p>
+<p>这年头连zf都在说大数据, 我不熟悉, 但好像他们的出发点都是怎么从大数据中获利, 例如怎么分析得到情报, 而visualization貌似可以帮到他们啊, 这就是需求? 有意思.  </p>
+<p>To read list:  <br />
+  http://cyrille.rossant.net/ 他写了两本书和很cool的project: <br />
+  book Learning IPython for Interactive Computing and Data Visualization; 已下载pdf.   <br />
+  book IPython Interactive Computing and Visualization Cookbook;                <br />
+  vispy.org ...</p>
+                    <a class="btn btn-default btn-xs" href="/Volume Data Visualization.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/阅读笔记 GLSL Cookbook - Chapter 1.html">阅读笔记 GLSL Cookbook - Chapter 1</a></h2>
+                <div class="summary"><p>[OpenGL 4.0 Shading Language Cookbook] - Chapter 1  </p>
+<h3>Profiles: Core vs. Compatibility</h3>
+<p>OpenGL 3.0版本引入了deprecation model模型. 被标记为deprecated的函数或者功能, 意味着在将来的版本中会被removed去掉. 例如immdediate mode rendering使用的glBegin/glEnd在3.0版本中标记为deprecated而在3.1版本中被去掉.     </p>
+<p>为了backwoods compatibility后兼容, OpenGL 3.2版本引入了compatibility profiles的概念.<br />
+Core profile: 目标是某一个特定的版本, older features removed.        <br />
+Compatibility profile: 为了后兼容, older features 还在的.  </p>
+<p>有些地方有full vs. forward compatible context这些概念, 听上去有点令人confusing. 跟上面的core/compatibility概念是有些不一样的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/阅读笔记 GLSL Cookbook - Chapter 1.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Mudbox - Sculpt Layer Group.html">Mudbox - Sculpt Layer Group</a></h2>
+                <div class="summary"><p>下面的截图来自autodesk/mudbox features中视频:  <br />
+<img alt="Alt text" src="data/2014-10-14-Mudbox2015_Layer_Group.PNG" title="output" />  <br />
+Group的引入可能会有这两个用处:          <br />
++ 管理、组织organize layers, 如脸部的和身体上的可以分两个group来组织layers;         <br />
++ one group &lt;&gt; one blendshape in maya; 当然blendshape复杂很多, 只是最简单支持.             </p>
+<p>看到参与的功能暴露出来面对用户了, 感觉好像创造的生命一样, 希望它能健康(别crash 别hang), 能有用:-)   </p>
+                    <a class="btn btn-default btn-xs" href="/Mudbox - Sculpt Layer Group.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Book - Everyday Probability and Statistics.html">Book - Everyday Probability and Statistics</a></h2>
+                <div class="summary"><p><img alt="Alt text" src="data/2014-10-13-book_naked_statistics.PNG" title="output" /> <img alt="Alt text" src="data/2014-10-13-book_everyday_probability_and_statistics.PNG" title="output" />         <br />
+那本[Naked Statistics]是流行书, 所以年初的时候买来看, 主要是讲日常生活中, 例如媒体, 那些统计学方面的概念可能会被误解or有意无意的用来误导大众.              <br />
+也正是在看这书时候发现后几章的概念不懂, 想找本简单的书来学习一下, 于是就有了第二本[人人都来掷骰子], 跟前一本的区别是: 前几章讲了一些概率的基础, 后几章讲统计学的概念。每一章介绍一个概念, 不长, 可以一下看完. 而且一般的步骤是例子|概念|怎么算, 没有复杂的公式没有公式证明推导等. 15章后开始的样品空间, 还不是很清晰.         </p>
+<p>不过能在上几周断断续续地看完这本书还是满足:-) 特别是还在追这部美剧:  <br />
+<img alt="Alt text" src="data/2014-10-13-PersionOfInterest.PNG" title="output" />                  <br />
+Person of Interest / 疑犯追凶;           <br />
+这有一个问题就是我们还有多少隐私呢? 倒不是说zf监控了我们的信息, 而是我们在日常的网上购物/网上言论/网上账单等都把我们清清楚楚的记录了, 甚至比我们自己还记得清楚, 慢慢地可能比我们自己还了解我们自己了. so who care the privacy? 说真的, 我都不知道哪些属于隐私范围, 而另外即使知道了别人的隐私, 是否又等于侵犯了别人的隐私呢?                                        </p>
+                    <a class="btn btn-default btn-xs" href="/Book - Everyday Probability and Statistics.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Algo - Check if a binary tree is mirror or symmetric.html">Algo - Check if a binary tree is mirror or symmetric</a></h2>
+                <div class="summary"><p>问题: 给出一个binary tree二叉树, 判断这个数是否关于根节点对称. </p>
+<p>尝试在纸上画画形状, 例如:  <br />
+<img alt="Alt text" src="data/2014-10-11-Asymmetric_BinaryTree.PNG" title="output" />            <br />
+这就引入一个问题, 问题中的对称是指结构上的对称就足够了, 还是还要加上node里面的值相等呢? 
+case 1: structure symmetric; 
+case 2: structure symmetric + value equal; 
+因为case 2是在case 1的基础上层进的, 所以并不矛盾, 先考虑case 1好了. 于是对着上面的图来写代码,  </p>
+<div class="highlight"><pre><span class="kt">bool</span> <span class="nf">isSymmetricBinaryTree</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>                    
+<span class="p">{</span>                                             
+    <span class="c1">// node without children                     </span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="n">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">)</span>        
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>                                                    
+    <span class="c1">//                       </span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">)</span>                  
+        <span class="k">return</span> <span class="nb">false ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Algo - Check if a binary tree is mirror or symmetric.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Algo - Detecting a Loop in a Singly Linked List.html">Algo - Detecting a Loop in a Singly Linked List</a></h2>
+                <div class="summary"><p>This is not the first time i see this algo problem, and i want to describe the details of how to solve it this time in case need to revisit it later.   </p>
+<p>首先想象一下一个list带loop/circle的形状.                            <br />
+<img alt="Alt text" src="data/2014-10-09-list_with_different_loop.PNG" title="output" />            <br />
+最左边的最general, 但是一个node只有一个next指针, 只能指向一个后续node, 所以只有最后的情况才可能. 或者是这个list没有loop, 或者是这个list本身就是一个loop/closed circle.                   </p>
+<p>假如一个node的定义是:         </p>
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">Node</span> <span class="p">{</span>   
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span> 
+<span class="p">};</span>     
+</pre></div>
+
+
+<p>要形成一个loop, 某一个node的next指向已经visit过的node ...</p>
+                    <a class="btn btn-default btn-xs" href="/Algo - Detecting a Loop in a Singly Linked List.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Difference between Parameter and Variabe and Argument.html">Difference between Parameter and Variabe and Argument</a></h2>
+                <div class="summary"><p>翻译过来的话, variable 是变量, parameter and argument 是参数的意思, 怎么区别使用呢?    </p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>     <span class="c1">// (int a, int b)叫argument list, a/b是parameter.  </span>
+<span class="p">{</span>                         
+    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>        <span class="c1">// c is variable.   </span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>           
+<span class="p">}</span>          
+
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                <span class="c1">// x对应自己的scope下的variables.       </span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>            <span class="c1">// x/y作为函数参数时候就是arguments.    </span>
+</pre></div>
+
+
+<p>引用一下网上的解释: </p>
+<blockquote>
+<p>A parameter is a variable in a method ...</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="/Difference between Parameter and Variabe and Argument.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Mode Switch in Class Hierarchy.html">Mode Switch in Class Hierarchy</a></h2>
+                <div class="summary"><p><img alt="Alt text" src="data/2014-09-22-Mode_Switching.PNG" title="output" /><br />
+想象我们正在搞一个砌砖的程序, 是的, 码农只是其中一种称呼, 时不时也被称为搬砖的.  <br />
+一开始, 我们只有不断在已有的基础上添加砖头的功能。      <br />
+后来, 我们需要有移动某些砖块的功能。例如在最外表面的砖块都可以被移动。 <br />
+再后来，我们需要敲掉某砖块的功能。                     <br />
+它们分别对应于add, move, delete这三种modes.     </p>
+<p>其中一种设计方法是 </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">Build</span> 
+<span class="p">{</span>
+    <span class="k">enum</span> <span class="n">BuildMode</span> <span class="p">{</span>            
+        <span class="n">Add</span><span class="p">,</span>      
+        <span class="n">Move</span><span class="p">,</span>       
+        <span class="n">Delete</span>       
+    <span class="p">};</span>          
+    <span class="n">BuildMode</span> <span class="n">m_currentMode</span><span class="p">;</span>            
+<span class="p">};</span>         
+</pre></div>
+
+
+<p>这方法是把所有mode的实现都放在同一个地方, 每次更新都要改这个地方Build的源代码实现. 但是假如在添加move, delete这新mode的时候, 我们不想or不能改已有的只有add mode的Build源码呢?    </p>
+<p>这是另一种设计方案  </p>
+<div class="highlight"><pre><span class="n">class</span> <span class="n">Build</span>  
+<span class="p">{</span>   
+    <span class="c1">// care about the add mode only.    </span>
+<span class="p">};</span>   
+<span class="n">class</span> <span class="n">BuildMove</span> <span class="o">:</span> <span class="n">public</span> <span class="n">Build</span> 
+<span class="p">{</span> 
+    <span class="kt">bool</span> <span class="n">onMouseEvent</span><span class="p">()</span>   
+    <span class="p">{</span> 
+        <span class="n">check</span> <span class="k">if</span> <span class="n">we</span> <span class="n">will</span> <span class="n">go ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/Mode Switch in Class Hierarchy.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        <ul class="pagination">
+                <li class="prev disabled"><a href="#">&laquo;</a></li>
+                    <li class="active"><a
+                            href="/index.html">1</a></li>
+                    <li class=""><a
+                            href="/index2.html">2</a></li>
+                    <li class=""><a
+                            href="/index3.html">3</a></li>
+                <li class="next"><a
+                        href="/index2.html">&raquo;</a></li>
+        </ul>
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/.html">
+                            
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
