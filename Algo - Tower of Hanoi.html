@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Algo - Tower of Hanoi - 阿can's  blog</title>
+    <title>Algo - Tower of Hanoi - 阿can's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -12,19 +12,19 @@
 
 <link rel="canonical" href="/Algo - Tower of Hanoi.html">
 
-        <meta name="author" content="" />
-        <meta name="keywords" content="" />
+        <meta name="author" content="renc" />
+        <meta name="keywords" content="Algo" />
         <meta name="description" content="在书[Anany Levitin, 算法设计与分析基础]的第二章又看到汉诺塔的问题: 有三个柱子A B C; A柱上有好几个盘子, 小的放在大的上面; 现在问怎么把A柱上的盘子移到C柱上, B是做辅助的, 条件是大的盘子不能压到小的盘子上. 所以结果C柱上的盘子也是小的放在大的上面。 A,B,C; 三个柱子 假如A上有1个盘子，直接放到C上就解答完了。 假如A上有2个盘子ab，a盘小的 在 b盘大的上面. 先把a放到B上, b放到C上, 然后把a从B移到C上. 结果就是C柱上有ab。[pattern 1] 注意这种case中先把a放到C上, 那b放到B上, 然后a从C移到到B柱上, 那B柱上就有ab两个盘子了. 这结果很像上面的, 但是B柱跟C柱次序反了. 可见在移动盘子的时候, 柱子的次序, 是很重要的. 假如A上有3个盘子, 去尝试多画几次, 还是能解出来, 但是发现好像没有什么规律啊. 假如A上有4个盘子, 那可能就要尝试好多次才能碰巧一次解答出来. 还没有看出来规律. 要换一种角度来看啊, 上面我们已经解答了A柱上有2个盘子的case了. 那重新看A柱上有3个盘子的case. A柱上的2个盘子 ..." />
 
-        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:site_name" content="阿can's blog" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Algo - Tower of Hanoi"/>
         <meta property="og:url" content="/Algo - Tower of Hanoi.html"/>
         <meta property="og:description" content="在书[Anany Levitin, 算法设计与分析基础]的第二章又看到汉诺塔的问题: 有三个柱子A B C; A柱上有好几个盘子, 小的放在大的上面; 现在问怎么把A柱上的盘子移到C柱上, B是做辅助的, 条件是大的盘子不能压到小的盘子上. 所以结果C柱上的盘子也是小的放在大的上面。 A,B,C; 三个柱子 假如A上有1个盘子，直接放到C上就解答完了。 假如A上有2个盘子ab，a盘小的 在 b盘大的上面. 先把a放到B上, b放到C上, 然后把a从B移到C上. 结果就是C柱上有ab。[pattern 1] 注意这种case中先把a放到C上, 那b放到B上, 然后a从C移到到B柱上, 那B柱上就有ab两个盘子了. 这结果很像上面的, 但是B柱跟C柱次序反了. 可见在移动盘子的时候, 柱子的次序, 是很重要的. 假如A上有3个盘子, 去尝试多画几次, 还是能解出来, 但是发现好像没有什么规律啊. 假如A上有4个盘子, 那可能就要尝试好多次才能碰巧一次解答出来. 还没有看出来规律. 要换一种角度来看啊, 上面我们已经解答了A柱上有2个盘子的case了. 那重新看A柱上有3个盘子的case. A柱上的2个盘子 ..."/>
         <meta property="article:published_time" content="2014-11-28" />
             <meta property="article:section" content="programming" />
-            <meta property="article:tag" content="" />
-            <meta property="article:author" content="" />
+            <meta property="article:tag" content="Algo" />
+            <meta property="article:author" content="renc" />
 
 
     <!-- Bootstrap -->
@@ -48,21 +48,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-阿can's  blog            </a>
+阿can's blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="/pages/about_page.html">
-                             About
-                          </a></li>
-                        <li >
-                            <a href="/category/.html"></a>
-                        </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
                         <li class="active">
                             <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -95,13 +95,13 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-11-28T20:20:00"> 周五 28 十一月 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-11-28T20:20:00+08:00"> 周五 28 十一月 2014</time>
     </span>
 
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
+	<a href="/tag/algo.html">Algo</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -154,7 +154,7 @@ recursive relation: 递归关系式, T(n) = T(n-1) + 1 + T(n-1) = 2*T(n-1) + 1; 
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
               </ul>
             </li>
 
@@ -162,11 +162,6 @@ recursive relation: 递归关系式, T(n) = T(n-1) + 1 + T(n-1) = 2*T(n-1) + 1; 
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
@@ -174,6 +169,16 @@ recursive relation: 递归关系式, T(n) = T(n-1) + 1 + T(n-1) = 2*T(n-1) + 1; 
         <li class="list-group-item">
             <a href="http://getpelican.com/" target="_blank">
                 Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
             </a>
         </li>
         <li class="list-group-item">
@@ -193,7 +198,7 @@ recursive relation: 递归关系式, T(n) = T(n-1) + 1 + T(n-1) = 2*T(n-1) + 1; 
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
+         <div class="col-xs-10">&copy; 2016 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

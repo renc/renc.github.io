@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Slide vertex on surface - 阿can's  blog</title>
+    <title>Slide vertex on surface - 阿can's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -12,19 +12,17 @@
 
 <link rel="canonical" href="/Slide vertex on surface.html">
 
-        <meta name="author" content="" />
-        <meta name="keywords" content="" />
+        <meta name="author" content="renc" />
         <meta name="description" content="过年上班没多几天啊, hackathon就开始了, 我报名的project是尝试实现以下paper: Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, EUROGRAPHICS 2010. 本文做一些记录, 特别是有些问题以后可能也会遇到. 想做这个slide brush的原因是: 1. 上面那个paper本身适合放到brush framework里面来做, 做成一个brush; 2. 看上去不是太难, 是有难点(后面会提到), 但是=不是那种求解方程组的优化问题(我还不太懂这个), 估计可以在2天内搞定的, yes, hackathon就2天. 大体做成的效果应该是: brush stroke的时候会带动一些vertices在mesh/surface上滑动, mesh的形状shape被保持。区别于现在mudbox已有的grab brush, 后者顶点跟着鼠标在走,会跑到mesh外面. 区域 算法的输入包括(不限于)下面这些: + handle, which is the mouse/brush ..." />
 
-        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:site_name" content="阿can's blog" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Slide vertex on surface"/>
         <meta property="og:url" content="/Slide vertex on surface.html"/>
         <meta property="og:description" content="过年上班没多几天啊, hackathon就开始了, 我报名的project是尝试实现以下paper: Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, EUROGRAPHICS 2010. 本文做一些记录, 特别是有些问题以后可能也会遇到. 想做这个slide brush的原因是: 1. 上面那个paper本身适合放到brush framework里面来做, 做成一个brush; 2. 看上去不是太难, 是有难点(后面会提到), 但是=不是那种求解方程组的优化问题(我还不太懂这个), 估计可以在2天内搞定的, yes, hackathon就2天. 大体做成的效果应该是: brush stroke的时候会带动一些vertices在mesh/surface上滑动, mesh的形状shape被保持。区别于现在mudbox已有的grab brush, 后者顶点跟着鼠标在走,会跑到mesh外面. 区域 算法的输入包括(不限于)下面这些: + handle, which is the mouse/brush ..."/>
         <meta property="article:published_time" content="2015-03-04" />
             <meta property="article:section" content="programming" />
-            <meta property="article:tag" content="" />
-            <meta property="article:author" content="" />
+            <meta property="article:author" content="renc" />
 
 
     <!-- Bootstrap -->
@@ -48,21 +46,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-阿can's  blog            </a>
+阿can's blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="/pages/about_page.html">
-                             About
-                          </a></li>
-                        <li >
-                            <a href="/category/.html"></a>
-                        </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
                         <li class="active">
                             <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -95,13 +93,11 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-03-04T20:20:00"> 周三 04 三月 2015</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-03-04T20:20:00+08:00"> 周三 04 三月 2015</time>
     </span>
 
 
 
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -115,7 +111,7 @@ Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, 
 + brush ring, this brush parameter is used to enumerate the active vertices, which are reachable/inside the brush ring;<br />
 + drag direction when stroking, dP0;   </p>
 <p>Step 1. 当brush stroke开始, handle就有了(这个handle应该可以是face上的surface point, 不单只是如paper中说的mesh vertex), 然后就可以枚举出这个handle附近会受到影响的所谓active vertices, 为每一个active vertex P建立一个Tangent space{Np, b1, b2}, 并且在这个Tangetn space of P上构建local parameterization of P.                                                                    </p>
-<p>Tangent space of vertex P的求法:  <br />
+<p>Tangent space of vertex P的:  <br />
 P点是有法相量normal的吧, 这个之间用作为Np; vertex P本身one-ring中有一些相连接的adjacent edges/vertices,  取最远的那个顶点Vx, 对向量VP = Vx - P 分解成垂直于Np的分向量b1 = VP - dotProject(VP, Np_normalized) * Np_normalized, 然后b2 = cross product( Np, b1 ); 注意normalize. 这方法算是Gram-Schmidt正交化在三维里面简化版?   <br />
 <img alt="Alt text" src="data/2015-03-04-tangentSpace.png" title="output" />  </p>
 <p>Local parameterization of vertex P的求法: <br />
@@ -149,7 +145,7 @@ P' = P + dP;    <br />
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
               </ul>
             </li>
 
@@ -157,11 +153,6 @@ P' = P + dP;    <br />
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
@@ -169,6 +160,16 @@ P' = P + dP;    <br />
         <li class="list-group-item">
             <a href="http://getpelican.com/" target="_blank">
                 Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
             </a>
         </li>
         <li class="list-group-item">
@@ -188,7 +189,7 @@ P' = P + dP;    <br />
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
+         <div class="col-xs-10">&copy; 2016 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

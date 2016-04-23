@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Char Array vs Char Pointer - 阿can's  blog</title>
+    <title>Char Array vs Char Pointer - 阿can's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -12,19 +12,17 @@
 
 <link rel="canonical" href="/Char Array vs Char Pointer.html">
 
-        <meta name="author" content="" />
-        <meta name="keywords" content="" />
+        <meta name="author" content="renc" />
         <meta name="description" content="刚才在阅读以下内容时候复习了一下这两个概念. Quick case: Char Pointer vs Char Array in C++, by Bartlomiej Filipek // Test case of char array vs char pointer. // #include &lt;iostream&gt; int main() { char strA[] = &#34;char array!&#34;; char *strP = &#34;char array?&#34;; std::cout &lt;&lt; &#34;sizeof(strA): &#34; &lt;&lt; sizeof(strA) &lt;&lt; &#34;, of: &#34; &lt;&lt; strA &lt;&lt; &#34;, addr: &#34; &lt;&lt; &amp;strA &lt;&lt; std::endl; std::cout &lt;&lt; &#34;sizeof(strA): &#34; &lt;&lt; sizeof ..." />
 
-        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:site_name" content="阿can's blog" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Char Array vs Char Pointer"/>
         <meta property="og:url" content="/Char Array vs Char Pointer.html"/>
         <meta property="og:description" content="刚才在阅读以下内容时候复习了一下这两个概念. Quick case: Char Pointer vs Char Array in C++, by Bartlomiej Filipek // Test case of char array vs char pointer. // #include &lt;iostream&gt; int main() { char strA[] = &#34;char array!&#34;; char *strP = &#34;char array?&#34;; std::cout &lt;&lt; &#34;sizeof(strA): &#34; &lt;&lt; sizeof(strA) &lt;&lt; &#34;, of: &#34; &lt;&lt; strA &lt;&lt; &#34;, addr: &#34; &lt;&lt; &amp;strA &lt;&lt; std::endl; std::cout &lt;&lt; &#34;sizeof(strA): &#34; &lt;&lt; sizeof ..."/>
         <meta property="article:published_time" content="2014-09-19" />
             <meta property="article:section" content="programming" />
-            <meta property="article:tag" content="" />
-            <meta property="article:author" content="" />
+            <meta property="article:author" content="renc" />
 
 
     <!-- Bootstrap -->
@@ -48,21 +46,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-阿can's  blog            </a>
+阿can's blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="/pages/about_page.html">
-                             About
-                          </a></li>
-                        <li >
-                            <a href="/category/.html"></a>
-                        </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
                         <li class="active">
                             <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -95,13 +93,11 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-09-19T12:00:00"> 周五 19 九月 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-09-19T12:00:00+08:00"> 周五 19 九月 2014</time>
     </span>
 
 
 
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -173,7 +169,7 @@
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
               </ul>
             </li>
 
@@ -181,11 +177,6 @@
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
@@ -193,6 +184,16 @@
         <li class="list-group-item">
             <a href="http://getpelican.com/" target="_blank">
                 Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
             </a>
         </li>
         <li class="list-group-item">
@@ -212,7 +213,7 @@
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
+         <div class="col-xs-10">&copy; 2016 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

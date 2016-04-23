@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>GPP - Double Buffer - 阿can's  blog</title>
+    <title>GPP - Double Buffer - 阿can's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -12,19 +12,17 @@
 
 <link rel="canonical" href="/GPP - Double Buffer.html">
 
-        <meta name="author" content="" />
-        <meta name="keywords" content="" />
+        <meta name="author" content="renc" />
         <meta name="description" content="首先多谢作者的慷慨generous! http://gameprogrammingpatterns.com/double-buffer.html Double buffer 出发点intent是使得一系列连续的操作像是同时立刻完成的。 为什么这么说呢? 作者的例子是读写屏幕的, 我画图说明: 问题是那个内存块还没有写完, 屏幕过来读的太快了, 我甚至猜想: 屏幕过来好几个笔头分任务读, 每个读一小块区域, 那速度就更快了, 快的结果是读到还没有来得及写的区域, 那可能那块区域里面就是一些不是这一帧原本想要呈现的信息(可能是之前的帧的遗留信息). 描述这样的现象专门有一个名词&#34;tearing&#34;, or &#34;image tearing&#34;. 解决方案，就是引入两个buffer, 你笔头2只能从我写完的那个bufferA里面读, 而另一个bufferB我笔头1在写, 没有写完之前不给笔头2来读. 等我笔头1写完了这个bufferB, 就做一个swap告诉笔头2可以来读这个bufferB了. 笔头2来读bufferB的时候, 我笔头1又过去写bufferA了, 依然没写完之前不给笔头2来读..... [update 2014-12-18]在看以下新闻时候遇到了&#34;image tearing&#34;这个词. &#34;A 4K monitor is great in theory, but ..." />
 
-        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:site_name" content="阿can's blog" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="GPP - Double Buffer"/>
         <meta property="og:url" content="/GPP - Double Buffer.html"/>
         <meta property="og:description" content="首先多谢作者的慷慨generous! http://gameprogrammingpatterns.com/double-buffer.html Double buffer 出发点intent是使得一系列连续的操作像是同时立刻完成的。 为什么这么说呢? 作者的例子是读写屏幕的, 我画图说明: 问题是那个内存块还没有写完, 屏幕过来读的太快了, 我甚至猜想: 屏幕过来好几个笔头分任务读, 每个读一小块区域, 那速度就更快了, 快的结果是读到还没有来得及写的区域, 那可能那块区域里面就是一些不是这一帧原本想要呈现的信息(可能是之前的帧的遗留信息). 描述这样的现象专门有一个名词&#34;tearing&#34;, or &#34;image tearing&#34;. 解决方案，就是引入两个buffer, 你笔头2只能从我写完的那个bufferA里面读, 而另一个bufferB我笔头1在写, 没有写完之前不给笔头2来读. 等我笔头1写完了这个bufferB, 就做一个swap告诉笔头2可以来读这个bufferB了. 笔头2来读bufferB的时候, 我笔头1又过去写bufferA了, 依然没写完之前不给笔头2来读..... [update 2014-12-18]在看以下新闻时候遇到了&#34;image tearing&#34;这个词. &#34;A 4K monitor is great in theory, but ..."/>
         <meta property="article:published_time" content="2014-12-10" />
             <meta property="article:section" content="programming" />
-            <meta property="article:tag" content="" />
-            <meta property="article:author" content="" />
+            <meta property="article:author" content="renc" />
 
 
     <!-- Bootstrap -->
@@ -48,21 +46,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-阿can's  blog            </a>
+阿can's blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="/pages/about_page.html">
-                             About
-                          </a></li>
-                        <li >
-                            <a href="/category/.html"></a>
-                        </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
                         <li class="active">
                             <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -95,13 +93,11 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-12-10T20:20:00"> 周三 10 十二月 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-12-10T20:20:00+08:00"> 周三 10 十二月 2014</time>
     </span>
 
 
 
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -131,7 +127,7 @@ http://gameprogrammingpatterns.com/double-buffer.html                </p>
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
               </ul>
             </li>
 
@@ -139,11 +135,6 @@ http://gameprogrammingpatterns.com/double-buffer.html                </p>
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
@@ -151,6 +142,16 @@ http://gameprogrammingpatterns.com/double-buffer.html                </p>
         <li class="list-group-item">
             <a href="http://getpelican.com/" target="_blank">
                 Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
             </a>
         </li>
         <li class="list-group-item">
@@ -170,7 +171,7 @@ http://gameprogrammingpatterns.com/double-buffer.html                </p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
+         <div class="col-xs-10">&copy; 2016 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

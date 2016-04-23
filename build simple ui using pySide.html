@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>build simple ui using pySide - 阿can's  blog</title>
+    <title>build simple ui using pySide - 阿can's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -13,17 +13,15 @@
 <link rel="canonical" href="/build simple ui using pySide.html">
 
         <meta name="author" content="renc" />
-        <meta name="keywords" content="" />
         <meta name="description" content="记录一下做UI prototype时候遇到的新概念 life is short, use python. 早有耳闻, 一试果然不凡. 安装Qt 4.8.X, 安装pySide (how? 具体看其主页), 然后新建file.py, 敲几行pySide代码, 然后command line里面python file.py立刻就出ui效果了. 省却了ide / c++代码 / 链接设置 / 反复修改反复编译的麻烦. 事情的缘由是, 最近要参与用python快速做一个ui的prototype, 本来主程序M里面就有Qt+pySide, 所以连安装都不需要, 直接改py文件就得到ui结果, 真快. 于是就缺学几下python了. example 1. To define the style sheet 样式 of a button. QPushButton { border: 2 ..." />
 
-        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:site_name" content="阿can's blog" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="build simple ui using pySide"/>
         <meta property="og:url" content="/build simple ui using pySide.html"/>
         <meta property="og:description" content="记录一下做UI prototype时候遇到的新概念 life is short, use python. 早有耳闻, 一试果然不凡. 安装Qt 4.8.X, 安装pySide (how? 具体看其主页), 然后新建file.py, 敲几行pySide代码, 然后command line里面python file.py立刻就出ui效果了. 省却了ide / c++代码 / 链接设置 / 反复修改反复编译的麻烦. 事情的缘由是, 最近要参与用python快速做一个ui的prototype, 本来主程序M里面就有Qt+pySide, 所以连安装都不需要, 直接改py文件就得到ui结果, 真快. 于是就缺学几下python了. example 1. To define the style sheet 样式 of a button. QPushButton { border: 2 ..."/>
         <meta property="article:published_time" content="2014-08-25" />
             <meta property="article:section" content="programming" />
-            <meta property="article:tag" content="" />
             <meta property="article:author" content="renc" />
 
 
@@ -48,21 +46,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-阿can's  blog            </a>
+阿can's blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="/pages/about_page.html">
-                             About
-                          </a></li>
-                        <li >
-                            <a href="/category/.html"></a>
-                        </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
                         <li class="active">
                             <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -95,13 +93,11 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-08-25T10:20:00"> 周一 25 八月 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-08-25T10:20:00+08:00"> 周一 25 八月 2014</time>
     </span>
 
 
 
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -224,7 +220,7 @@ widget-&gt;layout-&gt;addLayout/addWidget
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
               </ul>
             </li>
 
@@ -232,11 +228,6 @@ widget-&gt;layout-&gt;addLayout/addWidget
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
@@ -244,6 +235,16 @@ widget-&gt;layout-&gt;addLayout/addWidget
         <li class="list-group-item">
             <a href="http://getpelican.com/" target="_blank">
                 Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
             </a>
         </li>
         <li class="list-group-item">
@@ -263,7 +264,7 @@ widget-&gt;layout-&gt;addLayout/addWidget
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
+         <div class="col-xs-10">&copy; 2016 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

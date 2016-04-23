@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Bit field - 阿can's  blog</title>
+    <title>Bit field - 阿can's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -12,19 +12,17 @@
 
 <link rel="canonical" href="/Bit field.html">
 
-        <meta name="author" content="" />
-        <meta name="keywords" content="" />
+        <meta name="author" content="renc" />
         <meta name="description" content="一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢? 毕竟1个字节=8bits=2^8=256个状态. Part 1 Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验: #include &lt;cstdio&gt; // 交通繁忙时间 enum CallTariff { tOffPeak, tMediumRate, tPeakTime } ; // 账单 struct Bill { unsigned int iNameId; // 客户名 CallTariff eTariff; }; struct BillVIP { unsigned int iNameId; // 客户名 bool isVIP ..." />
 
-        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:site_name" content="阿can's blog" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Bit field"/>
         <meta property="og:url" content="/Bit field.html"/>
         <meta property="og:description" content="一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢? 毕竟1个字节=8bits=2^8=256个状态. Part 1 Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验: #include &lt;cstdio&gt; // 交通繁忙时间 enum CallTariff { tOffPeak, tMediumRate, tPeakTime } ; // 账单 struct Bill { unsigned int iNameId; // 客户名 CallTariff eTariff; }; struct BillVIP { unsigned int iNameId; // 客户名 bool isVIP ..."/>
         <meta property="article:published_time" content="2014-11-10" />
             <meta property="article:section" content="programming" />
-            <meta property="article:tag" content="" />
-            <meta property="article:author" content="" />
+            <meta property="article:author" content="renc" />
 
 
     <!-- Bootstrap -->
@@ -48,21 +46,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-阿can's  blog            </a>
+阿can's blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="/pages/about_page.html">
-                             About
-                          </a></li>
-                        <li >
-                            <a href="/category/.html"></a>
-                        </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
                         <li class="active">
                             <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -95,13 +93,11 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-11-10T20:20:00"> 周一 10 十一月 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-11-10T20:20:00+08:00"> 周一 10 十一月 2014</time>
     </span>
 
 
 
-<span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -421,7 +417,7 @@ std::bitset<mesh.FaceCount()> faceFlags;    <br />
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
               </ul>
             </li>
 
@@ -429,11 +425,6 @@ std::bitset<mesh.FaceCount()> faceFlags;    <br />
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
@@ -441,6 +432,16 @@ std::bitset<mesh.FaceCount()> faceFlags;    <br />
         <li class="list-group-item">
             <a href="http://getpelican.com/" target="_blank">
                 Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
             </a>
         </li>
         <li class="list-group-item">
@@ -460,7 +461,7 @@ std::bitset<mesh.FaceCount()> faceFlags;    <br />
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
+         <div class="col-xs-10">&copy; 2016 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

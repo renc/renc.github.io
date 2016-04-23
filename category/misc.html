@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title> - 阿can's  blog</title>
+    <title>misc - 阿can's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -12,14 +12,14 @@
 
 
     <meta name="author" content="renc" />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="misc" />
 
     <!-- Open Graph tags -->
-        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:site_name" content="阿can's blog" />
         <meta property="og:type" content="website"/>
-        <meta property="og:title" content="阿can's  blog"/>
+        <meta property="og:title" content="阿can's blog"/>
         <meta property="og:url" content=""/>
-        <meta property="og:description" content="阿can's  blog"/>
+        <meta property="og:description" content="阿can's blog"/>
 
 
     <!-- Bootstrap -->
@@ -43,21 +43,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-阿can's  blog            </a>
+阿can's blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="/pages/about_page.html">
-                             About
-                          </a></li>
-                        <li class="active">
-                            <a href="/category/.html"></a>
-                        </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
+                        <li class="active">
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
                         <li >
                             <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -74,43 +74,118 @@
         <div class="col-sm-9">
 
             <article>
-                <h2><a href="/Maya_Script_simple_node.html">Maya Script - simple node</a></h2>
-                <div class="summary"><p>要学习maya node, 例如的attribute, plug, 怎么连接, 怎么计算等. 所以找了些资料来看, 这里记录一下.  </p>
-<h2>例子 建一个算sin函数的node</h2>
-<p>这例子是http://me.autodesk.jp/wam/maya/docs/Maya2009/API/sine_node_8py-example.html这里找到的, 算是能找到的最简单明了的了.  我把单位从原来的radian改为了degree, 加了comments. <br />
-<a href="https://github.com/renc/coding_exercises/blob/master/maya_py_sineNodeDegree/sineNodeDegree.py">sineNodeDegree.py</a>               <br />
-下载这个py文件放到目录 里面, Windows &gt; Plugin-in Manager to load that script.      <br />
-然后就打开Node Editor or Hypergraph: Connection window就可以看到这个node了,          <br />
-<img alt="Alt text" src="data/2015-03-25-node_editor.png" title="" /> <br />
-在Node Editor里面click to select this node, 就看到Attribute Editor是这样子:        <br />
-<img alt="Alt text" src="data/2015-03-25-node_attribute_editor.png" title="" />      <br />
-尝试在input那边输入例如0 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Maya_Script_simple_node.html">more ...</a>
+                <h2><a href="/迭代啊别闷大招.html">迭代啊别闷大招</a></h2>
+                <div class="summary">
+                    <a class="btn btn-default btn-xs" href="/迭代啊别闷大招.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="/Exclude Edges Outside The Ring(排除圈外边).html">Exclude Edges Outside The Ring(排除圈外边)</a></h2>
-                <div class="summary"><p><img alt="Alt text" src="data/2015-03-17-edges_outside_ring.png" title="output" /><br />
-有时候为了找出这个圈ring接触到touch了哪些edge, 会用一个方形来代替这个圈. 问题是这个方形touch到的edges明显比圈理应touch到的要多, 怎么排除呢? 也就是在方形touch到的边作为一个集合set, 我们要在这里面找出正在被圈所接触到的(包括包含在圈内的).    </p>
-<p>图中我用橙色mark了那些应该被排除在外的边. 问题是怎么用代码表示出来.     </p>
-<div class="highlight"><pre><span class="nl">d:</span> <span class="err">圆圈中心点在边所在直线上的投影点</span><span class="p">,</span> <span class="err">和圈中心点的距离</span><span class="p">(</span><span class="err">点到直线距离</span><span class="p">);</span>   
-<span class="nl">R:</span> <span class="err">圆圈半径</span><span class="n">radius</span><span class="p">.</span>  
-<span class="nl">t:</span> <span class="err">圆圈中心点在边直线段上投影点对应直线段的参数</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="err">表示在直线段内部</span><span class="p">.</span>   
-
-<span class="err">圈外</span><span class="p">,</span> <span class="err">没有被圈覆盖到的边</span><span class="o">:</span>  
-<span class="n">d</span> <span class="o">&gt;</span> <span class="n">R</span> <span class="o">||</span> <span class="p">(</span> <span class="err">边两点在圈外</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">R</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="n">outside</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>     <span class="c1">// 公式1. </span>
-</pre></div>
-
-
-<p>有意思的是, 这是从反面找没有被touch的边, 也可以从正面直接找被touch到的边啊. 从图中可以找到这样的规律:  </p>
-<div class="highlight"><pre><span class="err">被圈覆盖到的边</span><span class="o">:</span>  
-<span class="err">边至少一点在圈内</span> <span class="o">||</span> <span class="p">(</span> <span class="err">边两点在圈外</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">R</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="n">inside</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>     <span class="c1">// 公式2.  </span>
-</pre></div>
-
-
-<p>理应两种情况包含了所有边的情况的, 也就是互补才对. 所以我画了下面的图 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Exclude Edges Outside The Ring(排除圈外边).html">more ...</a>
+                <h2><a href="/Qt Layout Demo.html">QtLayoutDemo</a></h2>
+                <div class="summary">
+                    <a class="btn btn-default btn-xs" href="/Qt Layout Demo.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/南海桂城土地交易统计.html">南海桂城土地交易统计</a></h2>
+                <div class="summary"><p>地图(我感兴趣的区域):           <br />
+<img alt="Alt text" src="data/map_Foshan_Nanhai_Guicheng.PNG" title="output" />               </p>
+<p>2016/2/18               <br />
+TD2016(NH)WG0003 佛山市南海区桂城街道天佑二路7、9、11、13号地段              <br />
+佛山市南海威通有限公司 楼面价 3965元/平方米(=4275万/面积3850.6/容积率2.8)              <br />
+旧区 旁边没有大公园 虽然靠近桂城地铁站 但是因为南海大道交通很塞车               <br />
+教育: 桂城中心小学                 </p>
+<p>2016/1/07               <br />
+TD2015(NH)WG021 南海区桂城街道广东金融高新技术服务区B区03-02-08地块              <br />
+创新蓝绿投资（北京）有限公司 楼面价 11539元/平方米(=166877万/面积48207.7/容积率3.0)               <br />
+城镇住宅用地兼容批发零售用地                </p>
+<p>2016/1/22               <br />
+TD2015 ...</p>
+                    <a class="btn btn-default btn-xs" href="/南海桂城土地交易统计.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Maya中的fileDialog2命令.html">Maya中的fileDialog2命令</a></h2>
+                <div class="summary"><p>今天在使用maya的fileDialog2 cmd去建一个file dialog, 要求能选中打开多个files, 于是需要使用:              <br />
+fileDialog2 -fileMode 4 ….;                                        <br />
+这里-fileMode=4 表示支持多个文件选择.               <br />
+问题是执行这个file dialog的时候，右下角两个按钮分别是Save, Cancel. 而我需要是Open, Cancel.     </p>
+<p>debug时候发现原来是对同一个地方分别两次操作，而产生冲突.                      <br />
+setAcceptMode(QFileDialog::AcceptOpen); // 影响open or save 这个按钮上的字.           <br />
+setLebelText(QFileDialog::Accept, "Save"); 也是影响用一个地方，但是这个"Save"跟上面的AcceptOpen中默认使用的"Open"就冲突了. 这个函数允许随意改这个角色上的字.                            </p>
+<p>解决方法是使用-okc "Open" flag来明确设置这个accept button上的text.              </p>
+<p>References: Qt4.8 (or Qt5.6), QFileDialog. </p>
+                    <a class="btn btn-default btn-xs" href="/Maya中的fileDialog2命令.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/门锁系统的接口设计.html">门锁系统的接口设计</a></h2>
+                <div class="summary"><p>想象一个场景:    <br />
+你要开发一个门锁, 设计好了锁的很多细节: 安全级别, 大小, 外观, 跟什么门相配, 使用细节等等, 但你只是一个设计公司, 这没有关系,  <br />
+因为在细节都决定好了之后, 只要找一家生产商合作按照你的设计要求来做就ok了, 当然你需要严格的验收测试.            </p>
+<p>上面那场景是我编造的, 重点是分离了接口的设计和实现.  <br />
+接口的设计:  这个class需要提供什么信息, 使用者可以通过这些接口得到使用这个class所需要的一切. 注意是使用这个class所需要的, 而不是解构分解这个class所需要知道的一切.         <br />
+接口的实现:  这是怎么实现, 用什么方法实现, 可能不同的算法, 没有关系, 使用者没有必要知道, 于是这些也没有必要让使用者接触到.     </p>
+<p>LockManager.h              <br />
+class LockManager {                         <br />
+    LockManager() { sLockManager = this; };              <br />
+    static LockManager &amp;instance() { return <em>sLockManager; };       <br />
+    static LockManager </em>sLockManager; </p>
+<div class="highlight"><pre><span class="n">virtual</span> <span class="kt">int</span> <span class="n">getInformationX</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="p">...;</span> <span class="p">};</span>                    
+<span class="n">virtual</span> <span class="kt">int</span> <span class="n">getInformationY</span><span class="p">()</span> <span class="k">const ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/门锁系统的接口设计.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Qt上GraphicsView显示SVG.html">Qt上GraphicsView显示SVG</a></h2>
+                <div class="summary"><p><img alt="Screen Shot" src="svgDemo_screenShot.PNG" title="output" /> </p>
+<p>There is a problem came at the daily work, to show a button on a graphics view,                   <br />
+this button is supposed to have the hover state, with an icon, but not general image format, but use SVG.<br />
+My first time to use svg image, even i know it is vector ...</p>
+                    <a class="btn btn-default btn-xs" href="/Qt上GraphicsView显示SVG.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/2016年02月阅读笔记.html">2016年02月阅读笔记</a></h2>
+                <div class="summary"><p>"In fact, there is no need to even enforce that the data be related to 3D", Chapter 2, Coomplete Maya Programming.    <br />
+这个话有意思。假设自己来设计一个3d应用程序，会有建模，动画，光照渲染等功能模块，你会怎么解耦和关联各个模块呢，例如某个模块改变了，别的模块需要怎么更新，会不会麻烦。而maya应用了data flow model，数据在不同模块下流入流出，不同模块就是对这些数据来操作。上面那个引入的话，这些流动的data甚至可以不用看作是3d数据。 <br />
+例如想到mesh, 什么是mesh? 三维顶点, 用边联系起来，结构halfedge是为了方便访问v/e/f。对mesh操作(sculpt, deform)，是对顶点操作，顶点的数目分布坐标等. 我是首先想到了mesh这个东西 ...</p>
+                    <a class="btn btn-default btn-xs" href="/2016年02月阅读笔记.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/Skinning notes.html">Skinning蒙皮技术</a></h2>
+                <div class="summary"><p>Reference: 
+Siggraph Course 2014 - Skinning: Real-time Shape Deformation </p>
+                    <a class="btn btn-default btn-xs" href="/Skinning notes.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/2015年11月阅读笔记.html">2015年11月阅读笔记</a></h2>
+                <div class="summary"><p>2015/11/02 今天读到一个文章: what kind of jobs do software engineers who earn 500k per year do?
+里面的故事是 villiage需要工人来为村庄供水，有两类工人：
+type 1 worker: 拿着两个水桶，到水源的地方装水，然后会村庄，自己和家人分一部分的水，余下给村庄。
+type 2 worker: 拿个铁锹去挖水道，从水源到村庄，花挺长时间，这时间里面别人不一定知道他在做什么，可能对他失望，好在村里有些人对他有信心，给他吃，好让他继续。突然一天，他的水道建好了。type 1 worker就失业，要找别工作，而type 2 worker得到了大回报。</p>
+<p>工人，在接受任务之后 ...</p>
+                    <a class="btn btn-default btn-xs" href="/2015年11月阅读笔记.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/20150929_别逃跑问题.html">20150929别逃跑问题</a></h2>
+                <div class="summary"><p>2015/9/29 一个月之前build opensubd的时候遇到一个cmake error:    </p>
+<p>当时请问了别人没有遇到，也想不到是什么原因。今天重遇这个问题，狠着心慢慢看，对比另一台机器上的build log, 
+在OpenSubd/cmake/FindDocutils.cmake的执行不一样，
+原来是这个机子上安装了C:/Anaconda, FindDocutils.cmake里面被其中一个库影响了。</p>
+<p>lesson: 别逃避问题啊, fix it. </p>
+                    <a class="btn btn-default btn-xs" href="/20150929_别逃跑问题.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -180,7 +255,7 @@ mesh.setVertexTC( tcID, newTC );
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
               </ul>
             </li>
 
@@ -188,11 +263,6 @@ mesh.setVertexTC( tcID, newTC );
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
@@ -200,6 +270,16 @@ mesh.setVertexTC( tcID, newTC );
         <li class="list-group-item">
             <a href="http://getpelican.com/" target="_blank">
                 Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
             </a>
         </li>
         <li class="list-group-item">
@@ -219,7 +299,7 @@ mesh.setVertexTC( tcID, newTC );
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
+         <div class="col-xs-10">&copy; 2016 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>QtLayoutDemo - 阿can's blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/Qt Layout Demo.html">
+
+        <meta name="author" content="renc" />
+
+        <meta property="og:site_name" content="阿can's blog" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="QtLayoutDemo"/>
+        <meta property="og:url" content="/Qt Layout Demo.html"/>
+        <meta property="og:description" content=""/>
+        <meta property="article:published_time" content="2016-04-19" />
+            <meta property="article:section" content="misc" />
+            <meta property="article:author" content="renc" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/Qt Layout Demo.html"
+                       rel="bookmark"
+                       title="Permalink to QtLayoutDemo">
+                        QtLayoutDemo
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-04-19T20:20:00+08:00"> 周二 19 四月 2016</time>
+    </span>
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>假如要实现一下的界面：                                      <br />
+<img alt="Alt text 图片说明, 空也可以" src="data/2016-04-19_qtLayoutDemo11.PNG" title="output" />        <br />
+<img alt="Alt text 图片说明, 空也可以" src="data/2016-04-19_qtLayoutDemo20.PNG" title="output" />                                             <br />
+拖拽这个界面缩放的时候，界面里面的button, text等都随着放大缩小，中间的padding比例依旧。                                        </p>
+<p>我一开始的做法是这个widget的layout里面加(button, label), 然后在virtual resizeEvent()里面根据widget的大小width and height, 来计算button and label的大小，然后setFixedHeight and setFixedWidth. 怎么搞都不对，虽然button and label的大小是对的，但是位置确实错的，因为中间的padding自动调节大小，莫非连中间的padding也要设置大小和位置？                                         </p>
+<p>于是找资料，Qt GUI programming, 发现qt的界面布局可以分为三类。                                        </p>
+<p>绝对位置法，连layout都没有用到，初始化时候除了建widgetChild以外, 只用widgetChild-&gt;setGeometry(xPos, yPos, w, h); 然后widgetFather自己setFixedSize()。                                      <br />
+这方法的问题包括，窗口大小不改变，字体的不同可能造成字体超出widget的大小，自己求每一个widgetChild的位置和大小.                                         </p>
+<p>人工布局法，连layout都没有用到，初始化时候建widgetChild and 调用自己的setMinimumSize() and resize(), 但是widgetChild的位置大小放在widgetFather::resizeEvent()里面根据当前widgetFather大小来还是用widgetChild-&gt;setGeometry().                                      <br />
+这方法虽然还是需要自己求每一个widgetChild的位置和大小，但是这些widgetChild可以根据窗户的大小改变来改变了。                                        </p>
+<p>布局管理器方法，layout management方法.                                       <br />
+第一步是，上下左右的次序和层次，QHBoxLayout, QVBoxLayout, QGridLayout.                                       <br />
+第二步是，大小尺寸策略 and 大小提示。                                      <br />
+大小尺寸策略：告诉布局系统怎么对它进行拉伸或者压缩。                                        </p>
+<p>回顾我一开始的方法，其实是人工布局法(resizeEvent()) 和 布局管理器方法的混合, 结果不好。                                      <br />
+在布局管理器里面，widget加入layout里面的次序，一定程度上觉得了widgets的相对坐标了，这是我之前一直熟悉的，但是怎么达到最终的坐标呢? 这是我不知道的. 机缘下发现了setStretch()函数. setStretch(index, stretch)设置各个widget是stretch比例，就决定了widgets在layout里面的大小。更好地是，setStretch还会随着widget的拉伸而重新更新各个小widget的大小和位置来保证比例。</p>
+<p>这demo里面还有些小trick. 有些空白地方我用了addStretch(), 而有些空白地方却用了QLabel没有text, 两者的结果一样的, 用QLabel的好处是可以设置background-color, 调试时候就可以很方便地看到这个widget所占的实际空间. 而怎么使用background-code呢, 用qt design来找第一感觉, 然后参考它生成的代码。                </p>
+<p>其它跟size有关的属性:                              <br />
+maximumHeight, maximumWidth, maximumSize: 默认是(QWIDGETSIZE_MAX,QWIDGETSIZE_MAX), widget最大也不能超过maxi H or W.                                       <br />
+minimumHeight, minimumWidth, minimumSize: 默认是(0,0), widget最小不能小于mini H or W;   minimumSizeHint.                                       <br />
+sizeHint: .                            <br />
+setFixedHeight/setFixedWidth: 只是方便把minimum and maximum Height/Width一起设了，without changing the Hegith/Width.                                          </p>
+<p>resize() 函数不是 virtual的, 估计不是打算给subclass override的.                                       <br />
+resizeEvent() 函数是virtual的, 可以override了.                                         </p>
+<p>source code at .                 </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

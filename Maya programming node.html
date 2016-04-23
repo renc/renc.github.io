@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Maya Programming Note - 阿can's  blog</title>
+    <title>Maya Programming Node - 阿can's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,23 @@
 
 
 
-<link rel="canonical" href="/Maya programming note.html">
+<link rel="canonical" href="/Maya programming node.html">
 
-        <meta name="author" content="" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="学maya时候有些新概念要记录一下，否则忘得快. Background colors 改变3d view的背景颜色: use the Alt-b hotkey to toggle切换 between different background colors; Or to customize it by Window &gt; Setting/Preferences &gt; Color Settings &gt; General tab &gt; 3d view section. Display the polygon count in the scene view 显示多边形个数 Display &gt; Heads Up Display &gt; Poly Count 有几列: 全部for visible polygon ..." />
+        <meta name="author" content="renc" />
+        <meta name="keywords" content="Maya,Mel,Python" />
+        <meta name="description" content="学maya时候有些新概念要记录一下，否则忘得快. 先在一个新场景里面拖一个多边形球polygon sphere出来, 打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是: + polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等; + pSphereShape1: 这个就是实际的shape node, 形状. + initialShadingGroup: 用于画这个球的. + pSphere1: transform node, 决定了球在空间位置. import maya.cmds; maya.cmds.polySphere() # 用script建一个球 # Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node ..." />
 
-        <meta property="og:site_name" content="阿can's  blog" />
+        <meta property="og:site_name" content="阿can's blog" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Maya Programming Note"/>
-        <meta property="og:url" content="/Maya programming note.html"/>
-        <meta property="og:description" content="学maya时候有些新概念要记录一下，否则忘得快. Background colors 改变3d view的背景颜色: use the Alt-b hotkey to toggle切换 between different background colors; Or to customize it by Window &gt; Setting/Preferences &gt; Color Settings &gt; General tab &gt; 3d view section. Display the polygon count in the scene view 显示多边形个数 Display &gt; Heads Up Display &gt; Poly Count 有几列: 全部for visible polygon ..."/>
+        <meta property="og:title" content="Maya Programming Node"/>
+        <meta property="og:url" content="/Maya programming node.html"/>
+        <meta property="og:description" content="学maya时候有些新概念要记录一下，否则忘得快. 先在一个新场景里面拖一个多边形球polygon sphere出来, 打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是: + polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等; + pSphereShape1: 这个就是实际的shape node, 形状. + initialShadingGroup: 用于画这个球的. + pSphere1: transform node, 决定了球在空间位置. import maya.cmds; maya.cmds.polySphere() # 用script建一个球 # Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node ..."/>
         <meta property="article:published_time" content="2014-04-01" />
             <meta property="article:section" content="programming" />
-            <meta property="article:tag" content="" />
-            <meta property="article:author" content="" />
+            <meta property="article:tag" content="Maya" />
+            <meta property="article:tag" content="Mel" />
+            <meta property="article:tag" content="Python" />
+            <meta property="article:author" content="renc" />
 
 
     <!-- Bootstrap -->
@@ -48,21 +50,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-阿can's  blog            </a>
+阿can's blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="/pages/about_page.html">
-                             About
-                          </a></li>
-                        <li >
-                            <a href="/category/.html"></a>
-                        </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
                         <li class="active">
                             <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -82,10 +84,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Maya programming note.html"
+                    <a href="/Maya programming node.html"
                        rel="bookmark"
-                       title="Permalink to Maya Programming Note">
-                        Maya Programming Note
+                       title="Permalink to Maya Programming Node">
+                        Maya Programming Node
                     </a>
                 </h1>
             </header>
@@ -95,25 +97,21 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-04-01T10:20:00"> 周二 01 四月 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-04-01T10:20:00+08:00"> 周二 01 四月 2014</time>
     </span>
 
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/.html"></a>
+	<a href="/tag/maya.html">Maya</a>
+        /
+	<a href="/tag/mel.html">Mel</a>
+        /
+	<a href="/tag/python.html">Python</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <p>学maya时候有些新概念要记录一下，否则忘得快. </p>
-<h1>Background colors 改变3d view的背景颜色:</h1>
-<ol>
-<li>use the Alt-b hotkey to toggle切换 between different background colors;    </li>
-<li>Or to customize it by Window &gt; Setting/Preferences &gt; Color Settings &gt; General tab &gt; 3d view section. </li>
-</ol>
-<h1>Display the polygon count in the scene view  显示多边形个数</h1>
-<p>Display &gt; Heads Up Display &gt; Poly Count 有几列: 全部for visible polygon; count for selected polygons;  counts for selected components on objects that are partly visible in the view; </p>
-<h2>Transfrom and Shape node</h2>
 <p>先在一个新场景里面拖一个多边形球polygon sphere出来,    <br />
 <img alt="transfrom and shape node" src="data/2014-04-01-transfer_shape_node.png" title="output" />
 打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是:    <br />
@@ -211,10 +209,6 @@ Developer Resources &gt; API Guide &gt; Polygon API &gt; How polygons are handle
 <p>定义命令cmd的语法, 例如你可能想给命令添加一些flags. [ MPxCommand::newSyntax() ]
 有了语法, 在具体执行这个命令的时候, 首先当然就是分解命令, 看它是否包含了哪些参数. [doIt, parseArgs, argument list, argument data]</p>
 <p>分regular command and interactive command (tool command)两种, 分别对应MPxCommand and MPxToolCommand. </p>
-<p>在maya doc中看到说maya 是区分tools和actions的:<br />
-1. Tools work continuously, 例如brush那样会click and drag;   <br />
-2. Actions are immediate, "one shot" operations.  <br />
-这个区分挺有意思, 也解答了一些命名问题. </p>
 <h2>Context</h2>
 <p>例如左边select tool, paint select tool, move tool...还有polygon/drag a cube等，其实每一样都是一个context，于是context好像跟tool工具是一个意思。     <br />
 mel 下 "currentCtx"询问当前context类型的object.       <br />
@@ -225,17 +219,13 @@ setToolTo grabUVContext1; // switch from current ctx to this new context object;
 + context command, 也就是在plugin里面注册register一个context时候，其实是一个ctx command.  上面那个grabUVContext其实是一个cmd，而且是一个特殊的cmd类型, ctx cmd; -q 也就是query下也是作为一个cmd来用. 
 + context and interactive command, 例如moveTool;        <br />
 + context and manipulator; 例子很多.                </p>
-<h2>Node and Attributes</h2>
-<p>Three types of attributes exists in Maya:<br />
-+ static: built in内置的, 不能被modified or removed; <br />
-+ dynamic: allow u to add or delete attributes on a particular node (a specific instance of a node type).<br />
-+ extension: allow u to add or delete attributes, at run time, on all nodes of a given type.                  </p>
 <p>给attribute设置值and取值             <br />
 maya.cmds.getAttr();   <br />
 maya.cmds.setAttr();<br />
 nodeName+'.scaleX' 这是简单的attribute;   <br />
 nodeName+'.translate' 这是所谓的compound attribute;                         </p>
-<p>连接attribute 前提是同样的type.      </p>
+<p>连接attribute <br />
+前提是同样的type.      </p>
 <h2>UI</h2>
 <p>2014/7 因为要在maya界面的某个shelf上加button, 于是需要了解一下mel里面怎么建ui.      <br />
 大致是一个window, 下面是layout, 可以是各种各样的layout,  layout之间可能有父子关系，然后是button.        <br />
@@ -252,11 +242,10 @@ UI例子 window/tabLayout/shelfLayout/shelfButton; 用setParent .. 可以回到�
 References: 
 + mel command document: window, tabLayout, shelfLayout, shelfButton. </p>
 <h2>安装Plugin</h2>
-<p>一般会提到plugin and script, 这两个名字有什么区别? (回顾maya区分tool and action)  </p>
 <p>首先是要让maya找到这些plugin or script, 那这些plugin or script放哪里才能被找到呢?      <br />
 + 可以放到maya自己指定的地方, 如maya安装目录下的相应文件夹;    <br />
 + 可以放到你自己指定的地方, 但是需要通过某种方式告诉maya让maya来这个地方找;    </p>
-<p>在当前运行的maya, script editor, MEL tab :             </p>
+<p>在当前运行的maya, script editor:             </p>
 <div class="highlight"><pre><span class="n">getenv</span> <span class="n">MAYA_PLUG_IN_PATH</span><span class="p">;</span> <span class="c1">// 注释 for c++ and python plug-ins                     </span>
 <span class="n">getenv</span> <span class="n">MAYA_SCRIPT_PATH</span><span class="p">;</span>  <span class="c1">// 注释 for MEL and Python scripts    </span>
 <span class="n">getenv</span> <span class="n">XBMLANGPATH</span>        <span class="c1">// 注释 for icons           </span>
@@ -283,23 +272,20 @@ Maya 2015 的doc形式好像改了, 之前是User Guide 和 API Guide(或者叫A
 step 2. at your visual studio project of that custom plugin, Tools -&gt; Attach to Process ..., choose maya.exe you will see visual studio processing some source files....这就完整寄生了. </p>
 <h2>Debug</h2>
 <ul>
-<li>MGlobal::displayInfo(MString("..")); 输出到Script Editor. </li>
-<li>MStatus status; 这东西是很多函数的返回值，记得判断是否MS::kSuccess. 用MString MStatus::errorString() const函数方便输出函数的返回状态. </li>
+<li>
+<p>MGlobal::displayInfo(MString("..")); 输出到Script Editor. </p>
+</li>
+<li>
+<p>MStatus status; 这东西是很多函数的返回值，记得判断是否MS::kSuccess. 用MString MStatus::errorString() const函数方便输出函数的返回状态. </p>
+</li>
+<li></li>
 </ul>
-<div class="highlight"><pre><span class="n">sys</span><span class="p">.</span><span class="n">platform</span><span class="p">;</span>              
-<span class="cp"># Result: win32 #  </span>
-<span class="n">sys</span><span class="p">.</span><span class="n">version</span>       
-<span class="cp"># Result: 2.7.6 (default, May  8 2014, 07:51:14) [MSC v.1700 64 bit (AMD64)] #   </span>
-<span class="n">print</span><span class="p">(</span> <span class="n">sys</span><span class="p">.</span><span class="n">version</span> <span class="p">)</span>      
-<span class="mf">2.7.6</span> <span class="p">(</span><span class="k">default</span><span class="p">,</span> <span class="n">May</span>  <span class="mi">8</span> <span class="mi">2014</span><span class="p">,</span> <span class="mo">07</span><span class="o">:</span><span class="mi">51</span><span class="o">:</span><span class="mi">14</span><span class="p">)</span> <span class="p">[</span><span class="n">MSC</span> <span class="n">v</span><span class="mf">.1700</span> <span class="mi">64</span> <span class="n">bit</span> <span class="p">(</span><span class="n">AMD64</span><span class="p">)]</span>       
+<div class="highlight"><pre><span class="n">import</span> <span class="n">sys</span><span class="p">;</span>                     
+<span class="n">import</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span> <span class="n">as</span> <span class="n">cmds</span>            
+<span class="n">import</span> <span class="n">maya</span><span class="p">.</span><span class="n">mel</span> <span class="n">as</span> <span class="n">mel</span>               
 
-<span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">about</span><span class="p">(</span><span class="n">apiVersion</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>            
-<span class="cp"># Result: 201600 #                               </span>
-<span class="n">print</span> <span class="p">(</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">about</span><span class="p">(</span><span class="n">apiVersion</span><span class="o">=</span><span class="n">True</span><span class="p">)</span> <span class="p">)</span>                      
-<span class="mi">201600</span>  <span class="err">#</span> <span class="err">这是输出</span> <span class="n">to</span> <span class="n">print</span> <span class="n">out</span> <span class="n">the</span> <span class="n">current</span> <span class="n">version</span> <span class="n">of</span> <span class="n">maya</span>           
-
-<span class="n">maya</span><span class="p">.</span><span class="n">mel</span><span class="p">.</span><span class="n">eval</span><span class="p">(</span><span class="err">&#39;</span><span class="n">getApplicationVersionAsFloat</span><span class="err">&#39;</span><span class="p">)</span>           
-<span class="cp"># Result: 2016.0 #          </span>
+<span class="n">print</span><span class="p">(</span> <span class="n">sys</span><span class="p">.</span><span class="n">version</span> <span class="p">)</span> <span class="err">#</span> <span class="n">python</span> <span class="n">version</span>    
+<span class="n">print</span> <span class="p">(</span> <span class="n">cmds</span><span class="p">.</span><span class="n">about</span><span class="p">(</span><span class="n">apiVersion</span><span class="o">=</span><span class="n">True</span><span class="p">)</span> <span class="p">)</span> <span class="err">#</span> <span class="n">to</span> <span class="n">print</span> <span class="n">out</span> <span class="n">the</span> <span class="n">current</span> <span class="n">version</span> <span class="n">of</span> <span class="n">maya</span>    
 </pre></div>
 
 
@@ -322,7 +308,7 @@ vs2012, install update 4, there is no v4.5.1
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
               </ul>
             </li>
 
@@ -330,11 +316,6 @@ vs2012, install update 4, there is no v4.5.1
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
@@ -342,6 +323,16 @@ vs2012, install update 4, there is no v4.5.1
         <li class="list-group-item">
             <a href="http://getpelican.com/" target="_blank">
                 Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
             </a>
         </li>
         <li class="list-group-item">
@@ -361,7 +352,7 @@ vs2012, install update 4, there is no v4.5.1
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
+         <div class="col-xs-10">&copy; 2016 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

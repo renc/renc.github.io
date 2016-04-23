@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>2016年02月阅读笔记 - 阿can's blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/2016年02月阅读笔记.html">
+
+        <meta name="author" content="renc" />
+        <meta name="description" content="&#34;In fact, there is no need to even enforce that the data be related to 3D&#34;, Chapter 2, Coomplete Maya Programming. 这个话有意思。假设自己来设计一个3d应用程序，会有建模，动画，光照渲染等功能模块，你会怎么解耦和关联各个模块呢，例如某个模块改变了，别的模块需要怎么更新，会不会麻烦。而maya应用了data flow model，数据在不同模块下流入流出，不同模块就是对这些数据来操作。上面那个引入的话，这些流动的data甚至可以不用看作是3d数据。 例如想到mesh, 什么是mesh? 三维顶点, 用边联系起来，结构halfedge是为了方便访问v/e/f。对mesh操作(sculpt, deform)，是对顶点操作，顶点的数目分布坐标等. 我是首先想到了mesh这个东西 ..." />
+
+        <meta property="og:site_name" content="阿can's blog" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="2016年02月阅读笔记"/>
+        <meta property="og:url" content="/2016年02月阅读笔记.html"/>
+        <meta property="og:description" content="&#34;In fact, there is no need to even enforce that the data be related to 3D&#34;, Chapter 2, Coomplete Maya Programming. 这个话有意思。假设自己来设计一个3d应用程序，会有建模，动画，光照渲染等功能模块，你会怎么解耦和关联各个模块呢，例如某个模块改变了，别的模块需要怎么更新，会不会麻烦。而maya应用了data flow model，数据在不同模块下流入流出，不同模块就是对这些数据来操作。上面那个引入的话，这些流动的data甚至可以不用看作是3d数据。 例如想到mesh, 什么是mesh? 三维顶点, 用边联系起来，结构halfedge是为了方便访问v/e/f。对mesh操作(sculpt, deform)，是对顶点操作，顶点的数目分布坐标等. 我是首先想到了mesh这个东西 ..."/>
+        <meta property="article:published_time" content="2016-02-09" />
+            <meta property="article:section" content="misc" />
+            <meta property="article:author" content="renc" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+阿can's blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/computer-graphics.html">Computer graphics</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/2016年02月阅读笔记.html"
+                       rel="bookmark"
+                       title="Permalink to 2016年02月阅读笔记">
+                        2016年02月阅读笔记
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-02-09T16:20:00+08:00"> 周二 09 二月 2016</time>
+    </span>
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>"In fact, there is no need to even enforce that the data be related to 3D", Chapter 2, Coomplete Maya Programming.    <br />
+这个话有意思。假设自己来设计一个3d应用程序，会有建模，动画，光照渲染等功能模块，你会怎么解耦和关联各个模块呢，例如某个模块改变了，别的模块需要怎么更新，会不会麻烦。而maya应用了data flow model，数据在不同模块下流入流出，不同模块就是对这些数据来操作。上面那个引入的话，这些流动的data甚至可以不用看作是3d数据。 <br />
+例如想到mesh, 什么是mesh? 三维顶点, 用边联系起来，结构halfedge是为了方便访问v/e/f。对mesh操作(sculpt, deform)，是对顶点操作，顶点的数目分布坐标等. 我是首先想到了mesh这个东西，然后把vertex看作是mesh的组成。那现在加入从data flow model的角度来看，是不是可以看作首先是一堆data point, 每一个point刚好三维, 这些data point本身可以描述别的东西，但是这里我们把它们恰好看作是描述一个形状shape, 而这些data point的数据数值在不同模块中流动, 被改变, 它反映的形状也随之改变. mesh只是这些data point的一个外衣.              <br />
+例如一堆data point，分裂split出新的data point, 平滑smooth这些point的坐标, 就是细分算法了. 有意思的是data point可以增加, 可以跟旁边别的data point商量组成pattern呢.                       <br />
+相比分裂产生新data, mudbox里面的sculpt layer merge, 是几组data point碰头而且合并为一了。 </p>
+<p>我上段时间碰到的一个问题，把一个interpolation node独立出来去插值不同的数据，这些数据可以是vertex position, color等。</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 renc
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

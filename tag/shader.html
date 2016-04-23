@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>About - 阿can's  blog</title>
+    <title>Shader - 阿can's blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,16 +10,16 @@
 
 
 
-<link rel="canonical" href="/pages/about_page.html">
 
-        <meta name="author" content="" />
-        <meta name="description" content="Hello, if you find something interesting or wrong please let me know, thank you. Hello你好，如果发现什么有意思的或者什么错误的, 麻烦告诉我一下, thx." />
+    <meta name="author" content="renc" />
+    <meta name="keywords" content="Shader" />
 
-    <meta property="og:site_name" content="阿can's  blog" />
-    <meta property="og:type" content="article"/>
-    <meta property="og:title" content="About"/>
-    <meta property="og:url" content="/pages/about_page.html"/>
-    <meta property="og:description" content="Hello, if you find something interesting or wrong please let me know, thank you. Hello你好，如果发现什么有意思的或者什么错误的, 麻烦告诉我一下, thx." />
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="阿can's blog" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="阿can's blog"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="阿can's blog"/>
 
 
     <!-- Bootstrap -->
@@ -43,21 +43,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-阿can's  blog            </a>
+阿can's blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li class="active"><a href="/pages/about_page.html">
-                             About
-                          </a></li>
-                        <li class="active">
-                            <a href="/category/.html"></a>
-                        </li>
                         <li >
                             <a href="/category/computer-graphics.html">Computer graphics</a>
                         </li>
                         <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
+                        <li >
                             <a href="/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="/category/tech.html">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -73,15 +73,20 @@
     <div class="row">
         <div class="col-sm-9">
 
-    <section id="content" class="body">
-        <h1 class="entry-title">About</h1>
-        
-        <div class="entry-content">
-            <p>Hello, if you find something interesting or wrong please let me know, thank you. <br />
-Hello你好，如果发现什么有意思的或者什么错误的, 麻烦告诉我一下, thx. </p>
-<p><img alt="contact info" src="../data/contact_info.PNG" title="" />   </p>
-        </div>
-    </section>
+            <article>
+                <h2><a href="/阅读笔记 GLSL Cookbook - Chapter 1.html">阅读笔记 GLSL Cookbook - Chapter 1</a></h2>
+                <div class="summary"><p>[OpenGL 4.0 Shading Language Cookbook] - Chapter 1  </p>
+<h3>Profiles: Core vs. Compatibility</h3>
+<p>OpenGL 3.0版本引入了deprecation model模型. 被标记为deprecated的函数或者功能, 意味着在将来的版本中会被removed去掉. 例如immdediate mode rendering使用的glBegin/glEnd在3.0版本中标记为deprecated而在3.1版本中被去掉.     </p>
+<p>为了backwoods compatibility后兼容, OpenGL 3.2版本引入了compatibility profiles的概念.<br />
+Core profile: 目标是某一个特定的版本, older features removed.        <br />
+Compatibility profile: 为了后兼容, older features 还在的.  </p>
+<p>有些地方有full vs. forward compatible context这些概念, 听上去有点令人confusing. 跟上面的core/compatibility概念是有些不一样的 ...</p>
+                    <a class="btn btn-default btn-xs" href="/阅读笔记 GLSL Cookbook - Chapter 1.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
@@ -91,7 +96,7 @@ Hello你好，如果发现什么有意思的或者什么错误的, 麻烦告诉�
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="https://github.com/renc"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
               </ul>
             </li>
 
@@ -99,11 +104,6 @@ Hello你好，如果发现什么有意思的或者什么错误的, 麻烦告诉�
 
             <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="/tag/.html">
-                            
-                        </a>
-                    </li>
                 </ul>
             </li>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
@@ -111,6 +111,16 @@ Hello你好，如果发现什么有意思的或者什么错误的, 麻烦告诉�
         <li class="list-group-item">
             <a href="http://getpelican.com/" target="_blank">
                 Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
             </a>
         </li>
         <li class="list-group-item">
@@ -130,7 +140,7 @@ Hello你好，如果发现什么有意思的或者什么错误的, 麻烦告诉�
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 renc
+         <div class="col-xs-10">&copy; 2014 renc
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
