@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>can's blog - can</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="can">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="can's blog ATOM Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">can's blog </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/computer-graphics.html">
+						<i class="icon-folder-open icon-large"></i>Computer Graphics
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/misc.html">
+						<i class="icon-folder-open icon-large"></i>misc
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/programming.html">
+						<i class="icon-folder-open icon-large"></i>programming
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tech.html">
+						<i class="icon-folder-open icon-large"></i>tech
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Vector based containers.html">Vector based containers</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-05-13T10:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 13 May 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记.  </p>
+<h2>引言</h2>
+<h1>Using STL Vectors</h1>
+<p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 
+但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. </p>
+<h2>Prefer vector over list</h2>
+<p>比较 std::vector 和 std::list, 其中一个特定是, vector的内存是连续的(contiguous buffers), 还可以避免avoid内存动态分配memory allocations和四散的访问scattered access.  这些都是优势. </p>
+<p>这里发散一下，以前在用Qt 4.8的时候(以后Qt 5可能有变)，就有QVector, QList, QLinkedList，它们的区别也有意思。其中QVector跟std::vector类似 ...</p>
+                        <a class="btn primary xsmall" href="/Vector based containers.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Pointer to Member Function.html">Pointer to Member Function</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-05-12T10:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 12 May 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>function pointer是知道的, 如</p>
+<div class="highlight"><pre><span></span>int max( int a, int b) { ... };
+
+int (*pFtor)( int, int ) = &amp;max;
+int iResult = pFtor(1, 2); 
+
+or
+
+typedef int(*FtorType)(int, int); 
+FtorType pFtor; 
+pFtor = &amp;max;
+int iResult = pFtor(1, 2);
+</pre></div>
+
+
+<p>但是当看到类似以下代码时候还是恐惧了一下: </p>
+<div class="highlight"><pre><span></span><span class="nt">class</span> <span class="nt">Tool</span> <span class="p">{</span>
+    <span class="n">int</span> <span class="n">doA</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">int</span> <span class="n">doB</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span> 
+<span class="p">}</span><span class="o">;</span> 
+<span class="nt">typedef</span> <span class="nt">int</span><span class="o">(</span><span class="nt">Tool</span><span class="o">::*</span><span class="nt">MemberFunctionPtr</span><span class="o">)(</span><span class="nt">ArgumentType</span> <span class="o">&amp;);</span>
+
+
+<span class="nt">Tool</span> <span class="nt">toolObj ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/Pointer to Member Function.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/In the middle of time and space.html">In the middle of time and space</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-05-09T10:20:00+08:00">
+        <i class="icon-calendar"></i>Fri 09 May 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>刚发生了一个有意思的事情, 5月9号16:40</p>
+<p>小伙C说了一段话;
+小伙B回答了一段话;</p>
+<p>小伙C是在北美西海岸, 跟我们差16小时; 
+小伙B是在英国.</p>
+<p>那么C大致是5月8号深夜, B可能是9号早上.</p>
+<p>过去和未来的对话，我们夹在时空中间，旁观.....</p>
+                        <a class="btn primary xsmall" href="/In the middle of time and space.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Example of code conventions.html">Example of code conventions</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-05-03T10:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 03 May 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>刚看到如下代码:</p>
+<div class="highlight"><pre><span></span><span class="o">//</span> <span class="nt">NvGLModel</span><span class="nc">.h</span> <span class="nt">from</span> <span class="nt">nvidia</span> <span class="nt">samples</span> 
+
+    <span class="nt">nv</span><span class="o">:</span><span class="nd">:vec3f</span> <span class="nt">m_center</span><span class="o">;</span> <span class="o">///&lt;</span> <span class="nt">The</span> <span class="nt">computed</span> <span class="nt">center</span> <span class="nt">of</span> <span class="nt">the</span> <span class="nt">bounding</span> <span class="nt">box</span> <span class="nt">of</span> <span class="nt">the</span> <span class="nt">app</span>
+
+<span class="nt">private</span><span class="o">:</span>
+    <span class="nt">NvModel</span> <span class="o">*</span><span class="nt">model</span><span class="o">;</span>
+    <span class="nt">GLuint</span> <span class="nt">model_vboID</span><span class="o">,</span> <span class="nt">model_iboID</span><span class="o">;</span>
+    <span class="nt">nv</span><span class="o">:</span><span class="nd">:vec3f</span> <span class="nt">m_minExtent</span><span class="o">,</span> <span class="nt">m_maxExtent</span><span class="o">,</span> <span class="nt">m_radius</span><span class="o">;</span>
+</pre></div>
+
+
+<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
+<p>btw, 反例的英文原来是: counter example; negative example </p>
+                        <a class="btn primary xsmall" href="/Example of code conventions.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Picking with OpenGL.html">Picking with OpenGL</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-04-28T10:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 28 April 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><blockquote>
+<p>If you have choices, choose the best. If you have no choice, do the best. 如果有选择，那就选择最好的；如果没有选择，那就努力做到最好。</p>
+</blockquote>
+<h1>Picking with OpenGL</h1>
+<p>在3d软件提供交互的时候，例如先选择了某个vertex或者某个face，然后去操作这个被选中的东西。如在maya里面很多工具(maya里面把context==tool?)都是先pick the manipulator, drag the manipulator, to update the attributes of the node (the selection list). 第一步就是要选中mouse底下的东西，这是怎么做到的呢?</p>
+<p>其实一开始我想到的方法ray intersection的方法，
+approach 0 ...</p>
+                        <a class="btn primary xsmall" href="/Picking with OpenGL.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/choose the overrided function.html">choose the overrided function</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-04-17T10:20:00+08:00">
+        <i class="icon-calendar"></i>Thu 17 April 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>In class hierarchy, if functions are overrided by some subclass, which one will be invoked?</p>
+                        <a class="btn primary xsmall" href="/choose the overrided function.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-04-14T10:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 14 April 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
+- do sth -&gt; undo it, or 
+- do sth -&gt; undo it -&gt; redo it;
+在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。</p>
+<p>maya/devkit的例子所使用的方法是:</p>
+<div class="highlight"><pre><span></span>//code  
+// inside class CommandXY 
+virtual bool isUndoable() const { return true or false; }
+virtual MStatus doIt( const MArglist &amp; )
+{
+    // parse the argument list;
+    // do some ...</pre></div>
+                        <a class="btn primary xsmall" href="/Do and redo are similiar.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/How to build a plugin system.html">How to build a plugin system</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-04-03T10:20:00+08:00">
+        <i class="icon-calendar"></i>Thu 03 April 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
+很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
+<p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
+- 自定义operation, support undo and redo;
+- 自定义某种brush (operation); 
+- 继承实现某个类，代替原有的那个. 例如map extraction? 
+当前接触到的maya api不多，知道plugin可以实现context and manipulator.</p>
+<p>问题就来了, 一个简单的plugin system是怎么设计和实现的呢? </p>
+<p>case 1: 
+Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
+http://3dgep ...</p>
+                        <a class="btn primary xsmall" href="/How to build a plugin system.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Maya programming node.html">Maya Programming Node</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-04-01T10:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 01 April 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/maya.html"><i class="icon-tag"></i>Maya</a>
+	<a href="/tag/mel.html"><i class="icon-tag"></i>Mel</a>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
+<p>先在一个新场景里面拖一个多边形球polygon sphere出来,    <br />
+<img alt="transfrom and shape node" src="data/2014-04-01-transfer_shape_node.png" title="output" />
+打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是:    <br />
++ polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等;  <br />
++ pSphereShape1: 这个就是实际的shape node, 形状.                  <br />
++ initialShadingGroup: 用于画这个球的.               <br />
++ pSphere1: transform node, 决定了球在空间位置.                 </p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">maya.cmds</span><span class="p">;</span> 
+
+<span class="n">maya</span><span class="o">.</span><span class="n">cmds</span><span class="o">.</span><span class="n">polySphere</span><span class="p">()</span>                  <span class="c1"># 用script建一个球 </span>
+<span class="c1"># Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node. interesting part ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/Maya programming node.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/simple implement of 2d bezier curve.html">simple implement of 2d bezier curve</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-03T10:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 03 March 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>工作中又一次遇到nurb curve的问题，具体是knots个数和求法的问题。那东西太难，相对来来说，bezier curve易懂很多，一直想实现一下来看看，于是就有了此。</p>
+                        <a class="btn primary xsmall" href="/simple implement of 2d bezier curve.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Flood fill.html">Flood fill</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-10-22T10:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 22 October 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>看见someone提到Flood fill algorithm, 惭愧，不熟悉这个名字，于是Google一下，竟然跟BFS很像，于是想着要简单实现一下。</p>
+                        <a class="btn primary xsmall" href="/Flood fill.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/This is the title.html">This is the Title</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2000-01-01T10:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 01 January 2000
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Most of time, do not want summary, since some theme will only display summary at the head page if there is summary here.</p>
+                        <a class="btn primary xsmall" href="/This is the title.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+
+        <div class="pagination">
+        <ul>
+                        <li class="prev"><a href="/author/can2.html">&larr; Previous</a></li>
+                        <li class=""><a href="/author/can.html">1</a></li>
+                        <li class=""><a href="/author/can2.html">2</a></li>
+                        <li class="active"><a href="/author/can3.html">3</a></li>
+                        <li class="next disabled"><a href="#">&rarr; Next</a></li>
+        </ul>
+        </div>
+
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
+    <li><a href="http://getpelican.com/"><i class="icon-external-link"></i>Pelican</a></li>
+    <li><a href="http://python.org/"><i class="icon-external-link"></i>Python.org</a></li>
+    <li><a href="http://jinja.pocoo.org/"><i class="icon-external-link"></i>Jinja2</a></li>
+    <li><a href="#"><i class="icon-external-link"></i>You can modify those links in your config file</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href="#"><i class="icon-You can add links in your config file-sign icon-large"></i>You can add links in your config file</a></li>
+    <li><a href="#"><i class="icon-Another social link-sign icon-large"></i>Another social link</a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/computer-graphics.html">
+    <i class="icon-folder-open icon-large"></i>Computer Graphics
+</a>
+</li>
+<li>
+<a href="/category/misc.html">
+    <i class="icon-folder-open icon-large"></i>misc
+</a>
+</li>
+<li>
+<a href="/category/programming.html">
+    <i class="icon-folder-open icon-large"></i>programming
+</a>
+</li>
+<li>
+<a href="/category/tech.html">
+    <i class="icon-folder-open icon-large"></i>tech
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

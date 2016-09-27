@@ -1,106 +1,129 @@
 <!DOCTYPE html>
-<html lang="en"
->
-<head>
-    <title>conflict by duplicated variables - 阿can's blog</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html lang="en">
+  <head>
     <meta charset="utf-8">
+    <title>conflict by duplicated variables</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="can">
 
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
 
+    <link href="/theme/css/pygments.css" rel="stylesheet">
 
-<link rel="canonical" href="/conflict by duplicated variables.html">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-        <meta name="author" content="renc" />
-        <meta name="description" content="用多于一个变量来表示一个状态, 变量之间很容易不一致呢. conflict 假如我们要描述以下这个状态: 在一次mouse click的picking中, 我们给出了pick的范围, 一个rectangle, 然后要标记是否只要pick一个物体object就够了, 还是pick所有在rectangel下面的物体. 当假如我们只要pick到一个物体就够了, 那可能在for里面, 一旦找到某一个物体有效, 我们就可以返回, 退出pick过程了. 也就是我们只要pick到第一个有效物体就ok了, 而不考虑这个pick到的物体是否距离mouse click的点最近. 那么, 要记录这个状态, 我们看下面的实现: class XViewContext { public: PickingResult pick(...); void setPickSingle(bool b) { m_bPickSingle = b; }; bool pickSingle() const { return m_bPickSingle; }; private: bool m_bPickSingle; }; PickingResult XViewContext::pick(...) { ... if ( pickSingle() ) ...; else ...; } 在这实现中, 是否要pick单一个物体的状态作为data member inside ..." />
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
 
-        <meta property="og:site_name" content="阿can's blog" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="conflict by duplicated variables"/>
-        <meta property="og:url" content="/conflict by duplicated variables.html"/>
-        <meta property="og:description" content="用多于一个变量来表示一个状态, 变量之间很容易不一致呢. conflict 假如我们要描述以下这个状态: 在一次mouse click的picking中, 我们给出了pick的范围, 一个rectangle, 然后要标记是否只要pick一个物体object就够了, 还是pick所有在rectangel下面的物体. 当假如我们只要pick到一个物体就够了, 那可能在for里面, 一旦找到某一个物体有效, 我们就可以返回, 退出pick过程了. 也就是我们只要pick到第一个有效物体就ok了, 而不考虑这个pick到的物体是否距离mouse click的点最近. 那么, 要记录这个状态, 我们看下面的实现: class XViewContext { public: PickingResult pick(...); void setPickSingle(bool b) { m_bPickSingle = b; }; bool pickSingle() const { return m_bPickSingle; }; private: bool m_bPickSingle; }; PickingResult XViewContext::pick(...) { ... if ( pickSingle() ) ...; else ...; } 在这实现中, 是否要pick单一个物体的状态作为data member inside ..."/>
-        <meta property="article:published_time" content="2014-08-18" />
-            <meta property="article:section" content="programming" />
-            <meta property="article:author" content="renc" />
+    <link href="/" type="application/atom+xml" rel="alternate" title="can's blog ATOM Feed" />
 
+  </head>
 
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+  <body>
 
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">can's blog </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/computer-graphics.html">
+						<i class="icon-folder-open icon-large"></i>Computer Graphics
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/misc.html">
+						<i class="icon-folder-open icon-large"></i>misc
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/programming.html">
+						<i class="icon-folder-open icon-large"></i>programming
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tech.html">
+						<i class="icon-folder-open icon-large"></i>tech
+					</a>
+                  </li>
 
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
 
-</head>
-<body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-阿can's blog            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li >
-                            <a href="/category/computer-graphics.html">Computer graphics</a>
-                        </li>
-                        <li >
-                            <a href="/category/misc.html">Misc</a>
-                        </li>
-                        <li class="active">
-                            <a href="/category/programming.html">Programming</a>
-                        </li>
-                        <li >
-                            <a href="/category/tech.html">Tech</a>
-                        </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
         </div>
-        <!-- /.navbar-collapse -->
+      </div>
     </div>
-</div> <!-- /.navbar -->
-<!-- Banner -->
-<!-- End Banner -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
 
-    <section id="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+<section id="content">
         <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/conflict by duplicated variables.html"
-                       rel="bookmark"
-                       title="Permalink to conflict by duplicated variables">
-                        conflict by duplicated variables
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to conflict by duplicated variables">
+                                        conflict by duplicated variables
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
 <footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-08-18T10:20:00+08:00"> 周一 18 八月 2014</time>
-    </span>
+<span class="label">Date</span>
+<abbr class="published" title="2014-08-18T10:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 18 August 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
 
 
-
-    
-</footer><!-- /.post-info -->                    </div>
-                </div>
+</footer><!-- /.post-info -->                </div>
                 <p>用多于一个变量来表示一个状态, 变量之间很容易不一致呢.      </p>
 <blockquote>
 <p>conflict  </p>
@@ -109,32 +132,32 @@
 在一次mouse click的picking中, 我们给出了pick的范围, 一个rectangle, 然后要标记是否只要pick一个物体object就够了, 还是pick所有在rectangel下面的物体.  </p>
 <p>当假如我们只要pick到一个物体就够了, 那可能在for里面, 一旦找到某一个物体有效, 我们就可以返回, 退出pick过程了. 也就是我们只要pick到第一个有效物体就ok了, 而不考虑这个pick到的物体是否距离mouse click的点最近.   </p>
 <p>那么, 要记录这个状态, 我们看下面的实现:     </p>
-<div class="highlight"><pre><span class="n">class</span> <span class="n">XViewContext</span>            
-<span class="p">{</span>               
-<span class="nl">public:</span>                           
-    <span class="n">PickingResult</span> <span class="n">pick</span><span class="p">(...);</span>                               
-    <span class="kt">void</span> <span class="nf">setPickSingle</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="n">m_bPickSingle</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>                      
-    <span class="kt">bool</span> <span class="n">pickSingle</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_bPickSingle</span><span class="p">;</span> <span class="p">};</span>                
-<span class="nl">private:</span>               
-    <span class="kt">bool</span> <span class="n">m_bPickSingle</span><span class="p">;</span>                   
-<span class="p">};</span>                           
-<span class="n">PickingResult</span> <span class="n">XViewContext</span><span class="o">::</span><span class="n">pick</span><span class="p">(...)</span>           
-<span class="p">{</span>                    
-    <span class="p">...</span>                                
-    <span class="k">if</span> <span class="p">(</span> <span class="n">pickSingle</span><span class="p">()</span> <span class="p">)</span> <span class="p">...;</span>                 
-    <span class="k">else</span> <span class="p">...;</span>         
-<span class="p">}</span>          
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">XViewContext</span>            
+{               
+<span class="n">public:</span>                           
+    <span class="n">PickingResult</span> <span class="nb">pick</span>(...);                               
+    <span class="nb">void</span> <span class="n">setPickSingle</span>(<span class="nb">bool</span> <span class="n">b</span>) { <span class="n">m_bPickSingle</span> = <span class="n">b</span>; };                      
+    <span class="nb">bool</span> <span class="n">pickSingle</span>() <span class="n">const</span> { <span class="k">return</span> <span class="n">m_bPickSingle</span>; };                
+<span class="n">private:</span>               
+    <span class="nb">bool</span> <span class="n">m_bPickSingle</span>;                   
+};                           
+<span class="n">PickingResult</span> <span class="n">XViewContext::pick</span>(...)           
+{                    
+    ...                                
+    <span class="k">if</span> ( <span class="n">pickSingle</span>() ) ...;                 
+    <span class="k">else</span> ...;         
+}          
 </pre></div>
 
 
 <p>在这实现中, 是否要pick单一个物体的状态作为data member inside a class; 在函数使用这个状态时候就用那个类成员.    </p>
 <p>so far so good, until ... 不知哪时出于某些需求, pick()函数的参数中增加了一个变量, 变为:   </p>
-<div class="highlight"><pre><span class="n">PickingResult</span> <span class="n">XViewContext</span><span class="o">::</span><span class="n">pick</span><span class="p">(...,</span> <span class="kt">bool</span> <span class="n">bPickSingle</span><span class="p">)</span>           
-<span class="p">{</span>                    
-    <span class="p">...</span>                                
-    <span class="k">if</span> <span class="p">(</span> <span class="n">bPickSingle</span> <span class="p">)</span> <span class="p">...;</span>                 
-    <span class="k">else</span> <span class="p">...;</span>         
-<span class="p">}</span>          
+<div class="highlight"><pre><span></span>PickingResult XViewContext::pick(..., bool bPickSingle)           
+{                    
+    ...                                
+    if ( bPickSingle ) ...;                 
+    else ...;         
+}          
 </pre></div>
 
 
@@ -142,80 +165,71 @@
 <p>而我的想法是这样的结果会出现:         <br />
 + bPickSingle 与 pickSingle()的值 可能不一致的. 于是就可能出现bug, 例如你想要bPickSingle == true, 但是pickSingle() == false, 这时候, pick的结果就跟pick()函数里面到底是用哪个来决定了, 而很多时候你是没有看到pick()函数的实现的，更坏地是pick()函数的实现中两个都使用了.   <br />
 + 我们好像可以避免这样的不一致, 要么就只用成员变量pickSingle(), 要么就在类里面不维护这么一个成员变量, 而在每次调用pick()前面都声明一个局部变量bPickSingle.   </p>
-            </div>
-            <!-- /.entry-content -->
+                </div><!-- /.entry-content -->
         </article>
-    </section>
-
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
-              </ul>
-            </li>
-
-
-
-            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://python.org/" target="_blank">
-                Python.org
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://jinja.pocoo.org/" target="_blank">
-                Jinja2
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
 </section>
-            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
+    <li><a href="http://getpelican.com/"><i class="icon-external-link"></i>Pelican</a></li>
+    <li><a href="http://python.org/"><i class="icon-external-link"></i>Python.org</a></li>
+    <li><a href="http://jinja.pocoo.org/"><i class="icon-external-link"></i>Jinja2</a></li>
+    <li><a href="#"><i class="icon-external-link"></i>You can modify those links in your config file</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href="#"><i class="icon-You can add links in your config file-sign icon-large"></i>You can add links in your config file</a></li>
+    <li><a href="#"><i class="icon-Another social link-sign icon-large"></i>Another social link</a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/computer-graphics.html">
+    <i class="icon-folder-open icon-large"></i>Computer Graphics
+</a>
+</li>
+<li>
+<a href="/category/misc.html">
+    <i class="icon-folder-open icon-large"></i>misc
+</a>
+</li>
+<li>
+<a href="/category/programming.html">
+    <i class="icon-folder-open icon-large"></i>programming
+</a>
+</li>
+<li>
+<a href="/category/tech.html">
+    <i class="icon-folder-open icon-large"></i>tech
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
       <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2016 renc
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="/theme/js/jquery.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
 
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
 
 
-</body>
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
 </html>

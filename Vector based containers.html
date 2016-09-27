@@ -1,106 +1,129 @@
 <!DOCTYPE html>
-<html lang="en"
->
-<head>
-    <title>Vector based containers - 阿can's blog</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html lang="en">
+  <head>
     <meta charset="utf-8">
+    <title>Vector based containers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="can">
 
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
 
+    <link href="/theme/css/pygments.css" rel="stylesheet">
 
-<link rel="canonical" href="/Vector based containers.html">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-        <meta name="author" content="renc" />
-        <meta name="description" content="在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. 引言 Using STL Vectors 在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. Prefer vector over list 比较 std::vector 和 std::list, 其中一个特定是, vector的内存是连续的(contiguous buffers), 还可以避免avoid内存动态分配memory allocations和四散的访问scattered access. 这些都是优势. 这里发散一下，以前在用Qt 4.8的时候(以后Qt 5可能有变)，就有QVector, QList, QLinkedList，它们的区别也有意思。其中QVector跟std::vector类似 ..." />
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
 
-        <meta property="og:site_name" content="阿can's blog" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Vector based containers"/>
-        <meta property="og:url" content="/Vector based containers.html"/>
-        <meta property="og:description" content="在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. 引言 Using STL Vectors 在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. Prefer vector over list 比较 std::vector 和 std::list, 其中一个特定是, vector的内存是连续的(contiguous buffers), 还可以避免avoid内存动态分配memory allocations和四散的访问scattered access. 这些都是优势. 这里发散一下，以前在用Qt 4.8的时候(以后Qt 5可能有变)，就有QVector, QList, QLinkedList，它们的区别也有意思。其中QVector跟std::vector类似 ..."/>
-        <meta property="article:published_time" content="2014-05-13" />
-            <meta property="article:section" content="programming" />
-            <meta property="article:author" content="renc" />
+    <link href="/" type="application/atom+xml" rel="alternate" title="can's blog ATOM Feed" />
 
+  </head>
 
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+  <body>
 
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">can's blog </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/computer-graphics.html">
+						<i class="icon-folder-open icon-large"></i>Computer Graphics
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/misc.html">
+						<i class="icon-folder-open icon-large"></i>misc
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/programming.html">
+						<i class="icon-folder-open icon-large"></i>programming
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tech.html">
+						<i class="icon-folder-open icon-large"></i>tech
+					</a>
+                  </li>
 
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
 
-</head>
-<body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-阿can's blog            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li >
-                            <a href="/category/computer-graphics.html">Computer graphics</a>
-                        </li>
-                        <li >
-                            <a href="/category/misc.html">Misc</a>
-                        </li>
-                        <li class="active">
-                            <a href="/category/programming.html">Programming</a>
-                        </li>
-                        <li >
-                            <a href="/category/tech.html">Tech</a>
-                        </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
         </div>
-        <!-- /.navbar-collapse -->
+      </div>
     </div>
-</div> <!-- /.navbar -->
-<!-- Banner -->
-<!-- End Banner -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
 
-    <section id="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+<section id="content">
         <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/Vector based containers.html"
-                       rel="bookmark"
-                       title="Permalink to Vector based containers">
-                        Vector based containers
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to Vector based containers">
+                                        Vector based containers
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
 <footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-05-13T10:20:00+08:00"> 周二 13 五月 2014</time>
-    </span>
+<span class="label">Date</span>
+<abbr class="published" title="2014-05-13T10:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 13 May 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
 
 
-
-    
-</footer><!-- /.post-info -->                    </div>
-                </div>
+</footer><!-- /.post-info -->                </div>
                 <p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记.  </p>
 <h2>引言</h2>
 <h1>Using STL Vectors</h1>
@@ -112,46 +135,46 @@
 <p>至于为什么vector的减少内存分配和避免四散访问都能成为优势，背后应该是有更深的理由的，可能跟内存分配有关，我还不懂。</p>
 <h2>Key issues of vector</h2>
 <p>首先一个知识点是, vector.size() != vector.capacity(), 一个表示已经装了多少元素, 另一个表示当前已经分配的空间可以装多少跟元素，有点不同哦。那么当push_back()的时候，size and copacity又是怎么增加的呢? </p>
-<div class="highlight"><pre><span class="vi">#include</span> <span class="o">&lt;</span><span class="nx">vector</span><span class="o">&gt;</span> 
-<span class="vi">#include</span> <span class="o">&lt;</span><span class="nx">iostream</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;vector&gt; </span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
-<span class="nx">int</span> <span class="nx">main</span><span class="p">()</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span> 
-    <span class="nx">std</span><span class="p">::</span><span class="nl">vector</span><span class="o">&lt;</span><span class="nx">int</span><span class="o">&gt;</span> <span class="nx">arr</span><span class="p">;</span> 
-    <span class="nb">for</span> <span class="p">(</span><span class="nx">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">;</span> 
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="nx">arr.push_back</span><span class="p">(</span> <span class="nx">i</span> <span class="p">);</span> 
-        <span class="nx">std</span><span class="p">::</span><span class="nl">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;size = &quot;</span> <span class="o">&lt;&lt;</span> <span class="nx">arr.size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;, capacity = &quot;</span> <span class="o">&lt;&lt;</span> <span class="nx">arr.capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="nx">std</span><span class="p">::</span><span class="nl">endl</span><span class="p">;</span>
+        <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span> <span class="n">i</span> <span class="p">);</span> 
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;size = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="nf">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, capacity = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="nx">std</span><span class="p">::</span><span class="nl">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;arr.capacity(): &quot;</span> <span class="o">&lt;&lt;</span> <span class="nx">arr.capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="nx">std</span><span class="p">::</span><span class="nl">endl</span><span class="p">;</span> 
-    <span class="nx">arr.swap</span><span class="p">(</span> <span class="nx">arr</span> <span class="p">);</span> 
-    <span class="nx">std</span><span class="p">::</span><span class="nl">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;arr.capacity(): &quot;</span> <span class="o">&lt;&lt;</span> <span class="nx">arr.capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="nx">std</span><span class="p">::</span><span class="nl">endl</span><span class="p">;</span>
-    <span class="nx">std</span><span class="p">::</span><span class="nl">vector</span><span class="o">&lt;</span><span class="nx">int</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="bp">.</span><span class="nx">swap</span><span class="p">(</span> <span class="nx">arr</span> <span class="p">);</span> 
-    <span class="nx">std</span><span class="p">::</span><span class="nl">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;arr.capacity(): &quot;</span> <span class="o">&lt;&lt;</span> <span class="nx">arr.capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="nx">std</span><span class="p">::</span><span class="nl">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;arr.capacity(): &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> 
+    <span class="n">arr</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span> <span class="n">arr</span> <span class="p">);</span> 
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;arr.capacity(): &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arr</span><span class="p">).</span><span class="n">swap</span><span class="p">(</span> <span class="n">arr</span> <span class="p">);</span> 
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;arr.capacity(): &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
-    <span class="nx">std</span><span class="p">::</span><span class="nl">getchar</span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">getchar</span><span class="p">();</span>
     <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> 
 <span class="p">};</span>
 <span class="c1">// the output, from visual studio 2012: </span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">9</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">9</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">9</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">13</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">13</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">13</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">13</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">19</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">19</span>
-<span class="nx">arr.capacity</span><span class="p">():</span> <span class="mi">19</span>
-<span class="nx">arr.capacity</span><span class="p">():</span> <span class="mi">19</span>
-<span class="nx">arr.capacity</span><span class="p">():</span> <span class="mi">15</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="nf">size</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="n">arr</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span><span class="o">:</span> <span class="mi">19</span>
+<span class="n">arr</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span><span class="o">:</span> <span class="mi">19</span>
+<span class="n">arr</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span><span class="o">:</span> <span class="mi">15</span>
 </pre></div>
 
 
@@ -159,48 +182,48 @@
 因为会预分配内容，所以可能就会出现over-allocation的问题了.  于是就到swap出场了,  释放多余的内存, 缩小capacity.  这种swap的技术原来有个名字的"shrink-to-fit".  在上面的代码例子中，一开始我还用错了swap方法.</p>
 <p>上面的例子还有一个有意思的地方。当要塞入新元素, 没有多余空间了, vector是一下子分配多一点的空间, 这时候capacity &gt; size, 但具体是多多少呢?  我以为是翻一倍，但结果看上去不是，那到底是多少呢？
 上面例子中15太小了, 看不出规律，我把它改成150之后，结果就: </p>
-<div class="highlight"><pre><span class="p">...</span> 
-<span class="n">size</span> <span class="o">=</span> <span class="mi">138</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">141</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">139</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">141</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">140</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">141</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">141</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">141</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">142</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">211</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">143</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">211</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">144</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">211</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">145</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">211</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">146</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">211</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">147</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">211</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">148</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">211</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">149</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">211</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">150</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">=</span> <span class="mi">211</span>
+<div class="highlight"><pre><span></span>... 
+size = 138, capacity = 141
+size = 139, capacity = 141
+size = 140, capacity = 141
+size = 141, capacity = 141
+size = 142, capacity = 211
+size = 143, capacity = 211
+size = 144, capacity = 211
+size = 145, capacity = 211
+size = 146, capacity = 211
+size = 147, capacity = 211
+size = 148, capacity = 211
+size = 149, capacity = 211
+size = 150, capacity = 211
 </pre></div>
 
 
 <p>211 - 141 = 70，是141的一半! 去看回上面别的数据, 果然:-)  </p>
-<div class="highlight"><pre>    <span class="kd">function</span> <span class="nx">push_back</span> <span class="p">(</span><span class="k">new</span> <span class="nx">value</span><span class="p">)</span><span class="err">：</span>
-        <span class="k">if</span> <span class="nx">capacity</span> <span class="o">==</span> <span class="nx">size</span>
-            <span class="nx">allocate</span> <span class="nx">more</span> <span class="nx">memory</span><span class="p">(</span> <span class="nx">size</span> <span class="o">*</span> <span class="mf">0.5f</span> <span class="p">);</span> 
-            <span class="c1">// capacity is bigger than size now;</span>
-        <span class="nx">append</span> <span class="nx">the</span> <span class="k">new</span> <span class="nx">value</span><span class="p">;</span>
-        <span class="o">++</span> <span class="nx">size</span><span class="p">;</span>            
+<div class="highlight"><pre><span></span>    function push_back (new value)：
+        if capacity == size
+            allocate more memory( size * 0.5f ); 
+            // capacity is bigger than size now;
+        append the new value;
+        ++ size;            
 </pre></div>
 
 
 <p>另一个问题是，vector要求内容是连续contiguous的，那当需要allocate more memory的时候，当前内容块的尾巴上却不一定有足够的内容满足要求吧? 这时候就会出现在另一个地方新开辟一个领土, 有足够大的内存来满足要求，把旧地方的值都往新地方去搬，那指向旧值的pointer就失效了吧? 但是假如用int作为index, 那这些index应该还是有效的，值之间的先后次序没有发生改变. </p>
-<div class="highlight"><pre><span class="err">这段是题外话。讲到上面</span><span class="n">index</span><span class="err">的有效性问题，回想起去年做</span><span class="n">Mudbox</span><span class="err">的</span><span class="n">sculpt</span> <span class="n">layer</span> <span class="n">group</span><span class="err">时候遇到的</span><span class="n">undo</span><span class="err">问题。</span>
+<div class="highlight"><pre><span></span>这段是题外话。讲到上面index的有效性问题，回想起去年做Mudbox的sculpt layer group时候遇到的undo问题。
 
-<span class="o">-&gt;</span> <span class="n">layer</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">layer</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="n">layer</span> <span class="mi">3</span> <span class="o">-&gt;</span> <span class="n">layer</span> <span class="mi">4</span><span class="p">;</span>
-<span class="n">to</span> <span class="n">delete</span> <span class="n">layer</span> <span class="mi">2</span><span class="o">:</span> 
-    <span class="n">need</span> <span class="n">to</span> <span class="n">record</span> <span class="n">its</span> <span class="n">location</span> <span class="n">before</span> <span class="n">deleting</span><span class="p">;</span> 
+-&gt; layer 1 -&gt; layer 2 -&gt; layer 3 -&gt; layer 4;
+to delete layer 2: 
+    need to record its location before deleting; 
 
-<span class="n">undo</span> <span class="n">to</span> <span class="n">insert</span> <span class="n">back</span> <span class="n">the</span> <span class="n">layer</span> <span class="mi">2</span><span class="o">:</span>
-    <span class="n">use</span> <span class="n">the</span> <span class="n">recorded</span> <span class="n">location</span> <span class="n">to</span> <span class="n">insert</span><span class="p">;</span> 
+undo to insert back the layer 2:
+    use the recorded location to insert; 
 
-<span class="err">那怎么记录</span><span class="n">layer</span> <span class="mi">2</span><span class="err">的</span><span class="n">location</span><span class="err">呢</span><span class="o">?</span> <span class="err">有几个问题的。用</span><span class="n">pointer</span> <span class="n">or</span> <span class="kt">int</span> <span class="n">index</span><span class="err">呢？</span>
-<span class="o">-</span> <span class="n">pointer</span><span class="err">的话</span><span class="p">,</span> <span class="err">例如记录</span><span class="n">location</span> <span class="o">=</span> <span class="n">after</span> <span class="n">layer</span> <span class="mf">1.</span> <span class="err">那假如</span><span class="n">delete</span> <span class="n">layer</span> <span class="mi">2</span><span class="err">之后</span> <span class="err">又</span><span class="n">delete</span> <span class="n">layer</span> <span class="mi">1</span><span class="p">,</span> <span class="n">undo</span> <span class="n">to</span> <span class="n">insert</span> <span class="n">back</span> <span class="n">layer</span> <span class="mi">1</span><span class="p">,</span> <span class="n">undo</span> <span class="n">again</span> <span class="n">to</span> <span class="n">insert</span> <span class="n">back</span> <span class="n">layer</span> <span class="mi">2</span><span class="err">的时候</span><span class="p">,</span> <span class="err">被</span><span class="n">delete</span><span class="err">后又被</span><span class="n">new</span><span class="err">的</span><span class="n">layer</span> <span class="mi">1</span><span class="err">的</span><span class="n">pointer</span><span class="err">还是一样吗？</span>
-<span class="n">Pointer</span><span class="err">执行的内存地方是不一样的吧。所以我还是用</span><span class="kt">int</span> <span class="n">index</span><span class="err">来标识某个</span><span class="n">layer</span><span class="p">.</span> 
+那怎么记录layer 2的location呢? 有几个问题的。用pointer or int index呢？
+- pointer的话, 例如记录location = after layer 1. 那假如delete layer 2之后 又delete layer 1, undo to insert back layer 1, undo again to insert back layer 2的时候, 被delete后又被new的layer 1的pointer还是一样吗？
+Pointer执行的内存地方是不一样的吧。所以我还是用int index来标识某个layer. 
 
-<span class="err">另外</span><span class="p">,</span> <span class="err">用</span><span class="n">index</span><span class="err">只是能标识具体某个</span><span class="n">layer</span><span class="p">,</span> <span class="err">但是还需要表示是在这个</span><span class="n">layer</span><span class="err">的前面呢，还是在这个</span><span class="n">layer</span><span class="err">的后面</span><span class="p">.</span> <span class="err">这就特殊了</span><span class="p">,</span> <span class="err">当被</span><span class="n">delete</span><span class="err">的</span><span class="n">layer</span><span class="err">是第一个</span><span class="n">or</span><span class="err">最后一个。</span>  
+另外, 用index只是能标识具体某个layer, 但是还需要表示是在这个layer的前面呢，还是在这个layer的后面. 这就特殊了, 当被delete的layer是第一个or最后一个。  
 </pre></div>
 
 
@@ -208,80 +231,71 @@
 <p>http://upcoder.com/series/1/vectors-and-vector-based-containers/ 作者Thomas Young 是参与开发PathEngine的. 
 http://www.codeproject.com/Articles/340797/Number-crunching-Why-you-should-never-ever-EVER-us 
 Thank you for sharing your experiences and insights. </p>
-            </div>
-            <!-- /.entry-content -->
+                </div><!-- /.entry-content -->
         </article>
-    </section>
-
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
-              </ul>
-            </li>
-
-
-
-            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://python.org/" target="_blank">
-                Python.org
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://jinja.pocoo.org/" target="_blank">
-                Jinja2
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
 </section>
-            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
+    <li><a href="http://getpelican.com/"><i class="icon-external-link"></i>Pelican</a></li>
+    <li><a href="http://python.org/"><i class="icon-external-link"></i>Python.org</a></li>
+    <li><a href="http://jinja.pocoo.org/"><i class="icon-external-link"></i>Jinja2</a></li>
+    <li><a href="#"><i class="icon-external-link"></i>You can modify those links in your config file</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href="#"><i class="icon-You can add links in your config file-sign icon-large"></i>You can add links in your config file</a></li>
+    <li><a href="#"><i class="icon-Another social link-sign icon-large"></i>Another social link</a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/computer-graphics.html">
+    <i class="icon-folder-open icon-large"></i>Computer Graphics
+</a>
+</li>
+<li>
+<a href="/category/misc.html">
+    <i class="icon-folder-open icon-large"></i>misc
+</a>
+</li>
+<li>
+<a href="/category/programming.html">
+    <i class="icon-folder-open icon-large"></i>programming
+</a>
+</li>
+<li>
+<a href="/category/tech.html">
+    <i class="icon-folder-open icon-large"></i>tech
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
       <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2016 renc
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="/theme/js/jquery.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
 
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
 
 
-</body>
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
 </html>

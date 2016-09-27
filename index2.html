@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>can's blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="can">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="can's blog ATOM Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">can's blog </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/computer-graphics.html">
+						<i class="icon-folder-open icon-large"></i>Computer Graphics
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/misc.html">
+						<i class="icon-folder-open icon-large"></i>misc
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/programming.html">
+						<i class="icon-folder-open icon-large"></i>programming
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tech.html">
+						<i class="icon-folder-open icon-large"></i>tech
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Algo - Tower of Hanoi.html">Algo - Tower of Hanoi</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-11-28T20:20:00+08:00">
+        <i class="icon-calendar"></i>Fri 28 November 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/algo.html"><i class="icon-tag"></i>Algo</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>在书[Anany Levitin, 算法设计与分析基础]的第二章又看到汉诺塔的问题:   <br />
+有三个柱子A B C; A柱上有好几个盘子, 小的放在大的上面;   <br />
+现在问怎么把A柱上的盘子移到C柱上, B是做辅助的, 条件是大的盘子不能压到小的盘子上. 所以结果C柱上的盘子也是小的放在大的上面。    </p>
+<p>A,B,C; 三个柱子     </p>
+<p>假如A上有1个盘子，直接放到C上就解答完了。    </p>
+<p>假如A上有2个盘子ab，a盘小的 在 b盘大的上面. 先把a放到B上, b放到C上, 然后把a从B移到C上. 结果就是C柱上有ab。[pattern 1]   <br />
+注意这种case中先把a放到C上, 那b放到B上, 然后a从C移到到B柱上, 那B柱上就有ab两个盘子了. 这结果很像上面的, 但是B柱跟C柱次序反了. 可见在移动盘子的时候, 柱子的次序, 是很重要的.   </p>
+<p>假如A上有3个盘子, 去尝试多画几次, 还是能解出来, 但是发现好像没有什么规律啊.   <br />
+假如A上有4个盘子, 那可能就要尝试好多次才能碰巧一次解答出来. 还没有看出来规律.   </p>
+<p>要换一种角度来看啊, 上面我们已经解答了A柱上有2个盘子的case了. 那重新看A柱上有3个盘子的case.          </p>
+<p>A柱上的2个盘子 ...</p>
+                        <a class="btn primary xsmall" href="/Algo - Tower of Hanoi.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Bit field.html">Bit field</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-11-10T20:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 10 November 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢?  毕竟1个字节=8bits=2^8=256个状态.           </p>
+<h2>Part 1</h2>
+<p>Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验:            </p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;          </span><span class="cp"></span>
+
+<span class="c1">// 交通繁忙时间            </span>
+<span class="k">enum</span> <span class="n">CallTariff</span> <span class="p">{</span> <span class="n">tOffPeak</span><span class="p">,</span> <span class="n">tMediumRate</span><span class="p">,</span> <span class="n">tPeakTime</span> <span class="p">}</span> <span class="p">;</span>           
+
+<span class="c1">// 账单           </span>
+<span class="k">struct</span> <span class="n">Bill</span>           
+<span class="p">{</span>          
+    <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+    <span class="n">CallTariff</span>      <span class="n">eTariff</span><span class="p">;</span>           
+<span class="p">};</span>           
+
+<span class="k">struct</span> <span class="n">BillVIP</span>           
+<span class="p">{</span>          
+    <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
+    <span class="kt">bool</span>            <span class="n">isVIP ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/Bit field.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Volume Data Visualization.html">Volume Data Visualization</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-10-20T10:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 20 October 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>上周五Sq.B突然说起L.F到一个创业公司做Director of Engineer了,               <br />
+http://www.datifex.com           <br />
+为L.F高兴的同时, 这家公司很是吸引. 它的team介绍中很多都很牛的背景呢.    </p>
+<p>big data visualize ...            </p>
+<p>这年头连zf都在说大数据, 我不熟悉, 但好像他们的出发点都是怎么从大数据中获利, 例如怎么分析得到情报, 而visualization貌似可以帮到他们啊, 这就是需求? 有意思.  </p>
+<p>To read list:  <br />
+  http://cyrille.rossant.net/ 他写了两本书和很cool的project: <br />
+  book Learning IPython for Interactive Computing and Data Visualization; 已下载pdf.   <br />
+  book IPython Interactive Computing and Visualization Cookbook;                <br />
+  vispy.org ...</p>
+                        <a class="btn primary xsmall" href="/Volume Data Visualization.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/阅读笔记 GLSL Cookbook - Chapter 1.html">阅读笔记 GLSL Cookbook - Chapter 1</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-10-16T08:00:00+08:00">
+        <i class="icon-calendar"></i>Thu 16 October 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/opengl.html"><i class="icon-tag"></i>OpenGL</a>
+	<a href="/tag/glsl.html"><i class="icon-tag"></i>GLSL</a>
+	<a href="/tag/shader.html"><i class="icon-tag"></i>Shader</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>[OpenGL 4.0 Shading Language Cookbook] - Chapter 1  </p>
+<h3>Profiles: Core vs. Compatibility</h3>
+<p>OpenGL 3.0版本引入了deprecation model模型. 被标记为deprecated的函数或者功能, 意味着在将来的版本中会被removed去掉. 例如immdediate mode rendering使用的glBegin/glEnd在3.0版本中标记为deprecated而在3.1版本中被去掉.     </p>
+<p>为了backwoods compatibility后兼容, OpenGL 3.2版本引入了compatibility profiles的概念.<br />
+Core profile: 目标是某一个特定的版本, older features removed.        <br />
+Compatibility profile: 为了后兼容, older features 还在的.  </p>
+<p>有些地方有full vs. forward compatible context这些概念, 听上去有点令人confusing. 跟上面的core/compatibility概念是有些不一样的 ...</p>
+                        <a class="btn primary xsmall" href="/阅读笔记 GLSL Cookbook - Chapter 1.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Mudbox - Sculpt Layer Group.html">Mudbox - Sculpt Layer Group</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-10-14T22:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 14 October 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/computer-graphics.html"><i class="icon-folder-open"></i>Computer Graphics</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>下面的截图来自autodesk/mudbox features中视频:  <br />
+<img alt="Alt text" src="data/2014-10-14-Mudbox2015_Layer_Group.PNG" title="output" />  <br />
+Group的引入可能会有这两个用处:          <br />
++ 管理、组织organize layers, 如脸部的和身体上的可以分两个group来组织layers;         <br />
++ one group &lt;&gt; one blendshape in maya; 当然blendshape复杂很多, 只是最简单支持.             </p>
+<p>看到参与的功能暴露出来面对用户了, 感觉好像创造的生命一样, 希望它能健康(别crash 别hang), 能有用:-)   </p>
+                        <a class="btn primary xsmall" href="/Mudbox - Sculpt Layer Group.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Book - Everyday Probability and Statistics.html">Book - Everyday Probability and Statistics</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-10-13T22:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 13 October 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/reading.html"><i class="icon-tag"></i>reading</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><img alt="Alt text" src="data/2014-10-13-book_naked_statistics.PNG" title="output" /> <img alt="Alt text" src="data/2014-10-13-book_everyday_probability_and_statistics.PNG" title="output" />         <br />
+那本[Naked Statistics]是流行书, 所以年初的时候买来看, 主要是讲日常生活中, 例如媒体, 那些统计学方面的概念可能会被误解or有意无意的用来误导大众.              <br />
+也正是在看这书时候发现后几章的概念不懂, 想找本简单的书来学习一下, 于是就有了第二本[人人都来掷骰子], 跟前一本的区别是: 前几章讲了一些概率的基础, 后几章讲统计学的概念。每一章介绍一个概念, 不长, 可以一下看完. 而且一般的步骤是例子|概念|怎么算, 没有复杂的公式没有公式证明推导等. 15章后开始的样品空间, 还不是很清晰.         </p>
+<p>不过能在上几周断断续续地看完这本书还是满足:-) 特别是还在追这部美剧:  <br />
+<img alt="Alt text" src="data/2014-10-13-PersionOfInterest.PNG" title="output" />                  <br />
+Person of Interest / 疑犯追凶;           <br />
+这有一个问题就是我们还有多少隐私呢? 倒不是说zf监控了我们的信息, 而是我们在日常的网上购物/网上言论/网上账单等都把我们清清楚楚的记录了, 甚至比我们自己还记得清楚, 慢慢地可能比我们自己还了解我们自己了. so who care the privacy? 说真的, 我都不知道哪些属于隐私范围, 而另外即使知道了别人的隐私, 是否又等于侵犯了别人的隐私呢?                                        </p>
+                        <a class="btn primary xsmall" href="/Book - Everyday Probability and Statistics.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Algo - Check if a binary tree is mirror or symmetric.html">Algo - Check if a binary tree is mirror or symmetric</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-10-11T22:00:00+08:00">
+        <i class="icon-calendar"></i>Sat 11 October 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>问题: 给出一个binary tree二叉树, 判断这个数是否关于根节点对称. </p>
+<p>尝试在纸上画画形状, 例如:  <br />
+<img alt="Alt text" src="data/2014-10-11-Asymmetric_BinaryTree.PNG" title="output" />            <br />
+这就引入一个问题, 问题中的对称是指结构上的对称就足够了, 还是还要加上node里面的值相等呢? 
+case 1: structure symmetric; 
+case 2: structure symmetric + value equal; 
+因为case 2是在case 1的基础上层进的, 所以并不矛盾, 先考虑case 1好了. 于是对着上面的图来写代码,  </p>
+<div class="highlight"><pre><span></span>bool isSymmetricBinaryTree(Node *root)                    
+{                                             
+    // node without children                     
+    if (root-&gt;left == nullptr &amp;&amp; root-&gt;right == nullptr)        
+        return true;                                                    
+    //                       
+    if (root-&gt;left &amp;&amp; root-&gt;right == nullptr)                  
+        return false ...</pre></div>
+                        <a class="btn primary xsmall" href="/Algo - Check if a binary tree is mirror or symmetric.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Algo - Detecting a Loop in a Singly Linked List.html">Algo - Detecting a Loop in a Singly Linked List</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-10-09T22:00:00+08:00">
+        <i class="icon-calendar"></i>Thu 09 October 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>This is not the first time i see this algo problem, and i want to describe the details of how to solve it this time in case need to revisit it later.   </p>
+<p>首先想象一下一个list带loop/circle的形状.                            <br />
+<img alt="Alt text" src="data/2014-10-09-list_with_different_loop.PNG" title="output" />            <br />
+最左边的最general, 但是一个node只有一个next指针, 只能指向一个后续node, 所以只有最后的情况才可能. 或者是这个list没有loop, 或者是这个list本身就是一个loop/closed circle.                   </p>
+<p>假如一个node的定义是:         </p>
+<div class="highlight"><pre><span></span>struct Node {   
+    struct Node *next; 
+};     
+</pre></div>
+
+
+<p>要形成一个loop, 某一个node的next指向已经visit过的node ...</p>
+                        <a class="btn primary xsmall" href="/Algo - Detecting a Loop in a Singly Linked List.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Difference between Parameter and Variabe and Argument.html">Difference between Parameter and Variabe and Argument</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-09-28T12:00:00+08:00">
+        <i class="icon-calendar"></i>Sun 28 September 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>翻译过来的话, variable 是变量, parameter and argument 是参数的意思, 怎么区别使用呢?    </p>
+<div class="highlight"><pre><span></span>int add(int a, int b)     // (int a, int b)叫argument list, a/b是parameter.  
+{                         
+    int c = a + b;        // c is variable.   
+    return c;           
+}          
+
+int x = 1;                // x对应自己的scope下的variables.       
+z = add(x, 2);            // x/y作为函数参数时候就是arguments.    
+</pre></div>
+
+
+<p>引用一下网上的解释: </p>
+<blockquote>
+<p>A parameter is a variable in a method ...</p></blockquote>
+                        <a class="btn primary xsmall" href="/Difference between Parameter and Variabe and Argument.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Mode Switch in Class Hierarchy.html">Mode Switch in Class Hierarchy</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-09-22T18:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 22 September 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><img alt="Alt text" src="data/2014-09-22-Mode_Switching.PNG" title="output" /><br />
+想象我们正在搞一个砌砖的程序, 是的, 码农只是其中一种称呼, 时不时也被称为搬砖的.  <br />
+一开始, 我们只有不断在已有的基础上添加砖头的功能。      <br />
+后来, 我们需要有移动某些砖块的功能。例如在最外表面的砖块都可以被移动。 <br />
+再后来，我们需要敲掉某砖块的功能。                     <br />
+它们分别对应于add, move, delete这三种modes.     </p>
+<p>其中一种设计方法是 </p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Build</span> 
+{
+    <span class="k">enum</span> <span class="n">BuildMode</span> {            
+        <span class="n">Add</span>,      
+        <span class="n">Move</span>,       
+        <span class="n">Delete</span>       
+    };          
+    <span class="n">BuildMode</span> <span class="n">m_currentMode</span>;            
+};         
+</pre></div>
+
+
+<p>这方法是把所有mode的实现都放在同一个地方, 每次更新都要改这个地方Build的源代码实现. 但是假如在添加move, delete这新mode的时候, 我们不想or不能改已有的只有add mode的Build源码呢?    </p>
+<p>这是另一种设计方案  </p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Build</span>  
+{   
+    // <span class="n">care</span> <span class="n">about</span> <span class="n">the</span> <span class="n">add</span> <span class="n">mode</span> <span class="k">only</span>.    
+};   
+<span class="k">class</span> <span class="n">BuildMove</span> : <span class="n">public</span> <span class="n">Build</span> 
+{ 
+    <span class="nb">bool</span> <span class="n">onMouseEvent</span>()   
+    { 
+        <span class="n">check</span> <span class="k">if</span> <span class="n">we</span> <span class="k">will</span> <span class="n">go ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/Mode Switch in Class Hierarchy.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Char Array vs Char Pointer.html">Char Array vs Char Pointer</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-09-19T12:00:00+08:00">
+        <i class="icon-calendar"></i>Fri 19 September 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>刚才在阅读以下内容时候复习了一下这两个概念. 
+<a href="http://www.bfilipek.com/2014/07/quick-case-char-pointer-vs-char-array.html">Quick case: Char Pointer vs Char Array in C++, by Bartlomiej Filipek</a>  </p>
+<div class="highlight"><pre><span></span><span class="c1">// Test case of char array vs char pointer. </span>
+<span class="c1">// </span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;   </span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>     
+<span class="p">{</span>       
+    <span class="kt">char</span> <span class="n">strA</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;char array!&quot;</span><span class="p">;</span>          
+    <span class="kt">char</span> <span class="o">*</span><span class="n">strP</span> <span class="o">=</span> <span class="s">&quot;char array?&quot;</span><span class="p">;</span>        
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;sizeof(strA): &quot;</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">strA</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, of: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">strA</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, addr: &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">strA</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>          
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;sizeof(strA): &quot;</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/Char Array vs Char Pointer.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Pointer is copied when passed as function parameter.html">Pointer is copied when passed as function parameter</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-09-12T12:00:00+08:00">
+        <i class="icon-calendar"></i>Fri 12 September 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/renc.html"><i class="icon-user"></i>renc</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><h2>起源</h2>
+<p>看到这段代码(肯定是简化更改版啦)  </p>
+<div class="highlight"><pre><span></span>void XList::merge(Item *item)   
+{  
+    ... // do the merge sth;   
+    item-&gt;unref();  
+}   
+void XList::merge(Item &amp;item)   
+{  
+    ... // do the merge sth;   
+}   
+</pre></div>
+
+
+<p>上面的unref()是用于reference count的, reference计数减一的意思. 为什么有这东东呢, 为什么下面用引入作为参数的就不需要呢? 
+我怀疑是指针在作为函数参数的传递过程中被复制了, 也就是指向实际的物体的指针又多了一个, 所以merge之后就unref减少一个. 以下的test case尝试证明指针是否被复制了:   </p>
+<div class="highlight"><pre><span></span><span class="c1">// try to check if a pointer will be copied during passing-by-pointer.         </span>
+<span class="c1">//              </span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;             </span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">func1</span><span class="p">(</span><span class="kt">int ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/Pointer is copied when passed as function parameter.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-09-02T16:00:00+08:00">
+        <i class="icon-calendar"></i>Tue 02 September 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/renc.html"><i class="icon-user"></i>renc</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
+<p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
+一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release.  <br />
+图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标....     </p>
+<p>从face面的角度来看, 深蓝色的面为起点, 然后鼠标一旦离开这个深蓝色的面之后, 肯定会进入这个深蓝色面四周的8个浅蓝色面之一(假如把面的边界也看作面一部分). 于是在stroke的路线中, 鼠标所pick到的面是一个连着一个的, 连续. </p>
+<p>从edge边的角度来看, 鼠标从起点移动时候, 虽然鼠标在面内部而不是压在边上面, 但是面的几个边总有一个是距离当前鼠标位置近一点的, 我们选择这个边; 当鼠标移动要离开这个深蓝色的face的时候, 肯定会触碰到这个face是边(假如把角点corner也看作是edge是一部分). 于是在stroke的路线中, 鼠标所pick到的边是一个连着一个的, 也连续. </p>
+<p>而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   </p>
+<p>怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? <br />
+因为上面说到面是完备的 ...</p>
+                        <a class="btn primary xsmall" href="/Fail to surround the mouse with the vertices.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Build myblog using pelican.html">Build myblog using pelican</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-08-31T20:00:00+08:00">
+        <i class="icon-calendar"></i>Sun 31 August 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/renc.html"><i class="icon-user"></i>renc</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞...   </p>
+<h2>环境:</h2>
+<ul>
+<li>python 2.7, withn pip, easy_install        </li>
+<li>pelican        <br />
+<img alt="Alt text" src="data/2014-08-31-pelican_output.PNG" title="output" /><br />
+注意上面的起始目录是E:\Temp\myblog&gt; 
+我试过别的起始目录是E:\Temp\myblog\context&gt; 就发生错误了. 
+进入output目录, 打开index.html就可以看到blog了。这里我没有用到make html命令哦.  </li>
+</ul>
+<h2>遇到的problems:</h2>
+<ul>
+<li>设置图片目录的路径.  <br />
+我的图片都是文档.md目录下的data目录, 例如folderA/xxx.md, folderA/data/yyy.PNG. 在pelican这里, 我想保持这样的结构, folderA 相当于 context目录, 目的是blog的内容(文档和图片)已经可以放到某个folderA里面, 然后要用pelican来build这个blog的时候, 直接把folderA目录里面的所有东西copy到context目录下就ok了.<br />
+但是pelican默认是把图片放到blogFolder/image目录 ...</li></ul>
+                        <a class="btn primary xsmall" href="/Build myblog using pelican.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/build simple ui using pySide.html">build simple ui using pySide</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-08-25T10:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 25 August 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/renc.html"><i class="icon-user"></i>renc</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>记录一下做UI prototype时候遇到的新概念 </p>
+<blockquote>
+<p>life is short, use python. </p>
+</blockquote>
+<p>早有耳闻, 一试果然不凡. 
+安装Qt 4.8.X, 安装pySide (how? 具体看其主页), 然后新建file.py, 敲几行pySide代码, 然后command line里面python file.py立刻就出ui效果了. 省却了ide / c++代码 / 链接设置 / 反复修改反复编译的麻烦.  <br />
+事情的缘由是, 最近要参与用python快速做一个ui的prototype, 本来主程序M里面就有Qt+pySide, 所以连安装都不需要, 直接改py文件就得到ui结果, 真快. 于是就缺学几下python了. </p>
+<p>example 1. To define the style sheet 样式 of a button.  <br />
+<img alt="Alt text" src="data/2014-08-25_qtButtonStyleSheet.png" title="output" />   </p>
+<div class="highlight"><pre><span></span><span class="nt">QPushButton</span> <span class="p">{</span>
+    <span class="nb">border</span><span class="o">:</span> <span class="m">2px ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/build simple ui using pySide.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Python Basis 基础笔记.html">Python Basis 基础笔记</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-08-21T10:20:00+08:00">
+        <i class="icon-calendar"></i>Thu 21 August 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>Python</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>新接触python programming, 记录一些基础.        </p>
+<p>Batteries Included. 立马就可以使用的. 
+Installizaton </p>
+<hr />
+<p>download 2.7 from python website and install at C:\Python27;              <br />
+download Anaconda 2.1.0 install at E:\Anaconda;                  <br />
+<img alt="Alt text" src="data/python_2014-11-03_version.PNG" title="output" />         <br />
+看来两者并不冲突.                    </p>
+<p>这是从Anaconda里面起来的Spyder IDE:<br />
+<img alt="Alt text" src="data/python_2014-11-03_Spyder_IDE.PNG" title="output" />        </p>
+<h2>Variables and Data</h2>
+<p>A variable is a name that points to some specific data type. 不允许声明一个变量而没有=赋值. 
+contents = 6;                 <br />
+print ...</p>
+                        <a class="btn primary xsmall" href="/Python Basis 基础笔记.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/name on a book.html">Name on a book</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-08-19T10:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 19 August 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>记录一次参与翻译一本外文书的过程, 过程有点累, 结果有点甜.   </p>
+<blockquote>
+<p>you know, it is funny that people do not care your name, until you are in trouble. 
+-- 美剧&lt;疑犯追凶&gt;第一集里面的话, 类似而已哦. </p>
+</blockquote>
+<p>去参与翻译一本书, 可以出现在书店书架上的, 还提到你的名字, 是不是很cool?    </p>
+<p>昨天看到email, 被告知我有份参与的书终于上架了, "在各大网店都有售。但是样书会比较慢" 里面上google一下，果然在amazon.cn等都找到了: </p>
+<div class="highlight"><pre><span></span><span class="nt">交互式程序设计</span><span class="err">（</span><span class="nt">第2版</span><span class="err">）</span>                                                               
+ <span class="o">~</span> <span class="nt">Joshua</span> <span class="nt">Noble</span> <span class="o">(</span><span class="nt">作者</span><span class="o">),</span> <span class="nt">毛顺兵</span> <span class="o">(</span><span class="nt">译者</span><span class="o">),</span> <span class="nt">张婷婷</span> <span class="o">(</span><span class="nt">译者</span><span class="o">)</span>                
+<span class="nt">出版社</span><span class="o">:</span> <span class="nt">机械工业出版社</span><span class="o">;</span> <span class="o">(</span><span class="nt">2014年8月15日</span><span class="o">)</span>                 
+<span class="nt">语种</span><span class="err">：</span> <span class="nt">简体中文</span>                            
+</pre></div>
+
+
+<p>是的 ...</p>
+                        <a class="btn primary xsmall" href="/name on a book.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/conflict by duplicated variables.html">conflict by duplicated variables</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-08-18T10:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 18 August 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>用多于一个变量来表示一个状态, 变量之间很容易不一致呢.      </p>
+<blockquote>
+<p>conflict  </p>
+</blockquote>
+<p>假如我们要描述以下这个状态:        <br />
+在一次mouse click的picking中, 我们给出了pick的范围, 一个rectangle, 然后要标记是否只要pick一个物体object就够了, 还是pick所有在rectangel下面的物体.  </p>
+<p>当假如我们只要pick到一个物体就够了, 那可能在for里面, 一旦找到某一个物体有效, 我们就可以返回, 退出pick过程了. 也就是我们只要pick到第一个有效物体就ok了, 而不考虑这个pick到的物体是否距离mouse click的点最近.   </p>
+<p>那么, 要记录这个状态, 我们看下面的实现:     </p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">XViewContext</span>            
+{               
+<span class="n">public:</span>                           
+    <span class="n">PickingResult</span> <span class="nb">pick</span>(...);                               
+    <span class="nb">void</span> <span class="n">setPickSingle</span>(<span class="nb">bool</span> <span class="n">b</span>) { <span class="n">m_bPickSingle</span> = <span class="n">b</span>; };                      
+    <span class="nb">bool</span> <span class="n">pickSingle</span>() <span class="n">const</span> { <span class="k">return</span> <span class="n">m_bPickSingle</span>; };                
+<span class="n">private:</span>               
+    <span class="nb">bool</span> <span class="n">m_bPickSingle</span>;                   
+};                           
+<span class="n">PickingResult</span> <span class="n">XViewContext::pick</span>(...)           
+{                    
+    ...                                
+    <span class="k">if</span> ( <span class="n">pickSingle</span>() ) ...;                 
+    <span class="k">else</span> ...;         
+}          
+</pre></div>
+
+
+<p>在这实现中, 是否要pick单一个物体的状态作为data member inside ...</p>
+                        <a class="btn primary xsmall" href="/conflict by duplicated variables.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Undo and Redo.html">Undo and Redo</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-06-25T10:20:00+08:00">
+        <i class="icon-calendar"></i>Wed 25 June 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Undo and Redo 已经遇到很多次了, 记录一下想法.     </p>
+<blockquote>
+<p>So we beat on, boats against the current, borne back ceaselessly into the past. -- The Great Gatsby<br />
+所以我们不停地往前划，逆流而上，回到无穷无尽的过去。《了不起的盖茨比》  </p>
+</blockquote>
+<p>一个程序假如连undo/redo都没有, 那基本上不是给人用的, 可能只能算是demo.</p>
+<h2>Undo/Redo</h2>
+<p>用windows/paint画图工具做例子就很直观啦. </p>
+<p>case 1. 假如操作次序是: 画一笔A, 再画一笔B;
+undo 一次就是剩下A; undo 第二次就是空;
+redo 一次就是增加A; redo第二次就是恢复到A B; 
+这个case的特点是undo到底了，再redo到底. 没有undo的时候又夹着redo ...</p>
+                        <a class="btn primary xsmall" href="/Undo and Redo.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Position Transfromation from 2d world to window screen.html">Position Transfromation from 2d world to window screen</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-06-19T10:20:00+08:00">
+        <i class="icon-calendar"></i>Thu 19 June 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/computer-graphics.html"><i class="icon-folder-open"></i>computer graphics</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to find the position at 2d world corresponding to this mouse positon?     </p>
+<h2>Background背景</h2>
+<p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to ...</p>
+                        <a class="btn primary xsmall" href="/Position Transfromation from 2d world to window screen.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+
+        <div class="pagination">
+        <ul>
+                        <li class="prev"><a href="/index.html">&larr; Previous</a></li>
+                        <li class=""><a href="/index.html">1</a></li>
+                        <li class="active"><a href="/index2.html">2</a></li>
+                        <li class=""><a href="/index3.html">3</a></li>
+                        <li class="next"><a href="/index3.html">Next &rarr;</a></li>
+        </ul>
+        </div>
+
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
+    <li><a href="http://getpelican.com/"><i class="icon-external-link"></i>Pelican</a></li>
+    <li><a href="http://python.org/"><i class="icon-external-link"></i>Python.org</a></li>
+    <li><a href="http://jinja.pocoo.org/"><i class="icon-external-link"></i>Jinja2</a></li>
+    <li><a href="#"><i class="icon-external-link"></i>You can modify those links in your config file</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href="#"><i class="icon-You can add links in your config file-sign icon-large"></i>You can add links in your config file</a></li>
+    <li><a href="#"><i class="icon-Another social link-sign icon-large"></i>Another social link</a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/computer-graphics.html">
+    <i class="icon-folder-open icon-large"></i>Computer Graphics
+</a>
+</li>
+<li>
+<a href="/category/misc.html">
+    <i class="icon-folder-open icon-large"></i>misc
+</a>
+</li>
+<li>
+<a href="/category/programming.html">
+    <i class="icon-folder-open icon-large"></i>programming
+</a>
+</li>
+<li>
+<a href="/category/tech.html">
+    <i class="icon-folder-open icon-large"></i>tech
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,93 +1,180 @@
 <!DOCTYPE html>
-<html lang="en"
->
-<head>
-    <title>阿can's blog</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html lang="en">
+  <head>
     <meta charset="utf-8">
+    <title>can's blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="can">
 
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
 
+    <link href="/theme/css/pygments.css" rel="stylesheet">
 
-<link rel="canonical" href="">
-        <meta name="author" content="renc" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <!-- Open Graph tags -->
-        <meta property="og:site_name" content="阿can's blog" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="阿can's blog"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="阿can's blog"/>
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
 
+    <link href="/" type="application/atom+xml" rel="alternate" title="can's blog ATOM Feed" />
 
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+  </head>
 
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+  <body>
 
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">can's blog </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/computer-graphics.html">
+						<i class="icon-folder-open icon-large"></i>Computer Graphics
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/misc.html">
+						<i class="icon-folder-open icon-large"></i>misc
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/programming.html">
+						<i class="icon-folder-open icon-large"></i>programming
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tech.html">
+						<i class="icon-folder-open icon-large"></i>tech
+					</a>
+                  </li>
 
-</head>
-<body>
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-阿can's blog            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li >
-                            <a href="/category/computer-graphics.html">Computer graphics</a>
-                        </li>
-                        <li >
-                            <a href="/category/misc.html">Misc</a>
-                        </li>
-                        <li >
-                            <a href="/category/programming.html">Programming</a>
-                        </li>
-                        <li >
-                            <a href="/category/tech.html">Tech</a>
-                        </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
         </div>
-        <!-- /.navbar-collapse -->
+      </div>
     </div>
-</div> <!-- /.navbar -->
-<!-- Banner -->
-<!-- End Banner -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
 
-            <article>
-                <h2><a href="/迭代啊别闷大招.html">迭代啊别闷大招</a></h2>
-                <div class="summary">
-                    <a class="btn btn-default btn-xs" href="/迭代啊别闷大招.html">more ...</a>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Polygonalize_Implicit_Surface隐式曲面的多边形化.html">Polygonalize Implicit Surface隐式曲面的多边形化</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-09-26T21:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 26 September 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>这几天遇到implicit surface (isosurface), marching cube这几个名称，复习了一下，顺便做了下面几个例子来增加理解：
+<img alt="Alt text" src="data/marchingCube_sphereBox.PNG" title="output" />      </p>
+<p>第一行： sphere, sphere被grid切了, 注意保证grid够大.  <br />
+第二行： box, box with rounding.  <br />
+第三行： union(box， sphere), difference(box, sphere).  <br />
+生成mesh之后，然后放到windows 10's 3D Builder中得到的渲染结果。    </p>
+                        <a class="btn primary xsmall" href="/Polygonalize_Implicit_Surface隐式曲面的多边形化.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Qt Layout Demo.html">QtLayoutDemo</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/迭代啊别闷大招.html">迭代啊别闷大招</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-04-23T20:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 23 April 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary">
-                    <a class="btn btn-default btn-xs" href="/Qt Layout Demo.html">more ...</a>
+                        <a class="btn primary xsmall" href="/迭代啊别闷大招.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/南海桂城土地交易统计.html">南海桂城土地交易统计</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Qt Layout Demo.html">QtLayoutDemo</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-04-19T20:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 19 April 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary">
+                        <a class="btn primary xsmall" href="/Qt Layout Demo.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/南海桂城土地交易统计.html">南海桂城土地交易统计</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-04-06T20:20:00+08:00">
+        <i class="icon-calendar"></i>Wed 06 April 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>地图(我感兴趣的区域):           <br />
 <img alt="Alt text" src="data/map_Foshan_Nanhai_Guicheng.PNG" title="output" />               </p>
 <p>2016/2/18               <br />
@@ -101,12 +188,24 @@ TD2015(NH)WG021 南海区桂城街道广东金融高新技术服务区B区03-02-
 城镇住宅用地兼容批发零售用地                </p>
 <p>2016/1/22               <br />
 TD2015 ...</p>
-                    <a class="btn btn-default btn-xs" href="/南海桂城土地交易统计.html">more ...</a>
+                        <a class="btn primary xsmall" href="/南海桂城土地交易统计.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Maya中的fileDialog2命令.html">Maya中的fileDialog2命令</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Maya中的fileDialog2命令.html">Maya中的fileDialog2命令</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-03-31T21:30:00+08:00">
+        <i class="icon-calendar"></i>Thu 31 March 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>今天在使用maya的fileDialog2 cmd去建一个file dialog, 要求能选中打开多个files, 于是需要使用:              <br />
 fileDialog2 -fileMode 4 ….;                                        <br />
 这里-fileMode=4 表示支持多个文件选择.               <br />
@@ -116,12 +215,24 @@ setAcceptMode(QFileDialog::AcceptOpen); // 影响open or save 这个按钮上的
 setLebelText(QFileDialog::Accept, "Save"); 也是影响用一个地方，但是这个"Save"跟上面的AcceptOpen中默认使用的"Open"就冲突了. 这个函数允许随意改这个角色上的字.                            </p>
 <p>解决方法是使用-okc "Open" flag来明确设置这个accept button上的text.              </p>
 <p>References: Qt4.8 (or Qt5.6), QFileDialog. </p>
-                    <a class="btn btn-default btn-xs" href="/Maya中的fileDialog2命令.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Maya中的fileDialog2命令.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/门锁系统的接口设计.html">门锁系统的接口设计</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/门锁系统的接口设计.html">门锁系统的接口设计</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-03-30T21:30:00+08:00">
+        <i class="icon-calendar"></i>Wed 30 March 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>想象一个场景:    <br />
 你要开发一个门锁, 设计好了锁的很多细节: 安全级别, 大小, 外观, 跟什么门相配, 使用细节等等, 但你只是一个设计公司, 这没有关系,  <br />
 因为在细节都决定好了之后, 只要找一家生产商合作按照你的设计要求来做就ok了, 当然你需要严格的验收测试.            </p>
@@ -133,75 +244,161 @@ class LockManager {                         <br />
     LockManager() { sLockManager = this; };              <br />
     static LockManager &amp;instance() { return <em>sLockManager; };       <br />
     static LockManager </em>sLockManager; </p>
-<div class="highlight"><pre><span class="n">virtual</span> <span class="kt">int</span> <span class="n">getInformationX</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="p">...;</span> <span class="p">};</span>                    
-<span class="n">virtual</span> <span class="kt">int</span> <span class="n">getInformationY</span><span class="p">()</span> <span class="k">const ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/门锁系统的接口设计.html">more ...</a>
+<div class="highlight"><pre><span></span>virtual int getInformationX() const { ...; };                    
+virtual int getInformationY() const ...</pre></div>
+                        <a class="btn primary xsmall" href="/门锁系统的接口设计.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Qt上GraphicsView显示SVG.html">Qt上GraphicsView显示SVG</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Qt上GraphicsView显示SVG.html">Qt上GraphicsView显示SVG</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-03-26T10:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 26 March 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/reading.html"><i class="icon-tag"></i>reading</a>
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p><img alt="Screen Shot" src="svgDemo_screenShot.PNG" title="output" /> </p>
 <p>There is a problem came at the daily work, to show a button on a graphics view,                   <br />
 this button is supposed to have the hover state, with an icon, but not general image format, but use SVG.<br />
 My first time to use svg image, even i know it is vector ...</p>
-                    <a class="btn btn-default btn-xs" href="/Qt上GraphicsView显示SVG.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Qt上GraphicsView显示SVG.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/2016年02月阅读笔记.html">2016年02月阅读笔记</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/2016年02月阅读笔记.html">2016年02月阅读笔记</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-02-09T16:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 09 February 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>"In fact, there is no need to even enforce that the data be related to 3D", Chapter 2, Coomplete Maya Programming.    <br />
 这个话有意思。假设自己来设计一个3d应用程序，会有建模，动画，光照渲染等功能模块，你会怎么解耦和关联各个模块呢，例如某个模块改变了，别的模块需要怎么更新，会不会麻烦。而maya应用了data flow model，数据在不同模块下流入流出，不同模块就是对这些数据来操作。上面那个引入的话，这些流动的data甚至可以不用看作是3d数据。 <br />
 例如想到mesh, 什么是mesh? 三维顶点, 用边联系起来，结构halfedge是为了方便访问v/e/f。对mesh操作(sculpt, deform)，是对顶点操作，顶点的数目分布坐标等. 我是首先想到了mesh这个东西 ...</p>
-                    <a class="btn btn-default btn-xs" href="/2016年02月阅读笔记.html">more ...</a>
+                        <a class="btn primary xsmall" href="/2016年02月阅读笔记.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Skinning notes.html">Skinning蒙皮技术</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Skinning notes.html">Skinning蒙皮技术</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-01-30T10:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 30 January 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>Reference: 
 Siggraph Course 2014 - Skinning: Real-time Shape Deformation </p>
-                    <a class="btn btn-default btn-xs" href="/Skinning notes.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Skinning notes.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/2015年11月阅读笔记.html">2015年11月阅读笔记</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/2015年11月阅读笔记.html">2015年11月阅读笔记</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-11-02T20:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 02 November 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>2015/11/02 今天读到一个文章: what kind of jobs do software engineers who earn 500k per year do?
 里面的故事是 villiage需要工人来为村庄供水，有两类工人：
 type 1 worker: 拿着两个水桶，到水源的地方装水，然后会村庄，自己和家人分一部分的水，余下给村庄。
 type 2 worker: 拿个铁锹去挖水道，从水源到村庄，花挺长时间，这时间里面别人不一定知道他在做什么，可能对他失望，好在村里有些人对他有信心，给他吃，好让他继续。突然一天，他的水道建好了。type 1 worker就失业，要找别工作，而type 2 worker得到了大回报。</p>
 <p>工人，在接受任务之后 ...</p>
-                    <a class="btn btn-default btn-xs" href="/2015年11月阅读笔记.html">more ...</a>
+                        <a class="btn primary xsmall" href="/2015年11月阅读笔记.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/20150929_别逃跑问题.html">20150929别逃跑问题</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/20150929_别逃跑问题.html">20150929别逃跑问题</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-09-29T20:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 29 September 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>2015/9/29 一个月之前build opensubd的时候遇到一个cmake error:    </p>
 <p>当时请问了别人没有遇到，也想不到是什么原因。今天重遇这个问题，狠着心慢慢看，对比另一台机器上的build log, 
 在OpenSubd/cmake/FindDocutils.cmake的执行不一样，
 原来是这个机子上安装了C:/Anaconda, FindDocutils.cmake里面被其中一个库影响了。</p>
 <p>lesson: 别逃避问题啊, fix it. </p>
-                    <a class="btn btn-default btn-xs" href="/20150929_别逃跑问题.html">more ...</a>
+                        <a class="btn primary xsmall" href="/20150929_别逃跑问题.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/texFormat的一次bugFix.html">texFormat的一次bugFix</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/texFormat的一次bugFix.html">texFormat的一次bugFix</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-08-13T20:20:00+08:00">
+        <i class="icon-calendar"></i>Thu 13 August 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/tech.html"><i class="icon-folder-open"></i>tech</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>故事的开头是有个bug说map extraction的ptex文件file1, 在import as paint layer and export paint layer again之后文件file2的大小相差几倍，怀疑file1跟file2中pixel的value不一样了。           <br />
 file1.ptex  vs. file2.ptex                                         </p>
 <p>用ptex代码附带的ptexInfo程序把ptex file的data dump出来, 默认是dump all faces, all levels, 发现数据量太大了。 需要ptexInfo做些修改, 只把个别感兴趣的face的数据输出.    <br />
 花时间看ptex代码， ptex所调用的zlib可以把压缩关了, 另外ptex还可以关了generate mipmap， 这样ptex写出的数据应该就是没有压缩的而且只有level0的. 所谓的level0就是full resolution.       </p>
 <p>发现虽然file1.f0, file1.f0, 两者的resolution, pixel size都是一样的, 但是pixel value还是不一样, file1.f0的每一个pixel的RGBA value每一个channel都相对小了0.003左右.                               </p>
 <p>继续追踪, 发现ptex ...</p>
-                    <a class="btn btn-default btn-xs" href="/texFormat的一次bugFix.html">more ...</a>
+                        <a class="btn primary xsmall" href="/texFormat的一次bugFix.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Slide vertex on surface.html">Slide vertex on surface</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Slide vertex on surface.html">Slide vertex on surface</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-03-04T20:20:00+08:00">
+        <i class="icon-calendar"></i>Wed 04 March 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>过年上班没多几天啊, hackathon就开始了, 我报名的project是尝试实现以下paper: <br />
 Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, EUROGRAPHICS 2010. <br />
 本文做一些记录, 特别是有些问题以后可能也会遇到. </p>
@@ -209,12 +406,24 @@ Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, 
 <p>大体做成的效果应该是: brush stroke的时候会带动一些vertices在mesh/surface上滑动, mesh的形状shape被保持。区别于现在mudbox已有的grab brush, 后者顶点跟着鼠标在走,会跑到mesh外面. 区域   </p>
 <p>算法的输入包括(不限于)下面这些:  <br />
 + handle, which is the mouse/brush ...</p>
-                    <a class="btn btn-default btn-xs" href="/Slide vertex on surface.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Slide vertex on surface.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/优化-访问数组值.html">优化-访问数组值</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/优化-访问数组值.html">优化-访问数组值</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-12-31T20:20:00+08:00">
+        <i class="icon-calendar"></i>Wed 31 December 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>记录一下学到的一个技术.    <br />
 <img alt="alt text" src="data/2014-12-31-optimize_array_value.png" title="output" />     <br />
 假如value[]是一个很长的数组, 记录着某些对象的值, 值的范围是[0, 1]. 它的操作包括:<br />
@@ -222,45 +431,85 @@ Sliding Deformation: Shape Preserving Per-Vertex Displacement, Dmitriy Pinskiy, 
 设置某一个元素的值, 如value[vIndex] = x;<br />
 访问某一个元素的值, 如x = value[vIndex];  </p>
 <p>虽然数组很长, 很多时候一次使用到的就是其中的某一小部分的值, 例如10k大小, 某次使用到的可能就是10-1k这么小的局部.    </p>
-<div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// change the value of 100 elements to [0, 1];    </span>
-<span class="p">}</span>    
+<div class="highlight"><pre><span></span>for (int i = 0; i &lt; 10000; ++i)
+{
+    // change the value of 100 elements to [0, 1];    
+}    
 
-<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>     
-        <span class="k">do ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/优化-访问数组值.html">more ...</a>
+for (int i = 0; i &lt; 10000; ++i)
+{
+    if (value[i] &gt; 0)     
+        do ...</pre></div>
+                        <a class="btn primary xsmall" href="/优化-访问数组值.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/祈祷落幕时.html">祈祷落幕时</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/祈祷落幕时.html">祈祷落幕时</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-12-27T10:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 27 December 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/reading.html"><i class="icon-tag"></i>reading</a>
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>书名：祈祷落幕时 <br />
 作者：东野圭吾 <br />
 2015-1    </p>
 <p>amazon.cn 12月份的推荐书, 尝试买回来看一下, 谁知一看就停不下来, 周五下午到周六就看完了. 极少看侦探推理小说啊，都忘了上一部是什么时候看的了. 主要是叙述看得很舒服, 没有太凶残的描写, 关键是找人物的联系.<br />
 介绍说是父女的爱, 但看过一半没有预知结局时候还是觉得很莫名, 跟父女的亲情有什么关系呢?  而题目为什么又是"祈祷落幕时"呢?<br />
 当看完之后回味, 才觉得这书名不错。推荐.   </p>
-                    <a class="btn btn-default btn-xs" href="/祈祷落幕时.html">more ...</a>
+                        <a class="btn primary xsmall" href="/祈祷落幕时.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Corrective Blendshape at Maya.html">Corrective Blendshape at Maya</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Corrective Blendshape at Maya.html">Corrective Blendshape at Maya</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-12-20T20:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 20 December 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/renc.html"><i class="icon-user"></i>renc</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/maya.html"><i class="icon-tag"></i>maya</a>
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>记录一下最近学到的corrective blendshape知识.    </p>
 <h2>问题描述</h2>
 <p>First, a basic scene is built, pCylinder1 is rigged and skinned,     <br />
 <img alt="basic scene for test" src="data/2014-12-20-skinedShape.png" title="basic scene for test" />     </p>
 <p>Now, suppose we are not satisfied with the elbow shape, want it change it a little bit. 例如一个手臂的骨骼动画已经搞好了, 后面发现在形状上还想改进一下, 那怎么办呢? </p>
 <p>If we select vertices and move them (adding vector delta to these vertics) on the skinned ...</p>
-                    <a class="btn btn-default btn-xs" href="/Corrective Blendshape at Maya.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Corrective Blendshape at Maya.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/GPP - Double Buffer.html">GPP - Double Buffer</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/GPP - Double Buffer.html">GPP - Double Buffer</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-12-10T20:20:00+08:00">
+        <i class="icon-calendar"></i>Wed 10 December 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>首先多谢作者的慷慨generous!                                         <br />
 http://gameprogrammingpatterns.com/double-buffer.html                </p>
 <p>Double buffer 出发点intent是使得一系列连续的操作像是同时立刻完成的。 
@@ -270,12 +519,26 @@ http://gameprogrammingpatterns.com/double-buffer.html                </p>
 问题是那个内存块还没有写完, 屏幕过来读的太快了, 我甚至猜想: 屏幕过来好几个笔头分任务读, 每个读一小块区域, 那速度就更快了, 快的结果是读到还没有来得及写的区域, 那可能那块区域里面就是一些不是这一帧原本想要呈现的信息(可能是之前的帧的遗留信息). 描述这样的现象专门有一个名词"tearing", or "image tearing".      </p>
 <p>解决方案，就是引入两个buffer, 你笔头2只能从我写完的那个bufferA里面读, 而另一个bufferB我笔头1在写, 没有写完之前不给笔头2来读. 等我笔头1写完了这个bufferB, 就做一个swap告诉笔头2可以来读这个bufferB了.  笔头2来读bufferB的时候, 我笔头1又过去写bufferA了, 依然没写完之前不给笔头2来读.....          </p>
 <p>[update 2014-12-18]在看以下新闻时候遇到了"image tearing"这个词. "A 4K monitor is great in theory, but ...</p>
-                    <a class="btn btn-default btn-xs" href="/GPP - Double Buffer.html">more ...</a>
+                        <a class="btn primary xsmall" href="/GPP - Double Buffer.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/LeetCodeOJ - Find Minimum in Rotated Sorted Array.html">LeetCodeOJ - Find Minimum in Rotated Sorted Array</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/LeetCodeOJ - Find Minimum in Rotated Sorted Array.html">LeetCodeOJ - Find Minimum in Rotated Sorted Array</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-12-09T20:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 09 December 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/algo.html"><i class="icon-tag"></i>Algo</a>
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>题目:      </p>
 <blockquote>
 <p>Suppose a sorted array is rotated at some pivot unknown to you beforehand.          <br />
@@ -285,24 +548,50 @@ You may assume no duplicate exists in the array                 </p>
 </blockquote>
 <p>基本上看到sorted, find, ... 这关键字就想到binary search二分查找.        <br />
 根据输入 ...</p>
-                    <a class="btn btn-default btn-xs" href="/LeetCodeOJ - Find Minimum in Rotated Sorted Array.html">more ...</a>
+                        <a class="btn primary xsmall" href="/LeetCodeOJ - Find Minimum in Rotated Sorted Array.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Reading List.html">Reading List</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Reading List.html">Reading List</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-12-09T20:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 09 December 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>C++ Concurrency in Action: Practical Multithreading Paperback – February 28, 2012  <br />
 by Anthony Williams (Author)               </p>
 <p>Multithreading for Visual Effects Hardcover – July 29, 2014        </p>
 <p>Effective Modern C++: 42 Specific Ways to Improve Your Use of C++11 and C++14 Paperback – December 5, 2014               <br />
 by Scott Meyers  (Author)                 </p>
 <p>Game Engine Architecture, Second ...</p>
-                    <a class="btn btn-default btn-xs" href="/Reading List.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Reading List.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/LeetCodeOJ - Min Stack.html">LeetCodeOJ - Min Stack</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/LeetCodeOJ - Min Stack.html">LeetCodeOJ - Min Stack</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-12-08T20:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 08 December 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/algo.html"><i class="icon-tag"></i>Algo</a>
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>Leetcode 上的题目, 实现一个Min Stack. <br />
 + 带stack的一般功能, push, pop, top;        <br />
 + int getMin()能在constant time 返回最小值.                 </p>
@@ -312,750 +601,83 @@ by Scott Meyers  (Author)                 </p>
 <p>一开始我想到保存一个最小值, 并可能需要O(n)的时间来更新这个最小值.  下面的方法是保存<em>所有</em>当前的最小值. 你只要取走了最小的, 然后下一个最小的立马出现了.  <br />
 <img alt="Alt text" src="data/2014-12-09-MinStack.png" title="output" />   <br />
 两个container, 其中一个是std::stack 用于实现一般的stack功能;  另一个可以是std::vector/list/stack ...</p>
-                    <a class="btn btn-default btn-xs" href="/LeetCodeOJ - Min Stack.html">more ...</a>
+                        <a class="btn primary xsmall" href="/LeetCodeOJ - Min Stack.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Algo - Tower of Hanoi.html">Algo - Tower of Hanoi</a></h2>
-                <div class="summary"><p>在书[Anany Levitin, 算法设计与分析基础]的第二章又看到汉诺塔的问题:   <br />
-有三个柱子A B C; A柱上有好几个盘子, 小的放在大的上面;   <br />
-现在问怎么把A柱上的盘子移到C柱上, B是做辅助的, 条件是大的盘子不能压到小的盘子上. 所以结果C柱上的盘子也是小的放在大的上面。    </p>
-<p>A,B,C; 三个柱子     </p>
-<p>假如A上有1个盘子，直接放到C上就解答完了。    </p>
-<p>假如A上有2个盘子ab，a盘小的 在 b盘大的上面. 先把a放到B上, b放到C上, 然后把a从B移到C上. 结果就是C柱上有ab。[pattern 1]   <br />
-注意这种case中先把a放到C上, 那b放到B上, 然后a从C移到到B柱上, 那B柱上就有ab两个盘子了. 这结果很像上面的, 但是B柱跟C柱次序反了. 可见在移动盘子的时候, 柱子的次序, 是很重要的.   </p>
-<p>假如A上有3个盘子, 去尝试多画几次, 还是能解出来, 但是发现好像没有什么规律啊.   <br />
-假如A上有4个盘子, 那可能就要尝试好多次才能碰巧一次解答出来. 还没有看出来规律.   </p>
-<p>要换一种角度来看啊, 上面我们已经解答了A柱上有2个盘子的case了. 那重新看A柱上有3个盘子的case.          </p>
-<p>A柱上的2个盘子 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Algo - Tower of Hanoi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Bit field.html">Bit field</a></h2>
-                <div class="summary"><p>一般在C++代码里面遇到的基本类型bool, char, short, int, etc, 都是说占多少个字节, 也就是最少也是一个字节. 那有时候会不会1个字节就多余了, 或者说1个字节不单只可以表示true/false, 还可以表示更多的信息呢?  毕竟1个字节=8bits=2^8=256个状态.           </p>
-<h2>Part 1</h2>
-<p>Bit field 貌似就是想充分利用内存. 下面是我看了参考(Reference那一节列了一些)之后做的实验:            </p>
-<div class="highlight"><pre><span class="vi">#include</span> <span class="o">&lt;</span><span class="nx">cstdio</span><span class="o">&gt;</span>          
-
-<span class="c1">// 交通繁忙时间            </span>
-<span class="nx">enum</span> <span class="nx">CallTariff</span> <span class="p">{</span> <span class="nx">tOffPeak</span><span class="p">,</span> <span class="nx">tMediumRate</span><span class="p">,</span> <span class="nx">tPeakTime</span> <span class="p">}</span> <span class="p">;</span>           
-
-<span class="c1">// 账单           </span>
-<span class="nx">struct</span> <span class="nx">Bill</span>           
-<span class="p">{</span>          
-    <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
-    <span class="nx">CallTariff</span>      <span class="nx">eTariff</span><span class="p">;</span>           
-<span class="p">};</span>           
-
-<span class="nx">struct</span> <span class="nx">BillVIP</span>           
-<span class="p">{</span>          
-    <span class="nx">unsigned</span> <span class="nx">int</span>    <span class="nx">iNameId</span><span class="p">;</span>    <span class="c1">// 客户名           </span>
-    <span class="nx">bool</span>            <span class="nx">isVIP ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Bit field.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Volume Data Visualization.html">Volume Data Visualization</a></h2>
-                <div class="summary"><p>上周五Sq.B突然说起L.F到一个创业公司做Director of Engineer了,               <br />
-http://www.datifex.com           <br />
-为L.F高兴的同时, 这家公司很是吸引. 它的team介绍中很多都很牛的背景呢.    </p>
-<p>big data visualize ...            </p>
-<p>这年头连zf都在说大数据, 我不熟悉, 但好像他们的出发点都是怎么从大数据中获利, 例如怎么分析得到情报, 而visualization貌似可以帮到他们啊, 这就是需求? 有意思.  </p>
-<p>To read list:  <br />
-  http://cyrille.rossant.net/ 他写了两本书和很cool的project: <br />
-  book Learning IPython for Interactive Computing and Data Visualization; 已下载pdf.   <br />
-  book IPython Interactive Computing and Visualization Cookbook;                <br />
-  vispy.org ...</p>
-                    <a class="btn btn-default btn-xs" href="/Volume Data Visualization.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/阅读笔记 GLSL Cookbook - Chapter 1.html">阅读笔记 GLSL Cookbook - Chapter 1</a></h2>
-                <div class="summary"><p>[OpenGL 4.0 Shading Language Cookbook] - Chapter 1  </p>
-<h3>Profiles: Core vs. Compatibility</h3>
-<p>OpenGL 3.0版本引入了deprecation model模型. 被标记为deprecated的函数或者功能, 意味着在将来的版本中会被removed去掉. 例如immdediate mode rendering使用的glBegin/glEnd在3.0版本中标记为deprecated而在3.1版本中被去掉.     </p>
-<p>为了backwoods compatibility后兼容, OpenGL 3.2版本引入了compatibility profiles的概念.<br />
-Core profile: 目标是某一个特定的版本, older features removed.        <br />
-Compatibility profile: 为了后兼容, older features 还在的.  </p>
-<p>有些地方有full vs. forward compatible context这些概念, 听上去有点令人confusing. 跟上面的core/compatibility概念是有些不一样的 ...</p>
-                    <a class="btn btn-default btn-xs" href="/阅读笔记 GLSL Cookbook - Chapter 1.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Mudbox - Sculpt Layer Group.html">Mudbox - Sculpt Layer Group</a></h2>
-                <div class="summary"><p>下面的截图来自autodesk/mudbox features中视频:  <br />
-<img alt="Alt text" src="data/2014-10-14-Mudbox2015_Layer_Group.PNG" title="output" />  <br />
-Group的引入可能会有这两个用处:          <br />
-+ 管理、组织organize layers, 如脸部的和身体上的可以分两个group来组织layers;         <br />
-+ one group &lt;&gt; one blendshape in maya; 当然blendshape复杂很多, 只是最简单支持.             </p>
-<p>看到参与的功能暴露出来面对用户了, 感觉好像创造的生命一样, 希望它能健康(别crash 别hang), 能有用:-)   </p>
-                    <a class="btn btn-default btn-xs" href="/Mudbox - Sculpt Layer Group.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Book - Everyday Probability and Statistics.html">Book - Everyday Probability and Statistics</a></h2>
-                <div class="summary"><p><img alt="Alt text" src="data/2014-10-13-book_naked_statistics.PNG" title="output" /> <img alt="Alt text" src="data/2014-10-13-book_everyday_probability_and_statistics.PNG" title="output" />         <br />
-那本[Naked Statistics]是流行书, 所以年初的时候买来看, 主要是讲日常生活中, 例如媒体, 那些统计学方面的概念可能会被误解or有意无意的用来误导大众.              <br />
-也正是在看这书时候发现后几章的概念不懂, 想找本简单的书来学习一下, 于是就有了第二本[人人都来掷骰子], 跟前一本的区别是: 前几章讲了一些概率的基础, 后几章讲统计学的概念。每一章介绍一个概念, 不长, 可以一下看完. 而且一般的步骤是例子|概念|怎么算, 没有复杂的公式没有公式证明推导等. 15章后开始的样品空间, 还不是很清晰.         </p>
-<p>不过能在上几周断断续续地看完这本书还是满足:-) 特别是还在追这部美剧:  <br />
-<img alt="Alt text" src="data/2014-10-13-PersionOfInterest.PNG" title="output" />                  <br />
-Person of Interest / 疑犯追凶;           <br />
-这有一个问题就是我们还有多少隐私呢? 倒不是说zf监控了我们的信息, 而是我们在日常的网上购物/网上言论/网上账单等都把我们清清楚楚的记录了, 甚至比我们自己还记得清楚, 慢慢地可能比我们自己还了解我们自己了. so who care the privacy? 说真的, 我都不知道哪些属于隐私范围, 而另外即使知道了别人的隐私, 是否又等于侵犯了别人的隐私呢?                                        </p>
-                    <a class="btn btn-default btn-xs" href="/Book - Everyday Probability and Statistics.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Algo - Check if a binary tree is mirror or symmetric.html">Algo - Check if a binary tree is mirror or symmetric</a></h2>
-                <div class="summary"><p>问题: 给出一个binary tree二叉树, 判断这个数是否关于根节点对称. </p>
-<p>尝试在纸上画画形状, 例如:  <br />
-<img alt="Alt text" src="data/2014-10-11-Asymmetric_BinaryTree.PNG" title="output" />            <br />
-这就引入一个问题, 问题中的对称是指结构上的对称就足够了, 还是还要加上node里面的值相等呢? 
-case 1: structure symmetric; 
-case 2: structure symmetric + value equal; 
-因为case 2是在case 1的基础上层进的, 所以并不矛盾, 先考虑case 1好了. 于是对着上面的图来写代码,  </p>
-<div class="highlight"><pre><span class="kt">bool</span> <span class="nf">isSymmetricBinaryTree</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>                    
-<span class="p">{</span>                                             
-    <span class="c1">// node without children                     </span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="n">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">)</span>        
-        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>                                                    
-    <span class="c1">//                       </span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">)</span>                  
-        <span class="k">return</span> <span class="nb">false ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Algo - Check if a binary tree is mirror or symmetric.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Algo - Detecting a Loop in a Singly Linked List.html">Algo - Detecting a Loop in a Singly Linked List</a></h2>
-                <div class="summary"><p>This is not the first time i see this algo problem, and i want to describe the details of how to solve it this time in case need to revisit it later.   </p>
-<p>首先想象一下一个list带loop/circle的形状.                            <br />
-<img alt="Alt text" src="data/2014-10-09-list_with_different_loop.PNG" title="output" />            <br />
-最左边的最general, 但是一个node只有一个next指针, 只能指向一个后续node, 所以只有最后的情况才可能. 或者是这个list没有loop, 或者是这个list本身就是一个loop/closed circle.                   </p>
-<p>假如一个node的定义是:         </p>
-<div class="highlight"><pre><span class="k">struct</span> <span class="n">Node</span> <span class="p">{</span>   
-    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span> 
-<span class="p">};</span>     
-</pre></div>
-
-
-<p>要形成一个loop, 某一个node的next指向已经visit过的node ...</p>
-                    <a class="btn btn-default btn-xs" href="/Algo - Detecting a Loop in a Singly Linked List.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Difference between Parameter and Variabe and Argument.html">Difference between Parameter and Variabe and Argument</a></h2>
-                <div class="summary"><p>翻译过来的话, variable 是变量, parameter and argument 是参数的意思, 怎么区别使用呢?    </p>
-<div class="highlight"><pre><span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>     <span class="c1">// (int a, int b)叫argument list, a/b是parameter.  </span>
-<span class="p">{</span>                         
-    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>        <span class="c1">// c is variable.   </span>
-    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>           
-<span class="p">}</span>          
-
-<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                <span class="c1">// x对应自己的scope下的variables.       </span>
-<span class="n">z</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>            <span class="c1">// x/y作为函数参数时候就是arguments.    </span>
-</pre></div>
-
-
-<p>引用一下网上的解释: </p>
-<blockquote>
-<p>A parameter is a variable in a method ...</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="/Difference between Parameter and Variabe and Argument.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Mode Switch in Class Hierarchy.html">Mode Switch in Class Hierarchy</a></h2>
-                <div class="summary"><p><img alt="Alt text" src="data/2014-09-22-Mode_Switching.PNG" title="output" /><br />
-想象我们正在搞一个砌砖的程序, 是的, 码农只是其中一种称呼, 时不时也被称为搬砖的.  <br />
-一开始, 我们只有不断在已有的基础上添加砖头的功能。      <br />
-后来, 我们需要有移动某些砖块的功能。例如在最外表面的砖块都可以被移动。 <br />
-再后来，我们需要敲掉某砖块的功能。                     <br />
-它们分别对应于add, move, delete这三种modes.     </p>
-<p>其中一种设计方法是 </p>
-<div class="highlight"><pre><span class="n">class</span> <span class="n">Build</span> 
-<span class="p">{</span>
-    <span class="k">enum</span> <span class="n">BuildMode</span> <span class="p">{</span>            
-        <span class="n">Add</span><span class="p">,</span>      
-        <span class="n">Move</span><span class="p">,</span>       
-        <span class="n">Delete</span>       
-    <span class="p">};</span>          
-    <span class="n">BuildMode</span> <span class="n">m_currentMode</span><span class="p">;</span>            
-<span class="p">};</span>         
-</pre></div>
-
-
-<p>这方法是把所有mode的实现都放在同一个地方, 每次更新都要改这个地方Build的源代码实现. 但是假如在添加move, delete这新mode的时候, 我们不想or不能改已有的只有add mode的Build源码呢?    </p>
-<p>这是另一种设计方案  </p>
-<div class="highlight"><pre><span class="n">class</span> <span class="n">Build</span>  
-<span class="p">{</span>   
-    <span class="c1">// care about the add mode only.    </span>
-<span class="p">};</span>   
-<span class="n">class</span> <span class="n">BuildMove</span> <span class="o">:</span> <span class="n">public</span> <span class="n">Build</span> 
-<span class="p">{</span> 
-    <span class="kt">bool</span> <span class="n">onMouseEvent</span><span class="p">()</span>   
-    <span class="p">{</span> 
-        <span class="n">check</span> <span class="k">if</span> <span class="n">we</span> <span class="n">will</span> <span class="n">go ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Mode Switch in Class Hierarchy.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Char Array vs Char Pointer.html">Char Array vs Char Pointer</a></h2>
-                <div class="summary"><p>刚才在阅读以下内容时候复习了一下这两个概念. 
-<a href="http://www.bfilipek.com/2014/07/quick-case-char-pointer-vs-char-array.html">Quick case: Char Pointer vs Char Array in C++, by Bartlomiej Filipek</a>  </p>
-<div class="highlight"><pre><span class="c1">// Test case of char array vs char pointer. </span>
-<span class="c1">// </span>
-
-<span class="p">#</span><span class="k">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>   
-
-<span class="k">int</span> <span class="n">main</span><span class="p">()</span>     
-<span class="p">{</span>       
-    <span class="n">char</span> <span class="n">strA</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;char array!&quot;</span><span class="p">;</span>          
-    <span class="n">char</span> <span class="o">*</span><span class="n">strP</span> <span class="o">=</span> <span class="s">&quot;char array?&quot;</span><span class="p">;</span>        
-
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;sizeof(strA): &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">strA</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, of: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">strA</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, addr: &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">strA</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>          
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;sizeof(strA): &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sizeof ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Char Array vs Char Pointer.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Pointer is copied when passed as function parameter.html">Pointer is copied when passed as function parameter</a></h2>
-                <div class="summary"><h2>起源</h2>
-<p>看到这段代码(肯定是简化更改版啦)  </p>
-<div class="highlight"><pre><span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>   
-<span class="p">{</span>  
-    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
-    <span class="n">item</span><span class="o">-&gt;</span><span class="n">unref</span><span class="p">();</span>  
-<span class="p">}</span>   
-<span class="kt">void</span> <span class="n">XList</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">Item</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">)</span>   
-<span class="p">{</span>  
-    <span class="p">...</span> <span class="c1">// do the merge sth;   </span>
-<span class="p">}</span>   
-</pre></div>
-
-
-<p>上面的unref()是用于reference count的, reference计数减一的意思. 为什么有这东东呢, 为什么下面用引入作为参数的就不需要呢? 
-我怀疑是指针在作为函数参数的传递过程中被复制了, 也就是指向实际的物体的指针又多了一个, 所以merge之后就unref减少一个. 以下的test case尝试证明指针是否被复制了:   </p>
-<div class="highlight"><pre><span class="c1">// try to check if a pointer will be copied during passing-by-pointer.         </span>
-<span class="c1">//              </span>
-<span class="p">#</span><span class="k">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>             
-
-<span class="k">void</span> <span class="n">func1</span><span class="p">(</span><span class="k">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Pointer is copied when passed as function parameter.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h2>
-                <div class="summary"><p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
-<p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
-一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release.  <br />
-图中红色点假如为click的起点, 然后沿着粉色的路径来drag鼠标....     </p>
-<p>从face面的角度来看, 深蓝色的面为起点, 然后鼠标一旦离开这个深蓝色的面之后, 肯定会进入这个深蓝色面四周的8个浅蓝色面之一(假如把面的边界也看作面一部分). 于是在stroke的路线中, 鼠标所pick到的面是一个连着一个的, 连续. </p>
-<p>从edge边的角度来看, 鼠标从起点移动时候, 虽然鼠标在面内部而不是压在边上面, 但是面的几个边总有一个是距离当前鼠标位置近一点的, 我们选择这个边; 当鼠标移动要离开这个深蓝色的face的时候, 肯定会触碰到这个face是边(假如把角点corner也看作是edge是一部分). 于是在stroke的路线中, 鼠标所pick到的边是一个连着一个的, 也连续. </p>
-<p>而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   </p>
-<p>怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? <br />
-因为上面说到面是完备的 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Fail to surround the mouse with the vertices.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Build myblog using pelican.html">Build myblog using pelican</a></h2>
-                <div class="summary"><p>都不知道这是第几次又想建一个自己blog来host那些笔记了, 相比于之前的blogger, wordpress, 这次用pelican and python来搞...   </p>
-<h2>环境:</h2>
-<ul>
-<li>python 2.7, withn pip, easy_install        </li>
-<li>pelican        <br />
-<img alt="Alt text" src="data/2014-08-31-pelican_output.PNG" title="output" /><br />
-注意上面的起始目录是E:\Temp\myblog&gt; 
-我试过别的起始目录是E:\Temp\myblog\context&gt; 就发生错误了. 
-进入output目录, 打开index.html就可以看到blog了。这里我没有用到make html命令哦.  </li>
-</ul>
-<h2>遇到的problems:</h2>
-<ul>
-<li>设置图片目录的路径.  <br />
-我的图片都是文档.md目录下的data目录, 例如folderA/xxx.md, folderA/data/yyy.PNG. 在pelican这里, 我想保持这样的结构, folderA 相当于 context目录, 目的是blog的内容(文档和图片)已经可以放到某个folderA里面, 然后要用pelican来build这个blog的时候, 直接把folderA目录里面的所有东西copy到context目录下就ok了.<br />
-但是pelican默认是把图片放到blogFolder/image目录 ...</li></ul>
-                    <a class="btn btn-default btn-xs" href="/Build myblog using pelican.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/build simple ui using pySide.html">build simple ui using pySide</a></h2>
-                <div class="summary"><p>记录一下做UI prototype时候遇到的新概念 </p>
-<blockquote>
-<p>life is short, use python. </p>
-</blockquote>
-<p>早有耳闻, 一试果然不凡. 
-安装Qt 4.8.X, 安装pySide (how? 具体看其主页), 然后新建file.py, 敲几行pySide代码, 然后command line里面python file.py立刻就出ui效果了. 省却了ide / c++代码 / 链接设置 / 反复修改反复编译的麻烦.  <br />
-事情的缘由是, 最近要参与用python快速做一个ui的prototype, 本来主程序M里面就有Qt+pySide, 所以连安装都不需要, 直接改py文件就得到ui结果, 真快. 于是就缺学几下python了. </p>
-<p>example 1. To define the style sheet 样式 of a button.  <br />
-<img alt="Alt text" src="data/2014-08-25_qtButtonStyleSheet.png" title="output" />   </p>
-<div class="highlight"><pre><span class="n">QPushButton</span> <span class="p">{</span>
-    <span class="nl">border:</span> <span class="mi">2 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/build simple ui using pySide.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Python Basis 基础笔记.html">Python Basis 基础笔记</a></h2>
-                <div class="summary"><p>新接触python programming, 记录一些基础.        </p>
-<p>Batteries Included. 立马就可以使用的. 
-Installizaton </p>
-<hr />
-<p>download 2.7 from python website and install at C:\Python27;              <br />
-download Anaconda 2.1.0 install at E:\Anaconda;                  <br />
-<img alt="Alt text" src="data/python_2014-11-03_version.PNG" title="output" />         <br />
-看来两者并不冲突.                    </p>
-<p>这是从Anaconda里面起来的Spyder IDE:<br />
-<img alt="Alt text" src="data/python_2014-11-03_Spyder_IDE.PNG" title="output" />        </p>
-<h2>Variables and Data</h2>
-<p>A variable is a name that points to some specific data type. 不允许声明一个变量而没有=赋值. 
-contents = 6;                 <br />
-print ...</p>
-                    <a class="btn btn-default btn-xs" href="/Python Basis 基础笔记.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/name on a book.html">Name on a book</a></h2>
-                <div class="summary"><p>记录一次参与翻译一本外文书的过程, 过程有点累, 结果有点甜.   </p>
-<blockquote>
-<p>you know, it is funny that people do not care your name, until you are in trouble. 
--- 美剧&lt;疑犯追凶&gt;第一集里面的话, 类似而已哦. </p>
-</blockquote>
-<p>去参与翻译一本书, 可以出现在书店书架上的, 还提到你的名字, 是不是很cool?    </p>
-<p>昨天看到email, 被告知我有份参与的书终于上架了, "在各大网店都有售。但是样书会比较慢" 里面上google一下，果然在amazon.cn等都找到了: </p>
-<div class="highlight"><pre><span class="err">交互式程序设计（第</span><span class="mi">2</span><span class="err">版）</span>                                                               
- <span class="o">~</span> <span class="n">Joshua</span> <span class="n">Noble</span> <span class="p">(</span><span class="err">作者</span><span class="p">),</span> <span class="err">毛顺兵</span> <span class="p">(</span><span class="err">译者</span><span class="p">),</span> <span class="err">张婷婷</span> <span class="p">(</span><span class="err">译者</span><span class="p">)</span>                
-<span class="err">出版社</span><span class="o">:</span> <span class="err">机械工业出版社</span><span class="p">;</span> <span class="p">(</span><span class="mi">2014</span><span class="err">年 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/name on a book.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/conflict by duplicated variables.html">conflict by duplicated variables</a></h2>
-                <div class="summary"><p>用多于一个变量来表示一个状态, 变量之间很容易不一致呢.      </p>
-<blockquote>
-<p>conflict  </p>
-</blockquote>
-<p>假如我们要描述以下这个状态:        <br />
-在一次mouse click的picking中, 我们给出了pick的范围, 一个rectangle, 然后要标记是否只要pick一个物体object就够了, 还是pick所有在rectangel下面的物体.  </p>
-<p>当假如我们只要pick到一个物体就够了, 那可能在for里面, 一旦找到某一个物体有效, 我们就可以返回, 退出pick过程了. 也就是我们只要pick到第一个有效物体就ok了, 而不考虑这个pick到的物体是否距离mouse click的点最近.   </p>
-<p>那么, 要记录这个状态, 我们看下面的实现:     </p>
-<div class="highlight"><pre><span class="n">class</span> <span class="n">XViewContext</span>            
-<span class="p">{</span>               
-<span class="nl">public:</span>                           
-    <span class="n">PickingResult</span> <span class="n">pick</span><span class="p">(...);</span>                               
-    <span class="kt">void</span> <span class="nf">setPickSingle</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="n">m_bPickSingle</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>                      
-    <span class="kt">bool</span> <span class="n">pickSingle</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_bPickSingle</span><span class="p">;</span> <span class="p">};</span>                
-<span class="nl">private:</span>               
-    <span class="kt">bool</span> <span class="n">m_bPickSingle</span><span class="p">;</span>                   
-<span class="p">};</span>                           
-<span class="n">PickingResult</span> <span class="n">XViewContext</span><span class="o">::</span><span class="n">pick</span><span class="p">(...)</span>           
-<span class="p">{</span>                    
-    <span class="p">...</span>                                
-    <span class="k">if</span> <span class="p">(</span> <span class="n">pickSingle</span><span class="p">()</span> <span class="p">)</span> <span class="p">...;</span>                 
-    <span class="k">else</span> <span class="p">...;</span>         
-<span class="p">}</span>          
-</pre></div>
-
-
-<p>在这实现中, 是否要pick单一个物体的状态作为data member inside ...</p>
-                    <a class="btn btn-default btn-xs" href="/conflict by duplicated variables.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Undo and Redo.html">Undo and Redo</a></h2>
-                <div class="summary"><p>Undo and Redo 已经遇到很多次了, 记录一下想法.     </p>
-<blockquote>
-<p>So we beat on, boats against the current, borne back ceaselessly into the past. -- The Great Gatsby<br />
-所以我们不停地往前划，逆流而上，回到无穷无尽的过去。《了不起的盖茨比》  </p>
-</blockquote>
-<p>一个程序假如连undo/redo都没有, 那基本上不是给人用的, 可能只能算是demo.</p>
-<h2>Undo/Redo</h2>
-<p>用windows/paint画图工具做例子就很直观啦. </p>
-<p>case 1. 假如操作次序是: 画一笔A, 再画一笔B;
-undo 一次就是剩下A; undo 第二次就是空;
-redo 一次就是增加A; redo第二次就是恢复到A B; 
-这个case的特点是undo到底了，再redo到底. 没有undo的时候又夹着redo ...</p>
-                    <a class="btn btn-default btn-xs" href="/Undo and Redo.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Position Transfromation from 2d world to window screen.html">Position Transfromation from 2d world to window screen</a></h2>
-                <div class="summary"><p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to find the position at 2d world corresponding to this mouse positon?     </p>
-<h2>Background背景</h2>
-<p>工作中遇到一个问题, 坐标映射。A 2d world is rendering in a window, user can mouse click on the window, how to ...</p>
-                    <a class="btn btn-default btn-xs" href="/Position Transfromation from 2d world to window screen.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/why game developers keep getting laid off.html">why game developers keep getting laid off</a></h2>
-                <div class="summary"><p>翻译了一下why game developers keep getting laid off这个文章. 里面有些观点是挺有意思的.   </p>
-<h2>引言</h2>
-<p>在Hacker News上看到此文, 
-Why Game Developers Keep Getting Laid Off
-by Jason Schreier 
-http://kotaku.com/why-game-developers-keep-getting-laid-off-1583192249 
-I enjoyed this article, thx. 稍微摘录和翻译一下. </p>
-<h2>Why does this happen so often?</h2>
-<p>...
-为什么裁掉一些开发，几个月之后又要重新请人？这个想法好像有点傻啊。但是这种事情却常常发生。根据Sony的某前员工，其中的解释很简单：在开发的前期(游戏的概念和设计是在这期间完成)，不需要那么多人，所以发行商就不养人。
-...</p>
-<h2>A deadline's ...</h2>
-                    <a class="btn btn-default btn-xs" href="/why game developers keep getting laid off.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/build error from line ending.html">build error from line ending</a></h2>
-                <div class="summary"><p>Build error, 具体是error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format怎么办呢？ </p>
-<p>故事的开端是checkin了一个.cpp，当然本地是build过的，但是server端那边反馈说build error, 具体是
-error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format</p>
-<p>怎么办呢？当然是查看一下到底是那个.cpp文件的line ending是什么东西，然后改成合适的就ok了. </p>
-<p>下面截图显示改之前是CR+LF, 改之后是LF的 ...</p>
-                    <a class="btn btn-default btn-xs" href="/build error from line ending.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/mesh history in maya.html">mesh history</a></h2>
-                <div class="summary"><p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
-<h2>引言</h2>
-<p>以前对mesh的修改都是例如
-mesh.setVertexPosition( vertexID, newPos ); 
-mesh.setVertexTC( tcID, newTC ); 
-这样直接改[1], 从读书时候到现在都是这么simple and naive:-) 而对于maya的case就没有这样简单了，例如去看maya&gt;devkit&gt;splitUV example [2],  套用上面直接修改的方法, 要split一个uv的话，那直接用MFnMesh加几个新uv, MFnMesh::setUV(new uv id, uv value) 就ok了, 可是故事没有这么简单.... </p>
-<h2>Construction History and Tweak</h2>
-<p>直接摘抄两段来看看:</p>
-<blockquote>
-<p>All the operations that can be performed on a polygonal ...</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="/mesh history in maya.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/algo - counting inversions.html">algo - counting inversions</a></h2>
-                <div class="summary"><p>算法练习: counting inversions       </p>
-<h2>Background</h2>
-<p>Given an array, say [1, 3, 5, 2, 4, 6], to count the inversions.
-What is an inversion ?
-if (i &lt; j) but arr[i] &gt; arr[j]. 例如上面的(3, 2), 3在2的前面, 但是3&gt;2, 构成一个inversion. 这个例子中一共三个inversions(3, 2) (5, 2) (5, 4). </p>
-<p>这个计算有什么用呢? 我是[Algorithms: Design and Analysis ...</p>
-                    <a class="btn btn-default btn-xs" href="/algo - counting inversions.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/partio.html">partio</a></h2>
-                <div class="summary"><p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.               </p>
-<h2>引言</h2>
-<p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project from
-Disney Animation, 读读它的代码应该能学到东西, 于是故事就开始了.<br />
-“The goal of Partio is to provide a unified interface akin to unified image libraries that makes it easier to load, save, and manipulate ...</p>
-                    <a class="btn btn-default btn-xs" href="/partio.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Vector based containers.html">Vector based containers</a></h2>
-                <div class="summary"><p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记.  </p>
-<h2>引言</h2>
-<h1>Using STL Vectors</h1>
-<p>在代码中std::vector经常被用到吧? 因为它很容易用, 只管往里面塞东西就ok了. 
-但是用!=用得好, 而对它的了解又是否足够把它用好呢...下面是在阅读参考文章时候的笔记. </p>
-<h2>Prefer vector over list</h2>
-<p>比较 std::vector 和 std::list, 其中一个特定是, vector的内存是连续的(contiguous buffers), 还可以避免avoid内存动态分配memory allocations和四散的访问scattered access.  这些都是优势. </p>
-<p>这里发散一下，以前在用Qt 4.8的时候(以后Qt 5可能有变)，就有QVector, QList, QLinkedList，它们的区别也有意思。其中QVector跟std::vector类似 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Vector based containers.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Pointer to Member Function.html">Pointer to Member Function</a></h2>
-                <div class="summary"><p>function pointer是知道的, 如</p>
-<div class="highlight"><pre><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
-
-<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">pFtor</span><span class="p">)(</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span> <span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> 
-
-<span class="n">or</span>
-
-<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="o">*</span><span class="n">FtorType</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span> 
-<span class="n">FtorType</span> <span class="n">pFtor</span><span class="p">;</span> 
-<span class="n">pFtor</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">max</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">iResult</span> <span class="o">=</span> <span class="n">pFtor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-</pre></div>
-
-
-<p>但是当看到类似以下代码时候还是恐惧了一下: </p>
-<div class="highlight"><pre><span class="n">class</span> <span class="n">Tool</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">doA</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="nf">doB</span><span class="p">(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span> 
-<span class="p">};</span> 
-<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="n">Tool</span><span class="o">::*</span><span class="n">MemberFunctionPtr</span><span class="p">)(</span><span class="n">ArgumentType</span> <span class="o">&amp;</span><span class="p">);</span>
-
-
-<span class="n">Tool</span> <span class="n">toolObj ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Pointer to Member Function.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/In the middle of time and space.html">In the middle of time and space</a></h2>
-                <div class="summary"><p>刚发生了一个有意思的事情, 5月9号16:40</p>
-<p>小伙C说了一段话;
-小伙B回答了一段话;</p>
-<p>小伙C是在北美西海岸, 跟我们差16小时; 
-小伙B是在英国.</p>
-<p>那么C大致是5月8号深夜, B可能是9号早上.</p>
-<p>过去和未来的对话，我们夹在时空中间，旁观.....</p>
-                    <a class="btn btn-default btn-xs" href="/In the middle of time and space.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Example of code conventions.html">Example of code conventions</a></h2>
-                <div class="summary"><p>刚看到如下代码:</p>
-<div class="highlight"><pre><span class="c1">// NvGLModel.h from nvidia samples </span>
-
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_center</span><span class="p">;</span> <span class="c1">///&lt; The computed center of the bounding box of the app</span>
-
-<span class="nl">private:</span>
-    <span class="n">NvModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
-    <span class="n">GLuint</span> <span class="n">model_vboID</span><span class="p">,</span> <span class="n">model_iboID</span><span class="p">;</span>
-    <span class="n">nv</span><span class="o">::</span><span class="n">vec3f</span> <span class="n">m_minExtent</span><span class="p">,</span> <span class="n">m_maxExtent</span><span class="p">,</span> <span class="n">m_radius</span><span class="p">;</span>
-</pre></div>
-
-
-<p>觉得别扭，主要是有些成员变量data member用来m_，而有些不用，不统一。所谓的taste?</p>
-<p>btw, 反例的英文原来是: counter example; negative example </p>
-                    <a class="btn btn-default btn-xs" href="/Example of code conventions.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Picking with OpenGL.html">Picking with OpenGL</a></h2>
-                <div class="summary"><blockquote>
-<p>If you have choices, choose the best. If you have no choice, do the best. 如果有选择，那就选择最好的；如果没有选择，那就努力做到最好。</p>
-</blockquote>
-<h1>Picking with OpenGL</h1>
-<p>在3d软件提供交互的时候，例如先选择了某个vertex或者某个face，然后去操作这个被选中的东西。如在maya里面很多工具(maya里面把context==tool?)都是先pick the manipulator, drag the manipulator, to update the attributes of the node (the selection list). 第一步就是要选中mouse底下的东西，这是怎么做到的呢?</p>
-<p>其实一开始我想到的方法ray intersection的方法，
-approach 0 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Picking with OpenGL.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/choose the overrided function.html">choose the overrided function</a></h2>
-                <div class="summary"><p>In class hierarchy, if functions are overrided by some subclass, which one will be invoked?</p>
-                    <a class="btn btn-default btn-xs" href="/choose the overrided function.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Do and redo are similiar.html">Do and redo are similiar</a></h2>
-                <div class="summary"><p>在学maya/MPxCommand, 当一个操作需要支持undo/redo的时候，用户操作的次序可能是: 
-- do sth -&gt; undo it, or 
-- do sth -&gt; undo it -&gt; redo it;
-在实现的时候会发现do sth 跟 redo sth的代码基本一样啊，那当然想写一个都被do and redo调用的函数就好了，避免代码重复嘛。</p>
-<p>maya/devkit的例子所使用的方法是:</p>
-<div class="highlight"><pre><span class="c1">//code  </span>
-<span class="c1">// inside class CommandXY </span>
-<span class="k">virtual</span> <span class="n">bool</span> <span class="n">isUndoable</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">true</span> <span class="k">or</span> <span class="n">false</span><span class="p">;</span> <span class="p">}</span>
-<span class="k">virtual</span> <span class="n">MStatus</span> <span class="n">doIt</span><span class="p">(</span> <span class="k">const</span> <span class="n">MArglist</span> <span class="o">&amp;</span> <span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// parse the argument list;</span>
-    <span class="c1">// do some ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Do and redo are similiar.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/How to build a plugin system.html">How to build a plugin system</a></h2>
-                <div class="summary"><p>Applications normally support custom plugins, how to do that?<br />
-很多软件都提供了API给customer, 可以写plugin来扩展原来的程序. </p>
-<p>例如mudbox和maya. 从mudbox的API来看，一般可以实现
-- 自定义operation, support undo and redo;
-- 自定义某种brush (operation); 
-- 继承实现某个类，代替原有的那个. 例如map extraction? 
-当前接触到的maya api不多，知道plugin可以实现context and manipulator.</p>
-<p>问题就来了, 一个简单的plugin system是怎么设计和实现的呢? </p>
-<p>case 1: 
-Reference: Using Dynamic Link Libraries (DLL) to Create Plug-Ins, by Jeremiah van Oosten. 
-http://3dgep ...</p>
-                    <a class="btn btn-default btn-xs" href="/How to build a plugin system.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Maya programming node.html">Maya Programming Node</a></h2>
-                <div class="summary"><p>学maya时候有些新概念要记录一下，否则忘得快. </p>
-<p>先在一个新场景里面拖一个多边形球polygon sphere出来,    <br />
-<img alt="transfrom and shape node" src="data/2014-04-01-transfer_shape_node.png" title="output" />
-打开Outline窗口, 看到一个pShere1, 选择Display/Shapes, 又看到pShere1下面还有一个pSphereShape1. 而在hypergraph: connection 窗口看到一共四个东西, 其中两个就是上面的pSphere1 and pSphereShape1, 而且其中三个是有连接关系的。从左到右它们分别是:    <br />
-+ polySphere1: 控制参数, 例如半径radius, axis/height上的布线密度等;  <br />
-+ pSphereShape1: 这个就是实际的shape node, 形状.                  <br />
-+ initialShadingGroup: 用于画这个球的.               <br />
-+ pSphere1: transform node, 决定了球在空间位置.                 </p>
-<div class="highlight"><pre><span class="n">import</span> <span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">;</span> 
-
-<span class="n">maya</span><span class="p">.</span><span class="n">cmds</span><span class="p">.</span><span class="n">polySphere</span><span class="p">()</span>                  <span class="err">#</span> <span class="err">用</span><span class="n">script</span><span class="err">建一个球</span> 
-<span class="cp"># Result: [u&#39;pSphere2&#39;, u&#39;polySphere2&#39;] # 返回就是transform node, shape node ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/Maya programming node.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/simple implement of 2d bezier curve.html">simple implement of 2d bezier curve</a></h2>
-                <div class="summary"><p>工作中又一次遇到nurb curve的问题，具体是knots个数和求法的问题。那东西太难，相对来来说，bezier curve易懂很多，一直想实现一下来看看，于是就有了此。</p>
-                    <a class="btn btn-default btn-xs" href="/simple implement of 2d bezier curve.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Flood fill.html">Flood fill</a></h2>
-                <div class="summary"><p>看见someone提到Flood fill algorithm, 惭愧，不熟悉这个名字，于是Google一下，竟然跟BFS很像，于是想着要简单实现一下。</p>
-                    <a class="btn btn-default btn-xs" href="/Flood fill.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/How to debug maya custom plugin.html">How to debug maya custom plugin</a></h2>
-                <div class="summary"><p>涉及maya plugin开发的时候，怎么debug呢? </p>
-<h2>Attach to maya process ... 寄生</h2>
-<p>step 1. maya plugin manager (Window -&gt; Settings/Preferences -&gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
-step 2. at your visual studio project of that custom plugin, Tools -&gt; Attach to ...</p>
-                    <a class="btn btn-default btn-xs" href="/How to debug maya custom plugin.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Tree view at Qt.html">Tree view at Qt</a></h2>
-                <div class="summary"><p>Qt中的TreeView很复杂, 记录一下自己的理解.  </p>
-<h2>引言</h2>
-<blockquote>
-<p>Model/View/item的关系就有点像Container/Algorithm/Iterator的关系。
-Tree view属于Model/View Programming的一部分。有些
-</p>
-</blockquote>
-<h2>Index 带上下层级结构的二维索引</h2>
-<p>QModelIndex()表示model中最上层的root item的index, QModelIndex().isValid() == 0. </p>
-<p>item之前有上下层级关系，index.parent()获取index的parent. 当index.parent().isValid() == false，表示这个item的parent就是root item. 这些items被称为top-level itmes. </p>
-<p>to retrieve data from a model:
-for (int row = 0; row &lt; model-&gt;rowCount(parentIndex); ++row)
-{
-    for (int ...</p>
-                    <a class="btn btn-default btn-xs" href="/Tree view at Qt.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Blendshape at maya.html">Blendshape at maya</a></h2>
-                <div class="summary"><p>最近接触了一点maya blendshape programming, 稍微记录一下。</p>
-<h2>BlendShape deformer basis (基础)</h2>
-<p>先说明一个特点，当drag一个cube or sphere物体的时候，会生成<transform node, shape node>两个nodes, 具体的细节请看maya scene graph，DAG。</p>
-<p>To create a simple blendshape example,<br />
-Polygon mode, create a cube, we have <pCube1, pCubeShape1>; <br />
-Select cube1, Shift+D, we have <pCube2, pCubeShape2>, move cube2 a little bit away from cube1.<br />
-Select cube1, Shift+D, we ...</pcube2,></pcube1,></p>
-                    <a class="btn btn-default btn-xs" href="/Blendshape at maya.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/This is the title.html">This is the Title</a></h2>
-                <div class="summary"><p>Most of time, do not want summary, since some theme will only display summary at the head page if there is summary here.</p>
-                    <a class="btn btn-default btn-xs" href="/This is the title.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-
         </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
+        <hr />
 
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
-              </ul>
-            </li>
-
-
-
-            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://python.org/" target="_blank">
-                Python.org
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://jinja.pocoo.org/" target="_blank">
-                Jinja2
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
-</section>
-            </aside>
+        <div class="pagination">
+        <ul>
+                        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+                        <li class="active"><a href="/index.html">1</a></li>
+                        <li class=""><a href="/index2.html">2</a></li>
+                        <li class=""><a href="/index3.html">3</a></li>
+                        <li class="next"><a href="/index2.html">Next &rarr;</a></li>
+        </ul>
         </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
+
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
+    <li><a href="http://getpelican.com/"><i class="icon-external-link"></i>Pelican</a></li>
+    <li><a href="http://python.org/"><i class="icon-external-link"></i>Python.org</a></li>
+    <li><a href="http://jinja.pocoo.org/"><i class="icon-external-link"></i>Jinja2</a></li>
+    <li><a href="#"><i class="icon-external-link"></i>You can modify those links in your config file</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href="#"><i class="icon-You can add links in your config file-sign icon-large"></i>You can add links in your config file</a></li>
+    <li><a href="#"><i class="icon-Another social link-sign icon-large"></i>Another social link</a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/computer-graphics.html">
+    <i class="icon-folder-open icon-large"></i>Computer Graphics
+</a>
+</li>
+<li>
+<a href="/category/misc.html">
+    <i class="icon-folder-open icon-large"></i>misc
+</a>
+</li>
+<li>
+<a href="/category/programming.html">
+    <i class="icon-folder-open icon-large"></i>programming
+</a>
+</li>
+<li>
+<a href="/category/tech.html">
+    <i class="icon-folder-open icon-large"></i>tech
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
       <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2016 renc
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="/theme/js/jquery.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
 
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
 
 
-</body>
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
 </html>

@@ -1,94 +1,180 @@
 <!DOCTYPE html>
-<html lang="en"
->
-<head>
-    <title>misc - 阿can's blog</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html lang="en">
+  <head>
     <meta charset="utf-8">
+    <title>can's blog - misc</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="can">
 
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
 
+    <link href="/theme/css/pygments.css" rel="stylesheet">
 
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <meta name="author" content="renc" />
-    <meta name="keywords" content="misc" />
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
 
-    <!-- Open Graph tags -->
-        <meta property="og:site_name" content="阿can's blog" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="阿can's blog"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="阿can's blog"/>
+    <link href="/" type="application/atom+xml" rel="alternate" title="can's blog ATOM Feed" />
 
+  </head>
 
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+  <body>
 
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">can's blog </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/computer-graphics.html">
+						<i class="icon-folder-open icon-large"></i>Computer Graphics
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/misc.html">
+						<i class="icon-folder-open icon-large"></i>misc
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/programming.html">
+						<i class="icon-folder-open icon-large"></i>programming
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tech.html">
+						<i class="icon-folder-open icon-large"></i>tech
+					</a>
+                  </li>
 
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
 
-</head>
-<body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-阿can's blog            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li >
-                            <a href="/category/computer-graphics.html">Computer graphics</a>
-                        </li>
-                        <li class="active">
-                            <a href="/category/misc.html">Misc</a>
-                        </li>
-                        <li >
-                            <a href="/category/programming.html">Programming</a>
-                        </li>
-                        <li >
-                            <a href="/category/tech.html">Tech</a>
-                        </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
         </div>
-        <!-- /.navbar-collapse -->
+      </div>
     </div>
-</div> <!-- /.navbar -->
-<!-- Banner -->
-<!-- End Banner -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
 
-            <article>
-                <h2><a href="/迭代啊别闷大招.html">迭代啊别闷大招</a></h2>
-                <div class="summary">
-                    <a class="btn btn-default btn-xs" href="/迭代啊别闷大招.html">more ...</a>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/Polygonalize_Implicit_Surface隐式曲面的多边形化.html">Polygonalize Implicit Surface隐式曲面的多边形化</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-09-26T21:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 26 September 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>这几天遇到implicit surface (isosurface), marching cube这几个名称，复习了一下，顺便做了下面几个例子来增加理解：
+<img alt="Alt text" src="data/marchingCube_sphereBox.PNG" title="output" />      </p>
+<p>第一行： sphere, sphere被grid切了, 注意保证grid够大.  <br />
+第二行： box, box with rounding.  <br />
+第三行： union(box， sphere), difference(box, sphere).  <br />
+生成mesh之后，然后放到windows 10's 3D Builder中得到的渲染结果。    </p>
+                        <a class="btn primary xsmall" href="/Polygonalize_Implicit_Surface隐式曲面的多边形化.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Qt Layout Demo.html">QtLayoutDemo</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/迭代啊别闷大招.html">迭代啊别闷大招</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-04-23T20:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 23 April 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary">
-                    <a class="btn btn-default btn-xs" href="/Qt Layout Demo.html">more ...</a>
+                        <a class="btn primary xsmall" href="/迭代啊别闷大招.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/南海桂城土地交易统计.html">南海桂城土地交易统计</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Qt Layout Demo.html">QtLayoutDemo</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-04-19T20:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 19 April 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
+                <div class="summary">
+                        <a class="btn primary xsmall" href="/Qt Layout Demo.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/南海桂城土地交易统计.html">南海桂城土地交易统计</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-04-06T20:20:00+08:00">
+        <i class="icon-calendar"></i>Wed 06 April 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>地图(我感兴趣的区域):           <br />
 <img alt="Alt text" src="data/map_Foshan_Nanhai_Guicheng.PNG" title="output" />               </p>
 <p>2016/2/18               <br />
@@ -102,12 +188,24 @@ TD2015(NH)WG021 南海区桂城街道广东金融高新技术服务区B区03-02-
 城镇住宅用地兼容批发零售用地                </p>
 <p>2016/1/22               <br />
 TD2015 ...</p>
-                    <a class="btn btn-default btn-xs" href="/南海桂城土地交易统计.html">more ...</a>
+                        <a class="btn primary xsmall" href="/南海桂城土地交易统计.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Maya中的fileDialog2命令.html">Maya中的fileDialog2命令</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Maya中的fileDialog2命令.html">Maya中的fileDialog2命令</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-03-31T21:30:00+08:00">
+        <i class="icon-calendar"></i>Thu 31 March 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>今天在使用maya的fileDialog2 cmd去建一个file dialog, 要求能选中打开多个files, 于是需要使用:              <br />
 fileDialog2 -fileMode 4 ….;                                        <br />
 这里-fileMode=4 表示支持多个文件选择.               <br />
@@ -117,12 +215,24 @@ setAcceptMode(QFileDialog::AcceptOpen); // 影响open or save 这个按钮上的
 setLebelText(QFileDialog::Accept, "Save"); 也是影响用一个地方，但是这个"Save"跟上面的AcceptOpen中默认使用的"Open"就冲突了. 这个函数允许随意改这个角色上的字.                            </p>
 <p>解决方法是使用-okc "Open" flag来明确设置这个accept button上的text.              </p>
 <p>References: Qt4.8 (or Qt5.6), QFileDialog. </p>
-                    <a class="btn btn-default btn-xs" href="/Maya中的fileDialog2命令.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Maya中的fileDialog2命令.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/门锁系统的接口设计.html">门锁系统的接口设计</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/门锁系统的接口设计.html">门锁系统的接口设计</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-03-30T21:30:00+08:00">
+        <i class="icon-calendar"></i>Wed 30 March 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>想象一个场景:    <br />
 你要开发一个门锁, 设计好了锁的很多细节: 安全级别, 大小, 外观, 跟什么门相配, 使用细节等等, 但你只是一个设计公司, 这没有关系,  <br />
 因为在细节都决定好了之后, 只要找一家生产商合作按照你的设计要求来做就ok了, 当然你需要严格的验收测试.            </p>
@@ -134,75 +244,165 @@ class LockManager {                         <br />
     LockManager() { sLockManager = this; };              <br />
     static LockManager &amp;instance() { return <em>sLockManager; };       <br />
     static LockManager </em>sLockManager; </p>
-<div class="highlight"><pre><span class="n">virtual</span> <span class="kt">int</span> <span class="n">getInformationX</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="p">...;</span> <span class="p">};</span>                    
-<span class="n">virtual</span> <span class="kt">int</span> <span class="n">getInformationY</span><span class="p">()</span> <span class="k">const ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/门锁系统的接口设计.html">more ...</a>
+<div class="highlight"><pre><span></span>virtual int getInformationX() const { ...; };                    
+virtual int getInformationY() const ...</pre></div>
+                        <a class="btn primary xsmall" href="/门锁系统的接口设计.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Qt上GraphicsView显示SVG.html">Qt上GraphicsView显示SVG</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Qt上GraphicsView显示SVG.html">Qt上GraphicsView显示SVG</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-03-26T10:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 26 March 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/reading.html"><i class="icon-tag"></i>reading</a>
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p><img alt="Screen Shot" src="svgDemo_screenShot.PNG" title="output" /> </p>
 <p>There is a problem came at the daily work, to show a button on a graphics view,                   <br />
 this button is supposed to have the hover state, with an icon, but not general image format, but use SVG.<br />
 My first time to use svg image, even i know it is vector ...</p>
-                    <a class="btn btn-default btn-xs" href="/Qt上GraphicsView显示SVG.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Qt上GraphicsView显示SVG.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/2016年02月阅读笔记.html">2016年02月阅读笔记</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/2016年02月阅读笔记.html">2016年02月阅读笔记</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-02-09T16:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 09 February 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>"In fact, there is no need to even enforce that the data be related to 3D", Chapter 2, Coomplete Maya Programming.    <br />
 这个话有意思。假设自己来设计一个3d应用程序，会有建模，动画，光照渲染等功能模块，你会怎么解耦和关联各个模块呢，例如某个模块改变了，别的模块需要怎么更新，会不会麻烦。而maya应用了data flow model，数据在不同模块下流入流出，不同模块就是对这些数据来操作。上面那个引入的话，这些流动的data甚至可以不用看作是3d数据。 <br />
 例如想到mesh, 什么是mesh? 三维顶点, 用边联系起来，结构halfedge是为了方便访问v/e/f。对mesh操作(sculpt, deform)，是对顶点操作，顶点的数目分布坐标等. 我是首先想到了mesh这个东西 ...</p>
-                    <a class="btn btn-default btn-xs" href="/2016年02月阅读笔记.html">more ...</a>
+                        <a class="btn primary xsmall" href="/2016年02月阅读笔记.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Skinning notes.html">Skinning蒙皮技术</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Skinning notes.html">Skinning蒙皮技术</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-01-30T10:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 30 January 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>Reference: 
 Siggraph Course 2014 - Skinning: Real-time Shape Deformation </p>
-                    <a class="btn btn-default btn-xs" href="/Skinning notes.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Skinning notes.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/2015年11月阅读笔记.html">2015年11月阅读笔记</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/2015年11月阅读笔记.html">2015年11月阅读笔记</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-11-02T20:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 02 November 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>2015/11/02 今天读到一个文章: what kind of jobs do software engineers who earn 500k per year do?
 里面的故事是 villiage需要工人来为村庄供水，有两类工人：
 type 1 worker: 拿着两个水桶，到水源的地方装水，然后会村庄，自己和家人分一部分的水，余下给村庄。
 type 2 worker: 拿个铁锹去挖水道，从水源到村庄，花挺长时间，这时间里面别人不一定知道他在做什么，可能对他失望，好在村里有些人对他有信心，给他吃，好让他继续。突然一天，他的水道建好了。type 1 worker就失业，要找别工作，而type 2 worker得到了大回报。</p>
 <p>工人，在接受任务之后 ...</p>
-                    <a class="btn btn-default btn-xs" href="/2015年11月阅读笔记.html">more ...</a>
+                        <a class="btn primary xsmall" href="/2015年11月阅读笔记.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/20150929_别逃跑问题.html">20150929别逃跑问题</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/20150929_别逃跑问题.html">20150929别逃跑问题</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-09-29T20:20:00+08:00">
+        <i class="icon-calendar"></i>Tue 29 September 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>2015/9/29 一个月之前build opensubd的时候遇到一个cmake error:    </p>
 <p>当时请问了别人没有遇到，也想不到是什么原因。今天重遇这个问题，狠着心慢慢看，对比另一台机器上的build log, 
 在OpenSubd/cmake/FindDocutils.cmake的执行不一样，
 原来是这个机子上安装了C:/Anaconda, FindDocutils.cmake里面被其中一个库影响了。</p>
 <p>lesson: 别逃避问题啊, fix it. </p>
-                    <a class="btn btn-default btn-xs" href="/20150929_别逃跑问题.html">more ...</a>
+                        <a class="btn primary xsmall" href="/20150929_别逃跑问题.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/祈祷落幕时.html">祈祷落幕时</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/祈祷落幕时.html">祈祷落幕时</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-12-27T10:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 27 December 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/reading.html"><i class="icon-tag"></i>reading</a>
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>书名：祈祷落幕时 <br />
 作者：东野圭吾 <br />
 2015-1    </p>
 <p>amazon.cn 12月份的推荐书, 尝试买回来看一下, 谁知一看就停不下来, 周五下午到周六就看完了. 极少看侦探推理小说啊，都忘了上一部是什么时候看的了. 主要是叙述看得很舒服, 没有太凶残的描写, 关键是找人物的联系.<br />
 介绍说是父女的爱, 但看过一半没有预知结局时候还是觉得很莫名, 跟父女的亲情有什么关系呢?  而题目为什么又是"祈祷落幕时"呢?<br />
 当看完之后回味, 才觉得这书名不错。推荐.   </p>
-                    <a class="btn btn-default btn-xs" href="/祈祷落幕时.html">more ...</a>
+                        <a class="btn primary xsmall" href="/祈祷落幕时.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Book - Everyday Probability and Statistics.html">Book - Everyday Probability and Statistics</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Book - Everyday Probability and Statistics.html">Book - Everyday Probability and Statistics</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-10-13T22:20:00+08:00">
+        <i class="icon-calendar"></i>Mon 13 October 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/reading.html"><i class="icon-tag"></i>reading</a>
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p><img alt="Alt text" src="data/2014-10-13-book_naked_statistics.PNG" title="output" /> <img alt="Alt text" src="data/2014-10-13-book_everyday_probability_and_statistics.PNG" title="output" />         <br />
 那本[Naked Statistics]是流行书, 所以年初的时候买来看, 主要是讲日常生活中, 例如媒体, 那些统计学方面的概念可能会被误解or有意无意的用来误导大众.              <br />
 也正是在看这书时候发现后几章的概念不懂, 想找本简单的书来学习一下, 于是就有了第二本[人人都来掷骰子], 跟前一本的区别是: 前几章讲了一些概率的基础, 后几章讲统计学的概念。每一章介绍一个概念, 不长, 可以一下看完. 而且一般的步骤是例子|概念|怎么算, 没有复杂的公式没有公式证明推导等. 15章后开始的样品空间, 还不是很清晰.         </p>
@@ -210,12 +410,24 @@ type 2 worker: 拿个铁锹去挖水道，从水源到村庄，花挺长时间�
 <img alt="Alt text" src="data/2014-10-13-PersionOfInterest.PNG" title="output" />                  <br />
 Person of Interest / 疑犯追凶;           <br />
 这有一个问题就是我们还有多少隐私呢? 倒不是说zf监控了我们的信息, 而是我们在日常的网上购物/网上言论/网上账单等都把我们清清楚楚的记录了, 甚至比我们自己还记得清楚, 慢慢地可能比我们自己还了解我们自己了. so who care the privacy? 说真的, 我都不知道哪些属于隐私范围, 而另外即使知道了别人的隐私, 是否又等于侵犯了别人的隐私呢?                                        </p>
-                    <a class="btn btn-default btn-xs" href="/Book - Everyday Probability and Statistics.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Book - Everyday Probability and Statistics.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/Fail to surround the mouse with the vertices.html">Fail to surround the mouse with the vertices</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-09-02T16:00:00+08:00">
+        <i class="icon-calendar"></i>Tue 02 September 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/renc.html"><i class="icon-user"></i>renc</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>一个鼠标点press/click在模型上, 然后drag/move, 在这个drag的路程中, 鼠标压到的faces/edges都是连续的, 而顶点vertices竟然不是, why ?  </p>
 <p><img alt="Alt text" src="data/2014-09-02-fail_to_surround_mouse_with_vertices.PNG" title="output" />   <br />
 一个stroke的过程: mouse click/press -&gt; drag/move -&gt; release.  <br />
@@ -225,12 +437,26 @@ Person of Interest / 疑犯追凶;           <br />
 <p>而从顶点vertices/cornersd的角度来看呢? 如图中的stroke路线就不会压到顶点, 不会触碰到顶点, 也就是顶点, 不像之前的面和边 能保证鼠标移动的时候肯定会pick到连续的face/edge, 很可能在stroke的过程中都没有接触到几个呢, 更何况是连续?   </p>
 <p>怎么解决, 假如我们要求stroke的路线中出现一串连续的顶点? <br />
 因为上面说到面是完备的 ...</p>
-                    <a class="btn btn-default btn-xs" href="/Fail to surround the mouse with the vertices.html">more ...</a>
+                        <a class="btn primary xsmall" href="/Fail to surround the mouse with the vertices.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/mesh history in maya.html">mesh history</a></h2>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/mesh history in maya.html">mesh history</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-05-28T10:20:00+08:00">
+        <i class="icon-calendar"></i>Wed 28 May 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/can.html"><i class="icon-user"></i>can</a>
+<span class="label">Category</span>
+<a href="/category/misc.html"><i class="icon-folder-open"></i>misc</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/maya.html"><i class="icon-tag"></i>maya</a>
+</footer><!-- /.post-info --></div>
                 <div class="summary"><p>做demo都只是对mesh做一次修改, 但是好像在一个成熟的程序里面往往是很多次修改的叠加. </p>
 <h2>引言</h2>
 <p>以前对mesh的修改都是例如
@@ -241,80 +467,73 @@ mesh.setVertexTC( tcID, newTC );
 <p>直接摘抄两段来看看:</p>
 <blockquote>
 <p>All the operations that can be performed on a polygonal ...</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="/mesh history in maya.html">more ...</a>
+                        <a class="btn primary xsmall" href="/mesh history in maya.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-
         </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
+        <hr />
 
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
-              </ul>
-            </li>
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
+    <li><a href="http://getpelican.com/"><i class="icon-external-link"></i>Pelican</a></li>
+    <li><a href="http://python.org/"><i class="icon-external-link"></i>Python.org</a></li>
+    <li><a href="http://jinja.pocoo.org/"><i class="icon-external-link"></i>Jinja2</a></li>
+    <li><a href="#"><i class="icon-external-link"></i>You can modify those links in your config file</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href="#"><i class="icon-You can add links in your config file-sign icon-large"></i>You can add links in your config file</a></li>
+    <li><a href="#"><i class="icon-Another social link-sign icon-large"></i>Another social link</a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/computer-graphics.html">
+    <i class="icon-folder-open icon-large"></i>Computer Graphics
+</a>
+</li>
+<li>
+<a href="/category/misc.html">
+    <i class="icon-folder-open icon-large"></i>misc
+</a>
+</li>
+<li>
+<a href="/category/programming.html">
+    <i class="icon-folder-open icon-large"></i>programming
+</a>
+</li>
+<li>
+<a href="/category/tech.html">
+    <i class="icon-folder-open icon-large"></i>tech
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
 
 
+</ul>        </div><!--/.well -->
 
-            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                </ul>
-            </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://python.org/" target="_blank">
-                Python.org
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://jinja.pocoo.org/" target="_blank">
-                Jinja2
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
-</section>
-            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
+      </div><!--/row-->
+
       <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2016 renc
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="/theme/js/jquery.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
 
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
 
 
-</body>
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
 </html>
