@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>can's blog - programming</title>
+    <title>can's blog - canjiang[dot]ren[at]outlook[dot]com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="canjiang[dot]ren[at]outlook[dot]com">
@@ -74,7 +74,7 @@
 						<i class="icon-folder-open icon-large"></i>misc
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/programming.html">
 						<i class="icon-folder-open icon-large"></i>programming
 					</a>
@@ -99,214 +99,6 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-        <div class="article">
-                <h1><a href="/name on a book.html">Name on a book</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-08-19T10:20:00+08:00">
-        <i class="icon-calendar"></i>Tue 19 August 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/canjiangdotrenatoutlookdotcom.html"><i class="icon-user"></i>canjiang[dot]ren[at]outlook[dot]com</a>
-<span class="label">Category</span>
-<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>记录一次参与翻译一本外文书的过程, 过程有点累, 结果有点甜.   </p>
-<blockquote>
-<p>you know, it is funny that people do not care your name, until you are in trouble. 
--- 美剧&lt;疑犯追凶&gt;第一集里面的话, 类似而已哦. </p>
-</blockquote>
-<p>去参与翻译一本书, 可以出现在书店书架上的, 还提到你的名字, 是不是很cool?    </p>
-<p>昨天看到email, 被告知我有份参与的书终于上架了, "在各大网店都有售。但是样书会比较慢" 里面上google一下，果然在amazon.cn等都找到了: </p>
-<div class="highlight"><pre><span></span><span class="nt">交互式程序设计</span><span class="err">（</span><span class="nt">第2版</span><span class="err">）</span>                                                               
- <span class="o">~</span> <span class="nt">Joshua</span> <span class="nt">Noble</span> <span class="o">(</span><span class="nt">作者</span><span class="o">),</span> <span class="nt">毛顺兵</span> <span class="o">(</span><span class="nt">译者</span><span class="o">),</span> <span class="nt">张婷婷</span> <span class="o">(</span><span class="nt">译者</span><span class="o">)</span>                
-<span class="nt">出版社</span><span class="o">:</span> <span class="nt">机械工业出版社</span><span class="o">;</span> <span class="o">(</span><span class="nt">2014年8月15日</span><span class="o">)</span>                 
-<span class="nt">语种</span><span class="err">：</span> <span class="nt">简体中文</span>                            
-</pre></div>
-
-
-<p>是的 ...</p>
-                        <a class="btn primary xsmall" href="/name on a book.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/conflict by duplicated variables.html">conflict by duplicated variables</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-08-18T10:20:00+08:00">
-        <i class="icon-calendar"></i>Mon 18 August 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/canjiangdotrenatoutlookdotcom.html"><i class="icon-user"></i>canjiang[dot]ren[at]outlook[dot]com</a>
-<span class="label">Category</span>
-<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>用多于一个变量来表示一个状态, 变量之间很容易不一致呢.      </p>
-<blockquote>
-<p>conflict  </p>
-</blockquote>
-<p>假如我们要描述以下这个状态:        <br />
-在一次mouse click的picking中, 我们给出了pick的范围, 一个rectangle, 然后要标记是否只要pick一个物体object就够了, 还是pick所有在rectangel下面的物体.  </p>
-<p>当假如我们只要pick到一个物体就够了, 那可能在for里面, 一旦找到某一个物体有效, 我们就可以返回, 退出pick过程了. 也就是我们只要pick到第一个有效物体就ok了, 而不考虑这个pick到的物体是否距离mouse click的点最近.   </p>
-<p>那么, 要记录这个状态, 我们看下面的实现:     </p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">XViewContext</span>            
-{               
-<span class="n">public:</span>                           
-    <span class="n">PickingResult</span> <span class="nb">pick</span>(...);                               
-    <span class="nb">void</span> <span class="n">setPickSingle</span>(<span class="nb">bool</span> <span class="n">b</span>) { <span class="n">m_bPickSingle</span> = <span class="n">b</span>; };                      
-    <span class="nb">bool</span> <span class="n">pickSingle</span>() <span class="n">const</span> { <span class="k">return</span> <span class="n">m_bPickSingle</span>; };                
-<span class="n">private:</span>               
-    <span class="nb">bool</span> <span class="n">m_bPickSingle</span>;                   
-};                           
-<span class="n">PickingResult</span> <span class="n">XViewContext::pick</span>(...)           
-{                    
-    ...                                
-    <span class="k">if</span> ( <span class="n">pickSingle</span>() ) ...;                 
-    <span class="k">else</span> ...;         
-}          
-</pre></div>
-
-
-<p>在这实现中, 是否要pick单一个物体的状态作为data member inside ...</p>
-                        <a class="btn primary xsmall" href="/conflict by duplicated variables.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/Undo and Redo.html">Undo and Redo</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-06-25T10:20:00+08:00">
-        <i class="icon-calendar"></i>Wed 25 June 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/canjiangdotrenatoutlookdotcom.html"><i class="icon-user"></i>canjiang[dot]ren[at]outlook[dot]com</a>
-<span class="label">Category</span>
-<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>Undo and Redo 已经遇到很多次了, 记录一下想法.     </p>
-<blockquote>
-<p>So we beat on, boats against the current, borne back ceaselessly into the past. -- The Great Gatsby<br />
-所以我们不停地往前划，逆流而上，回到无穷无尽的过去。《了不起的盖茨比》  </p>
-</blockquote>
-<p>一个程序假如连undo/redo都没有, 那基本上不是给人用的, 可能只能算是demo.</p>
-<h2>Undo/Redo</h2>
-<p>用windows/paint画图工具做例子就很直观啦. </p>
-<p>case 1. 假如操作次序是: 画一笔A, 再画一笔B;
-undo 一次就是剩下A; undo 第二次就是空;
-redo 一次就是增加A; redo第二次就是恢复到A B; 
-这个case的特点是undo到底了，再redo到底. 没有undo的时候又夹着redo ...</p>
-                        <a class="btn primary xsmall" href="/Undo and Redo.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/why game developers keep getting laid off.html">why game developers keep getting laid off</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-06-08T10:20:00+08:00">
-        <i class="icon-calendar"></i>Sun 08 June 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/canjiangdotrenatoutlookdotcom.html"><i class="icon-user"></i>canjiang[dot]ren[at]outlook[dot]com</a>
-<span class="label">Category</span>
-<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>翻译了一下why game developers keep getting laid off这个文章. 里面有些观点是挺有意思的.   </p>
-<h2>引言</h2>
-<p>在Hacker News上看到此文, 
-Why Game Developers Keep Getting Laid Off
-by Jason Schreier 
-http://kotaku.com/why-game-developers-keep-getting-laid-off-1583192249 
-I enjoyed this article, thx. 稍微摘录和翻译一下. </p>
-<h2>Why does this happen so often?</h2>
-<p>...
-为什么裁掉一些开发，几个月之后又要重新请人？这个想法好像有点傻啊。但是这种事情却常常发生。根据Sony的某前员工，其中的解释很简单：在开发的前期(游戏的概念和设计是在这期间完成)，不需要那么多人，所以发行商就不养人。
-...</p>
-<h2>A deadline's ...</h2>
-                        <a class="btn primary xsmall" href="/why game developers keep getting laid off.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/build error from line ending.html">build error from line ending</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-05-29T10:20:00+08:00">
-        <i class="icon-calendar"></i>Thu 29 May 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/canjiangdotrenatoutlookdotcom.html"><i class="icon-user"></i>canjiang[dot]ren[at]outlook[dot]com</a>
-<span class="label">Category</span>
-<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>Build error, 具体是error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format怎么办呢？ </p>
-<p>故事的开端是checkin了一个.cpp，当然本地是build过的，但是server端那边反馈说build error, 具体是
-error C4335: Mac file format detected: please convert the source file to either DOS or UNIX format</p>
-<p>怎么办呢？当然是查看一下到底是那个.cpp文件的line ending是什么东西，然后改成合适的就ok了. </p>
-<p>下面截图显示改之前是CR+LF, 改之后是LF的 ...</p>
-                        <a class="btn primary xsmall" href="/build error from line ending.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/algo - counting inversions.html">algo - counting inversions</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-05-22T10:20:00+08:00">
-        <i class="icon-calendar"></i>Thu 22 May 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/canjiangdotrenatoutlookdotcom.html"><i class="icon-user"></i>canjiang[dot]ren[at]outlook[dot]com</a>
-<span class="label">Category</span>
-<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>算法练习: counting inversions       </p>
-<h2>Background</h2>
-<p>Given an array, say [1, 3, 5, 2, 4, 6], to count the inversions.
-What is an inversion ?
-if (i &lt; j) but arr[i] &gt; arr[j]. 例如上面的(3, 2), 3在2的前面, 但是3&gt;2, 构成一个inversion. 这个例子中一共三个inversions(3, 2) (5, 2) (5, 4). </p>
-<p>这个计算有什么用呢? 我是[Algorithms: Design and Analysis ...</p>
-                        <a class="btn primary xsmall" href="/algo - counting inversions.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/partio.html">partio</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2014-05-22T10:20:00+08:00">
-        <i class="icon-calendar"></i>Thu 22 May 2014
-</abbr>
-<span class="label">By</span>
-<a href="/author/canjiangdotrenatoutlookdotcom.html"><i class="icon-user"></i>canjiang[dot]ren[at]outlook[dot]com</a>
-<span class="label">Category</span>
-<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
-
-
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project, 读读它的代码应该能学到东西, 于是故事就开始了.               </p>
-<h2>引言</h2>
-<p>本来是在找point clould读入的资信, 如point cloud to maya, 遇到partio这open souce project from
-Disney Animation, 读读它的代码应该能学到东西, 于是故事就开始了.<br />
-“The goal of Partio is to provide a unified interface akin to unified image libraries that makes it easier to load, save, and manipulate ...</p>
-                        <a class="btn primary xsmall" href="/partio.html">more ...</a>
-                </div>
-        </div>
-        <hr />
         <div class="article">
                 <h1><a href="/Vector based containers.html">Vector based containers</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -608,71 +400,32 @@ http://3dgep ...</p>
         </div>
         <hr />
         <div class="article">
-                <h1><a href="/How to debug maya custom plugin.html">How to debug maya custom plugin</a></h1>
+                <h1><a href="/This is the title.html">This is the Title</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2013-10-12T10:20:00+08:00">
-        <i class="icon-calendar"></i>Sat 12 October 2013
+<abbr class="published" title="2000-01-01T10:20:00+08:00">
+        <i class="icon-calendar"></i>Sat 01 January 2000
 </abbr>
 <span class="label">By</span>
-<a href="/author/renc.html"><i class="icon-user"></i>renc</a>
+<a href="/author/canjiangdotrenatoutlookdotcom.html"><i class="icon-user"></i>canjiang[dot]ren[at]outlook[dot]com</a>
 <span class="label">Category</span>
 <a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
 
 
-<span class="label">Tags</span>
-	<a href="/tag/maya.html"><i class="icon-tag"></i>maya</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>涉及maya plugin开发的时候，怎么debug呢? </p>
-<h2>Attach to maya process ... 寄生</h2>
-<p>step 1. maya plugin manager (Window -&gt; Settings/Preferences -&gt; Plug-in Manager)中load your custom plugin. This plugin need to be built by the same compiler version of maya, 也许不需要. 
-step 2. at your visual studio project of that custom plugin, Tools -&gt; Attach to ...</p>
-                        <a class="btn primary xsmall" href="/How to debug maya custom plugin.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/Tree view at Qt.html">Tree view at Qt</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2013-10-08T10:20:00+08:00">
-        <i class="icon-calendar"></i>Tue 08 October 2013
-</abbr>
-<span class="label">By</span>
-<a href="/author/renc.html"><i class="icon-user"></i>renc</a>
-<span class="label">Category</span>
-<a href="/category/programming.html"><i class="icon-folder-open"></i>programming</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/qt.html"><i class="icon-tag"></i>qt</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>Qt中的TreeView很复杂, 记录一下自己的理解.  </p>
-<h2>引言</h2>
-<blockquote>
-<p>Model/View/item的关系就有点像Container/Algorithm/Iterator的关系。
-Tree view属于Model/View Programming的一部分。有些
-</p>
-</blockquote>
-<h2>Index 带上下层级结构的二维索引</h2>
-<p>QModelIndex()表示model中最上层的root item的index, QModelIndex().isValid() == 0. </p>
-<p>item之前有上下层级关系，index.parent()获取index的parent. 当index.parent().isValid() == false，表示这个item的parent就是root item. 这些items被称为top-level itmes. </p>
-<p>to retrieve data from a model:
-for (int row = 0; row &lt; model-&gt;rowCount(parentIndex); ++row)
-{
-    for (int ...</p>
-                        <a class="btn primary xsmall" href="/Tree view at Qt.html">more ...</a>
+                <div class="summary"><p>Most of time, do not want summary, since some theme will only display summary at the head page if there is summary here.</p>
+                        <a class="btn primary xsmall" href="/This is the title.html">more ...</a>
                 </div>
         </div>
         <hr />
 
         <div class="pagination">
         <ul>
-                        <li class="prev"><a href="/category/programming.html">&larr; Previous</a></li>
-                        <li class=""><a href="/category/programming.html">1</a></li>
-                        <li class="active"><a href="/category/programming2.html">2</a></li>
-                        <li class=""><a href="/category/programming3.html">3</a></li>
-                        <li class="next"><a href="/category/programming3.html">Next &rarr;</a></li>
+                        <li class="prev"><a href="/author/canjiangdotrenatoutlookdotcom2.html">&larr; Previous</a></li>
+                        <li class=""><a href="/author/canjiangdotrenatoutlookdotcom.html">1</a></li>
+                        <li class=""><a href="/author/canjiangdotrenatoutlookdotcom2.html">2</a></li>
+                        <li class="active"><a href="/author/canjiangdotrenatoutlookdotcom3.html">3</a></li>
+                        <li class="next disabled"><a href="#">&rarr; Next</a></li>
         </ul>
         </div>
 
